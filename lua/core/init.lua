@@ -20,6 +20,7 @@ local parts = require 'core.parts'
 ---@field colorscheme string
 ---@field transparent_background boolean
 ---@field transparent_fn { [string]: function(bool) }
+---@field config_module string
 ---@field modules Modules
 
 ---@class Core
@@ -64,6 +65,8 @@ function M.setup(config)
     return
   end
 
+  CONFIG_MODULE = config.config_module or 'custom'
+
   if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
   core.group_id = vim.api.nvim_create_augroup("config:" .. CONFIG_MODULE, {})
   require 'core.load.autocmds'.setup {
@@ -78,6 +81,7 @@ function M.setup(config)
     colorscheme = config.colorscheme,
     transparent_background = config.transparent_background,
     transparent_fn = config.transparent_fn,
+    config_module = CONFIG_MODULE,
     modules = {},
   }
 

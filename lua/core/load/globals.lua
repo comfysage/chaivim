@@ -1,5 +1,3 @@
-CONFIG_MODULE = "config"
-
 CR = CR or "~/.config"
 
 ENV = function(v)
