@@ -91,21 +91,7 @@ function parts.colorscheme(_)
 end
 
 function parts.preload(_)
-  core.path.keymaps = core.path.root .. "/keymaps"
-  vim.opt.rtp:prepend(core.path.keymaps)
-
-  local ok, keymaps_nvim = pcall(require, 'keymaps')
-  if ok then
-    keymaps_nvim.setup {}
-  else
-    Util.log 'module keymaps not found. bootstrapping...'
-    keymaps_nvim = require 'core.bootstrap'.load 'keymaps'
-    if not keymaps_nvim then
-      Util.log('error while bootstrapping.', 'error')
-      return
-    end
-    keymaps_nvim.setup {}
-  end
+  require 'core.bootstrap'.boot 'keymaps'
 
   if not keymaps then
     Util.log('global keymaps is not defined.', 'error')

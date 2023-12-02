@@ -11,6 +11,9 @@ local fn = {
     end,
   },
   keymaps = {
+    boot = function ()
+      Util.boot { name = 'keymaps', dir = 'keymaps', mod = 'keymaps', opts = {} }
+    end,
     load = function()
       local keymapspath = core.path.keymaps
 
@@ -50,6 +53,12 @@ local function _get(name, props)
 end
 
 return {
+  boot = function(props)
+    local _fn = _get(props, 'boot')
+    if _fn then
+      _fn()
+    end
+  end,
   load = function(props)
     local _fn = _get(props, 'load')
     if _fn then
