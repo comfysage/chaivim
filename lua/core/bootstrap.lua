@@ -20,6 +20,21 @@ local fn = {
       end
       return keymaps_nvim
     end,
+    update = function()
+      local keymapspath = core.path.keymaps
+
+      vim.system({
+        "git",
+        "pull",
+      }, { cwd = keymapspath }, function(obj)
+        if obj.code > 0 then
+          Util.log('error while updating keymaps at ' .. keymapspath ..
+            '\n\t' .. obj.stdout .. '\n\t' .. obj.stderr, 'error')
+          return
+        end
+        Util.log('succesfully updated keymaps', 'info')
+      end)
+    end,
   },
 }
 
