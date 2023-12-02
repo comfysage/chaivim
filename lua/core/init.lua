@@ -143,4 +143,9 @@ function M.reload()
   parts.platform {}
 end
 
+function M.update()
+  parts.update_core {}
+  parts.update_keymaps {}
+end
+
 return M
