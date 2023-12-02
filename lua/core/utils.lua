@@ -49,7 +49,7 @@ function Util.boot(props)
   local ok, module = pcall(require, props.mod)
   if ok then
     if props.opts then
-      module.setup (props.opts)
+      module.setup(props.opts)
     end
   else
     Util.log('module ' .. props.name .. ' not found. bootstrapping...')
@@ -59,7 +59,7 @@ function Util.boot(props)
       return
     end
     if props.opts then
-      module.setup (props.opts)
+      module.setup(props.opts)
     end
   end
 end
