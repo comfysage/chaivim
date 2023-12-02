@@ -67,6 +67,10 @@ function parts._modules(mod, modules)
 
     parts.load(module, spec)
     spec.loaded = true
+
+    if spec.reload then
+      require 'core.load.autocmds'.create_reload(module, spec)
+    end
   end
 end
 
