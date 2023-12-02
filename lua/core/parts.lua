@@ -103,18 +103,18 @@ end
 
 function parts.platform(_)
   local has = vim.fn.has
-  local is_mac = has 'macunix'
+  local is_mac = has 'mac'
   local is_win = has 'win32'
   local is_neovide = vim.g.neovide
 
   if is_mac then
-    require 'config.macos'
+    require (CONFIG_MODULE .. '.macos')
   end
   if is_win then
-    require 'config.windows'
+    require (CONFIG_MODULE .. '.windows')
   end
   if is_neovide then
-    require 'config.neovide'
+    require (CONFIG_MODULE .. '.neovide')
   end
 end
 
