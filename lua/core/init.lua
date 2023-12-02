@@ -25,6 +25,7 @@ local parts = require 'core.parts'
 ---@field config Config
 ---@field group_id integer
 ---@field path CorePath
+---@field loaded boolean
 
 ---@class CorePath
 ---@field root string
@@ -55,6 +56,11 @@ _G.core.path = {
 
 ---@param config Config
 function M.setup(config)
+  if core.loaded then
+    M.reload()
+    return
+  end
+
   if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
   core.group_id = vim.api.nvim_create_augroup("config:" .. CONFIG_MODULE, {})
   require 'core.load.autocmds'.setup {
@@ -92,6 +98,11 @@ end
 
 --- load config
 function M.load()
+  if core.loaded then
+    M.reload()
+    return
+  end
+
   Util.log('loading config')
 
   parts.load_modules {}
@@ -106,6 +117,8 @@ function M.load()
   toggle_transparent_background(core.config.transparent_background)
 
   parts.platform {}
+
+  core.loaded = true
 end
 
 function M.reload()
