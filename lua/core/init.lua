@@ -29,6 +29,7 @@ local parts = require 'core.parts'
 
 ---@class CorePath
 ---@field root string
+---@field core string
 ---@field keymaps string
 
 local M = {}
@@ -53,6 +54,7 @@ local root_path = vim.fn.stdpath("data") .. "/core"
 _G.core.path = {
   root = root_path,
 }
+_G.core.path.core = _G.core.path.root .. "/sentinel"
 
 ---@param config Config
 function M.setup(config)

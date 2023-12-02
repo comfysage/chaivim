@@ -27,6 +27,14 @@ local fn = {
       }
     end,
   },
+  core = {
+    update = function()
+      Util.git_pull {
+        name = 'core',
+        path = core.path.core,
+      }
+    end,
+  },
 }
 
 ---@param name string
