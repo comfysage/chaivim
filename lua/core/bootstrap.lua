@@ -10,45 +10,14 @@ local fn = {
       }
     end,
   },
-  keymaps = {
-    boot = function ()
-      Util.boot { name = 'keymaps', dir = 'keymaps', mod = 'keymaps', opts = {} }
-    end,
-    load = function()
-      Util.git_clone { name = 'keymaps', url = 'crispybaccoon/keymaps.nvim' }
-
-      local ok, keymaps_nvim = pcall(R, 'keymaps')
-      if not ok then
-        return false
-      end
-      return keymaps_nvim
-    end,
-    update = function()
-      Util.git_pull {
-        name = 'keymaps',
-        path = core.path.keymaps,
-      }
-    end,
+  keymaps = Util.create_bootstrap {
+    name = 'keymaps',
+    url = 'crispybaccoon/keymaps.nvim',
+    opts = {},
   },
-  plenary = {
-    boot = function ()
-      Util.boot { name = 'plenary', dir = 'plenary', mod = 'plenary', opts = nil }
-    end,
-    load = function()
-      Util.git_clone { name = 'plenary', url = 'nvim-lua/plenary.nvim' }
-
-      local ok, plenary_nvim = pcall(R, 'plenary')
-      if not ok then
-        return false
-      end
-      return plenary_nvim
-    end,
-    update = function()
-      Util.git_pull {
-        name = 'plenary',
-        path = core.path.plenary,
-      }
-    end,
+  plenary = Util.create_bootstrap {
+    name = 'plenary',
+    url = 'nvim-lua/plenary.nvim',
   },
 }
 

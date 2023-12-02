@@ -73,4 +73,41 @@ function Util.boot(props)
   end
 end
 
+---@param props { name: string, dir: string, mod: string, url: string, opts: table|nil }
+---@return { boot: function, load: function, update: function }|nil
+function Util.create_bootstrap(props)
+  if not props.name then
+    Util.log('error while loading bootstrap spec\n\t`props.name` is empty', 'error')
+    return
+  end
+  if not props.url then
+    Util.log('error while loading bootstrap spec\n\t`props.url` is empty', 'error')
+    return
+  end
+  props.dir = props.dir or props.name
+  props.mod = props.mod or props.name
+
+  return {
+    boot = function()
+      Util.boot { name = props.name, dir = props.dir, mod = props.mod, opts = props.opts }
+    end,
+    load = function()
+      Util.git_clone { name = props.name, url = props.url }
+
+      package.loaded[props.name] = nil
+      local ok, module = pcall(require, props.mod)
+      if not ok then
+        return false
+      end
+      return module
+    end,
+    update = function()
+      Util.git_pull {
+        name = props.name,
+        path = core.path[props.name],
+      }
+    end,
+  }
+end
+
 return Util
