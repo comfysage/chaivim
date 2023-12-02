@@ -135,9 +135,6 @@ function M.reload()
   parts.colorscheme {}
 
   _G.transparent_background_fn = core.config.transparent_fn
-  vim.api.nvim_create_user_command('ToggleTransparentBG', function()
-    _G.toggle_transparent_background()
-  end, {})
 
   toggle_transparent_background(core.config.transparent_background)
 
