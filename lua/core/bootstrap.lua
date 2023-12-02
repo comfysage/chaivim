@@ -1,6 +1,6 @@
 local Util = require 'core.utils'
 
----@type { [string]: { load: function } }
+---@type { [string]: { load: function, update: function } }
 local fn = {
   keymaps = {
     load = function()
@@ -41,5 +41,11 @@ return {
     if _fn then
       _fn()
     end
-  end
+  end,
+  update = function(props)
+    local _fn = _get(props, 'update')
+    if _fn then
+      _fn()
+    end
+  end,
 }
