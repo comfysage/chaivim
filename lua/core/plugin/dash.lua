@@ -23,8 +23,8 @@ local default_config = {
     [[    ▝▀▀▀▀▀▀▀▀▀  ]],
   },
   buttons = {
-    { 'find files', 'SPC SPC', function() require 'core.plugin.telescope'.space() end },
-    { 'select theme', 'CTRL t', function() require 'telescope.builtin'.colorscheme() end }
+    { 'find files',   '', function() require 'core.plugin.telescope'.space() end },
+    { 'select theme', '', function() require 'telescope.builtin'.colorscheme() end },
   },
 }
 
