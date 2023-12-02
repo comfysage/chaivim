@@ -92,6 +92,7 @@ end
 
 function parts.preload(_)
   require 'core.bootstrap'.boot 'keymaps'
+  require 'core.bootstrap'.boot 'plenary'
 
   if not keymaps then
     Util.log('global keymaps is not defined.', 'error')

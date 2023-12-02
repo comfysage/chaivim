@@ -30,6 +30,26 @@ local fn = {
       }
     end,
   },
+  plenary = {
+    boot = function ()
+      Util.boot { name = 'plenary', dir = 'plenary', mod = 'plenary', opts = nil }
+    end,
+    load = function()
+      Util.git_clone { name = 'plenary', url = 'nvim-lua/plenary.nvim' }
+
+      local ok, plenary_nvim = pcall(R, 'plenary')
+      if not ok then
+        return false
+      end
+      return plenary_nvim
+    end,
+    update = function()
+      Util.git_pull {
+        name = 'plenary',
+        path = core.path.plenary,
+      }
+    end,
+  },
 }
 
 ---@param name string

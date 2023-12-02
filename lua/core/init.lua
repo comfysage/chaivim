@@ -32,6 +32,7 @@ local parts = require 'core.parts'
 ---@class CorePath
 ---@field root string
 ---@field core string
+---@field plenary string
 ---@field keymaps string
 
 local M = {}
