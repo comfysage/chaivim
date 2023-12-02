@@ -23,17 +23,16 @@ local fn = {
     update = function()
       local keymapspath = core.path.keymaps
 
-      vim.system({
+      local obj = vim.system({
         "git",
         "pull",
-      }, { cwd = keymapspath }, function(obj)
-        if obj.code > 0 then
-          Util.log('error while updating keymaps at ' .. keymapspath ..
-            '\n\t' .. obj.stdout .. '\n\t' .. obj.stderr, 'error')
-          return
-        end
-        Util.log('succesfully updated keymaps', 'info')
-      end)
+      }, { cwd = keymapspath }):wait()
+      if obj.code > 0 then
+        Util.log('error while updating keymaps at ' .. keymapspath ..
+          '\n\t' .. obj.stdout .. '\n\t' .. obj.stderr, 'error')
+        return
+      end
+      Util.log('succesfully updated keymaps', 'info')
     end,
   },
 }
