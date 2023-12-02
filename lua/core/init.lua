@@ -34,6 +34,7 @@ local parts = require 'core.parts'
 ---@field core string
 ---@field plenary string
 ---@field keymaps string
+---@field telescope string
 
 local M = {}
 

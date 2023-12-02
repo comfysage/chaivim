@@ -19,6 +19,10 @@ local fn = {
     name = 'plenary',
     url = 'nvim-lua/plenary.nvim',
   },
+  telescope = Util.create_bootstrap {
+    name = 'telescope',
+    url = 'nvim-telescope/telescope.nvim',
+  },
 }
 
 ---@param name string
