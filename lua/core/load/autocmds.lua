@@ -8,6 +8,7 @@ return {
       end,
       group = opts.group_id,
       pattern = 'lua/' .. CONFIG_MODULE .. '/init.lua',
+      desc = 'config:reload:' .. CONFIG_MODULE,
     })
   end,
 }
