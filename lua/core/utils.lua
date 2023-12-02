@@ -20,6 +20,12 @@ function Util.log(msg, level)
   vim.notify(msg, log_level)
 end
 
+---@param name string
+function Util.has(name)
+  local value = vim.fn.has(name)
+  return value == 1
+end
+
 ---@param props { name: string|nil, path: string|nil }
 function Util.git_pull(props)
   if not props.path then

@@ -102,9 +102,8 @@ function parts.preload(_)
 end
 
 function parts.platform(_)
-  local has = vim.fn.has
-  local is_mac = has 'mac'
-  local is_win = has 'win32'
+  local is_mac = Util.has 'mac'
+  local is_win = Util.has 'win32'
   local is_neovide = vim.g.neovide
 
   if is_mac then
