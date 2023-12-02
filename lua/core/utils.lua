@@ -67,10 +67,6 @@ function Util.boot(props)
   else
     Util.log('module ' .. props.name .. ' not found. bootstrapping...')
     module = require 'core.bootstrap'.load(props.name)
-    if not module then
-      Util.log('error while bootstrapping.', 'error')
-      return
-    end
     if props.opts then
       module.setup(props.opts)
     end
