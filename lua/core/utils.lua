@@ -41,6 +41,19 @@ function Util.git_pull(props)
   Util.log('succesfully updated ' .. name, 'info')
 end
 
+---@param props { name: string, url: string }
+function Util.git_clone(props)
+  local modulepath = core.path[props.name]
+
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/" .. props.url .. ".git",
+    modulepath,
+  })
+end
+
 ---@param props { name: string, dir: string, mod: string, opts: table|nil }
 function Util.boot(props)
   core.path[props.name] = core.path.root .. '/' .. props.dir

@@ -15,15 +15,7 @@ local fn = {
       Util.boot { name = 'keymaps', dir = 'keymaps', mod = 'keymaps', opts = {} }
     end,
     load = function()
-      local keymapspath = core.path.keymaps
-
-      vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/crispybaccoon/keymaps.nvim.git",
-        keymapspath,
-      })
+      Util.git_clone { name = 'keymaps', url = 'crispybaccoon/keymaps.nvim' }
 
       local ok, keymaps_nvim = pcall(R, 'keymaps')
       if not ok then
