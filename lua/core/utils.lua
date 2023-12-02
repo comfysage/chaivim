@@ -41,4 +41,27 @@ function Util.git_pull(props)
   Util.log('succesfully updated ' .. name, 'info')
 end
 
+---@param props { name: string, dir: string, mod: string, opts: table|nil }
+function Util.boot(props)
+  core.path[props.name] = core.path.root .. '/' .. props.dir
+  vim.opt.rtp:prepend(core.path[props.name])
+
+  local ok, module = pcall(require, props.mod)
+  if ok then
+    if props.opts then
+      module.setup (props.opts)
+    end
+  else
+    Util.log('module ' .. props.name .. ' not found. bootstrapping...')
+    module = require 'core.bootstrap'.load(props.name)
+    if not module then
+      Util.log('error while bootstrapping.', 'error')
+      return
+    end
+    if props.opts then
+      module.setup (props.opts)
+    end
+  end
+end
+
 return Util
