@@ -51,6 +51,8 @@ local kind_icons = {
   Package = "",
 }
 
+M.kind_icons = kind_icons
+
 local kind_hl = {
   Text  = "Comment",
   Method  = "Constant",
