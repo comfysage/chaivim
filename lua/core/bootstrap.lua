@@ -2,6 +2,14 @@ local Util = require 'core.utils'
 
 ---@type { [string]: { load: function, update: function } }
 local fn = {
+  core = {
+    update = function()
+      Util.git_pull {
+        name = 'core',
+        path = core.path.core,
+      }
+    end,
+  },
   keymaps = {
     load = function()
       local keymapspath = core.path.keymaps
@@ -24,14 +32,6 @@ local fn = {
       Util.git_pull {
         name = 'keymaps',
         path = core.path.keymaps,
-      }
-    end,
-  },
-  core = {
-    update = function()
-      Util.git_pull {
-        name = 'core',
-        path = core.path.core,
       }
     end,
   },
