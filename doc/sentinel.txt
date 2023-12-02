@@ -1,0 +1,148 @@
+*sentinel.txt*                                            a cozy neovim system
+
+==============================================================================
+Table of Contents                                 *sentinel-table-of-contents*
+
+1. installation                                        |sentinel-installation|
+2. usage                                                      |sentinel-usage|
+3. configuration                                      |sentinel-configuration|
+
+==============================================================================
+1. installation                                        *sentinel-installation*
+
+>lua
+    -- init.lua
+    local rootpath = vim.fn.stdpath("data") .. "/core"
+    local sentinelpath = rootpath .. "/sentinel"
+    vim.opt.rtp:prepend(sentinelpath)
+    
+    local ok, core = pcall(require, 'core')
+    if not ok then
+        vim.fn.system({
+            "git",
+            "clone",
+            "--filter=blob:none",
+            "https://github.com/crispybaccoon/sentinel.nvim.git",
+            sentinelpath,
+        })
+    end
+<
+
+sentinel can be updated with:
+
+>lua
+    require 'core'.update()
+<
+
+
+==============================================================================
+2. usage                                                      *sentinel-usage*
+
+>lua
+    require 'core'.setup {
+        colorscheme = 'aurora',
+        transparent_background = true,
+        transparent_fn = {
+            evergarden = function(t)
+                _G.evergarden_config.transparent_background = t
+            end,
+            aurora = function(t)
+                _G.aurora_config.transparent_background = t
+            end,
+            aki = function(t)
+                _G.aki_config.transparent_background = t
+            end,
+            adachi = function(t)
+                _G.adachi_config.transparent_background = t
+            end,
+            gruvboxed = function(t)
+                _G.gruvboxed_config.transparent_background = t
+            end,
+        },
+        config_module = 'custom', -- defaults to 'custom'
+        modules = {
+            ['core'] = {
+                {
+                    'options',
+                    event = nil,
+                    opts = {
+                        cursorline = false,
+                        tab_width = 2,
+                        scrolloff = 5,
+                        use_ripgrep = true,
+                        treesitter_folds = false,
+                    }
+                },
+                {
+                    'highlights',
+                    event = 'UIEnter',
+                    opts = {
+                        fix = function()
+                            local groups = {
+                                fixme   = { "Fixme", vim.api.nvim_get_hl(0, { name = "DiagnosticWarn" }) },
+                                todo    = { "Todo", vim.api.nvim_get_hl(0, { name = "DiagnosticInfo" }) },
+                                note    = { "Note", vim.api.nvim_get_hl(0, { name = "DiagnosticHint" }) },
+                                success = { "Success", vim.api.nvim_get_hl(0, { name = "DiagnosticOk" }) },
+                                failure = { "Failure", vim.api.nvim_get_hl(0, { name = "DiagnosticError" }) },
+                            }
+                            for _, v in pairs(groups) do
+                                vim.api.nvim_set_hl(0, v[1], { fg = v[2].fg })
+                                vim.api.nvim_set_hl(0, v[1] .. 'Note', { fg = v[2].fg, reverse = true })
+                            end
+                        end
+                    },
+                },
+                {
+                    'dash',
+                    opts = {
+                        open_on_startup = true, -- defaults to `false`
+                    },
+                },
+            },
+            ['custom'] = {
+                -- your custom modules (in `lua/custom/`)
+            },
+        },
+    }
+<
+
+
+==============================================================================
+3. configuration                                      *sentinel-configuration*
+
+
+                                                      *sentinel-core-config*
+
+
+core-config                            core configuration
+
+
+                                            *sentinel-core-config-log_level*
+
+
+core-config-log_level                  Minimum log level
+
+
+
+Set to `vim.log.levels.OFF` to disable logging from `sentinel`, or
+`vim.log.levels.TRACE` to enable all logging.
+
+Type: `vim.log.levels` (default: `vim.log.levels.INFO`)
+
+
+                                                      *sentinel-module-spec*
+
+
+module-spec                            specification for a module
+
+
+                                           *sentinel-modules.highlights.fix*
+
+
+modules.highlights.fix                 specification for core highlight module
+
+
+
+Type: `function` (default: `nil`)
+
+vim:tw=78:ts=8:noet:ft=help:norl:readonly:
