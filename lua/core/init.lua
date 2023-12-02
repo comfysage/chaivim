@@ -67,12 +67,6 @@ function M.setup(config)
 
   CONFIG_MODULE = config.config_module or 'custom'
 
-  if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
-  core.group_id = vim.api.nvim_create_augroup("config:" .. CONFIG_MODULE, {})
-  require 'core.load.autocmds'.setup {
-    group_id = core.group_id,
-  }
-
   -- preload keymaps module
   parts.preload {}
 
@@ -111,6 +105,12 @@ function M.load()
   end
 
   Util.log('loading config')
+
+  if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
+  core.group_id = vim.api.nvim_create_augroup("config:" .. CONFIG_MODULE, {})
+  require 'core.load.autocmds'.setup {
+    group_id = core.group_id,
+  }
 
   parts.load_modules {}
 
