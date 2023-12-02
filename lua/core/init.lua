@@ -146,6 +146,8 @@ function M.reload()
   toggle_transparent_background(core.config.transparent_background)
 
   parts.platform {}
+
+  vim.api.nvim_exec_autocmds('ColorScheme', {})
 end
 
 function M.update()
