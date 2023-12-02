@@ -10,9 +10,10 @@ local parts = require 'core.parts'
 ---@field name ModuleName
 ---@field event string
 ---@field opts table
+---@field reload boolean
 
 ---@alias ModuleName 'options'|'highlights'|'base'|'maps'|'plugins'|string
----@alias ModuleField { [MainModule]: Modules }
+---@alias ModuleField { [MainModule]: ModuleSpec[] }
 
 ---@class Config
 ---@field log_level integer

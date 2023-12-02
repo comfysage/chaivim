@@ -20,6 +20,8 @@ function parts.load_modules(_)
   end
 end
 
+---@param module string
+---@param spec ModuleSpec
 function parts.load(module, spec)
   if spec.loaded and spec.reload == false then
     Util.log('skipping reloading module: ' .. module)
@@ -27,7 +29,6 @@ function parts.load(module, spec)
   end
 
   ---@param source string
-  ---@param mod ModuleName
   ---@param opts table
   local callback = function(source, opts)
     local status, result = pcall(require, source)
