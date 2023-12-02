@@ -60,11 +60,6 @@ _G.core.path.core = _G.core.path.root .. "/sentinel"
 
 ---@param config Config
 function M.setup(config)
-  if core.loaded then
-    M.reload()
-    return
-  end
-
   CONFIG_MODULE = config.config_module or 'custom'
 
   -- preload keymaps module
