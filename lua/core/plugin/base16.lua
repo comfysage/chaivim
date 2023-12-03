@@ -2653,6 +2653,7 @@ M.load = function(name)
     return
   end
 
+  vim.g.colors_name = name
   M.apply_theme(theme)
 end
 
