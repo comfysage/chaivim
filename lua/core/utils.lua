@@ -90,7 +90,7 @@ function Util.boot(props)
     return
   end
 
-  Util.log('error while bootstrapping ' .. props.name .. '\n\t' .. result)
+  Util.log('error while bootstrapping ' .. props.name .. '\n\t' .. (result or ''), 'error')
 end
 
 ---@param props { name: string, dir: string, mod: string, url: string, opts: table|nil }
