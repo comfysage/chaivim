@@ -114,12 +114,7 @@ function Util.create_bootstrap(props)
     load = function()
       Util.git_clone { name = props.name, url = props.url }
 
-      package.loaded[props.name] = nil
-      local ok, module = pcall(require, props.mod)
-      if not ok then
-        return false
-      end
-      return module
+      return SR(props.mod)
     end,
     update = function()
       Util.git_pull {
