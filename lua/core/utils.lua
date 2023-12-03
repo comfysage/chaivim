@@ -68,21 +68,29 @@ end
 
 ---@param props { name: string, dir: string, mod: string, opts: table|nil }
 function Util.boot(props)
-  core.path[props.name] = core.path.root .. '/' .. props.dir
-  vim.opt.rtp:prepend(core.path[props.name])
+  local dir = core.path.root .. '/' .. props.dir
+  core.path[props.name] = dir
+  vim.opt.rtp:prepend(dir)
 
-  local ok, module = pcall(require, props.mod)
+  local ok, result = SR(props.mod)
   if ok then
     if props.opts then
-      module.setup(props.opts)
+      result.setup(props.opts)
     end
-  else
-    Util.log('module ' .. props.name .. ' not found. bootstrapping...')
-    module = require 'core.bootstrap'.load(props.name)
-    if props.opts then
-      module.setup(props.opts)
-    end
+    return
   end
+
+  Util.log('module ' .. props.name .. ' not found. bootstrapping...')
+  ok, result = require 'core.bootstrap'.load(props.name)
+
+  if ok then
+    if props.opts then
+      result.setup(props.opts)
+    end
+    return
+  end
+
+  Util.log('error while bootstrapping ' .. props.name .. '\n\t' .. result)
 end
 
 ---@param props { name: string, dir: string, mod: string, url: string, opts: table|nil }
