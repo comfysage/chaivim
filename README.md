@@ -171,3 +171,16 @@ core.config.colorscheme = 'tokyonight'
   },
 }
 ```
+
+### `base16` module
+
+```lua
+{
+  'base16',
+  event = 'UIEnter',
+  opts = {
+    -- you can try out different colorschemes with `require 'core.plugin.base16'.select()`
+    colorscheme = 'nord',
+  },
+}
+```
