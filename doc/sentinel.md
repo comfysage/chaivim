@@ -4,18 +4,18 @@
 -- init.lua
 local rootpath = vim.fn.stdpath("data") .. "/core"
 local sentinelpath = rootpath .. "/sentinel"
-vim.opt.rtp:prepend(sentinelpath)
 
-local ok, core = pcall(require, 'core')
-if not ok then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/crispybaccoon/sentinel.nvim.git",
-        sentinelpath,
-    })
+if not vim.loop.fs_stat(sentinelpath) then
+  vim.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/crispybaccoon/sentinel.nvim.git",
+    sentinelpath,
+  }):wait()
 end
+
+vim.opt.rtp:prepend(sentinelpath)
 ```
 
 sentinel can be updated with:
