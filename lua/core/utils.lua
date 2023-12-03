@@ -70,18 +70,14 @@ end
 function Util.boot(props)
   local dir = core.path.root .. '/' .. props.dir
   core.path[props.name] = dir
+
+  if not vim.loop.fs_stat(dir) then
+    Util.log('module ' .. props.name .. ' not found. bootstrapping...', 'warn')
+    require 'core.bootstrap'.load(props.name)
+  end
   vim.opt.rtp:prepend(dir)
 
   local ok, result = SR(props.mod)
-  if ok then
-    if props.opts then
-      result.setup(props.opts)
-    end
-    return
-  end
-
-  Util.log('module ' .. props.name .. ' not found. bootstrapping...')
-  ok, result = require 'core.bootstrap'.load(props.name)
 
   if ok then
     if props.opts then
@@ -113,8 +109,6 @@ function Util.create_bootstrap(props)
     end,
     load = function()
       Util.git_clone { name = props.name, url = props.url }
-
-      return SR(props.mod)
     end,
     update = function()
       Util.git_pull {
