@@ -82,18 +82,22 @@ V = function ()
 end
 
 MT = function (t1, t2)
+  local tnew = {}
+  for k,v in pairs(t1) do
+    tnew[k] = v
+  end
   for k,v in pairs(t2) do
     if type(v) == "table" then
-      if type(t1[k] or false) == "table" then
-        MT(t1[k] or {}, t2[k] or {})
+      if type(tnew[k] or false) == "table" then
+        MT(tnew[k] or {}, t2[k] or {})
       else
-        t1[k] = v
+        tnew[k] = v
       end
     else
-      t1[k] = v
+      tnew[k] = v
     end
   end
-  return t1
+  return tnew
 end
 
 CUTIL = {}
