@@ -51,13 +51,19 @@ end
 function Util.git_clone(props)
   local modulepath = core.path[props.name]
 
-  vim.fn.system({
+  local obj = vim.system({
     "git",
     "clone",
     "--filter=blob:none",
     "https://github.com/" .. props.url .. ".git",
     modulepath,
-  })
+  }, { cwd = core.path.root }):wait()
+  if obj.code > 0 then
+    Util.log('error while cloning ' .. props.name .. ' at ' .. modulepath ..
+      '\n\t' .. obj.stdout .. '\n\t' .. obj.stderr, 'error')
+    return
+  end
+  Util.log('succesfully cloned ' .. props.name, 'info')
 end
 
 ---@param props { name: string, dir: string, mod: string, opts: table|nil }
