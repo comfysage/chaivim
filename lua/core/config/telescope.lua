@@ -33,6 +33,7 @@ local default_config = {
 
 ---@class CoreTelescopeOpts
 ---@field config TelescopeConfig
+---@field use_fzf boolean
 
 ---@param opts CoreTelescopeOpts
 M.setup = function(opts)
@@ -40,7 +41,7 @@ M.setup = function(opts)
 
   require 'telescope'.setup (config)
 
-  if config.use_fzf then
+  if opts.use_fzf then
     require 'telescope'.load_extension 'fzf'
   end
 end
