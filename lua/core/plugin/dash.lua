@@ -134,7 +134,7 @@ function M.open(opts)
     api.nvim_buf_add_highlight(buf, dash, "DashButtons", i, horiz_pad_index, -1)
   end
 
-  api.nvim_win_set_cursor(win, { abc + #header, math.floor((vim.o.columns - dashWidth) / 2) - 2})
+  api.nvim_win_set_cursor(win, { abc + #header, math.floor((vim.o.columns - dashWidth) / 2) - 2 })
 
   local first_btn_line = abc + #header + 2
   local keybind_lineNrs = {}
