@@ -314,6 +314,8 @@ function M.apply_theme(theme, use_256_colorspace)
 
   -- TODO
   -- nvim.command 'syntax on'
+
+  vim.api.nvim_exec_autocmds('ColorScheme', {})
 end
 
 M.themes = {}
