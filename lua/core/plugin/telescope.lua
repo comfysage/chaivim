@@ -40,6 +40,7 @@ M.picker = {}
 function M.picker.find_files(props)
   props = props or {}
   local opts = MT(M.style.main, {
+    prompt_prefix = core.icons.item.find .. ' ',
     shorten_path = true,
     hidden = true,
   })
