@@ -45,7 +45,7 @@ function parts.load(module, spec)
     end
   end
 
-  if spec.event then
+  if spec.event and not spec.loaded then
     vim.api.nvim_create_autocmd({ spec.event }, {
       group = core.group_id,
       once = true,
