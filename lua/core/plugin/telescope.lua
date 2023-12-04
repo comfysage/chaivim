@@ -6,12 +6,6 @@ local M = {}
 M.style = {}
 
 M.style.dropdown = themes.get_dropdown {
-  borderchars = {
-    { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    prompt = { "─", "│", " ", "│", '╭', '╮', "│", "│" },
-    results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-    preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-  },
   width = 0.8,
   previewer = false,
   prompt_title = false
@@ -39,12 +33,6 @@ M.style.main = {
   prompt_title = '',
   preview_title = '',
   preview_width = 0.4,
-  borderchars = {
-    { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    prompt = { " ", "│", "─", "│", '│', '│', "╯", "╰" },
-    results = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-    preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-  },
 }
 
 M.picker = {}
