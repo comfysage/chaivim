@@ -103,6 +103,8 @@ function parts.preload(_)
     Util.log('global keymaps is not defined.', 'error')
     return
   end
+
+  core.icons = require 'core.plugin.icons'
 end
 
 function parts.platform(_)
