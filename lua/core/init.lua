@@ -28,6 +28,7 @@ local parts = require 'core.parts'
 ---@field group_id integer
 ---@field path CorePath
 ---@field loaded boolean
+---@field modules InternalModules parsed module configs
 
 ---@class CorePath
 ---@field root string
@@ -35,6 +36,8 @@ local parts = require 'core.parts'
 ---@field plenary string
 ---@field keymaps string
 ---@field telescope string
+
+---@alias InternalModules { [MainModule]: { [ModuleName]: ModuleSpec } }
 
 local M = {}
 
@@ -59,6 +62,8 @@ _G.core.path = {
   root = root_path,
 }
 _G.core.path.core = _G.core.path.root .. "/sentinel"
+
+_G.core.modules = _G.core.modules or {}
 
 ---@param config Config
 function M.setup(config)

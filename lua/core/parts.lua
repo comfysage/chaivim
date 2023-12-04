@@ -14,6 +14,8 @@ function parts.load_modules(_)
     -- end
     Util.log('loading ' .. main_mod .. ' modules.')
 
+    core.modules[main_mod] = core.modules[main_mod] or {}
+
     parts._modules(main_mod, modules)
 
     -- ::continue::
@@ -64,6 +66,8 @@ function parts._modules(mod, modules)
     if mod == 'core' then
       module = mod .. '.config.' .. spec.name
     end
+
+    core.modules[mod][spec.name] = spec
 
     parts.load(module, spec)
     spec.loaded = true
