@@ -9,7 +9,7 @@ local parts = require 'core.parts'
 ---@class ModuleSpec
 ---@field name ModuleName
 ---@field event string
----@field opts table
+---@field opts table|string|nil
 ---@field reload boolean
 
 ---@alias ModuleName 'options'|'highlights'|'base'|'maps'|'plugins'|string

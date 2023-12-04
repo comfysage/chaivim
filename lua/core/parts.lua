@@ -40,6 +40,9 @@ function parts.load(module, spec)
     end
     if type(result) == 'table' then
       if result.setup then
+        if not type(spec.opts) == 'table' then
+          return
+        end
         result.setup(opts)
       end
     end
@@ -65,6 +68,10 @@ function parts._modules(mod, modules)
     local module = mod .. '.' .. spec.name
     if mod == 'core' then
       module = mod .. '.config.' .. spec.name
+    end
+
+    if spec.opts and type(spec.opts) == 'string' then
+      spec.opts = require(spec.opts)
     end
 
     core.modules[mod][spec.name] = spec
