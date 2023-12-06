@@ -7,6 +7,13 @@ local default_config = {
 
 local lazy_config = {
   root = nil, -- directory where plugins will be installed
+  ui = {
+    -- a number <1 is a percentage., >1 is a fixed size
+    size = { width = 90, height = 0.8 },
+    wrap = true, -- wrap the lines in the ui
+    -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+    border = 'none',
+  },
   -- required for core bootstrap
   performance = {
     reset_packpath = false,
