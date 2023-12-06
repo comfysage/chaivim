@@ -30,6 +30,7 @@ local parts = require 'core.parts'
 ---@field loaded boolean
 ---@field modules InternalModules parsed module configs
 ---@field icons CoreIcons
+---@field hl CoreHighlights
 
 ---@class CorePath
 ---@field root string

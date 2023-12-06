@@ -112,6 +112,7 @@ function parts.preload(_)
   end
 
   core.icons = require 'core.plugin.icons'
+  require 'core.plugin.hl'.load()
 end
 
 function parts.platform(_)
