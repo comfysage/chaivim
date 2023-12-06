@@ -93,7 +93,7 @@ function M.setup(config)
         reload = spec.reload == nil and true or spec.reload,
         event = spec.event or false,
         opts = spec.opts or {},
-        loaded = false,
+        loaded = core.loaded,
       }
     end
   end
