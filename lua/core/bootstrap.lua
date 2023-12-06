@@ -1,6 +1,6 @@
 local Util = require 'core.utils'
 
----@type { [string]: { load: function, update: function } }
+---@type { [string]: { boot: function, load: function, update: function }|nil }
 local fn = {
   core = {
     update = function()
