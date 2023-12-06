@@ -90,7 +90,7 @@ function M.setup(config)
     for i, spec in ipairs(modules) do
       _config.modules[main_mod][i] = {
         name = spec[1],
-        reload = spec.reload or true,
+        reload = spec.reload == nil and true or spec.reload,
         event = spec.event or false,
         opts = spec.opts or {},
         loaded = false,
