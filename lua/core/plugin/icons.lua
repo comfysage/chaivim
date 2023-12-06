@@ -3,6 +3,7 @@
 ---@class CoreIcons
 ---@field syntax Icons
 ---@field item Icons
+---@field info Icons
 
 ---@type CoreIcons
 return {
@@ -46,5 +47,9 @@ return {
   item = {
     colors = '󰏘',
     find = '',
+  },
+  info = {
+    loaded = "●",
+    not_loaded = "○",
   },
 }
