@@ -24,9 +24,9 @@ local fn = {
     url = 'nvim-telescope/telescope.nvim',
   },
   lazy = Util.create_bootstrap {
-    name = 'lazy_nvim',
+    name = 'lazy',
     url = 'folke/lazy.nvim',
-    dir = 'lazy/lazy.nvim',
+    dir = 'lazy.nvim',
     mod = 'lazy',
   },
 }

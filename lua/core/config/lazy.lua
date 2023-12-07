@@ -33,8 +33,7 @@ return {
     opts.config = vim.tbl_deep_extend('force', opts.config, overwrite)
 
     -- set lazy path
-    core.path.lazy = core.path.root .. '/lazy'
-    opts.config.root = core.path.lazy
+    opts.config.root = core.path.root
 
     -- update global
     core.modules.core.lazy.opts = opts
@@ -43,6 +42,6 @@ return {
     require 'core.bootstrap'.boot 'lazy'
 
     Util.log 'loading plugins.'
-    require 'lazy'.setup(opts.module, opts.config)
+    require 'lazy'.setup('core.lazy.plugins', opts.config)
   end
 }

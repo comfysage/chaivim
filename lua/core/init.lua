@@ -39,7 +39,6 @@ local parts = require 'core.parts'
 ---@field keymaps string
 ---@field telescope string
 ---@field lazy string
----@field lazy_nvim string
 
 ---@alias InternalModules { [MainModule]: { [ModuleName]: ModuleSpec } }
 
