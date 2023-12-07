@@ -35,8 +35,16 @@ local function create_hls(props)
 end
 
 return {
-  ---@return CoreHighlights
   setup = function()
+    require 'core.load.handle'.create {
+      event = 'ColorScheme', priority = 1,
+      fn = function(_)
+        require 'core.plugin.hl'.load()
+      end,
+    }
+  end,
+  ---@return CoreHighlights
+  create = function()
     return {
       ui = create_hls {
         { 'bg',        from = 'Normal',     fg = 'none' },
@@ -54,6 +62,6 @@ return {
     }
   end,
   load = function()
-    core.hl = require 'core.plugin.hl'.setup()
+    core.hl = require 'core.plugin.hl'.create()
   end
 }
