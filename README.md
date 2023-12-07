@@ -8,6 +8,13 @@
 
 ## installation
 
+chaivim can be installed [manually](#manual-install) or through the installer:
+```shell
+curl -fsSL https://github.com/CrispyBaccoon/chaivim/raw/mega/install.sh | sh
+```
+
+### manual install
+
 ```lua
 -- init.lua
 local rootpath = vim.fn.stdpath("data") .. "/core"
