@@ -1,5 +1,22 @@
 Spec = Spec or {}
 
+--- adds priority and lazy fields to plugin spec
+--- example:
+--- ```lua
+--- return Spec.colorscheme {
+---   'crispybaccoon/evergarden',
+---   opts = {},
+--- }
+--- ```
+--- is the same as:
+--- ```lua
+--- return {
+---   'crispybaccoon/evergarden',
+---   priority = 1200,
+---   lazy = true,
+---   opts = {},
+--- }
+--- ```
 ---@param props LazyPluginSpec
 ---@return LazyPluginSpec
 function Spec.colorscheme(props)
