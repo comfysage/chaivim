@@ -19,7 +19,7 @@ return {
       group = core.group_id,
       desc = 'core handle for ' .. event,
       callback = function(opts)
-        for i, fn_t in ipairs(core.handle[event]) do
+        for i, fn_t in pairs(core.handle[event]) do
           Util.log(string.format('autocmds:%s:%d', event, i))
           for _, fn in ipairs(fn_t) do
             fn(opts)
