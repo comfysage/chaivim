@@ -191,3 +191,28 @@ core.config.colorscheme = 'tokyonight'
   },
 }
 ```
+
+## plugin modules
+
+### `telescope` module
+
+```lua
+{
+  'telescope',
+  event = 'UIEnter',
+  opts = {
+    use_fzf = true,
+    config = {}, -- `config` will be passed to `telescope.setup()`
+  },
+}
+```
+
+### `lazy` module
+
+```lua
+{
+  'lua',
+  event = nil,
+  reload = false, -- lazy.nvim doesn't allow config reloading
+}
+```
