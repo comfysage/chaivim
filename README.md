@@ -1,4 +1,4 @@
-# sentinel
+# chaivim
 
 ## requirements
 
@@ -11,19 +11,19 @@
 ```lua
 -- init.lua
 local rootpath = vim.fn.stdpath("data") .. "/core"
-local sentinelpath = rootpath .. "/sentinel"
+local chaipath = rootpath .. "/chai"
 
-if not vim.loop.fs_stat(sentinelpath) then
+if not vim.loop.fs_stat(chaipath) then
   vim.system({
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/crispybaccoon/sentinel.nvim.git",
-    sentinelpath,
+    "https://github.com/crispybaccoon/chaivim.git",
+    chaipath,
   }):wait()
 end
 
-vim.opt.rtp:prepend(sentinelpath)
+vim.opt.rtp:prepend(chaipath)
 ```
 
 ## usage

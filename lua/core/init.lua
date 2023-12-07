@@ -64,7 +64,7 @@ local root_path = vim.fn.stdpath("data") .. "/core"
 _G.core.path = {
   root = root_path,
 }
-_G.core.path.core = _G.core.path.root .. "/sentinel"
+_G.core.path.core = _G.core.path.root .. "/chai"
 
 _G.core.modules = _G.core.modules or {}
 

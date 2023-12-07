@@ -3,22 +3,22 @@
 ```lua
 -- init.lua
 local rootpath = vim.fn.stdpath("data") .. "/core"
-local sentinelpath = rootpath .. "/sentinel"
+local chaipath = rootpath .. "/chai"
 
-if not vim.loop.fs_stat(sentinelpath) then
+if not vim.loop.fs_stat(chaipath) then
   vim.system({
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/crispybaccoon/sentinel.nvim.git",
-    sentinelpath,
+    "https://github.com/crispybaccoon/chaivim.git",
+    chaipath,
   }):wait()
 end
 
-vim.opt.rtp:prepend(sentinelpath)
+vim.opt.rtp:prepend(chaipath)
 ```
 
-sentinel can be updated with:
+chai can be updated with:
 ```lua
 require 'core'.update()
 ```
@@ -101,7 +101,7 @@ core-config
 core-config-log_level
 : Minimum log level
 
-Set to `vim.log.levels.OFF` to disable logging from `sentinel`, or `vim.log.levels.TRACE`
+Set to `vim.log.levels.OFF` to disable logging from `chai`, or `vim.log.levels.TRACE`
 to enable all logging.
 
 Type: `vim.log.levels` (default: `vim.log.levels.INFO`)
