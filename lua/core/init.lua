@@ -51,7 +51,7 @@ _G.core = _G.core or {}
 ---@type Config
 M.default_config = {
   log_level = vim.log.levels.INFO,
-  colorscheme = "habamax", -- or "zaibatsu" or "retrobox"
+  colorscheme = 'evergarden', -- or 'habamax' or 'zaibatsu' or 'retrobox'
   transparent_background = false,
   transparent_fn = {},
   modules = {},
