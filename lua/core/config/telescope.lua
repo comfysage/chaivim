@@ -80,10 +80,10 @@ local default_config = {
   },
   extensions = {
     fzf = {
-      fuzzy = true,                         -- false will only do exact matching
-      override_generic_sorter = true,       -- override the generic sorter
-      override_file_sorter = true,          -- override the file sorter
-      case_mode = 'smart_case',             -- or 'ignore_case' or 'respect_case', defaults to 'smart_case'
+      fuzzy = true,                   -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true,    -- override the file sorter
+      case_mode = 'smart_case',       -- or 'ignore_case' or 'respect_case', defaults to 'smart_case'
     },
   },
   pickers = {
@@ -102,7 +102,7 @@ local default_config = {
 M.setup = function(opts)
   local config = vim.tbl_deep_extend('force', default_config, opts.config or {})
 
-  require 'telescope'.setup (config)
+  require 'telescope'.setup(config)
 
   if opts.use_fzf then
     require 'telescope'.load_extension 'fzf'
