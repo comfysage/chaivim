@@ -6,7 +6,15 @@ return {
       -- command = 'source <afile>',
       callback = function(props)
         vim.notify('reloading module: ' .. CONFIG_MODULE .. '\t' .. props.file, vim.log.levels.INFO)
-        vim.cmd.source(props.file)
+        local status, config = SR(CONFIG_MODULE)
+        if not status then
+          Util.log('config module ' .. CONFIG_MODULE .. ' was not found', 'error')
+          return
+        end
+        if type(config) == 'table' then
+          require 'core'.setup(config)
+        end
+        return
       end,
       group = opts.group_id,
       pattern = 'lua/' .. CONFIG_MODULE .. '/init.lua',
