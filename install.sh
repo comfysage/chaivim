@@ -18,7 +18,7 @@ function usage() {
   echo "Options:"
   echo "    -h, --help                               Print this help message"
   echo "    -y, --yes                                Disable confirmation prompts (answer yes to all questions)"
-  echo "    --overwrite                              Overwrite previous sentinel configuration (a backup is always performed first)"
+  echo "    --overwrite                              Overwrite previous chaivim configuration (a backup is always performed first)"
 }
 
 function parse_arguments() {
@@ -210,45 +210,49 @@ function create_init() {
   echo '
 -- bootstrap chaivim
 local rootpath = vim.fn.stdpath("data") .. "/core"
-local sentinelpath = rootpath .. "/sentinel"
+local chaipath = rootpath .. "/chai"
 
-if not vim.loop.fs_stat(sentinelpath) then
+if not vim.loop.fs_stat(chaipath) then
   vim.system({
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/crispybaccoon/sentinel.nvim.git",
-    sentinelpath,
+    "https://github.com/crispybaccoon/chaivim.git",
+    chaipath,
   }):wait()
 end
+vim.opt.rtp:prepend(chaipath)
 
-vim.opt.rtp:prepend(sentinelpath)
-require "core".setup {
-    colorscheme = "habamax",
-    transparent_background = false,
-    modules = {
-        core = {
-            {
-                "options",
-                opts = {
-                    cursorline = false,
-                    tab_width = 2,
-                    scrolloff = 5,
-                },
-            },
-            {
-                "dash",
-                opts = {
-                    open_on_startup = true,
-                },
-            },
-        },
-        custom = {
-            -- your custom modules (in `lua/custom/`)
-        },
-    }
-}
+require "core".setup "custom"
 ' > "$CONFIG_DIR/init.lua"
+
+  mkdir -p "$CONFIG_DIR/lua/custom"
+  echo 'return {
+  colorscheme = "evergarden",
+  transparent_background = false,
+  modules = {
+      core = {
+          {
+              "options",
+              opts = {
+                  cursorline = false,
+                  tab_width = 2,
+                  scrolloff = 5,
+              },
+          },
+          {
+              "dash",
+              opts = {
+                  open_on_startup = true,
+              },
+          },
+      },
+      custom = {
+          -- your custom modules (in `lua/custom/`)
+      },
+  }
+}
+' > "$CONFIG_DIR/lua/custom/init.lua"
 }
 
 function setup_cvim() {
