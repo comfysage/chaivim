@@ -63,6 +63,21 @@ require 'core'.setup {
     }
 }
 ```
+or call `require 'core'.setup 'custom'` to load a custom configuration from `lua/custom/init.lua`:
+```lua
+-- init.lua
+require 'core'.setup 'custom'
+
+-- lua/custom/init.lua
+return {
+    colorscheme = 'evergarden',
+    modules = {
+        core = {
+            { 'options' },
+        },
+    }
+}
+```
 
 all config fields can be overwritten after `setup()`:
 ```lua
