@@ -38,7 +38,7 @@ vim.opt.rtp:prepend(chaipath)
 ```lua
 -- init.lua
 require 'core'.setup {
-    colorscheme = 'nord',
+    colorscheme = 'evergarden',
     transparent_background = false,
     modules = {
         core = {
