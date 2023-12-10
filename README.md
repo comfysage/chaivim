@@ -1,12 +1,12 @@
 # chaivim
 
-## requirements
+## :lock: requirements
 
 - Neovim >= 0.8.0 (needs to be built with LuaJIT)
 - git >= 2.19.0 (for partial clones support)
 - a Nerd Font (optional)
 
-## installation
+## :package: installation
 
 chaivim can be installed [manually](#manual-install) or through the installer:
 ```shell
@@ -33,7 +33,7 @@ end
 vim.opt.rtp:prepend(chaipath)
 ```
 
-## usage
+## :rocket: usage
 
 ```lua
 -- init.lua
@@ -69,7 +69,7 @@ all config fields can be overwritten after `setup()`:
 core.config.colorscheme = 'tokyonight'
 ```
 
-## config modules
+## :gear: config modules
 
 ### `options` module
 
