@@ -9,25 +9,6 @@ local fn = vim.fn
 ---@field header string[]
 ---@field buttons { [1]: string, [2]: string, [3]: string|function }[]
 
-local default_config = {
-  open_on_startup = true,
-  header = {
-    [[      )  (      ]],
-    [[     (   ) )    ]],
-    [[      ) ( (     ]],
-    [[           )    ]],
-    [[   ▟██████████▙ ]],
-    [[ █▛██▛ ▟▛ ▟▛ ▟█ ]],
-    [[ ▜▙█▛ ▟▛ ▟▛ ▟██ ]],
-    [[   ▝██████████▛ ]],
-    [[    ▝▀▀▀▀▀▀▀▀▀  ]],
-  },
-  buttons = {
-    { 'find files',   '', function() require 'core.plugin.telescope'.picker.find_files {} end },
-    { 'select theme', '', function() require 'telescope.builtin'.colorscheme() end },
-  },
-}
-
 api.nvim_create_autocmd("BufLeave", {
   group = core.group_id,
   callback = function()
@@ -40,9 +21,8 @@ api.nvim_create_autocmd("BufLeave", {
 vim.api.nvim_set_hl(0, "DashAscii", { link = 'TablineSel' })
 vim.api.nvim_set_hl(0, "DashButtons", { link = 'Comment' })
 
----@param opts DashConfig
-function M.open(opts)
-  local config = vim.tbl_deep_extend('force', default_config, opts)
+---@param config DashConfig
+function M.open(config)
   -- setup variables
   local headerAscii = config.header
   local emmptyLine = string.rep(" ", fn.strwidth(headerAscii[1]))
