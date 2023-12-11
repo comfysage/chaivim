@@ -23,6 +23,10 @@ local fn = {
     name = 'telescope',
     url = 'nvim-telescope/telescope.nvim',
   },
+  lualine = Util.create_bootstrap {
+    name = 'lualine',
+    url = 'nvim-lualine/lualine.nvim',
+  },
   evergarden = Util.create_bootstrap {
     name = 'evergarden',
     url = 'crispybaccoon/evergarden',
