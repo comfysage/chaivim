@@ -1,8 +1,8 @@
 return {
   setup = function(main, module, spec)
-    local ok, import = SR(string.format('core.load.modules.%s.%s', main, module))
+    local ok, import = SR(string.format('core.modules.%s.%s', main, module))
     if not ok then
-      ok, import = SR_L 'core.load.modules.default'
+      ok, import = SR_L 'core.modules.default'
       if not ok then
         return
       end

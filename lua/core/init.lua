@@ -99,7 +99,7 @@ function M.setup(config)
     _config.modules[main_mod] = {}
     for i, spec in ipairs(modules) do
       local name = spec.name or spec[1]
-      _config.modules[main_mod][i] = require 'core.load.modules'.setup(main_mod, name, spec)
+      _config.modules[main_mod][i] = require 'core.modules'.setup(main_mod, name, spec)
     end
   end
 
