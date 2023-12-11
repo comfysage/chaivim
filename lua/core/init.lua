@@ -103,8 +103,11 @@ function M.setup(config)
         reload = spec.reload == nil and true or spec.reload,
         event = spec.event or false,
         opts = spec.opts or {},
-        loaded = core.loaded,
+        loaded = false,
       }
+      if core.loaded and core.modules[main_mod] and core.modules[main_mod][spec[1]] then
+        _config.modules[main_mod][i].loaded = core.modules[main_mod][spec[1]].loaded
+      end
     end
   end
 
