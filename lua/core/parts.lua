@@ -3,22 +3,33 @@ local Util = require 'core.utils'
 local parts = {}
 
 function parts.load_modules(_)
+  parts.load_config {}
+
+  for main_mod, modules in pairs(core.modules) do
+    parts._modules(main_mod, modules)
+  end
+end
+
+function parts.load_config(_)
   if not core.config.modules['core'] then
     Util.log('core modules are not defined.', 'error')
     return
   end
 
   for main_mod, modules in pairs(core.config.modules) do
-    -- if main_mod == 'core' then
-    --   goto continue
-    -- end
     Util.log('loading ' .. main_mod .. ' modules.')
 
     core.modules[main_mod] = core.modules[main_mod] or {}
+    core.modules[main_mod] = vim.tbl_deep_extend("force", core.modules[main_mod],
+      require 'core.modules'.get_defaults(main_mod))
 
-    parts._modules(main_mod, modules)
+    for _, spec in pairs(modules) do
+      if spec.opts and type(spec.opts) == 'string' then
+        spec.opts = require(spec.opts)
+      end
 
-    -- ::continue::
+      core.modules[main_mod][spec.name] = spec
+    end
   end
 end
 
@@ -63,18 +74,12 @@ end
 
 ---@param modules { [ModuleName]: boolean }
 function parts._modules(mod, modules)
-  for _, spec in ipairs(modules) do
+  for _, spec in pairs(modules) do
     ---@type ModuleName
     local module = mod .. '.' .. spec.name
     if mod == 'core' then
       module = mod .. '.config.' .. spec.name
     end
-
-    if spec.opts and type(spec.opts) == 'string' then
-      spec.opts = require(spec.opts)
-    end
-
-    core.modules[mod][spec.name] = spec
 
     parts.load(module, spec)
     spec.loaded = true
@@ -122,13 +127,13 @@ function parts.platform(_)
   local is_neovide = vim.g.neovide
 
   if is_mac then
-    require (CONFIG_MODULE .. '.macos')
+    require(CONFIG_MODULE .. '.macos')
   end
   if is_win then
-    require (CONFIG_MODULE .. '.windows')
+    require(CONFIG_MODULE .. '.windows')
   end
   if is_neovide then
-    require (CONFIG_MODULE .. '.neovide')
+    require(CONFIG_MODULE .. '.neovide')
   end
 end
 
