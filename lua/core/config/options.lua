@@ -10,8 +10,6 @@ local M = {}
 --- Setup options
 ---@param opts OptionsConfig
 function M.setup(opts)
-  opts = opts or {}
-
   vim.opt.encoding = 'utf-8'
   vim.opt.fileencoding = 'utf-8'
 
