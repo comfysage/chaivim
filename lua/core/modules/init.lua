@@ -20,7 +20,8 @@ return {
       loaded = false,
     }
 
-    _spec = vim.tbl_deep_extend('force', _spec, import.default)
+    _spec = vim.tbl_deep_extend('force', _spec, spec)
+    _spec = vim.tbl_deep_extend('force', import.default, _spec)
 
     if core.loaded and core.modules[main] and core.modules[main][module] then
       _spec.loaded = core.modules[main][module].loaded
