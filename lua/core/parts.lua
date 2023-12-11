@@ -36,6 +36,10 @@ end
 ---@param module string
 ---@param spec ModuleSpec
 function parts.load(module, spec)
+  if spec.enabled == false then
+    Util.log('skipping loading module: ' .. module)
+    return
+  end
   if spec.loaded and spec.reload == false then
     Util.log('skipping reloading module: ' .. module)
     return
