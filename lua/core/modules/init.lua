@@ -4,7 +4,7 @@ local default_modules = {
   core = {
     'base', 'options', 'highlights',
     'lazy', 'lualine', 'treesitter',
-    'telescope',
+    'telescope', 'mini',
     'dash',
   },
 }
