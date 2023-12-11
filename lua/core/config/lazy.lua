@@ -1,10 +1,5 @@
 local Util = require 'core.utils'
 
-local default_config = {
-  config = {},
-  module = 'plugins',
-}
-
 local lazy_config = {
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
@@ -29,7 +24,6 @@ local overwrite = {
 return {
   setup = function(opts)
     opts = opts or {}
-    opts = vim.tbl_deep_extend('force', default_config, opts)
     opts.config = vim.tbl_deep_extend('force', lazy_config, opts.config)
     opts.config = vim.tbl_deep_extend('force', opts.config, overwrite)
 
