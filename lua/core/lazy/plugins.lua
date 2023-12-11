@@ -11,4 +11,8 @@ return {
   { name = 'lualine', 'nvim-lualine/lualine.nvim' },
   { name = 'evergarden', 'crispybaccoon/evergarden' },
   { import = core.modules.core.lazy.opts.module },
+  { name = 'nvim-treesitter', 'nvim-treesitter/nvim-treesitter',
+    version = false, -- last release is way too old and doesn't work on Windows
+    build = ":TSUpdate",
+  },
 }

@@ -37,6 +37,12 @@ local fn = {
     dir = 'lazy.nvim',
     mod = 'lazy',
   },
+  treesitter = Util.create_bootstrap {
+    name = 'treesitter',
+    url = 'nvim-treesitter/nvim-treesitter',
+    mod = 'nvim-treesitter',
+    dir = 'nvim-treesitter',
+  },
 }
 
 ---@param name string
