@@ -1,6 +1,28 @@
+local Util = require 'core.utils'
+
+local default_modules = {
+  core = {
+    'base', 'options', 'highlights',
+    'lazy', 'lualine',
+    'telescope',
+    'dash',
+  },
+}
+
 return {
   get_module = function(main, module)
     return SR(string.format('core.modules.%s.%s', main, module))
+  end,
+  get_defaults = function(main)
+    if not default_modules[main] then
+      return {}
+    end
+
+    local modules = {}
+    for _, module in ipairs(default_modules[main]) do
+      modules[module] = require 'core.modules'.setup(main, module, {})
+    end
+    return modules
   end,
   setup = function(main, module, spec)
     local ok, default = SR_L 'core.modules.default'
