@@ -1,11 +1,14 @@
 return {
+  get_module = function(main, module)
+    return SR(string.format('core.modules.%s.%s', main, module))
+  end,
   setup = function(main, module, spec)
     local ok, default = SR_L 'core.modules.default'
     if not ok then
       return
     end
     ---@diagnostic disable-next-line redefined-local
-    local ok, import = SR(string.format('core.modules.%s.%s', main, module))
+    local ok, import = require 'core.modules'.get_module(main, module)
     if not ok then
       import = {}
     end
