@@ -92,16 +92,8 @@ function M.setup(config)
     transparent_background = config.transparent_background,
     transparent_fn = config.transparent_fn,
     config_module = CONFIG_MODULE,
-    modules = {},
+    modules = config.modules,
   }
-
-  for main_mod, modules in pairs(config.modules) do
-    _config.modules[main_mod] = {}
-    for i, spec in ipairs(modules) do
-      local name = spec.name or spec[1]
-      _config.modules[main_mod][i] = require 'core.modules'.setup(main_mod, name, spec)
-    end
-  end
 
   _G.core.config = vim.tbl_deep_extend('force', _G.core.config, _config)
 

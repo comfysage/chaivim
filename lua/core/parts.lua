@@ -18,18 +18,20 @@ function parts.load_config(_)
 
   for main_mod, modules in pairs(core.config.modules) do
     Util.log('loading ' .. main_mod .. ' modules.')
-
     core.modules[main_mod] = core.modules[main_mod] or {}
-    core.modules[main_mod] = vim.tbl_deep_extend("force", core.modules[main_mod],
-      require 'core.modules'.get_defaults(main_mod))
 
     for _, spec in pairs(modules) do
       if spec.opts and type(spec.opts) == 'string' then
         spec.opts = require(spec.opts)
       end
+      local name = spec.name or spec[1]
+      spec = require 'core.modules'.setup(main_mod, name, spec)
 
       core.modules[main_mod][spec.name] = spec
     end
+
+    core.modules[main_mod] = vim.tbl_deep_extend("force", core.modules[main_mod],
+      require 'core.modules'.get_defaults(main_mod))
   end
 end
 
