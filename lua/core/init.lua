@@ -98,16 +98,8 @@ function M.setup(config)
   for main_mod, modules in pairs(config.modules) do
     _config.modules[main_mod] = {}
     for i, spec in ipairs(modules) do
-      _config.modules[main_mod][i] = {
-        name = spec[1],
-        reload = spec.reload == nil and true or spec.reload,
-        event = spec.event or false,
-        opts = spec.opts or {},
-        loaded = false,
-      }
-      if core.loaded and core.modules[main_mod] and core.modules[main_mod][spec[1]] then
-        _config.modules[main_mod][i].loaded = core.modules[main_mod][spec[1]].loaded
-      end
+      local name = spec.name or spec[1]
+      _config.modules[main_mod][i] = require 'core.load.modules'.setup(main_mod, name, spec)
     end
   end
 
