@@ -51,6 +51,15 @@ SR = function(module_name, starts_with_only)
   return pcall(require, module_name)
 end
 
+-- secure reload and log
+SR_L = function (...)
+  local ok, result = SR(...)
+  if not ok then
+    vim.notify('error while loading module\n\t' .. result, vim.log.levels.ERROR)
+  end
+  return ok, result
+end
+
 RELOAD = function (...)
  return require("plenary.reload").reload_module(...)
 end
