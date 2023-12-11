@@ -28,6 +28,7 @@ local overwrite = {
 
 return {
   setup = function(opts)
+    opts = opts or {}
     opts = vim.tbl_deep_extend('force', default_config, opts)
     opts.config = vim.tbl_deep_extend('force', lazy_config, opts.config)
     opts.config = vim.tbl_deep_extend('force', opts.config, overwrite)
