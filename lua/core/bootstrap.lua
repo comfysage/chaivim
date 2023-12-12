@@ -13,19 +13,23 @@ local fn = {
   keymaps = Util.create_bootstrap {
     name = 'keymaps',
     url = 'crispybaccoon/keymaps.nvim',
+    dir = 'keymaps.nvim',
     opts = {},
   },
   plenary = Util.create_bootstrap {
     name = 'plenary',
     url = 'nvim-lua/plenary.nvim',
+    dir = 'plenary.nvim',
   },
   telescope = Util.create_bootstrap {
     name = 'telescope',
     url = 'nvim-telescope/telescope.nvim',
+    dir = 'telescope.nvim',
   },
   lualine = Util.create_bootstrap {
     name = 'lualine',
     url = 'nvim-lualine/lualine.nvim',
+    dir = 'lualine.nvim',
   },
   evergarden = Util.create_bootstrap {
     name = 'evergarden',

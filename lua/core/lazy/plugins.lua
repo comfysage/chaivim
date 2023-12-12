@@ -1,19 +1,19 @@
 return {
   { name = 'chai', 'crispybaccoon/chaivim' },
-  { name = 'keymaps', 'crispybaccoon/keymaps.nvim' },
-  { name = 'plenary', 'nvim-lua/plenary.nvim' },
-  { name = 'telescope', 'nvim-telescope/telescope.nvim',
+  { 'crispybaccoon/keymaps.nvim' },
+  { 'nvim-lua/plenary.nvim' },
+  { 'nvim-telescope/telescope.nvim',
     dependencies = {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       'sharkdp/fd',
     },
   },
-  { name = 'lualine', 'nvim-lualine/lualine.nvim' },
-  { name = 'evergarden', 'crispybaccoon/evergarden' },
-  { import = core.modules.core.lazy.opts.module },
-  { name = 'nvim-treesitter', 'nvim-treesitter/nvim-treesitter',
+  { 'nvim-lualine/lualine.nvim' },
+  { 'crispybaccoon/evergarden' },
+  { 'nvim-treesitter/nvim-treesitter',
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
   },
-  { name = 'mini.nvim', 'echasnovski/mini.nvim' },
+  { 'echasnovski/mini.nvim' },
+  { import = core.modules.core.lazy.opts.module },
 }
