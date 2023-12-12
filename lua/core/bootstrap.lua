@@ -53,6 +53,18 @@ local fn = {
     dir = 'mini.nvim',
     opts = false,
   },
+  telescope_fzf = Util.create_bootstrap {
+    name = 'telescope_fzf',
+    url = 'nvim-telescope/telescope-fzf-native.nvim',
+    dir = 'telescope-fzf-native.nvim',
+    opts = false,
+  },
+  telescope_fd = Util.create_bootstrap {
+    name = 'telescope_fd',
+    url = 'sharkdp/fd',
+    dir = 'fd',
+    opts = false,
+  },
 }
 
 ---@param name string

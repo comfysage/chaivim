@@ -72,6 +72,7 @@ M.setup = function(opts)
   require 'telescope'.setup(opts.config)
 
   if opts.use_fzf then
+    require 'core.bootstrap'.boot 'telescope_fzf'
     require 'telescope'.load_extension 'fzf'
   end
 
