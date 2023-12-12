@@ -59,12 +59,6 @@ local fn = {
     dir = 'telescope-fzf-native.nvim',
     opts = false,
   },
-  telescope_fd = Util.create_bootstrap {
-    name = 'telescope_fd',
-    url = 'sharkdp/fd',
-    dir = 'fd',
-    opts = false,
-  },
 }
 
 ---@param name string
