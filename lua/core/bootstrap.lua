@@ -47,27 +47,12 @@ local fn = {
     mod = 'nvim-treesitter',
     dir = 'nvim-treesitter',
   },
-  mini = {
-    boot = function()
-      local dir = core.path.root .. '/mini.nvim'
-      core.path.mini = dir
-
-      if not vim.loop.fs_stat(dir) then
-        Util.log('module mini not found. bootstrapping...', 'warn')
-        require 'core.bootstrap'.load 'mini'
-      end
-      vim.opt.rtp:prepend(dir)
-    end,
-    load = function()
-      Util.git_clone { name = 'mini', url = 'echasnovski/mini.nvim' }
-    end,
-    update = function()
-      Util.git_pull {
-        name = 'mini',
-        path = core.path.mini,
-      }
-    end,
-  }
+  mini = Util.create_bootstrap {
+    name = 'mini',
+    url = 'echasnovski/mini.nvim',
+    dir = 'mini.nvim',
+    opts = false,
+  },
 }
 
 ---@param name string

@@ -66,7 +66,7 @@ function Util.git_clone(props)
   Util.log('succesfully cloned ' .. props.name, 'info')
 end
 
----@param props { name: string, dir: string, mod: string, opts: table|nil }
+---@param props { name: string, dir: string, mod: string, opts: table|nil|boolean }
 function Util.boot(props)
   local dir = core.path.root .. '/' .. props.dir
   core.path[props.name] = dir
@@ -76,6 +76,10 @@ function Util.boot(props)
     require 'core.bootstrap'.load(props.name)
   end
   vim.opt.rtp:prepend(dir)
+
+  if props.opts == false then
+    return
+  end
 
   local ok, result = SR(props.mod)
 
@@ -89,7 +93,7 @@ function Util.boot(props)
   Util.log('error while bootstrapping ' .. props.name .. '\n\t' .. (result or ''), 'error')
 end
 
----@param props { name: string, dir: string, mod: string, url: string, opts: table|nil }
+---@param props { name: string, dir: string, mod: string, url: string, opts: table|nil|boolean }
 ---@return { boot: function, load: function, update: function }|nil
 function Util.create_bootstrap(props)
   if not props.name then
