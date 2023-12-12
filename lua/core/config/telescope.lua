@@ -2,38 +2,38 @@ local Util = require 'core.utils'
 
 local M = {}
 
-local themes = {
-  minimal = {
-    borderchars = {
-      { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-      prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-      results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-      preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-    },
-    highlights = {
-      TelescopeTitle = { core.hl.ui.accent, { reverse = true } },
-      TelescopeNormal = { core.hl.ui.bg },
-      TelescopePromptNormal = { core.hl.ui.bg_accent },
-      TelescopeSelection = { core.hl.ui.current },
-    },
-  },
-  main = {
-    borderchars = {
-      { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-      prompt = { " ", "│", "─", "│", '│', '│', "╯", "╰" },
-      results = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-      preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    },
-    highlights = {
-      TelescopeTitle = { core.hl.ui.accent, { reverse = true } },
-      TelescopeNormal = { core.hl.ui.bg },
-      TelescopePromptNormal = { core.hl.ui.bg_accent },
-      TelescopeSelection = { core.hl.ui.current },
-    },
-  },
-}
-
 local function use_theme(theme_name)
+  local themes = {
+    minimal = {
+      borderchars = {
+        { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+        prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+        results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+        preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+      },
+      highlights = {
+        TelescopeTitle = { core.hl.ui.accent },
+        TelescopeNormal = { core.hl.ui.bg },
+        TelescopePromptNormal = { core.hl.ui.bg_accent },
+        TelescopeSelection = { core.hl.ui.current },
+      },
+    },
+    main = {
+      borderchars = {
+        { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        prompt = { " ", "│", "─", "│", '│', '│', "╯", "╰" },
+        results = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+        preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+      },
+      highlights = {
+        TelescopeTitle = { core.hl.ui.accent, { reverse = true } },
+        TelescopeNormal = { core.hl.ui.bg },
+        TelescopePromptNormal = { core.hl.ui.bg_accent },
+        TelescopeSelection = { core.hl.ui.current },
+      },
+    },
+  }
+
   if not theme_name then
     return
   end
