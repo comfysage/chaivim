@@ -36,6 +36,8 @@ end
 
 return {
   setup = function()
+    require 'core.plugin.hl'.load()
+
     require 'core.load.handle'.create {
       event = 'ColorScheme', priority = 1,
       fn = function(_)
