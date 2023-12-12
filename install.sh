@@ -253,6 +253,11 @@ require "core".setup "custom"
   }
 }
 ' > "$CONFIG_DIR/lua/custom/init.lua"
+
+  mkdir -p "$CONFIG_DIR/lua/plugins"
+  echo 'return {
+  -- { "owner/repo" }, -- add your own custom plugin specs
+}' > "$CONFIG_DIR/lua/plugins/init.lua"
 }
 
 function setup_cvim() {
