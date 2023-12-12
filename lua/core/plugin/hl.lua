@@ -14,7 +14,7 @@
 
 ---@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName
 
----@param props { [1]: CoreHlName, [2]: Color|nil, [3]: Color|nil , fg: Color|nil, bg: Color|nil, from: Color|nil }[]
+---@param props { [1]: CoreHlName, [2]: Color|nil, [3]: Color|nil , fg: Color|nil, bg: Color|nil, from: Color|nil, inverse: boolean|nil }[]
 ---@return { [string]: Highlight }
 local function create_hls(props)
   local hls = {}
@@ -30,6 +30,18 @@ local function create_hls(props)
       bg = bg or copy.bg
     end
     hls[name] = { name = name, fg = fg or 'none', bg = bg or 'none' }
+
+    if v.inverse then
+      local fg = hls[name].fg
+      local bg = hls[name].bg
+      if type(fg) == 'number' and type(bg) == 'number' and fg > bg then
+        hls[name].fg = bg
+        hls[name].bg = fg
+      elseif bg == 'none' then
+        hls[name].fg = 0
+        hls[name].bg = fg
+      end
+    end
   end
   return hls
 end
@@ -49,17 +61,17 @@ return {
   create = function()
     return {
       ui = create_hls {
-        { 'bg',        from = 'Normal',     fg = 'none' },
-        { 'bg_accent', from = 'SignColumn', fg = 'none' },
-        { 'accent',    from = 'TablineSel', bg = 'none' },
-        { 'current',   from = 'CursorLine', fg = 'none' },
+        { 'bg',        from = 'Normal' },
+        { 'bg_accent', from = 'SignColumn' },
+        { 'accent',    from = 'TablineSel', inverse = true },
+        { 'current',   from = 'CursorLine' },
       },
       diagnostic = create_hls {
-        { 'ok',    from = 'DiagnosticOk',    bg = 'none' },
-        { 'warn',  from = 'DiagnosticWarn',  bg = 'none' },
-        { 'error', from = 'DiagnosticError', bg = 'none' },
-        { 'info',  from = 'DiagnosticInfo',  bg = 'none' },
-        { 'hint',  from = 'DiagnosticHint',  bg = 'none' },
+        { 'ok',    from = 'DiagnosticOk' },
+        { 'warn',  from = 'DiagnosticWarn' },
+        { 'error', from = 'DiagnosticError' },
+        { 'info',  from = 'DiagnosticInfo' },
+        { 'hint',  from = 'DiagnosticHint' },
       },
     }
   end,
