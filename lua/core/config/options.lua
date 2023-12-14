@@ -17,7 +17,7 @@ function M.setup(opts)
   vim.opt.errorbells = false
   vim.opt.mouse = 'nv'
 
-  vim.opt.cursorline = opts.cursorline or false
+  vim.opt.cursorline = opts.cursorline
   vim.opt.showmode = false
   vim.opt.showcmd = false
 
@@ -44,10 +44,9 @@ function M.setup(opts)
   vim.opt.smartindent = true
 
   -- no tab indention
-  local tab_width = opts.tab_width or 2
-  vim.opt.tabstop = tab_width
+  vim.opt.tabstop = opts.tab_width
   vim.opt.softtabstop = 1
-  vim.opt.shiftwidth = tab_width
+  vim.opt.shiftwidth = opts.tab_width
   vim.opt.expandtab = true
 
   -- Lifecycle
@@ -67,7 +66,8 @@ function M.setup(opts)
   vim.opt.smartcase = true
 
   -- Scrolling
-  vim.opt.scrolloff = opts.scrolloff or 2
+  vim.opt.scrolloff = opts.scrolloff
+  vim.opt.sidescrolloff = opts.scrolloff
 
   -- Folding
   vim.opt.foldenable = true
@@ -91,13 +91,22 @@ function M.setup(opts)
   end
 
   -- by default unload all vim plugins
-  vim.g.loaded_zipPlugin         = 1
-  vim.g.loaded_zip               = 1
-  vim.g.loaded_tarPlugin         = 1
-  vim.g.loaded_tar               = 1
-  vim.g.loaded_gzip              = 1
-  vim.g.loaded_tutor_mode_plugin = 1
-  vim.g.loaded_matchit           = 1
+  local loaded_plugins = {
+    'zipPlugin',
+    'zip',
+    'tarPlugin',
+    'tar',
+    'gzip',
+    'tutor_mode_plugin',
+    'matchit',
+  }
+  for _, k in ipairs(loaded_plugins) do
+    if opts.load_plugins and opts.load_plugins[k] then
+      vim.g['loaded_' .. k] = 0
+    else
+      vim.g['loaded_' .. k] = 1
+    end
+  end
 end
 
 return M
