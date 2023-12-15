@@ -2,17 +2,19 @@ return {
   default = {
     opts = {
       mappings = {
+        -- General
         show_lsp_info = '<space>si',
+        -- LSP
         goto_declaration = 'gD',
         goto_definition = 'gd',
         peek_definition = '<space>gd',
-        hover = 'K',
+        goto_references = 'gR',
         goto_implementation = 'gi',
         show_signature = '<C-k>',
         show_type_definition = 'gT',
-        rename = 'gr',
+        hover = 'K',
         show_code_action = 'gl',
-        goto_references = 'gR',
+        rename = 'gr',
         format = ',f',
       },
       config = {
