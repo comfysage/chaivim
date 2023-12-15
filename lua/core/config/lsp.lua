@@ -1,6 +1,6 @@
 local Util = require 'core.utils'
 
----@alias LspConfig__mappings 'show_lsp_info'|'goto_declaration'|'goto_definition'|'peek_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
+---@alias LspConfig__mappings 'show_lsp_info'|'open_float'|'goto_prev'|'goto_next'|'set_qflist'|'goto_declaration'|'goto_definition'|'peek_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
 ---@alias LspConfig__servers { [string]: { settings: table, [string]: table } }
 
 ---@class LspConfigOpts
@@ -64,10 +64,10 @@ return {
 
     -- Global mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-    vim.keymap.set('n', '<space>q', vim.diagnostic.setqflist)
+    vim.keymap.set('n', opts.mappings.open_float, vim.diagnostic.open_float)
+    vim.keymap.set('n', opts.mappings.goto_prev, vim.diagnostic.goto_prev)
+    vim.keymap.set('n', opts.mappings.goto_next, vim.diagnostic.goto_next)
+    vim.keymap.set('n', opts.mappings.set_qflist, vim.diagnostic.setqflist)
 
     -- nvim-cmp supports additional completion capabilities
     local capabilities = vim.lsp.protocol.make_client_capabilities()

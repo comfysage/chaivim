@@ -4,6 +4,11 @@ return {
       mappings = {
         -- General
         show_lsp_info = '<space>si',
+        -- diagnostics
+        open_float = '<space>l',
+        goto_prev = '<M-h>',
+        goto_next = '<M-l>',
+        set_qflist = '<space>q',
         -- LSP
         goto_declaration = 'gD',
         goto_definition = 'gd',
