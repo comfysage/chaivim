@@ -1,5 +1,7 @@
+---@type string
 CR = CR or "~/.config"
 
+---@type fun(v: string): string
 ENV = function(v)
     if not vim.fn.has_key(vim.fn.environ(), v) then
         return ""
@@ -7,15 +9,24 @@ ENV = function(v)
     return vim.fn.environ()[v]
 end
 
+---@type fun(v: string): string
 CR_PATH = function (v)
     return CR .. "/" .. v
 end
 
+---@generic T : any
+---@param v T
+---@return T
 P = function (v)
  print(vim.inspect(v))
  return v
 end
 
+--- Secure reload module
+---@param module_name string
+---@param starts_with_only boolean
+---@return boolean
+---@return any|nil|string
 SR = function(module_name, starts_with_only)
   -- Default to starts with only
   if starts_with_only == nil then
@@ -51,7 +62,10 @@ SR = function(module_name, starts_with_only)
   return pcall(require, module_name)
 end
 
--- secure reload and log
+--- secure reload and log if module is not found
+---@param ... unknown
+---@return boolean
+---@return any
 SR_L = function (...)
   local ok, result = SR(...)
   if not ok then
@@ -60,6 +74,7 @@ SR_L = function (...)
   return ok, result
 end
 
+
 --- wrapper fn for plenary reload
 ---@param module string
 ---@param name_only boolean|nil
@@ -67,6 +82,9 @@ RELOAD = function(module, name_only)
  return require("plenary.reload").reload_module(module, name_only)
 end
 
+--- wrapper fn for module reload and require
+---@param name string
+---@return any
 R = function (name)
  RELOAD(name)
  return require(name)
@@ -91,8 +109,11 @@ MT = function (t1, t2)
   return tnew
 end
 
+---@type {}
 CUTIL = {}
 
+---@param _ any
+---@return string|string[]
 CUTIL.PATH_DIR = function (_)
   local _dir = vim.fn.expand('%:.:h')
   local name
@@ -104,7 +125,9 @@ CUTIL.PATH_DIR = function (_)
   return name
 end
 
--- if in visual mode, returns number of visually selected words
+--- if in visual mode, returns number of visually selected words
+---@param _ any
+---@return string
 CUTIL.WORD_COUNT = function (_)
   local w_count = vim.fn.wordcount()
   local count = 0
@@ -119,7 +142,10 @@ CUTIL.WORD_COUNT = function (_)
   return count
 end
 
--- if in visual mode, returns number of visually selected lines
+--- if in visual mode, returns number of visually selected lines,
+--- else return line count in file
+---@param _ any
+---@return integer
 CUTIL.LINE_COUNT = function (_)
   local _vstart = vim.fn.line('v')
   local _vend = vim.fn.line('.')
@@ -136,6 +162,11 @@ CUTIL.LINE_COUNT = function (_)
   return diff
 end
 
+--- return file info based on filetype
+--- default: LINE_COUNT
+--- markdown: WORD_COUNT
+---@param _ any
+---@return string|integer
 CUTIL.FILE_INFO = function (_)
   local type_info = {
     markdown = CUTIL.WORD_COUNT,
