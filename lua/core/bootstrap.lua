@@ -47,6 +47,11 @@ local fn = {
     mod = 'nvim-treesitter',
     dir = 'nvim-treesitter',
   },
+  lspconfig = Util.create_bootstrap {
+    name = 'lspconfig',
+    url = 'neovim/nvim-lspconfig',
+    dir = 'nvim-lspconfig',
+  },
   mini = Util.create_bootstrap {
     name = 'mini',
     url = 'echasnovski/mini.nvim',

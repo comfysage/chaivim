@@ -13,6 +13,7 @@ return {
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
   },
+  { 'neovim/nvim-lspconfig' },
   { 'echasnovski/mini.nvim' },
   { import = core.modules.core.lazy.opts.module },
 }
