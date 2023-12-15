@@ -26,6 +26,11 @@ function Util.has(name)
   return value == 1
 end
 
+---@param path string
+function Util.add_to_path(path)
+  vim.opt.rtp:prepend(path)
+end
+
 ---@param props { name: string|nil, path: string|nil }
 function Util.git_pull(props)
   if not props.path then
@@ -75,7 +80,7 @@ function Util.boot(props)
     Util.log('module ' .. props.name .. ' not found. bootstrapping...', 'warn')
     require 'core.bootstrap'.load(props.name)
   end
-  vim.opt.rtp:prepend(dir)
+  Util.add_to_path(dir)
 
   if props.opts == false then
     return
