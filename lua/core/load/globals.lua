@@ -138,15 +138,10 @@ end
 
 CUTIL.FILE_INFO = function (_)
   local type_info = {
-    lua = CUTIL.LINE_COUNT,
+    markdown = CUTIL.WORD_COUNT,
   }
   local bufnr = vim.fn.bufnr()
   local t = vim.filetype.match { buf = bufnr }
-  local fn = type_info[t]
-
-  if fn then
-    return fn()
-  end
-
-  return ''
+  local fn = type_info[t] or CUTIL.LINE_COUNT
+  return fn()
 end
