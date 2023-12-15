@@ -47,6 +47,11 @@ local fn = {
     mod = 'nvim-treesitter',
     dir = 'nvim-treesitter',
   },
+  cmp = Util.create_bootstrap {
+    name = 'cmp',
+    url = 'hrsh7th/nvim-cmp',
+    dir = 'nvim-cmp',
+  },
   lspconfig = Util.create_bootstrap {
     name = 'lspconfig',
     url = 'neovim/nvim-lspconfig',
