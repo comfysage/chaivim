@@ -4,6 +4,7 @@
 ---@field syntax Icons
 ---@field item Icons
 ---@field info Icons
+---@field diagnostic Icons
 
 ---@type CoreIcons
 return {
@@ -51,5 +52,11 @@ return {
   info = {
     loaded = "●",
     not_loaded = "○",
+  },
+  diagnostic = {
+    error = 'E',
+    warn = 'W',
+    info = 'I',
+    hint = 'H',
   },
 }
