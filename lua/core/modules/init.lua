@@ -3,7 +3,7 @@ local Util = require 'core.utils'
 local default_modules = {
   core = {
     'base', 'options', 'highlights',
-    'lazy', 'lualine', 'treesitter',
+    'lazy', 'lualine', 'treesitter', 'lsp',
     'telescope', 'mini',
     'dash',
   },
