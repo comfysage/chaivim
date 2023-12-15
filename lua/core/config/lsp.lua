@@ -89,20 +89,31 @@ return {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local map_opts = { buffer = ev.buf }
-        keymaps.normal[opts.mappings.goto_declaration] = { vim.lsp.buf.declaration, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.goto_definition] = { vim.lsp.buf.definition, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.hover] = { vim.lsp.buf.hover, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.goto_implementation] = { vim.lsp.buf.implementation, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.show_signature] = { vim.lsp.buf.signature_help, '', group = 'LSP', map_opts }
-        keymaps.insert[opts.mappings.show_signature] = { vim.lsp.buf.signature_help, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.show_type_definition] = { vim.lsp.buf.type_definition, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.rename] = { vim.lsp.buf.rename, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.show_code_action] = { vim.lsp.buf.code_action, '', group = 'LSP', map_opts }
-        keymaps.visual[opts.mappings.show_code_action] = { vim.lsp.buf.code_action, '', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.goto_references] = { vim.lsp.buf.references, '', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.goto_declaration] = { vim.lsp.buf.declaration,
+          'goto declaration', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.goto_definition] = { vim.lsp.buf.definition,
+          'goto definition', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.hover] = { vim.lsp.buf.hover,
+          'hover', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.goto_implementation] = { vim.lsp.buf.implementation,
+          'goto implementation', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.show_signature] = { vim.lsp.buf.signature_help,
+          'show signature', group = 'LSP', map_opts }
+        keymaps.insert[opts.mappings.show_signature] = { vim.lsp.buf.signature_help,
+          'show signature', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.show_type_definition] = { vim.lsp.buf.type_definition,
+          'show type definition', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.rename] = { vim.lsp.buf.rename,
+          'rename', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.show_code_action] = { vim.lsp.buf.code_action,
+          'show code action', group = 'LSP', map_opts }
+        keymaps.visual[opts.mappings.show_code_action] = { vim.lsp.buf.code_action,
+          'show code action', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.goto_references] = { vim.lsp.buf.references,
+          'goto references', group = 'LSP', map_opts }
         keymaps.normal[opts.mappings.format] = { function()
           vim.lsp.buf.format { async = true }
-        end, '', group = 'LSP', map_opts }
+        end, 'format', group = 'LSP', map_opts }
       end,
     })
   end
