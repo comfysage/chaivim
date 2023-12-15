@@ -1,6 +1,6 @@
 local Util = require 'core.utils'
 
----@alias LspConfig__mappings 'show_lsp_info'|'goto_declaration'|'goto_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
+---@alias LspConfig__mappings 'show_lsp_info'|'goto_declaration'|'goto_definition'|'peek_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
 ---@alias LspConfig__servers { [string]: { settings: table, [string]: table } }
 
 ---@class LspConfigOpts
@@ -93,6 +93,9 @@ return {
           'goto declaration', group = 'LSP', map_opts }
         keymaps.normal[opts.mappings.goto_definition] = { vim.lsp.buf.definition,
           'goto definition', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.peek_definition] = { function ()
+          require 'core.plugin.lsp'.peek_definition()
+        end, 'peek definition', group = 'LSP', map_opts }
         keymaps.normal[opts.mappings.hover] = { vim.lsp.buf.hover,
           'hover', group = 'LSP', map_opts }
         keymaps.normal[opts.mappings.goto_implementation] = { vim.lsp.buf.implementation,

@@ -5,6 +5,7 @@ return {
         show_lsp_info = '<space>si',
         goto_declaration = 'gD',
         goto_definition = 'gd',
+        peek_definition = '<space>gd',
         hover = 'K',
         goto_implementation = 'gi',
         show_signature = '<C-k>',
