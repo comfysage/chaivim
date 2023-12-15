@@ -30,7 +30,7 @@ function parts.load_config(_)
       core.modules[main_mod][spec.name] = spec
     end
 
-    core.modules[main_mod] = vim.tbl_deep_extend("force", core.modules[main_mod],
+    core.modules[main_mod] = vim.tbl_deep_extend("keep", core.modules[main_mod],
       require 'core.modules'.get_defaults(main_mod))
   end
 end
