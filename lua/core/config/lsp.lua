@@ -64,10 +64,10 @@ return {
 
     -- Global mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    vim.keymap.set('n', opts.mappings.open_float, vim.diagnostic.open_float)
-    vim.keymap.set('n', opts.mappings.goto_prev, vim.diagnostic.goto_prev)
-    vim.keymap.set('n', opts.mappings.goto_next, vim.diagnostic.goto_next)
-    vim.keymap.set('n', opts.mappings.set_qflist, vim.diagnostic.setqflist)
+    keymaps.normal[opts.mappings.open_float] = { vim.diagnostic.open_float, 'show diagnostics', group = 'LSP' }
+    keymaps.normal[opts.mappings.goto_prev] = { vim.diagnostic.goto_prev, 'goto previous diagnostic', group = 'LSP' }
+    keymaps.normal[opts.mappings.goto_next] = { vim.diagnostic.goto_next, 'goto next diagnostic', group = 'LSP' }
+    keymaps.normal[opts.mappings.set_qflist] = { vim.diagnostic.setqflist, 'add diagnostics to qf list', group = 'LSP' }
 
     -- nvim-cmp supports additional completion capabilities
     local capabilities = vim.lsp.protocol.make_client_capabilities()
