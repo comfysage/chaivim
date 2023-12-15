@@ -72,27 +72,6 @@ R = function (name)
  return require(name)
 end
 
-V = function ()
- vim.ui.input({ prompt = '' }, function (name)
-  local sp = vim.split(name, ".", { plain = true, trimempty = true })
-
-  local basepath = CR_PATH 'nvim'
-  local p = ''
-
-  for i, n in pairs(sp) do
-    p = p .. "/"
-   if i == #sp then
-    p = p .. n .. '.lua'
-   else
-    p = p .. n
-   end
-  end
-
-  local path = basepath .. p
-  vim.notify(path)
- end)
-end
-
 MT = function (t1, t2)
   local tnew = {}
   for k,v in pairs(t1) do
