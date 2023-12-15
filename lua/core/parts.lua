@@ -27,7 +27,7 @@ function parts.load_config(_)
       local name = spec.name or spec[1]
       spec = require 'core.modules'.setup(main_mod, name, spec)
 
-      core.modules[main_mod][spec.name] = spec
+      core.modules[main_mod][name] = spec
     end
 
     core.modules[main_mod] = vim.tbl_deep_extend("keep", core.modules[main_mod],
