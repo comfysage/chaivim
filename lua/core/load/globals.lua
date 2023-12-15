@@ -60,8 +60,11 @@ SR_L = function (...)
   return ok, result
 end
 
-RELOAD = function (...)
- return require("plenary.reload").reload_module(...)
+--- wrapper fn for plenary reload
+---@param module string
+---@param name_only boolean|nil
+RELOAD = function(module, name_only)
+ return require("plenary.reload").reload_module(module, name_only)
 end
 
 R = function (name)
