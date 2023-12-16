@@ -11,8 +11,12 @@ declare -xr NVIM_APPNAME="${NVIM_APPNAME:-"cvim"}"
 declare -xr CONFIG_DIR="${CONFIG_DIR:-"$XDG_CONFIG_HOME/$NVIM_APPNAME"}"
 
 declare -x CV_BRANCH="start"
-declare -xr CV_REMOTE="${CV_REMOTE:-crispybaccoon/chaivim.git}"
+declare -xr CV_REMOTE="${CV_REMOTE:-"crispybaccoon/chaivim"}"
 declare -xr INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
+
+declare -xr REPO_URL="https://github.com/${CV_REMOTE}"
+declare -xr RAW_BRANCH="${RAW_BRANCH:-"mega"}"
+declare -xr RAW_URL="${REPO_URL}/raw/${RAW_BRANCH}"
 
 function usage() {
   echo "Usage: install.sh [<options>]"
@@ -195,12 +199,22 @@ function __backup_dir() {
 }
 
 function setup_shim() {
-  binf="$INSTALL_PREFIX/bin/$NVIM_APPNAME"
+  local src="$RAW_URL/utils/bin/${NVIM_APPNAME}.template"
+  local dst="$INSTALL_PREFIX/bin/$NVIM_APPNAME"
 
-  echo "\
-#!/usr/bin/env bash
-NVIM_APPNAME=$NVIM_APPNAME nvim \$@
-" > "$binf"
+  [ ! -d "$INSTALL_PREFIX/bin" ] && mkdir -p "$INSTALL_PREFIX/bin"
+
+  # remove outdated installation so that `cp` doesn't complain
+  rm -f "$dst"
+
+  msg "installing template from $src"
+  curl -fsSL "$src" "$dst"
+
+  sed -e s"#NVIM_APPNAME_VAR#\"${NVIM_APPNAME}\"#"g \
+    -e s"#CONFIG_DIR_VAR#\"${CONFIG_DIR}\"#"g "$src" \
+    | tee "$dst" >/dev/null
+
+  chmod u+x "$dst"
 }
 
 function create_init() {
@@ -209,7 +223,7 @@ function create_init() {
   msg "cloning starter template from $CV_REMOTE"
 
   if ! git clone --progress --depth 1 --branch "$CV_BRANCH" \
-    "https://github.com/${CV_REMOTE}" "$CONFIG_DIR"; then
+    "${REPO_URL}.git" "$CONFIG_DIR"; then
     echo "failed to clone repository. installation failed."
     exit 1
   fi
