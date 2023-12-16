@@ -15,9 +15,17 @@ return {
       default_opts = opts.defaults,
     }
 
-    for mode, mappings in pairs(opts.mappings) do
-      for k, map in pairs(mappings) do
-        keymaps[mode][k] = map
+    for group, mappings in pairs(opts.mappings) do
+      for _, map in ipairs(mappings) do
+        if #map < 4 then
+          goto continue
+        end
+        local mode = map[1]
+        local lhs = map[2]
+        local rhs = map[3]
+        local desc = map[4]
+        keymaps[mode][lhs] = { rhs, desc, group = group }
+        ::continue::
       end
     end
   end
