@@ -1,7 +1,18 @@
 return {
   default = {
+    --- default mappings can be disabled with:
+    --- ```lua
+    --- opts = {
+    ---   mappings = {
+    ---     normal = {},
+    ---     visual = {},
+    ---     insert = {},
+    ---   },
+    --- },
+    --- ```
     opts = {
       leader = 'SPC',
+      -- default options used for keymaps
       defaults = {},
       mappings = {
         normal = {
