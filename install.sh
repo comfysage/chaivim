@@ -10,6 +10,8 @@ declare -xr XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 declare -xr NVIM_APPNAME="${NVIM_APPNAME:-"cvim"}"
 declare -xr CONFIG_DIR="${CONFIG_DIR:-"$XDG_CONFIG_HOME/$NVIM_APPNAME"}"
 
+declare -x CV_BRANCH="start"
+declare -xr CV_REMOTE="${CV_REMOTE:-crispybaccoon/chaivim.git}"
 declare -xr INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
 function usage() {
@@ -203,61 +205,14 @@ NVIM_APPNAME=$NVIM_APPNAME nvim \$@
 
 function create_init() {
   [[ -d "$CONFIG_DIR" ]] && __backup_dir "$CONFIG_DIR"
-  mkdir -p "$CONFIG_DIR"
 
-  msg "creating init.lua"
+  msg "cloning starter template from $CV_REMOTE"
 
-  echo '
--- bootstrap chaivim
-local rootpath = vim.fn.stdpath("data") .. "/core"
-local chaipath = rootpath .. "/chai"
-
-if not vim.loop.fs_stat(chaipath) then
-  vim.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/crispybaccoon/chaivim.git",
-    chaipath,
-  }):wait()
-end
-vim.opt.rtp:prepend(chaipath)
-
-require "core".setup "custom"
-' > "$CONFIG_DIR/init.lua"
-
-  mkdir -p "$CONFIG_DIR/lua/custom"
-  echo 'return {
-  colorscheme = "evergarden",
-  transparent_background = false,
-  modules = {
-      core = {
-          {
-              "options",
-              opts = {
-                  cursorline = false,
-                  tab_width = 2,
-                  scrolloff = 5,
-              },
-          },
-          {
-              "dash",
-              opts = {
-                  open_on_startup = true,
-              },
-          },
-      },
-      custom = {
-          -- your custom modules (in `lua/custom/`)
-      },
-  }
-}
-' > "$CONFIG_DIR/lua/custom/init.lua"
-
-  mkdir -p "$CONFIG_DIR/lua/plugins"
-  echo 'return {
-  -- { "owner/repo" }, -- add your own custom plugin specs
-}' > "$CONFIG_DIR/lua/plugins/init.lua"
+  if ! git clone --progress --depth 1 --branch "$CV_BRANCH" \
+    "https://github.com/${CV_REMOTE}" "$CONFIG_DIR"; then
+    echo "failed to clone repository. installation failed."
+    exit 1
+  fi
 }
 
 function setup_cvim() {
