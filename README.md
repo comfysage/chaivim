@@ -16,7 +16,7 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 chaivim can be installed [manually](#manual-install) or through the installer:
 ```shell
-curl -fsSL https://github.com/CrispyBaccoon/chaivim/raw/mega/install.sh | sh
+curl -fsSL https://github.com/CrispyBaccoon/chaivim/raw/mega/utils/installer/install.sh | sh
 ```
 
 ### manual install
