@@ -24,6 +24,9 @@ return {
         windows = {
           { 'normal', '<C-\\>', ':vs<CR>:wincmd l<CR>', 'Split File Vertically' },
         },
+        buffers = {
+          { 'normal', '<leader>x', ':Close<cr>', 'close buffer' },
+        },
         qf_list = {
           -- quick fix list
           { 'normal', '<c-n>', ':cnext<cr>', 'goto next item in qf list' },
