@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export NVIM_APPNAME="${NVIM_APPNAME:-NVIM_APPNAME_VAR}"
+
+export CV_CONFIG_DIR="${CV_CONFIG_DIR:-CONFIG_DIR_VAR}"
+
+exec -a "$NVIM_APPNAME" nvim -u "$CV_CONFIG_DIR/init.lua" "$@"
