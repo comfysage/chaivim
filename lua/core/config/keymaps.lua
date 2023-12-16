@@ -14,5 +14,11 @@ return {
     require 'keymaps'.setup {
       default_opts = opts.defaults,
     }
+
+    for mode, mappings in pairs(opts.mappings) do
+      for k, map in pairs(mappings) do
+        keymaps[mode][k] = map
+      end
+    end
   end
 }

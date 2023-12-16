@@ -3,6 +3,7 @@ return {
     opts = {
       leader = 'SPC',
       defaults = {},
+      mappings = {},
     },
   },
 }
