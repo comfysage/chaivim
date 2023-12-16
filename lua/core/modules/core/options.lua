@@ -2,6 +2,8 @@ return {
   default = {
     opts = {
       cursorline = false,
+      -- true|false or 'relative' for relative line numbers
+      number = true,
       tab_width = 2,
       use_ripgrep = true,
       scrolloff = 2,

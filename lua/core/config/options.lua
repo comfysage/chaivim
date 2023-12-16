@@ -2,6 +2,7 @@ local M = {}
 
 ---@class OptionsConfig
 ---@field cursorline boolean
+---@field number boolean|'relative'
 ---@field tab_width integer
 ---@field scrolloff integer
 ---@field use_ripgrep boolean
@@ -21,8 +22,15 @@ function M.setup(opts)
   vim.opt.showmode = false
   vim.opt.showcmd = false
 
-  vim.opt.relativenumber = false
   vim.opt.number = true
+  vim.opt.relativenumber = false
+  if opts.number == false then
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end
+  if opts.number == 'relative' then
+    vim.opt.relativenumber = true
+  end
   vim.opt.numberwidth = 3
   vim.opt.signcolumn = 'yes:1'
   vim.opt.smarttab = true
