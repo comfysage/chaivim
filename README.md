@@ -1,5 +1,11 @@
 # chaivim
 
+## :sparkles: Features
+
+### Lazy plugin management
+
+chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
+
 ## :lock: requirements
 
 - Neovim >= 0.8.0 (needs to be built with LuaJIT)
