@@ -1,6 +1,20 @@
 return {
   default = {
     opts = {
+      mappings = {
+        find_files = '<leader><leader>',
+        live_grep = '<leader>fr',
+        simple_find_file = '<leader>ff',
+        search = '<leader>f/',
+        symbols = '<leader>fs',
+        git_files = '<leader>fg',
+        buffers = "<leader>fb",
+        filetypes = "<leader>ft",
+        keymaps = "<leader>fk",
+        help_tags = "<leader>fh",
+        colorscheme = "<C-t>",
+        quickfix = '<leader>fq',
+      },
       config = {
         defaults = {
           prompt_prefix = '$ ',

@@ -66,6 +66,7 @@ end
 ---@field config TelescopeConfig
 ---@field use_fzf boolean
 ---@field theme 'main'|'minimal'
+---@field mappings { [string]: string }
 
 ---@param opts CoreTelescopeOpts
 M.setup = function(opts)
@@ -84,6 +85,70 @@ M.setup = function(opts)
       end
     }
   end
+
+  keymaps.normal[opts.mappings.find_files] = {
+    function() require 'core.plugin.telescope'.picker.find_files {} end,
+    group = 'Telescope', 'Find files'
+  }
+  keymaps.normal[opts.mappings.live_grep] = {
+    function() require 'core.plugin.telescope'.picker.grep {} end,
+    group = 'Telescope',
+    'Find String'
+  }
+  keymaps.normal[opts.mappings.simple_find_file] = {
+    function() require 'core.plugin.telescope'.picker.explorer {} end,
+    group = 'Telescope',
+    'Find File'
+  }
+  keymaps.normal[opts.mappings.search] = {
+    function() R 'core.plugin.telescope'.picker.grep_current_file {} end,
+    group = 'Telescope',
+    'Find in file'
+  }
+
+  keymaps.normal[opts.mappings.symbols] = {
+    function() require 'core.plugin.telescope'.picker.symbols {} end,
+    group = 'Telescope',
+    'Find Symbols'
+  }
+  keymaps.normal[opts.mappings.git_files] = {
+    function() require 'core.plugin.telescope'.picker.git_files {} end,
+    group = 'Telescope',
+    "Find Git file"
+  }
+
+  keymaps.normal[opts.mappings.buffers] = {
+    function() require 'telescope.builtin'.buffers() end,
+    group = 'Telescope',
+    "Find Buffer"
+  }
+  keymaps.normal[opts.mappings.filetypes] = {
+    function() require 'telescope.builtin'.filetypes() end,
+    group = 'Telescope',
+    "Find FileType"
+  }
+  keymaps.normal[opts.mappings.keymaps] = {
+    function() require 'telescope.builtin'.keymaps() end,
+    group = 'Telescope',
+    "Find Keymap"
+  }
+  keymaps.normal[opts.mappings.help_tags] = {
+    function() require 'telescope.builtin'.help_tags() end,
+    group = 'Telescope',
+    "Find Help tag"
+  }
+
+  keymaps.normal[opts.mappings.colorscheme] = {
+    function() require 'telescope.builtin'.colorscheme() end,
+    group = 'Telescope',
+    "Find Colorscheme"
+  }
+
+  keymaps.normal[opts.mappings.quickfix] = {
+    function() require 'telescope.builtin'.quickfix() end,
+    group = 'Telescope',
+    'Search in qf list'
+  }
 end
 
 return M
