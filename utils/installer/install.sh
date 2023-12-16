@@ -199,16 +199,19 @@ function __backup_dir() {
 }
 
 function setup_shim() {
-  local src="$RAW_URL/utils/bin/${NVIM_APPNAME}.template"
+  local src_url="$RAW_URL/utils/bin/${NVIM_APPNAME}.template"
+  local src="$INSTALL_PREFIX/bin/${NVIM_APPNAME}.template"
   local dst="$INSTALL_PREFIX/bin/$NVIM_APPNAME"
 
   [ ! -d "$INSTALL_PREFIX/bin" ] && mkdir -p "$INSTALL_PREFIX/bin"
 
   # remove outdated installation so that `cp` doesn't complain
+  rm -f "$src"
   rm -f "$dst"
 
   msg "installing template from $src"
-  curl -fsSL "$src" "$dst"
+  curl -fsSL "$src_url" -o "$src"
+  cp "$src" "$dst"
 
   sed -e s"#NVIM_APPNAME_VAR#\"${NVIM_APPNAME}\"#"g \
     -e s"#CONFIG_DIR_VAR#\"${CONFIG_DIR}\"#"g "$src" \
