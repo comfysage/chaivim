@@ -20,12 +20,12 @@ return {
     },
     custom = {
       -- your custom modules (in `lua/custom/`)
-      {
-        'example',
-        opts = {
-          msg = 'hello from `lua/custom/example`',
-        },
-      },
+      -- {
+      --   'example',
+      --   opts = {
+      --     msg = 'hello from `lua/custom/example`',
+      --   },
+      -- },
     },
   }
 }
