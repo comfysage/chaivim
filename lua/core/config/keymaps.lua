@@ -43,5 +43,5 @@ return {
     for group, mappings in pairs(opts.mappings) do
       Keymap.group { group = group, mappings }
     end
-  end
+  end,
 }
