@@ -28,11 +28,6 @@ end
 ---@param map string
 ---@return string
 local function lhs_fmt(map)
-  local leader = vim.g.mapleader == ' ' and 'SPC' or vim.g.mapleader
-  local repl = {
-    ['<leader>'] = leader,
-  }
-
   local map_str = ''
 
   local sp_open = 0
@@ -44,8 +39,10 @@ local function lhs_fmt(map)
     temp = ''
     if sp_open > 0 then
       if _map[i] == '>' then
-        for pattern, rpl in pairs(repl) do
-          temp = string.gsub(string.sub(map, sp_open, i), pattern, rpl)
+        temp = string.sub(map, sp_open, i)
+        temp = string.lower(temp)
+        for pattern, rpl in pairs(keymaps_config.repl_keys) do
+          temp = string.gsub(temp, pattern, rpl)
         end
         sp_open = 0
       end
@@ -90,6 +87,14 @@ return {
       default_opts = opts.defaults,
       special_keys = opts.special_keys
     }
+    keymaps_config.repl_keys = {}
+    for m, k in pairs(keymaps_config.special_keys) do
+      keymaps_config.repl_keys[string.lower(k)] = m
+    end
+    keymaps_config.repl_keys['<leader>'] = opts.leader
+    keymaps_config.repl_keys['<[c]%-([%w])>'] = 'CTRL+%1'
+    keymaps_config.repl_keys['<[m]%-([%w])>'] = 'META+%1'
+    keymaps_config.repl_keys['<[a]%-([%w])>'] = 'ALT+%1'
 
     for group, mappings in pairs(opts.mappings) do
       Keymap.group { group = group, mappings }
