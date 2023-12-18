@@ -34,8 +34,8 @@ return {
         },
         indent = {
           -- < and > indents
-          { 'normal', '<', '<gv', 'decrease indention' },
-          { 'normal', '>', '>gv', 'increase indention' },
+          { 'visual', '<', '<gv', 'decrease indention' },
+          { 'visual', '>', '>gv', 'increase indention' },
         },
         toggle_ui = {
           { 'normal', ',tb', function()
