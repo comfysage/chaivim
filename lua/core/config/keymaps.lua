@@ -87,6 +87,7 @@ return {
 
     require 'keymaps'.setup {
       default_opts = opts.defaults,
+      special_keys = opts.special_keys
     }
 
     for group, mappings in pairs(opts.mappings) do

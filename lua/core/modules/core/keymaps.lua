@@ -14,6 +14,12 @@ return {
       leader = 'SPC',
       -- default options used for keymaps
       defaults = {},
+      special_keys = {
+        ['SPC'] = '<space>',
+        ['TAB'] = '<tab>',
+        ['STAB'] = '<s-tab>',
+        ['BS'] = '<bs>',
+      },
       mappings = {
         tabs = {
           -- tab switching
