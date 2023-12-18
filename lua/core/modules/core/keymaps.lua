@@ -17,12 +17,12 @@ return {
       mappings = {
         tabs = {
           -- tab switching
-          { 'normal', '<tab>',        vim.cmd.tabnext, 'Next Tab' },
-          { 'normal', '<S-TAB>',      vim.cmd.tabprev, 'Prev Tab' },
-          { 'normal', '<space><TAB>', ':$tabedit<CR>', 'Open New Tab' },
+          { 'normal', '<tab>',        vim.cmd.tabnext, 'next tab' },
+          { 'normal', '<S-TAB>',      vim.cmd.tabprev, 'prev tab' },
+          { 'normal', '<space><TAB>', ':$tabedit<CR>', 'open new tab' },
         },
         windows = {
-          { 'normal', '<C-\\>', ':vs<CR>:wincmd l<CR>', 'Split File Vertically' },
+          { 'normal', '<C-\\>', ':vs<CR>:wincmd l<CR>', 'split file vertically' },
         },
         buffers = {
           { 'normal', '<leader>x', ':Close<cr>', 'close buffer' },
@@ -34,8 +34,8 @@ return {
         },
         indent = {
           -- < and > indents
-          { 'normal', '<', '<gv', 'Decrease indention' },
-          { 'normal', '>', '>gv', 'Increase indention' },
+          { 'normal', '<', '<gv', 'decrease indention' },
+          { 'normal', '>', '>gv', 'increase indention' },
         },
         toggle_ui = {
           { 'normal', ',tb', function()
