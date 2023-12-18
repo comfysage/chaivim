@@ -47,14 +47,14 @@ local function lhs_fmt(map)
         sp_open = 0
       end
     else
-      if _map[i] == '<' then
+      temp = _map[i]
+
+      if temp == '<' then
         sp_open = i
-      else
-        if i == #_map and sp_open > 0 then
-          temp = string.sub(map, sp_open, i)
-        else
-          temp = _map[i]
-        end
+        temp = ''
+      end
+      if i == #_map and sp_open > 0 then
+        temp = string.sub(map, sp_open, i)
       end
     end
 
