@@ -78,12 +78,13 @@ return {
   setup = function(opts)
     Util.log(string.format('setting leader to "%s"', vim.g.mapleader))
 
+    local _leader = opts.leader
     if opts.leader == 'space' or opts.leader == 'SPC' then
-      opts.leader = ' '
+      _leader = ' '
     end
 
-    vim.g.mapleader = opts.leader
-    vim.g.maplocalleader = opts.leader
+    vim.g.mapleader = _leader
+    vim.g.maplocalleader = _leader
 
     require 'keymaps'.setup {
       default_opts = opts.defaults,
