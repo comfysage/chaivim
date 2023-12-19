@@ -65,7 +65,7 @@ local function lhs_fmt(map)
       map_str = map_str .. temp
     end
 
-    i = i+1
+    i = i + 1
   end
 
   return map_str
@@ -184,7 +184,7 @@ return {
                 desc .. string.rep(' ', spacing) .. lhs .. string.rep(' ', hor_pad) .. string.rep(' ', column_spacing)
           end
 
-          section[#section+1] = string.rep(' ', group_width)
+          section[#section + 1] = string.rep(' ', group_width)
 
           cheatsheet[cur_gr_in_line][local_gr_i] = section
           local_gr_i = local_gr_i + 1
@@ -236,11 +236,11 @@ return {
             if rel_i == 2 then
               local x_start = (column_x - 1) * group_width
               local x_end = x_start + group_width - 1
-              hls.title[#hls.title+1] = { y-1, { from = x_start, to = x_end } }
+              hls.title[#hls.title + 1] = { y - 1, { from = x_start, to = x_end } }
             elseif rel_i > 2 then
               local x_start = (column_x - 1) * group_width
               local x_end = x_start + group_width - 1
-              hls.lines[#hls.lines+1] = { y-1, { from = x_start, to = x_end } }
+              hls.lines[#hls.lines + 1] = { y - 1, { from = x_start, to = x_end } }
             end
           end
           _y = _y + #group
