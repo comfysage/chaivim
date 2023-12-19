@@ -149,7 +149,8 @@ return {
     local lhs_width = 12
     local hor_pad = 1
     local spacing = 2
-    local group_width = desc_width + lhs_width + (hor_pad * 2) + spacing
+    local column_spacing = 1
+    local group_width = desc_width + lhs_width + (hor_pad * 2) + spacing + column_spacing
     local groups_per_line = math.floor(max_width / group_width)
     local max_groups_per_col = math.ceil(#groups / groups_per_line)
 
@@ -172,14 +173,15 @@ return {
           local gr_padding = { math.floor(gr_space / 2), math.ceil(gr_space / 2) }
           local gr_header = string.rep(' ', gr_padding[1]) .. name .. string.rep(' ', gr_padding[2])
 
-          section[1] = gr_header
-          section[2] = string.rep(' ', group_width)
+          section[1] = string.rep(' ', group_width)
+          section[2] = gr_header
+          section[3] = string.rep(' ', group_width)
 
           for _, str_tuple in ipairs(str_keys) do
             local desc = str_tuple[1] .. string.rep(' ', desc_width - vim.fn.strwidth(str_tuple[1]))
             local lhs = string.rep(' ', lhs_width - vim.fn.strwidth(str_tuple[2])) .. str_tuple[2]
             section[#section + 1] = string.rep(' ', hor_pad) ..
-                desc .. string.rep(' ', spacing) .. lhs .. string.rep(' ', hor_pad)
+                desc .. string.rep(' ', spacing) .. lhs .. string.rep(' ', hor_pad) .. string.rep(' ', column_spacing)
           end
 
           section[#section+1] = string.rep(' ', group_width)
@@ -203,13 +205,24 @@ return {
       result[i] = ""
     end
 
+    require 'core.plugin.hl'.load()
+    -- local cheatsheet_ns = api.nvim_create_namespace 'cheatsheet'
+    api.nvim_set_hl(0, "CheatsheetTitle", { link = 'TelescopeTitle' })
+    api.nvim_set_hl(0, "CheatsheetLine", { fg = core.hl.ui.bg.fg, bg = core.hl.ui.current.bg })
+
+    ---@type { ['title'|'lines']: { [1]: integer, [2]: { from: integer, to: integer } }[] }
+    local hls = {
+      title = {},
+      lines = {},
+    }
+
     local y = 1
     local empty = false
     while not empty do
       empty = true -- assume current line is empty until proven wrong
       local current_line = ''
 
-      for _, column in ipairs(cheatsheet) do
+      for column_x, column in ipairs(cheatsheet) do
         local part = ''
         local empty_part = true
 
@@ -220,6 +233,15 @@ return {
           if (#group) >= rel_i and empty_part then
             part = group[rel_i]
             empty_part = false
+            if rel_i == 2 then
+              local x_start = (column_x - 1) * group_width
+              local x_end = x_start + group_width - 1
+              hls.title[#hls.title+1] = { y-1, { from = x_start, to = x_end } }
+            elseif rel_i > 2 then
+              local x_start = (column_x - 1) * group_width
+              local x_end = x_start + group_width - 1
+              hls.lines[#hls.lines+1] = { y-1, { from = x_start, to = x_end } }
+            end
           end
           _y = _y + #group
         end
@@ -241,6 +263,13 @@ return {
     end
 
     api.nvim_buf_set_lines(buf, 0, -1, false, result)
+
+    for _, hl in ipairs(hls.title) do
+      api.nvim_buf_add_highlight(buf, 0, 'CheatsheetTitle', hl[1], hl[2].from, hl[2].to)
+    end
+    for _, hl in ipairs(hls.lines) do
+      api.nvim_buf_add_highlight(buf, 0, 'CheatsheetLine', hl[1], hl[2].from, hl[2].to)
+    end
 
     vim.keymap.set("n", "q", function() vim.api.nvim_buf_delete(buf, { force = true }) end, { buffer = true })
 
