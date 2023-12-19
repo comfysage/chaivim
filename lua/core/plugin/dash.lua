@@ -27,6 +27,9 @@ function M.open(config)
   local headerAscii = config.header
   local emmptyLine = string.rep(" ", fn.strwidth(headerAscii[1]))
   local buttons = config.buttons
+  if type(config.buttons) == 'function' then
+    buttons = config.buttons()
+  end
 
   table.insert(headerAscii, 1, emmptyLine)
   table.insert(headerAscii, 2, emmptyLine)
