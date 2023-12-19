@@ -26,6 +26,7 @@ function M.open(config)
   -- setup variables
   local headerAscii = config.header
   local emmptyLine = string.rep(" ", fn.strwidth(headerAscii[1]))
+  local buttons = config.buttons
 
   table.insert(headerAscii, 1, emmptyLine)
   table.insert(headerAscii, 2, emmptyLine)
@@ -39,7 +40,7 @@ function M.open(config)
     dashWidth = min_width
   end
 
-  local max_height = #headerAscii + 4 + (2 * #config.buttons) -- 4  = extra spaces i.e top/bottom
+  local max_height = #headerAscii + 4 + (2 * #buttons) -- 4  = extra spaces i.e top/bottom
   local get_win_height = api.nvim_win_get_height
 
   -- create buffer
@@ -58,7 +59,6 @@ function M.open(config)
   vim.g.dash_displayed = true
 
   local header = headerAscii
-  local buttons = config.buttons
 
   local function addSpacing_toBtns(txt1, txt2)
     local btn_len = fn.strwidth(txt1) + fn.strwidth(txt2)
@@ -119,7 +119,7 @@ function M.open(config)
   local first_btn_line = abc + #header + 2
   local keybind_lineNrs = {}
 
-  for _, _ in ipairs(config.buttons) do
+  for _, _ in ipairs(buttons) do
     table.insert(keybind_lineNrs, first_btn_line - 2)
     first_btn_line = first_btn_line + 2
   end
@@ -148,7 +148,7 @@ function M.open(config)
   vim.keymap.set("n", "<CR>", function()
     for i, val in ipairs(keybind_lineNrs) do
       if val == fn.line "." then
-        local action = config.buttons[i][3]
+        local action = buttons[i][3]
 
         if type(action) == "string" then
           vim.cmd(action)
