@@ -182,16 +182,9 @@ return {
                 desc .. string.rep(' ', spacing) .. lhs .. string.rep(' ', hor_pad)
           end
 
-          local i = #cheatsheet[cur_gr_in_line]
-          local j = 1
-          while j <= #section do
-            y = i + j
-            cheatsheet[cur_gr_in_line][y] = section[j]
-            j = j + 1
-          end
-          y = y + 1
-          cheatsheet[cur_gr_in_line][y] = string.rep(' ', group_width)
+          section[#section+1] = string.rep(' ', group_width)
 
+          cheatsheet[cur_gr_in_line][local_gr_i] = section
           local_gr_i = local_gr_i + 1
         end
 
@@ -211,20 +204,39 @@ return {
     end
 
     local y = 1
-    local not_empty = true
-    while not_empty do
-      not_empty = false
-      local line = ''
+    local empty = false
+    while not empty do
+      empty = true -- assume current line is empty until proven wrong
+      local current_line = ''
+
       for _, column in ipairs(cheatsheet) do
-        local row = column[y]
-        if row and vim.fn.strwidth(row) > 0 then
-          not_empty = true
-          line = line .. row
-        else
-          line = line .. string.rep(' ', group_width)
+        local part = ''
+        local empty_part = true
+
+        -- find group at current y
+        local _y = 0
+        for _, group in ipairs(column) do
+          local rel_i = y - _y
+          if (#group) >= rel_i and empty_part then
+            part = group[rel_i]
+            empty_part = false
+          end
+          _y = _y + #group
         end
+
+        if empty_part then
+          -- last group in this column has been passed
+          part = string.rep(' ', group_width)
+        end
+        current_line = current_line .. part
+
+        empty = empty and empty_part or false
       end
-      result[y] = line
+
+      if not empty then
+        result[y] = current_line
+      end
+
       y = y + 1
     end
 
