@@ -14,8 +14,14 @@ return {
         [[    ▝▀▀▀▀▀▀▀▀▀  ]],
       },
       buttons = {
-        { 'find files',   '', function() require 'core.plugin.telescope'.picker.find_files {} end },
-        { 'select theme', '', function() require 'telescope.builtin'.colorscheme() end },
+        { 'find files', core.modules.core.telescope.opts.mappings.find_files, function()
+          require 'core.plugin.telescope'
+              .picker.find_files {}
+        end },
+        { 'select theme', core.modules.core.telescope.opts.mappings.colorscheme, function()
+          require 'telescope.builtin'
+              .colorscheme()
+        end },
       },
     },
   },
