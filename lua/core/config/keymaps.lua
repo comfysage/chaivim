@@ -153,6 +153,8 @@ return {
     local group_width = desc_width + lhs_width + (hor_pad * 2) + spacing + column_spacing
     local groups_per_line = math.floor(max_width / group_width)
     local max_groups_per_col = math.ceil(#groups / groups_per_line)
+    local _center_padding = max_width - group_width * groups_per_line
+    local center_padding = { math.floor(_center_padding / 2), math.ceil(_center_padding / 2) }
 
     local win_height = api.nvim_win_get_height(win)
 
@@ -234,11 +236,11 @@ return {
             part = group[rel_i]
             empty_part = false
             if rel_i == 2 then
-              local x_start = (column_x - 1) * group_width
+              local x_start = center_padding[1] + (column_x - 1) * group_width
               local x_end = x_start + group_width - 1
               hls.title[#hls.title + 1] = { y - 1, { from = x_start, to = x_end } }
             elseif rel_i > 2 then
-              local x_start = (column_x - 1) * group_width
+              local x_start = center_padding[1] + (column_x - 1) * group_width
               local x_end = x_start + group_width - 1
               hls.lines[#hls.lines + 1] = { y - 1, { from = x_start, to = x_end } }
             end
@@ -260,6 +262,10 @@ return {
       end
 
       y = y + 1
+    end
+
+    for i, _ in ipairs(result) do
+      result[i] = string.rep(' ', center_padding[1]) .. result[i] .. string.rep(' ', center_padding[2])
     end
 
     api.nvim_buf_set_lines(buf, 0, -1, false, result)
