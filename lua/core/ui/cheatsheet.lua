@@ -15,6 +15,32 @@ local function generate_group(group_name, desc_width, lhs_width)
   return str_keys
 end
 
+---@param str string
+---@return { [1]: integer, [2]: integer }
+local function dry_trim_str(str)
+  local _str = vim.split(str, '')
+  local _start = 0
+  local _end = 0
+
+  local i = 1
+  while i <= #_str and _start == 0 do
+    if _str[i] ~= ' ' then
+      _start = i
+    end
+    i = i + 1
+  end
+
+  i = #_str
+  while i > 0 and _end == 0 do
+    if _str[i] ~= ' ' then
+      _end = i
+    end
+    i = i - 1
+  end
+
+  return { _start, (#_str - _end) * -1 }
+end
+
 return {
   open = function(props)
     local api = vim.api
@@ -135,10 +161,14 @@ return {
             part = group[rel_i]
             empty_part = false
             if rel_i == 2 then
+              local pos = dry_trim_str(part)
               local x_start = center_padding[1] + (column_x - 1) * group_width
               local x_end = x_start + group_width - 1
+              x_start = x_start + (pos[1] - 2)
+              x_end = x_end + pos[2] + 2
               hls.title[#hls.title + 1] = { y - 1, { from = x_start, to = x_end } }
-            elseif rel_i > 2 then
+            end
+            if rel_i > 1 then
               local x_start = center_padding[1] + (column_x - 1) * group_width
               local x_end = x_start + group_width - 1
               hls.lines[#hls.lines + 1] = { y - 1, { from = x_start, to = x_end } }
