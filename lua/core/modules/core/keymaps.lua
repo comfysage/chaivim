@@ -51,7 +51,7 @@ return {
         },
         show_ui = {
           { 'normal', '<leader>sc', function()
-            require 'core.config.keymaps'.cheatsheet()
+            require 'core.ui.cheatsheet'.open()
           end, 'show cheatsheet' }
         },
         copy_paste = {
