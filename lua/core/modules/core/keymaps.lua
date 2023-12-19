@@ -49,6 +49,11 @@ return {
             _G.toggle_transparent_background()
           end, 'toggle transparent background' },
         },
+        show_ui = {
+          { 'normal', '<leader>sc', function()
+            require 'core.config.keymaps'.cheatsheet()
+          end, 'show cheatsheet' }
+        },
         copy_paste = {
           -- copy/pasting from system clipboard
           { 'normal', '<c-v>', '"+p', 'paste from system clipboard' },
