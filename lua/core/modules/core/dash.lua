@@ -26,6 +26,8 @@ return {
           result[i] = { map.desc, map.lhs, map.fn }
         end
 
+        local map = require 'keymaps.data'.get_mapping({ desc = 'show cheatsheet' }) or { desc = '', lhs = '', fn = '' }
+        result[#result + 1] = { map.desc, map.lhs, map.fn }
         return result
       end,
     },
