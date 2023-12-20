@@ -19,8 +19,10 @@ return {
     end
 
     local modules = {}
-    for _, module in ipairs(default_modules[main]) do
-      modules[module] = require 'core.modules'.setup(main, module, {})
+    for i, module in ipairs(default_modules[main]) do
+      modules[module] = require 'core.modules'.setup(main, module, {
+        priority = i,
+      })
     end
     return modules
   end,

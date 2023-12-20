@@ -7,20 +7,16 @@ function parts.load_modules(_)
 
   for main_mod, modules in pairs(core.modules) do
     for _, spec in pairs(modules) do
-      ---@type ModuleName
-      local module = main_mod .. '.' .. spec.name
-      if main_mod == 'core' then
-        module = main_mod .. '.config.' .. spec.name
-      end
-
-      parts.load(module, spec)
-      spec.loaded = true
-
-      if spec.reload then
-        require 'core.load.autocmds'.create_reload(module, spec)
-      end
+      require 'core.load.handle'.create {
+        event = 'custom', type = 'lazycore', priority = spec.priority or nil,
+        fn = function()
+          parts.lazy_load(main_mod, spec.name)
+        end
+      }
     end
   end
+
+  require 'core.load.handle'.start 'lazycore'
 end
 
 function parts.load_config(_)
@@ -45,6 +41,25 @@ function parts.load_config(_)
 
     core.modules[main_mod] = vim.tbl_deep_extend("keep", core.modules[main_mod],
       require 'core.modules'.get_defaults(main_mod))
+  end
+end
+
+---@param main string
+---@param name string
+function parts.lazy_load(main, name)
+  ---@type ModuleName
+  local module = main .. '.' .. name
+  if main == 'core' then
+    module = main .. '.config.' .. name
+  end
+
+  local spec = core.modules[main][name]
+
+  parts.load(module, spec)
+  spec.loaded = true
+
+  if spec.reload then
+    require 'core.load.autocmds'.create_reload(module, spec)
   end
 end
 

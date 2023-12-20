@@ -13,14 +13,18 @@ core.handle = core.handle or {}
 ---@field data any arbitrary data passed from `nvim_exec_autocmds()`
 
 return {
-  setup = function (event)
-    core.handle[event] = core.handle[event] or {}
+  ---@param event string
+  ---@param ev? string
+  setup = function (event, ev)
+    ev = ev or event
+    core.handle[ev] = core.handle[ev] or {}
     vim.api.nvim_create_autocmd(event, {
       group = core.group_id,
       desc = 'core handle for ' .. event,
+      pattern = ev ~= event and ev or nil,
       callback = function(opts)
-        for i, fn_t in pairs(core.handle[event]) do
-          Util.log(string.format('autocmds:%s:%d', event, i))
+        for i, fn_t in pairs(core.handle[ev]) do
+          Util.log(string.format('autocmds:%s:%d', ev, i))
           for _, fn in ipairs(fn_t) do
             fn(opts)
           end
@@ -33,24 +37,40 @@ return {
   ---   event = 'ColorScheme', priority = 0,
   ---   fn = function() Util.log 'hi' end,
   --- }
+  --- handle.create {
+  ---   event = 'custom', type = 'event', priority = 0,
+  ---   fn = function() Util.log 'hi' end,
+  --- }
   --- ```
-  ---@param props { event: string, fn: AutoCmdCallback, priority: integer|nil }
+  ---@param props { event: string, fn: AutoCmdCallback, priority?: integer, type?: string }
   create = function(props)
     if not props.event or not props.fn then
       return
     end
 
+    local event = props.event
+    local ev = props.event
+    if event == 'custom' then
+      event = 'User'
+      ev = props.type
+    end
+
     local priority = props.priority or 50
 
-    if not core.handle[props.event] then
-      require 'core.load.handle'.setup (props.event)
+    if not core.handle[ev] then
+      require 'core.load.handle'.setup (event, ev)
     end
 
-    local current_handle = core.handle[props.event][priority]
+    local current_handle = core.handle[ev][priority]
     if not current_handle then
-      core.handle[props.event][priority] = {}
-      current_handle = core.handle[props.event][priority]
+      core.handle[ev][priority] = {}
+      current_handle = core.handle[ev][priority]
     end
-    core.handle[props.event][priority][#current_handle+1] = props.fn
-  end
+    core.handle[ev][priority][#current_handle+1] = props.fn
+  end,
+  --- trigger a custom event
+  start = function(ev)
+    Util.log(string.format('start:custom:%s', ev))
+    vim.api.nvim_exec_autocmds('User', { pattern = ev })
+  end,
 }
