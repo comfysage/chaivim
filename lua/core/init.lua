@@ -4,6 +4,8 @@ require 'core.plugin.globals'
 local Util = require 'core.utils'
 local parts = require 'core.parts'
 
+---@diagnostic disable duplicate-doc-alias
+
 ---@alias MainModule 'core'|'config'|string
 
 ---@class ModuleSpec
