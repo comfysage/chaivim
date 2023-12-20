@@ -19,7 +19,7 @@ local parts = require 'core.parts'
 ---@field log_level integer
 ---@field colorscheme string
 ---@field transparent_background boolean
----@field transparent_fn { [string]: function(bool) }
+---@field transparent_fn { [string]: fun(_: bool) }
 ---@field config_module string
 ---@field modules Modules
 
