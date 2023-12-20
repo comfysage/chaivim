@@ -1,6 +1,7 @@
 return {
   default = {
     opts = {
+      theme = 'main',
       mappings = {
         find_files = '<leader><leader>',
         live_grep = '<leader>fr',
