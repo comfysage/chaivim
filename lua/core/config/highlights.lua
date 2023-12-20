@@ -19,12 +19,12 @@ return {
     vim.cmd([[ command! Highlights source $VIMRUNTIME/syntax/hitest.vim ]])
 
     if opts.fix then
-      vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-        group = core.group_id,
-        callback = function()
+      require 'core.load.handle'.create {
+        event = 'ColorScheme', priority = 12,
+        fn = function(_)
           opts.fix()
         end
-      })
+      }
     end
   end
 }
