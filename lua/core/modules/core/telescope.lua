@@ -12,6 +12,7 @@ return {
         buffers = "<leader>fb",
         filetypes = "<leader>ft",
         keymaps = "<leader>fk",
+        mappings = "<leader>fm",
         help_tags = "<leader>fh",
         colorscheme = "<C-t>",
         quickfix = '<leader>fq',

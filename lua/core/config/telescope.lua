@@ -100,6 +100,7 @@ M.setup = function(opts)
     { 'normal', opts.mappings.help_tags,        function() require 'telescope.builtin'.help_tags() end,               'find help tag' },
     { 'normal', opts.mappings.colorscheme,      function() require 'telescope.builtin'.colorscheme() end,             'find colorscheme' },
     { 'normal', opts.mappings.quickfix,         function() require 'telescope.builtin'.quickfix() end,                'search in qf list' },
+    { 'normal', opts.mappings.mappings,         function() require 'keymaps'.telescope() end,                         'find mapping' },
   }
 end
 
