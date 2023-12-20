@@ -71,7 +71,7 @@ return {
 
     -- nvim-cmp supports additional completion capabilities
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    Util.add_to_path 'cmp-nvim-lua'
+    Util.add_to_path(string.format('%s/%s', core.path.root, 'cmp-nvim-lua'))
     capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
 
     Util.log 'set up lsp servers'
