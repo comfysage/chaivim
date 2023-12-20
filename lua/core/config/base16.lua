@@ -8,5 +8,7 @@ return {
         require 'core.plugin.base16'.load(opts.colorscheme)
       end, 0)
     end
-  end
+
+    keymaps.normal[opts.mappings.select_theme] = { ':SelectTheme<cr>', 'select base16 theme', group = 'base16' }
+  end,
 }

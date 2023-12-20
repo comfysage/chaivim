@@ -1,6 +1,10 @@
 return {
   default = {
     event = 'UIEnter',
-    opts = {},
+    opts = {
+      mappings = {
+        select_theme = '<a-t>',
+      },
+    },
   },
 }
