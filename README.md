@@ -1,5 +1,7 @@
 # chaivim
 
+![telescope__config](images/telescope__config.png)
+
 ## :sparkles: Features
 
 ### Lazy plugin management
