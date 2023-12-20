@@ -6,7 +6,20 @@ function parts.load_modules(_)
   parts.load_config {}
 
   for main_mod, modules in pairs(core.modules) do
-    parts._modules(main_mod, modules)
+    for _, spec in pairs(modules) do
+      ---@type ModuleName
+      local module = main_mod .. '.' .. spec.name
+      if main_mod == 'core' then
+        module = main_mod .. '.config.' .. spec.name
+      end
+
+      parts.load(module, spec)
+      spec.loaded = true
+
+      if spec.reload then
+        require 'core.load.autocmds'.create_reload(module, spec)
+      end
+    end
   end
 end
 
@@ -75,24 +88,6 @@ function parts.load(module, spec)
     })
   else
     callback(module, spec.opts)
-  end
-end
-
----@param modules { [ModuleName]: boolean }
-function parts._modules(mod, modules)
-  for _, spec in pairs(modules) do
-    ---@type ModuleName
-    local module = mod .. '.' .. spec.name
-    if mod == 'core' then
-      module = mod .. '.config.' .. spec.name
-    end
-
-    parts.load(module, spec)
-    spec.loaded = true
-
-    if spec.reload then
-      require 'core.load.autocmds'.create_reload(module, spec)
-    end
   end
 end
 
