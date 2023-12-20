@@ -26,7 +26,7 @@ local function use_theme(theme_name)
         preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       },
       highlights = {
-        TelescopeTitle = { core.hl.ui.accent, { reverse = true } },
+        TelescopeTitle = { core.hl.ui.accent },
         TelescopeNormal = { core.hl.ui.bg },
         TelescopePromptNormal = { core.hl.ui.bg_accent },
         TelescopeSelection = { core.hl.ui.current },
