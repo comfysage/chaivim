@@ -69,6 +69,12 @@ local fn = {
     dir = 'telescope-fzf-native.nvim',
     opts = false,
   },
+  telescope_select = Util.create_bootstrap {
+    name = 'telescope_select',
+    url = 'nvim-telescope/telescope-ui-select.nvim',
+    dir = 'telescope-ui-select.nvim',
+    opts = false,
+  }
 }
 
 ---@param name string
