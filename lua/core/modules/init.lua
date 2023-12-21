@@ -2,11 +2,21 @@ local Util = require 'core.utils'
 
 local default_modules = {
   core = {
-    'base', 'options', 'ui', 'highlights', 'keymaps',
-    'lazy', 'lualine', 'treesitter', 'lsp', 'cmp',
-    'telescope', 'mini',
-    'dash',
+    init = {
+      'base', 'options', 'ui', 'highlights', 'keymaps',
+      'lazy', 'lualine', 'treesitter', 'lsp',
+    },
+    buf = { 'cmp', },
+    ui = {
+      'telescope', 'mini',
+      'dash',
+    },
   },
+}
+
+local event_map = {
+  ui = 'UIEnter',
+  buf = 'BufAdd',
 }
 
 return {
@@ -19,10 +29,13 @@ return {
     end
 
     local modules = {}
-    for i, module in ipairs(default_modules[main]) do
-      modules[module] = require 'core.modules'.setup(main, module, {
-        priority = i,
-      })
+    for event, list in pairs(default_modules[main]) do
+      for i, module in ipairs(list) do
+        modules[module] = require 'core.modules'.setup(main, module, {
+          priority = i,
+          event = event_map[event] or nil,
+        })
+      end
     end
     return modules
   end,
