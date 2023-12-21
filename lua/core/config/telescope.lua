@@ -89,21 +89,25 @@ M.setup = function(opts)
     }
   end
 
+  local pickers = require 'core.plugin.telescope'.picker
+  local builtins = require 'telescope.builtin'
+
   Keymap.group {
     group = 'telescope',
-    { 'normal', opts.mappings.find_files,       function() require 'core.plugin.telescope'.picker.find_files {} end,  'find files' },
-    { 'normal', opts.mappings.live_grep,        function() require 'core.plugin.telescope'.picker.grep {} end,        'find string' },
-    { 'normal', opts.mappings.simple_find_file, function() require 'core.plugin.telescope'.picker.explorer {} end,    'find file' },
-    { 'normal', opts.mappings.search,           function() R 'core.plugin.telescope'.picker.grep_current_file {} end, 'find in file' },
-    { 'normal', opts.mappings.symbols,          function() require 'core.plugin.telescope'.picker.symbols {} end,     'find symbols' },
-    { 'normal', opts.mappings.git_files,        function() require 'core.plugin.telescope'.picker.git_files {} end,   'find git file' },
-    { 'normal', opts.mappings.buffers,          function() require 'telescope.builtin'.buffers() end,                 'find buffer' },
-    { 'normal', opts.mappings.filetypes,        function() require 'telescope.builtin'.filetypes() end,               'find filetype' },
-    { 'normal', opts.mappings.keymaps,          function() require 'telescope.builtin'.keymaps() end,                 'find keymap' },
-    { 'normal', opts.mappings.help_tags,        function() require 'telescope.builtin'.help_tags() end,               'find help tag' },
-    { 'normal', opts.mappings.colorscheme,      function() require 'telescope.builtin'.colorscheme() end,             'find colorscheme' },
-    { 'normal', opts.mappings.quickfix,         function() require 'telescope.builtin'.quickfix() end,                'search in qf list' },
-    { 'normal', opts.mappings.mappings,         function() require 'keymaps'.telescope() end,                         'find mapping' },
+    { 'normal', opts.mappings.find_files,       pickers.find_files,   'find files' },
+    { 'normal', opts.mappings.live_grep,        pickers.grep,         'find string' },
+    { 'normal', opts.mappings.simple_find_file, pickers.explorer,     'find file' },
+    { 'normal', opts.mappings.symbols,          pickers.symbols,      'find symbols' },
+    { 'normal', opts.mappings.git_files,        pickers.git_files,    'find git file' },
+    { 'normal', opts.mappings.buffers,          builtins.buffers,     'find buffer' },
+    { 'normal', opts.mappings.filetypes,        builtins.filetypes,   'find filetype' },
+    { 'normal', opts.mappings.keymaps,          builtins.keymaps,     'find keymap' },
+    { 'normal', opts.mappings.help_tags,        builtins.help_tags,   'find help tag' },
+    { 'normal', opts.mappings.quickfix,         builtins.quickfix,    'search in qf list' },
+    { 'normal', opts.mappings.colorscheme,      builtins.colorscheme, 'find colorscheme' },
+    { 'normal', opts.mappings.search,
+      function() R 'core.plugin.telescope'.picker.grep_current_file {} end, 'find in file' },
+    { 'normal', opts.mappings.mappings, require 'keymaps'.telescope, 'find mapping' },
   }
 end
 
