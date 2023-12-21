@@ -90,21 +90,23 @@ M.setup = function(opts)
   end
 
   local pickers = require 'core.plugin.telescope'.picker
+  local style = require 'core.plugin.telescope'.get_style
   local builtins = require 'telescope.builtin'
 
   Keymap.group {
     group = 'telescope',
-    { 'normal', opts.mappings.find_files,       pickers.find_files,   'find files' },
-    { 'normal', opts.mappings.live_grep,        pickers.grep,         'find string' },
-    { 'normal', opts.mappings.simple_find_file, pickers.explorer,     'find file' },
-    { 'normal', opts.mappings.symbols,          pickers.symbols,      'find symbols' },
-    { 'normal', opts.mappings.git_files,        pickers.git_files,    'find git file' },
-    { 'normal', opts.mappings.buffers,          builtins.buffers,     'find buffer' },
-    { 'normal', opts.mappings.filetypes,        builtins.filetypes,   'find filetype' },
-    { 'normal', opts.mappings.keymaps,          builtins.keymaps,     'find keymap' },
-    { 'normal', opts.mappings.help_tags,        builtins.help_tags,   'find help tag' },
-    { 'normal', opts.mappings.quickfix,         builtins.quickfix,    'search in qf list' },
-    { 'normal', opts.mappings.colorscheme,      builtins.colorscheme, 'find colorscheme' },
+    { 'normal', opts.mappings.find_files,       pickers.find_files, 'find files' },
+    { 'normal', opts.mappings.live_grep,        pickers.grep,       'find string' },
+    { 'normal', opts.mappings.simple_find_file, pickers.explorer,   'find file' },
+    { 'normal', opts.mappings.symbols,          pickers.symbols,    'find symbols' },
+    { 'normal', opts.mappings.git_files,        pickers.git_files,  'find git file' },
+    { 'normal', opts.mappings.buffers,          builtins.buffers,   'find buffer' },
+    { 'normal', opts.mappings.filetypes,        builtins.filetypes, 'find filetype' },
+    { 'normal', opts.mappings.keymaps,          builtins.keymaps,   'find keymap' },
+    { 'normal', opts.mappings.help_tags,        builtins.help_tags, 'find help tag' },
+    { 'normal', opts.mappings.quickfix,         builtins.quickfix,  'search in qf list' },
+    { 'normal', opts.mappings.colorscheme,
+      function() builtins.colorscheme(style('dropdown', { prompt_title = 'select colorscheme' })) end, 'find colorscheme' },
     { 'normal', opts.mappings.search,
       function() R 'core.plugin.telescope'.picker.grep_current_file {} end, 'find in file' },
     { 'normal', opts.mappings.mappings, require 'keymaps'.telescope, 'find mapping' },
