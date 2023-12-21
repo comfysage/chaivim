@@ -11,7 +11,6 @@ M.style = {}
 M.style.dropdown = themes.get_dropdown {
   width = 0.8,
   previewer = false,
-  prompt_title = false
 }
 
 M.style.bottom = themes.get_ivy {
