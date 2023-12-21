@@ -352,7 +352,6 @@ local function show_input(opts, on_confirm)
 
   local prompt = opts.prompt or config.default_prompt
   local prompt_lines = vim.split(prompt, "\n", { plain = true, trimempty = true })
-  prompt_lines[#prompt_lines] = prompt_lines[#prompt_lines] .. config.prompt_separator
 
   -- Create or update the window
   local winid, start_in_insert = create_or_update_win(config, prompt_lines, opts.default)

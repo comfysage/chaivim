@@ -6,8 +6,7 @@ return {
         enabled = true,
 
         -- Default prompt string
-        default_prompt = 'input:',
-        prompt_separator = ':',
+        default_prompt = '',
 
         -- Can be 'left', 'right', or 'center'
         title_pos = 'left',
