@@ -77,6 +77,9 @@ M.setup = function(opts)
     require 'telescope'.load_extension 'fzf'
   end
 
+  require 'core.bootstrap'.boot 'telescope_select'
+  require 'telescope'.load_extension 'ui-select'
+
   if opts.theme and type(opts.theme) == 'string' then
     require 'core.load.handle'.create {
       event = 'ColorScheme', priority = 5,
