@@ -5,6 +5,7 @@ local Util = require 'core.utils'
 
 ---@class LspConfig__signature
 ---@field enabled boolean
+---@field window { height: integer, width: integer, border: 'single'|'double'|'rounded'|'none' }
 
 ---@class LspConfigOpts
 ---@field mappings { [LspConfig__mappings]: string }

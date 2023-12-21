@@ -24,6 +24,11 @@ return {
       },
       signature = {
         enabled = true,
+        window = {
+          height = 20,
+          width = 64,
+          border = 'none'
+        },
       },
       config = {
         -- options passed to `vim.diagnostic.open_float()`

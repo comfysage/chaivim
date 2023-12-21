@@ -216,7 +216,7 @@ H.process_lsp_response = function(request_result, processor)
 end
 
 H.signature_window_opts = function()
-  local win_config = { height = 20, width = 50, border = 'none' }
+  local win_config = core.modules.core.lsp.opts.signature.window
   local lines = vim.api.nvim_buf_get_lines(H.signature.bufnr, 0, -1, {})
   local height, width = H.floating_dimensions(lines, win_config.height, win_config.width)
 
@@ -395,7 +395,7 @@ function M.show_signature_window()
 
   -- Add `lines` to signature buffer. Use `wrap_at` to have proper width of
   -- 'non-UTF8' section separators.
-  vim.lsp.util.stylize_markdown(H.signature.bufnr, lines, { wrap_at = 50 })
+  vim.lsp.util.stylize_markdown(H.signature.bufnr, lines, { wrap_at = core.modules.core.lsp.opts.signature.window.width })
 
   -- Add highlighting of active parameter
   for i, hl_range in ipairs(hl_ranges) do
