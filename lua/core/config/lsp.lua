@@ -3,8 +3,12 @@ local Util = require 'core.utils'
 ---@alias LspConfig__mappings 'show_lsp_info'|'open_float'|'goto_prev'|'goto_next'|'set_qflist'|'goto_declaration'|'goto_definition'|'peek_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
 ---@alias LspConfig__servers { [string]: { settings: table, [string]: table } }
 
+---@class LspConfig__signature
+---@field enabled boolean
+
 ---@class LspConfigOpts
 ---@field mappings { [LspConfig__mappings]: string }
+---@field signature LspConfig__signature
 ---@field config table
 ---@field servers LspConfig__servers
 
@@ -118,6 +122,17 @@ return {
         keymaps.normal[opts.mappings.format] = { function()
           vim.lsp.buf.format { async = true }
         end, 'format', group = 'LSP', map_opts }
+
+        if opts.signature.enabled then
+          vim.api.nvim_create_autocmd('InsertLeave', {
+            group = core.group_id,
+            callback = require 'core.plugin.lsp'.close_signature,
+          })
+          vim.api.nvim_create_autocmd({ 'InsertEnter', 'CursorMovedI' }, {
+            group = core.group_id,
+            callback = require 'core.plugin.lsp'.auto_signature,
+          })
+        end
       end,
     })
   end

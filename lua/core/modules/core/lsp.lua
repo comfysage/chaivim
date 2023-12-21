@@ -22,6 +22,9 @@ return {
         rename = 'gr',
         format = ',f',
       },
+      signature = {
+        enabled = true,
+      },
       config = {
         -- options passed to `vim.diagnostic.open_float()`
         -- float = {},
