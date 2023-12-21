@@ -54,8 +54,8 @@ end
 
 function M.peek_definition()
   local params = vim.lsp.util.make_position_params()
-  M.request('textDocument/definition', params, function (_, result)
-    M.preview_location(result[1], {context = 2})
+  M.request('textDocument/definition', params, function(_, result)
+    M.preview_location(result[1], { context = 2 })
   end)
 end
 
