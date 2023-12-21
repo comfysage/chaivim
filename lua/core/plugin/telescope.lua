@@ -3,6 +3,9 @@ local themes = require 'telescope.themes'
 
 local M = {}
 
+---@alias TelescopeStyle 'dropdown'|'bottom'|'main'
+
+---@type { [TelescopeStyle]: table }
 M.style = {}
 
 M.style.dropdown = themes.get_dropdown {
@@ -34,6 +37,14 @@ M.style.main = {
   preview_title = '',
   preview_width = 0.4,
 }
+
+---@param name TelescopeStyle
+---@param opts table
+M.get_style = function(name, opts)
+  opts = opts or {}
+  local style = M.style[name]
+  return style and vim.tbl_deep_extend('force', style, opts)
+end
 
 M.picker = {}
 
