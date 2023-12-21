@@ -124,6 +124,8 @@ return {
         end, 'format', group = 'LSP', map_opts }
 
         if opts.signature.enabled then
+          vim.api.nvim_set_hl(0, 'ActiveParameter', { fg = core.hl.ui.focus.bg })
+
           vim.api.nvim_create_autocmd('InsertLeave', {
             group = core.group_id,
             callback = require 'core.plugin.lsp'.close_signature,

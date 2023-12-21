@@ -403,7 +403,7 @@ function M.show_signature_window()
       vim.api.nvim_buf_add_highlight(
         H.signature.bufnr,
         0,
-        'MiniCompletionActiveParameter',
+        'ActiveParameter',
         i - 1,
         hl_range.first,
         hl_range.last
