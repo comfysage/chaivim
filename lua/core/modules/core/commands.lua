@@ -1,7 +1,9 @@
 return {
   default = {
     opts = {
-      commands = {},
+      commands = {
+        cheatsheet = require 'core.ui.cheatsheet'.open,
+      },
     },
   },
 }
