@@ -7,7 +7,7 @@
 ---@field diagnostic CoreDiagnosticHighlights
 
 ---@alias CoreUIHighlights { [CoreUIHlName]: Highlight }
----@alias CoreUIHlName 'bg'|'bg_accent'|'accent'|'current'|'focus'
+---@alias CoreUIHlName 'bg'|'bg_accent'|'accent'|'current'|'focus'|'border'
 
 ---@alias CoreDiagnosticHighlights { [CoreDiagnosticHlName]: Highlight }
 ---@alias CoreDiagnosticHlName 'ok'|'warn'|'error'|'info'|'hint'
@@ -66,6 +66,7 @@ return {
         { 'accent',    from = 'TablineSel', inverse = true },
         { 'current',   from = 'CursorLine' },
         { 'focus',     from = 'IncSearch', inverse = true },
+        { 'border',    from = 'WinSeparator' },
       },
       diagnostic = create_hls {
         { 'ok',    from = 'DiagnosticOk' },
