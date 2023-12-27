@@ -12,10 +12,10 @@ local function use_theme(theme_name)
         preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
       },
       highlights = {
-        TelescopeTitle = { core.hl.ui.accent },
-        TelescopeNormal = { core.hl.ui.bg },
-        TelescopePromptNormal = { core.hl.ui.bg_accent },
-        TelescopeSelection = { core.hl.ui.current },
+        TelescopeTitle = core.hl.ui.accent,
+        TelescopeNormal = core.hl.ui.bg,
+        TelescopePromptNormal = core.hl.ui.bg_accent,
+        TelescopeSelection = core.hl.ui.current,
       },
     },
     main = {
@@ -26,10 +26,10 @@ local function use_theme(theme_name)
         preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       },
       highlights = {
-        TelescopeTitle = { core.hl.ui.accent },
-        TelescopeNormal = { core.hl.ui.bg },
-        TelescopePromptNormal = { core.hl.ui.bg_accent },
-        TelescopeSelection = { core.hl.ui.current },
+        TelescopeTitle = core.hl.ui.accent,
+        TelescopeNormal = core.hl.ui.bg,
+        TelescopePromptNormal = core.hl.ui.bg_accent,
+        TelescopeSelection = core.hl.ui.current,
       },
     },
   }
@@ -51,15 +51,7 @@ local function use_theme(theme_name)
     },
   }
 
-  for hl_name, hl_v in pairs(theme.highlights) do
-    local hl_group = hl_v[1]
-    if hl_v[2] then
-      hl_group = vim.tbl_extend('force', hl_group, hl_v[2])
-    end
-    hl_group.name = nil
-
-    vim.api.nvim_set_hl(0, hl_name, hl_group)
-  end
+  require 'core.plugin.highlight'.apply(theme.highlights)
 end
 
 ---@class CoreTelescopeOpts
