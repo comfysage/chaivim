@@ -57,7 +57,8 @@ return {
   end,
   create = function()
     return {
-      Title = core.hl.ui.accent,
+      Title       = core.hl.ui.border,
+      FloatTitle  = core.hl.ui.accent,
       FloatBorder = core.hl.ui.border,
     }
   end,
