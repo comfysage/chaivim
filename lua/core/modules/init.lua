@@ -10,6 +10,7 @@ local default_modules = {
     ui = {
       'telescope', 'mini',
       'dash',
+      'commands',
     },
   },
 }
