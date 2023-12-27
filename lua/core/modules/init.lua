@@ -3,7 +3,7 @@ local Util = require 'core.utils'
 local default_modules = {
   core = {
     init = {
-      'base', 'options', 'ui', 'highlights', 'keymaps',
+      'base', 'options', 'hl', 'ui', 'highlights', 'keymaps',
       'lazy', 'lualine', 'treesitter', 'lsp',
     },
     buf = { 'cmp', },
