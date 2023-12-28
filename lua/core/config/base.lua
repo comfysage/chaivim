@@ -51,34 +51,34 @@ endfunction
 -- statusline
 require 'core.plugin.command'.create {
   name = 'ToggleStatusLine', fn = function(_)
-    if vim.o.laststatus == 0 then
-      vim.opt.laststatus = 3
-      vim.opt.cmdheight = 1
-    else
-      vim.opt.laststatus = 0
-      vim.opt.cmdheight = 0
-    end
-  end,
+  if vim.o.laststatus == 0 then
+    vim.opt.laststatus = 3
+    vim.opt.cmdheight = 1
+  else
+    vim.opt.laststatus = 0
+    vim.opt.cmdheight = 0
+  end
+end,
 }
 
 require 'core.plugin.command'.create {
   name = 'Close', opts = { bang = true }, fn = function(props)
-    local buf = vim.api.nvim_get_current_buf()
-    if props.bang then
-      vim.api.nvim_buf_delete(buf, { force = true })
+  local buf = vim.api.nvim_get_current_buf()
+  if props.bang then
+    vim.api.nvim_buf_delete(buf, { force = true })
+  else
+    local is_changed = vim.fn.getbufinfo(buf)[1].changed == 1
+    if is_changed then
+      vim.ui.input({ prompt = 'buffer has changes, are you sure? y/N' }, function(input)
+        if input == 'yes' or input == 'y' then
+          vim.api.nvim_buf_delete(buf, { force = true })
+        end
+      end)
     else
-      local is_changed = vim.fn.getbufinfo(buf)[1].changed == 1
-      if is_changed then
-        vim.ui.input({ prompt = 'buffer has changes, are you sure? y/N' }, function(input)
-          if input == 'yes' or input == 'y' then
-            vim.api.nvim_buf_delete(buf, { force = true })
-          end
-        end)
-      else
-        vim.api.nvim_buf_delete(buf, {})
-      end
+      vim.api.nvim_buf_delete(buf, {})
     end
-  end,
+  end
+end,
 }
 
 ---@class BaseConfig
