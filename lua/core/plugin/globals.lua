@@ -6,7 +6,7 @@ Spec.defaults = {
 }
 
 setmetatable(Spec, {
-  __call = function (t, props)
+  __call = function(t, props)
     if type(props) ~= 'table' then return end
     local spec = props
     for k, v in pairs(t.defaults) do
@@ -38,8 +38,8 @@ setmetatable(Spec, {
 function Spec.colorscheme(props)
   ---@type LazyPluginSpec
   local _opts = {
-    priority = 1200,
     lazy = true,
+    priority = 1200,
   }
   return vim.tbl_deep_extend("force", _opts, props)
 end
