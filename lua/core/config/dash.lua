@@ -1,8 +1,10 @@
 return {
   setup = function(opts)
-    vim.api.nvim_create_user_command('Dash', function()
-      require 'core.plugin.dash'.open(opts)
-    end, {})
+    require 'core.plugin.command'.create {
+      name = 'Dash', fn = function(_)
+        require 'core.plugin.dash'.open(core.modules.core.dash.opts)
+      end,
+    }
     if opts.open_on_startup then
       vim.defer_fn(function()
         local buf_lines = vim.api.nvim_buf_get_lines(0, 0, 1, false)
