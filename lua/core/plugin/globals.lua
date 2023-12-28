@@ -1,5 +1,21 @@
 Spec = Spec or {}
 
+Spec.defaults = {
+  lazy = true,
+  priority = 500,
+}
+
+setmetatable(Spec, {
+  __call = function (t, props)
+    if type(props) ~= 'table' then return end
+    local spec = props
+    for k, v in pairs(t.defaults) do
+      spec[k] = v
+    end
+    return spec
+  end
+})
+
 --- adds priority and lazy fields to plugin spec
 --- example:
 --- ```lua
