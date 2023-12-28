@@ -58,23 +58,25 @@ vim.api.nvim_create_user_command('ToggleStatusLine', function(_)
   end
 end, {})
 
-vim.api.nvim_create_user_command('Close', function(props)
-  local buf = vim.api.nvim_get_current_buf()
-  if props.bang then
-    vim.api.nvim_buf_delete(buf, { force = true })
-  else
-    local is_changed = vim.fn.getbufinfo(buf)[1].changed == 1
-    if is_changed then
-      vim.ui.input({ prompt = 'buffer has changes, are you sure? y/N' }, function(input)
-        if input == 'yes' or input == 'y' then
-          vim.api.nvim_buf_delete(buf, { force = true })
-        end
-      end)
+require 'core.plugin.command'.create {
+  name = 'Close', opts = { bang = true }, fn = function(props)
+    local buf = vim.api.nvim_get_current_buf()
+    if props.bang then
+      vim.api.nvim_buf_delete(buf, { force = true })
     else
-      vim.api.nvim_buf_delete(buf, {})
+      local is_changed = vim.fn.getbufinfo(buf)[1].changed == 1
+      if is_changed then
+        vim.ui.input({ prompt = 'buffer has changes, are you sure? y/N' }, function(input)
+          if input == 'yes' or input == 'y' then
+            vim.api.nvim_buf_delete(buf, { force = true })
+          end
+        end)
+      else
+        vim.api.nvim_buf_delete(buf, {})
+      end
     end
-  end
-end, { bang = true })
+  end,
+}
 
 ---@class BaseConfig
 ---@field file_associations { [1]: string[], [2]: string, [3]: function }[]
