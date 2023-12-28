@@ -48,15 +48,17 @@ endfunction
 ]]
 
 -- statusline
-vim.api.nvim_create_user_command('ToggleStatusLine', function(_)
-  if vim.o.laststatus == 0 then
-    vim.opt.laststatus = 3
-    vim.opt.cmdheight = 1
-  else
-    vim.opt.laststatus = 0
-    vim.opt.cmdheight = 0
-  end
-end, {})
+require 'core.plugin.command'.create {
+  name = 'ToggleStatusLine', fn = function(_)
+    if vim.o.laststatus == 0 then
+      vim.opt.laststatus = 3
+      vim.opt.cmdheight = 1
+    else
+      vim.opt.laststatus = 0
+      vim.opt.cmdheight = 0
+    end
+  end,
+}
 
 require 'core.plugin.command'.create {
   name = 'Close', opts = { bang = true }, fn = function(props)
