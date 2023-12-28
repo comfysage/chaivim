@@ -18,21 +18,22 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 -- mkdir path
 
-vim.cmd [[
-function s:Mkdir()
-  let dir = expand('%:p:h')
+-- autocmd BufWritePre * call s:Mkdir()
+require 'core.load.handle'.create {
+  event = 'BufWritePre',
+  fn = function()
+    local dir = vim.fn.expand('<afile>:p:h')
 
-  if dir =~ '://'
-    return
-  endif
+    -- This handles URLs using netrw. See ':help netrw-transparent' for details.
+    if dir:find('%l+://') == 1 then
+      return
+    end
 
-  if !isdirectory(dir)
-    call mkdir(dir, 'p')
-    echo 'Created non-existing directory: '.dir
-  endif
-endfunction
-
-autocmd BufWritePre * call s:Mkdir()]]
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
+  end,
+}
 
 -- white space
 vim.cmd [[
