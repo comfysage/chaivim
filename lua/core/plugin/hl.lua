@@ -31,16 +31,18 @@ local function create_hls(props)
     end
     hls[name] = { name = name, fg = fg or 'none', bg = bg or 'none' }
 
-    if v.inverse then
-      local fg = hls[name].fg
-      local bg = hls[name].bg
-      if type(fg) == 'number' and type(bg) == 'number' and fg > bg then
-        hls[name].fg = bg
-        hls[name].bg = fg
-      elseif bg == 'none' then
-        hls[name].fg = 0
-        hls[name].bg = fg
+    local fg = hls[name].fg
+    local bg = hls[name].bg
+    if type(fg) == 'number' and type(bg) == 'number' and bg > fg then
+      hls[name].fg = bg
+      hls[name].bg = fg
+      if v.inverse then
+        hls[name].fg = fg
+        hls[name].bg = bg
       end
+    elseif bg == 'none' and v.inverse then
+      hls[name].fg = 0
+      hls[name].bg = fg
     end
   end
   return hls
@@ -65,7 +67,7 @@ return {
         { 'bg_accent', from = 'SignColumn' },
         { 'accent',    from = 'TablineSel', inverse = true },
         { 'current',   from = 'CursorLine' },
-        { 'focus',     from = 'IncSearch', inverse = true },
+        { 'focus',     from = 'IncSearch' },
         { 'border',    from = 'WinSeparator' },
       },
       diagnostic = create_hls {
