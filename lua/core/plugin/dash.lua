@@ -82,7 +82,9 @@ function M.open(config)
   end
 
   for _, val in ipairs(buttons) do
-    table.insert(dashboard, addSpacing_toBtns(val[1], val[2]) .. " ")
+    local desc = val[1]
+    local lhs = require 'core.plugin.keymaps'.fmt(val[2])
+    table.insert(dashboard, addSpacing_toBtns(desc, lhs) .. " ")
     table.insert(dashboard, header[1] .. " ")
   end
 
