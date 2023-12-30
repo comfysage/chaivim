@@ -7,7 +7,7 @@ local function generate_group(group_name, desc_width, lhs_width)
   for _, map in pairs(maps.normal) do
     local desc = string.sub(map.desc, 0, desc_width)
 
-    local lhs = require 'core.config.keymaps'.fmt(map.lhs)
+    local lhs = require 'core.plugin.keymaps'.fmt(map.lhs)
     lhs = string.sub(lhs, 0, lhs_width)
     str_keys[#str_keys + 1] = { desc, lhs }
   end
