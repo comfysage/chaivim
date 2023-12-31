@@ -57,5 +57,26 @@ return {
       group = 'git',
       { expr = true }
     }
+
+    -- Actions
+    Keymap.group {
+      group = 'git',
+      { 'normal', opts.mappings.stage_hunk, gs.stage_hunk, 'stage current hunk' },
+      { 'visual', opts.mappings.stage_hunk, gs.stage_hunk, 'stage current hunk' },
+      { 'normal', opts.mappings.reset_hunk, gs.reset_hunk, 'reset the lines of the current hunk' },
+      { 'visual', opts.mappings.reset_hunk, gs.reset_hunk, 'reset the lines of the current hunk' },
+      { 'normal', opts.mappings.stage_buffer, gs.stage_buffer, 'stage buffer' },
+      { 'normal', opts.mappings.undo_stage_hunk, gs.undo_stage_hunk, 'undo last call to stage_hunk()' },
+      { 'normal', opts.mappings.reset_buffer, gs.reset_buffer, 'reset the lines of all hunks in the buffer' },
+      { 'normal', opts.mappings.preview_hunk, gs.preview_hunk, 'preview hunk' },
+      { 'normal', opts.mappings.show_line_blame,
+        function() gs.blame_line { full = true } end,
+        'run git blame on the current line and show the results',
+      },
+      { 'normal', opts.mappings.toggle_current_line_blame, gs.toggle_current_line_blame, 'toggle current line blame' },
+      { 'normal', opts.mappings.toggle_deleted, gs.toggle_deleted, 'toggle show_deleted' },
+      { 'normal', opts.mappings.diffthis, gs.diffthis, 'vimdiff on current file' },
+      { 'normal', opts.mappings.show_diff, function() gs.diffthis('~') end, 'vimdiff on current file with base ~' },
+    }
   end,
 }

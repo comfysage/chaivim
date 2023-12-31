@@ -4,6 +4,17 @@ return {
       mappings = {
         next_hunk = ']c',
         prev_hunk = '[c',
+        stage_hunk = ',hs',
+        reset_hunk = ',hr',
+        stage_buffer = ',hS',
+        undo_stage_hunk = ',hu',
+        reset_buffer = ',hR',
+        preview_hunk = ',hp',
+        show_line_blame = ',hb',
+        toggle_current_line_blame = '.gb',
+        toggle_deleted = '.gd',
+        diffthis = ',hd',
+        show_diff = ',hD',
       },
       config = {
         signs = {
