@@ -135,6 +135,8 @@ function parts.preload(_)
 
   core.icons = require 'core.plugin.icons'
   require 'core.plugin.hl'.setup()
+
+  require 'core.plugin.keymaps'
 end
 
 function parts.platform(_)
