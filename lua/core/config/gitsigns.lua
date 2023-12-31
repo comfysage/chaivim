@@ -34,5 +34,28 @@ return {
     }
 
     gs.setup(opts.config)
+
+    -- Navigation
+    keymaps.normal[opts.mappings.next_hunk] = {
+      function()
+        if vim.wo.diff then return core.modules.core.gitsigns.opts.mappings.next_hunk end
+        vim.schedule(function() gs.next_hunk() end)
+        return '<Ignore>'
+      end,
+      'jump to the next hunk in the current buffer',
+      group = 'git',
+      { expr = true }
+    }
+
+    keymaps.normal[opts.mappings.prev_hunk] = {
+      function()
+        if vim.wo.diff then return core.modules.core.gitsigns.opts.mappings.prev_hunk end
+        vim.schedule(function() gs.prev_hunk() end)
+        return '<Ignore>'
+      end,
+      'jump to the previous hunk in the current buffer',
+      group = 'git',
+      { expr = true }
+    }
   end,
 }

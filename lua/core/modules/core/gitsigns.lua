@@ -1,6 +1,10 @@
 return {
   default = {
     opts = {
+      mappings = {
+        next_hunk = ']c',
+        prev_hunk = '[c',
+      },
       config = {
         signs = {
           add          = { text = '│' },
