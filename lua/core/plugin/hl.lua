@@ -5,12 +5,16 @@
 ---@class CoreHighlights
 ---@field ui CoreUIHighlights
 ---@field diagnostic CoreDiagnosticHighlights
+---@field diff CoreDiffHighlights
 
 ---@alias CoreUIHighlights { [CoreUIHlName]: Highlight }
 ---@alias CoreUIHlName 'bg'|'bg_accent'|'accent'|'current'|'focus'|'border'
 
 ---@alias CoreDiagnosticHighlights { [CoreDiagnosticHlName]: Highlight }
 ---@alias CoreDiagnosticHlName 'ok'|'warn'|'error'|'info'|'hint'
+
+---@alias CoreDiffHighlights { [CoreDiffHlName]: Highlight }
+---@alias CoreDiffHlName 'add'|'change'|'delete'
 
 ---@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName
 
@@ -76,6 +80,11 @@ return {
         { 'error', from = 'DiagnosticError' },
         { 'info',  from = 'DiagnosticInfo' },
         { 'hint',  from = 'DiagnosticHint' },
+      },
+      diff = create_hls {
+        { 'add',    from = 'DiffAdd' },
+        { 'change', from = 'DiffChange' },
+        { 'delete', from = 'DiffAdd' },
       },
     }
   end,
