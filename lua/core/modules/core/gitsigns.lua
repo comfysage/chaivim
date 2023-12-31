@@ -15,6 +15,7 @@ return {
         toggle_deleted = '.gd',
         diffthis = ',hd',
         show_diff = ',hD',
+        select_hunk = 'ih',
       },
       config = {
         signs = {

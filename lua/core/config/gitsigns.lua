@@ -78,5 +78,12 @@ return {
       { 'normal', opts.mappings.diffthis, gs.diffthis, 'vimdiff on current file' },
       { 'normal', opts.mappings.show_diff, function() gs.diffthis('~') end, 'vimdiff on current file with base ~' },
     }
+
+    -- Text object
+    Keymap.group {
+      group = 'git',
+      { 'normal', { 'v', opts.mappings.select_hunk }, ':<C-U>Gitsigns select_hunk<CR>', 'select inside hunk' },
+      { 'visual', opts.mappings.select_hunk, ':<C-U>Gitsigns select_hunk<CR>', 'select inside hunk' },
+    }
   end,
 }
