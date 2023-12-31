@@ -8,7 +8,7 @@ local default_modules = {
     },
     buf = { 'cmp', },
     ui = {
-      'telescope', 'mini',
+      'telescope', 'mini', 'gitsigns',
       'dash',
       'commands',
     },
