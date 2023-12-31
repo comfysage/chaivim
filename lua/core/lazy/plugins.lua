@@ -22,5 +22,6 @@ return {
   },
   { 'neovim/nvim-lspconfig' },
   { 'echasnovski/mini.nvim' },
+  { 'lewis6991/gitsigns.nvim' },
   { import = core.modules.core.lazy.opts.module },
 }

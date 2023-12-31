@@ -63,6 +63,11 @@ local fn = {
     dir = 'mini.nvim',
     opts = false,
   },
+  gitsigns = Util.create_bootstrap {
+    name = 'gitsigns',
+    url = 'lewis6991/gitsigns.nvim',
+    dir = 'gitsigns.nvim',
+  },
   telescope_fzf = Util.create_bootstrap {
     name = 'telescope_fzf',
     url = 'nvim-telescope/telescope-fzf-native.nvim',
