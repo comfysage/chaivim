@@ -63,6 +63,17 @@
   }
 }
 ```
+### `commands` module
+```lua
+{ "commands",
+  opts = {
+    commands = {
+      ToggleTransparentBG = <function 1>,
+      cheatsheet = <function 2>
+    }
+  }
+}
+```
 ### `dash` module
 ```lua
 {
@@ -86,6 +97,82 @@
       { 'find files', 'SPC SPC', function() require 'core.plugin.telescope'.picker.find_files {} end },
     },
   },
+}
+```
+### `gitsigns` module
+```lua
+{ "gitsigns",
+  opts = {
+    config = {
+      attach_to_untracked = true,
+      current_line_blame = false,
+      current_line_blame_formatter = "<summary>, <author_time:%Y-%m-%d> ~ <author>",
+      current_line_blame_opts = {
+        delay = 500,
+        ignore_whitespace = false,
+        virt_text = true,
+        virt_text_pos = "eol"
+      },
+      linehl = false,
+      max_file_length = 40000,
+      numhl = false,
+      on_attach = <function 1>,
+      preview_config = {
+        border = "rounded",
+        col = 1,
+        relative = "cursor",
+        row = 0,
+        style = "minimal"
+      },
+      sign_priority = 6,
+      signcolumn = true,
+      signs = {
+        add = {
+          text = "│"
+        },
+        change = {
+          text = "│"
+        },
+        changedelete = {
+          text = "~"
+        },
+        delete = {
+          text = "_"
+        },
+        topdelete = {
+          text = "‾"
+        },
+        untracked = {
+          text = "┆"
+        }
+      },
+      update_debounce = 100,
+      watch_gitdir = {
+        follow_files = true,
+        interval = 1000
+      },
+      word_diff = false,
+      yadm = {
+        enable = false
+      }
+    },
+    mappings = {
+      diffthis = ",hd",
+      next_hunk = "]c",
+      prev_hunk = "[c",
+      preview_hunk = ",hp",
+      reset_buffer = ",hR",
+      reset_hunk = ",hr",
+      select_hunk = "ih",
+      show_diff = ",hD",
+      show_line_blame = ",hb",
+      stage_buffer = ",hS",
+      stage_hunk = ",hs",
+      toggle_current_line_blame = ".gb",
+      toggle_deleted = ".gd",
+      undo_stage_hunk = ",hu"
+    }
+  }
 }
 ```
 ### `highlights` module
@@ -123,6 +210,14 @@
       end
     end
   },
+}
+```
+### `hl` module
+```lua
+{ "hl",
+  opts = {
+    use_overrides = true
+  }
 }
 ```
 ### `keymaps` module
@@ -192,7 +287,15 @@
       show_signature = "<C-k>",
       show_type_definition = "gT"
     },
-    servers = {}
+    servers = {},
+    signature = {
+      enabled = true,
+      window = {
+        border = "none",
+        height = 20,
+        width = 64
+      }
+    }
   }
 }
 ```
@@ -327,6 +430,43 @@
       textobjects = {}
     },
     ensure_installed = {}
+  }
+}
+```
+### `ui` module
+```lua
+{ "ui",
+  opts = {
+    input = {
+      border = "rounded",
+      buf_options = {},
+      default_prompt = "",
+      enabled = true,
+      insert_only = true,
+      mappings = {
+        i = {
+          close = "<c-c>",
+          confirm = "<cr>"
+        },
+        n = {
+          close = "<esc>",
+          confirm = "<cr>"
+        }
+      },
+      max_width = { 140, 0.9 },
+      min_width = { 20, 0.2 },
+      override = <function 1>,
+      prefer_width = 40,
+      relative = "cursor",
+      start_in_insert = true,
+      title_pos = "left",
+      win_options = {
+        list = true,
+        listchars = "precedes:…,extends:…",
+        sidescrolloff = 0,
+        wrap = false
+      }
+    }
   }
 }
 ```
