@@ -89,6 +89,9 @@ return {
     }
   end,
   load = function()
+    core.lib.hl = require 'core.plugin.hl'.create()
+
+    -- [FIXME] deprecate
     core.hl = require 'core.plugin.hl'.create()
   end
 }

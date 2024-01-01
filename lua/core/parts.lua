@@ -133,10 +133,11 @@ function parts.preload(_)
     return
   end
 
-  core.icons = require 'core.plugin.icons'
-  require 'core.plugin.hl'.setup()
+  parts.load_lib {}
+end
 
-  require 'core.plugin.keymaps'
+function parts.load_lib(_)
+  require 'core.lib'.setup()
 end
 
 function parts.platform(_)
