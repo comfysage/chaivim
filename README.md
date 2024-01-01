@@ -101,4 +101,3 @@ core.config.colorscheme = 'tokyonight'
 ## :gear: config modules
 
 view example configurations for modules [here](doc/modules.md).
-```
