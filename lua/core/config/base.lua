@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 -- mkdir path
 
 -- autocmd BufWritePre * call s:Mkdir()
-require 'core.load.handle'.create {
+core.lib.autocmd.create {
   event = 'BufWritePre',
   fn = function()
     local dir = vim.fn.expand('<afile>:p:h')
