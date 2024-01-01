@@ -73,7 +73,7 @@ M.setup = function(opts)
   require 'telescope'.load_extension 'ui-select'
 
   if opts.theme and type(opts.theme) == 'string' then
-    require 'core.load.handle'.create {
+    core.lib.autocmd.create {
       event = 'ColorScheme', priority = 5,
       fn = function(_)
         use_theme(core.modules.core.telescope.opts.theme)
