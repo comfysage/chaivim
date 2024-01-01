@@ -26,7 +26,6 @@ return {
     keymaps_config.repl_keys['<[a]%-([%w])>'] = 'ALT+%1'
 
     -- load keymaps plugin
-    require 'core.plugin.keymaps'
     for group, mappings in pairs(opts.mappings) do
       Keymap.group { group = group, mappings }
     end
