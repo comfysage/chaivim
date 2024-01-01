@@ -7,7 +7,7 @@ function parts.load_modules(_)
 
   for main_mod, modules in pairs(core.modules) do
     for _, spec in pairs(modules) do
-      require 'core.load.handle'.create {
+      core.lib.autocmd.create {
         event = 'custom', type = 'lazycore', priority = spec.priority or nil,
         fn = function()
           parts.lazy_load(main_mod, spec.name)
