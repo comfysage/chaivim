@@ -19,7 +19,7 @@ return {
     vim.cmd([[ command! Highlights source $VIMRUNTIME/syntax/hitest.vim ]])
 
     if opts.fix then
-      require 'core.load.handle'.create {
+      core.lib.autocmd.create {
         event = 'ColorScheme', priority = 12,
         fn = function(_)
           opts.fix()
