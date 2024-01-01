@@ -48,7 +48,7 @@ end
 
 return {
   setup = function(opts)
-    require 'core.load.handle'.create {
+    core.lib.autocmd.create {
       event = 'ColorScheme', priority = 2, -- `2`: after `1` ( `core.hl` is updated )
       fn = function(_)
         require 'core.plugin.highlight'.load()
