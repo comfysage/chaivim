@@ -1,5 +1,7 @@
 # chaivim
 
+![dash](images/dash.png)
+
 ![telescope__config](images/telescope__config.png)
 
 ## :sparkles: Features
