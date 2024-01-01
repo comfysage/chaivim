@@ -82,6 +82,7 @@ return {
     modules = {
         core = {
             { 'options' },
+            { 'base' },
         },
     }
 }
