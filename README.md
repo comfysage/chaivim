@@ -8,6 +8,11 @@
 
 chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
+### integrated plugins
+
+- :telescope: [telescope](https://github.com/nvim-telescope/telescope.nvim)
+- :evergreen_tree: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+
 ## :lock: requirements
 
 - Neovim >= 0.8.0 (needs to be built with LuaJIT)
