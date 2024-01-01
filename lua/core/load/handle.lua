@@ -2,6 +2,8 @@ local Util = require 'core.utils'
 
 core.handle = core.handle or {}
 
+---@diagnostic disable duplicate-doc-alias
+
 ---@alias AutoCmdCallback fun(ev: AutoCmdCallbackOpts)
 ---@class AutoCmdCallbackOpts
 ---@field id number autocommand id
@@ -22,6 +24,7 @@ return {
       group = core.group_id,
       desc = 'core handle for ' .. event,
       pattern = ev ~= event and ev or nil,
+      ---@type AutoCmdCallback
       callback = function(opts)
         for i, fn_t in pairs(core.handle[ev]) do
           Util.log(string.format('autocmds:%s:%d', ev, i))
