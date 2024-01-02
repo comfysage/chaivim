@@ -9,6 +9,7 @@ return {
     ---@field autocmd CoreLib__autocmd
     ---@field event CoreLib__event
     ---@field keymaps CoreLib__keymaps
+    ---@field highlight CoreLib__highlight
 
     ---@class CoreLib__autocmd
     ---@field create _
@@ -24,5 +25,10 @@ return {
     ---@field fmt fun(lhs: string): string
     core.lib.keymaps = {}
     core.lib.keymaps.fmt = require 'core.plugin.keymaps'.fmt
+
+    ---@class CoreLib__highlight
+    ---@field apply fun(hls: HLGroups )
+    core.lib.highlight = {}
+    core.lib.highlight.apply = require 'core.plugin.highlight'.apply
   end,
 }
