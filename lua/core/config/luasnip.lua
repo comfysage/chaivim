@@ -18,14 +18,13 @@ return {
     require 'luasnip'.config.set_config(opts.config)
 
     -- load snippets from snippets directory
-    if type(opts.import_languages) == 'table' then
-      require 'luasnip.loaders.from_vscode'.lazy_load {
+    local snippets_opts = {
         paths = ('%s/%s'):format(core.path.root, 'friendly-snippets'),
-        include = opts.import_languages,
-      }
-    else
-      require 'luasnip.loaders.from_vscode'.lazy_load()
+    }
+    if type(opts.import_languages) == 'table' then
+      snippets_opts.include = opts.import_languages
     end
+    require 'luasnip.loaders.from_vscode'.lazy_load(snippets_opts)
 
     -- this will expand the current item or jump to the next item within the snippet.
     vim.keymap.set({ 'i', 's' }, opts.mappings.jump_next, function()
