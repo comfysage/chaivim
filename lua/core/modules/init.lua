@@ -6,7 +6,7 @@ local default_modules = {
       'base', 'options', 'hl', 'ui', 'highlights', 'keymaps',
       'lazy', 'lualine', 'treesitter', 'lsp',
     },
-    buf = { 'cmp', },
+    buf = { 'luasnip', 'cmp', },
     ui = {
       'telescope', 'mini', 'gitsigns',
       'dash',
