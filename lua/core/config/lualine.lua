@@ -2,41 +2,41 @@ local Util = require 'core.utils'
 
 ---@alias fmt_f fun(str: string): string
 ---@alias wrapper_f fun(): string
----@alias separator { left: string, right: string }
+---@alias separator { left: string, right: string }|string
 ---
 ---@class LualineConfig__component
 ---@field [1] string
----@field fmt fmt_f|nil
----@field icon string|nil
----@field separator separator|nil
----@field cond function|nil
----@field draw_empty boolean|nil
----@field color any|nil
----@field type any|nil
----@field padding integer|nil
----@field on_click function|nil
+---@field fmt? fmt_f
+---@field icon? string
+---@field separator? separator
+---@field cond? function
+---@field draw_empty? boolean
+---@field color? any
+---@field type? any
+---@field padding? integer
+---@field on_click? function
 
 ---@class LualineConfig__options
----@field icons_enabled boolean
----@field theme 'auto'|string
----@field component_separators separator
----@field section_separators separator
----@field always_divide_middle boolean
----@field globalstatus boolean
----@field refresh { ['statusline'|'tabline'|'winbar']: integer }
+---@field icons_enabled? boolean
+---@field theme? 'auto'|string
+---@field component_separators? separator
+---@field section_separators? separator
+---@field always_divide_middle? boolean
+---@field globalstatus? boolean
+---@field refresh? { ['statusline'|'tabline'|'winbar']: integer }
 ---@class LualineConfig__sections
----@field lualine_a LualineConfig__section
----@field lualine_b LualineConfig__section
----@field lualine_c LualineConfig__section
----@field lualine_x LualineConfig__section
----@field lualine_y LualineConfig__section
----@field lualine_z LualineConfig__section
+---@field lualine_a? LualineConfig__section
+---@field lualine_b? LualineConfig__section
+---@field lualine_c? LualineConfig__section
+---@field lualine_x? LualineConfig__section
+---@field lualine_y? LualineConfig__section
+---@field lualine_z? LualineConfig__section
 ---@alias LualineConfig__section (LualineConfig__component|wrapper_f|string)[]
 
 ---@class LualineConfig
----@field options LualineConfig__options
----@field sections LualineConfig__sections
----@field inactive_sections LualineConfig__sections
+---@field options? LualineConfig__options
+---@field sections? LualineConfig__sections
+---@field inactive_sections? LualineConfig__sections
 
 ---@alias LualineStyle 'minimal'
 
@@ -44,15 +44,15 @@ local Util = require 'core.utils'
 local styles = {
   minimal = {
     options = {
-      component_separators = '', -- { left = '', right = '' },
-      section_separators = '',   -- { left = '', right = '' },
+      component_separators = '',
+      section_separators = '',
     }
   }
 }
 
 ---@class CoreLualineOpts
 ---@field config LualineConfig
----@field style LualineStyle
+---@field style? LualineStyle
 
 return {
   ---@param opts CoreLualineOpts
