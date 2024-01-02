@@ -5,6 +5,7 @@
 ---@field item Icons
 ---@field info Icons
 ---@field diagnostic Icons
+---@field separator Icons
 
 return {
   ---@return CoreIcons
@@ -60,6 +61,12 @@ return {
         warn = 'W',
         info = 'I',
         hint = 'H',
+      },
+      separator = {
+        slant = { left = "", right = "" },
+        round = { left = "", right = "" },
+        block = { left = "█", right = "█" },
+        arrow = { left = "", right = "" },
       },
     }
   end,
