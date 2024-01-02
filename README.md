@@ -1,5 +1,7 @@
 # chaivim
 
+🍵 easily configurable neovim system with solid defaults and a cozy editor experience.
+
 ![dash](images/dash.png)
 
 ![telescope__config](images/telescope__config.png)
