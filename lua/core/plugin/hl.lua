@@ -1,3 +1,5 @@
+---@diagnostic disable duplicate-doc-alias
+
 ---@alias Color string|'none'
 
 ---@alias Highlight { name: string, fg: Color, bg: Color  }
