@@ -57,6 +57,10 @@ local fn = {
     url = 'neovim/nvim-lspconfig',
     dir = 'nvim-lspconfig',
   },
+  luasnip = Util.create_bootstrap {
+    name = 'luasnip',
+    url = 'L3MON4D3/LuaSnip',
+  },
   mini = Util.create_bootstrap {
     name = 'mini',
     url = 'echasnovski/mini.nvim',

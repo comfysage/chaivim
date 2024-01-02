@@ -21,6 +21,13 @@ return {
     { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline' },
   },
   { 'neovim/nvim-lspconfig' },
+  { name = 'luasnip', 'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    dependencies = {
+      'saadparwaiz1/cmp_luasnip',
+      'rafamadriz/friendly-snippets',
+    },
+  },
   { 'echasnovski/mini.nvim' },
   { 'lewis6991/gitsigns.nvim' },
   { import = core.modules.core.lazy.opts.module },
