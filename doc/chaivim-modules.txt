@@ -302,6 +302,68 @@ modules.lsp                                           *chaivim-modules.lsp*
     }
   }
 <
+modules.lualine                                   *chaivim-modules.lualine*
+>lua
+  { "lualine",
+    opts = {
+      config = {
+        extensions = {},
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { "filename" },
+          lualine_x = { <function 1> },
+          lualine_y = {},
+          lualine_z = {}
+        },
+        inactive_winbar = {},
+        options = {
+          always_divide_middle = true,
+          component_separators = {
+            left = "",
+            right = ""
+          },
+          disabled_filetypes = {
+            statusline = {},
+            winbar = {}
+          },
+          globalstatus = true,
+          icons_enabled = true,
+          ignore_focus = {},
+          refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000
+          },
+          section_separators = {
+            left = "",
+            right = ""
+          },
+          theme = "auto"
+        },
+        sections = {
+          lualine_a = { { "mode",
+              fmt = <function 2>
+            } },
+          lualine_b = { "branch", <function 3>, "diff", { "diagnostics",
+              symbols = {
+                error = "E",
+                hint = "H",
+                info = "I",
+                warn = "W"
+              }
+            } },
+          lualine_c = { "filename" },
+          lualine_x = { "filetype" },
+          lualine_y = { <function 4> },
+          lualine_z = { <function 5> }
+        },
+        tabline = {},
+        winbar = {}
+      }
+    }
+  }
+<
 modules.mini                                         *chaivim-modules.mini*
 >lua
   { "mini",
