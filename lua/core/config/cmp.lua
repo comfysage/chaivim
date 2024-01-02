@@ -9,14 +9,7 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline'
     }
-    for _, url in ipairs(sources) do
-      local _url = vim.split(url, '/')
-      if #_url < 2 then
-        goto continue
-      end
-      Util.add_to_path(_url[2])
-      ::continue::
-    end
+    Util.load_plugins(sources)
   end,
   setup = function(opts)
     vim.g.indentLine_conceallevel = 2
