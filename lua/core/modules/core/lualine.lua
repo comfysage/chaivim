@@ -23,7 +23,21 @@ return {
         },
         sections = {
           lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
-          lualine_b = { 'branch', function() return CUTIL.PATH_DIR {} end, 'diff', { 'diagnostics', symbols = { error = 'E', warn = 'W', info = 'I', hint = 'H' } } },
+          lualine_b = {
+            'branch',
+            function() return CUTIL.PATH_DIR {} end,
+            'diff',
+            {
+              'diagnostics',
+              symbols =
+              {
+                error = core.lib.icons.diagnostic.error,
+                warn = core.lib.icons.diagnostic.warn,
+                info = core.lib.icons.diagnostic.info,
+                hint = core.lib.icons.diagnostic.hint
+              }
+            }
+          },
           lualine_c = { 'filename' },
           lualine_x = { 'filetype' },
           lualine_y = { function() return CUTIL.FILE_INFO {} end },
