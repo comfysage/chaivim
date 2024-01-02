@@ -57,10 +57,10 @@ return {
         not_loaded = "○",
       },
       diagnostic = {
-        error = 'E',
-        warn = 'W',
-        info = 'I',
-        hint = 'H',
+        error = '󰅙',
+        warn = '',
+        info = '󰋼',
+        hint = '󰌵',
       },
       separator = {
         slant = { left = "", right = "" },
