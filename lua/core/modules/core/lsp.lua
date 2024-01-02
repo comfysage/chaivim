@@ -62,12 +62,7 @@ return {
           -- symbols or error codes.
           -- string|function
           prefix = function(props)
-            local icons = {
-              [vim.diagnostic.severity.ERROR] = core.icons.diagnostic.error,
-              [vim.diagnostic.severity.WARN] = core.icons.diagnostic.warn,
-              [vim.diagnostic.severity.INFO] = core.icons.diagnostic.info,
-              [vim.diagnostic.severity.HINT] = core.icons.diagnostic.hint,
-            }
+            local icons = require 'core.utils'.get_diagnostic_signs()
             return icons[props.severity]
           end,
           -- Append diagnostic message with suffix. If a function, it must have

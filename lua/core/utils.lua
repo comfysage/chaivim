@@ -138,4 +138,13 @@ function Util.create_bootstrap(props)
   }
 end
 
+function Util.get_diagnostic_signs()
+  return {
+    [vim.diagnostic.severity.ERROR] = core.lib.icons.diagnostic.error,
+    [vim.diagnostic.severity.WARN] = core.lib.icons.diagnostic.warn,
+    [vim.diagnostic.severity.INFO] = core.lib.icons.diagnostic.info,
+    [vim.diagnostic.severity.HINT] = core.lib.icons.diagnostic.hint,
+  }
+end
+
 return Util
