@@ -26,6 +26,16 @@ function Util.has(name)
   return value == 1
 end
 
+---@param plugins table<string>
+function Util.load_plugins(plugins)
+  for _, url in ipairs(plugins) do
+    local _url = vim.split(url, '/')
+    if #_url > 1 then
+      Util.add_to_path(_url[#_url])
+    end
+  end
+end
+
 ---@param path string
 function Util.add_to_path(path)
   vim.opt.rtp:prepend(path)
