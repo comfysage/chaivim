@@ -16,7 +16,7 @@
 ---@alias CoreDiffHighlights { [CoreDiffHlName]: Highlight }
 ---@alias CoreDiffHlName 'add'|'change'|'delete'
 
----@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName
+---@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName|CoreDiffHlName
 
 ---@param props { [1]: CoreHlName, [2]: Color|nil, [3]: Color|nil , fg: Color|nil, bg: Color|nil, from: Color|nil, inverse: boolean|nil }[]
 ---@return { [string]: Highlight }
