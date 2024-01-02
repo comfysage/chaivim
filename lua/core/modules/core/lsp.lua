@@ -35,7 +35,9 @@ return {
         -- float = {},
         severity_sort = false,
         -- use signs for diagnostics
-        signs = true,
+        signs = {
+          text = require 'core.utils'.get_diagnostic_signs(),
+        },
         -- Use underline for diagnostics
         underline = true,
         -- don't update diagnostics while typing
