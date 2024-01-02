@@ -1,11 +1,11 @@
 local M = {}
 
 local cmp_hi = {
-  CmpItemMenu           = { fg = core.lib.hl.syntax.constant.fg, bg = "NONE", italic = true },
+  CmpItemMenu           = { fg = core.lib.hl:get('syntax', 'constant').fg, bg = "NONE", italic = true },
 
-  CmpItemAbbrDeprecated = { fg = core.lib.hl.diagnostic.warn.fg },
+  CmpItemAbbrDeprecated = { fg = core.lib.hl:get('diagnostic', 'warn').fg },
 
-  CmpItemAbbrMatch      = { fg = core.lib.hl.ui.match.fg },
+  CmpItemAbbrMatch      = { fg = core.lib.hl:get('ui', 'match').fg },
   CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 }
 
@@ -54,46 +54,46 @@ local kind_icons = {
 M.kind_icons = kind_icons
 
 local kind_hl = {
-  Text          = core.lib.hl.syntax.text,
-  Method        = core.lib.hl.syntax.method,
-  Function      = core.lib.hl.syntax.fn,
-  Constructor   = core.lib.hl.syntax.constructor,
-  Field         = core.lib.hl.syntax.field,
-  Variable      = core.lib.hl.syntax.variable,
-  Class         = core.lib.hl.syntax.class,
-  Interface     = core.lib.hl.syntax.interface,
-  Module        = core.lib.hl.syntax.module,
-  Property      = core.lib.hl.syntax.property,
-  Unit          = core.lib.hl.syntax.unit,
-  Value         = core.lib.hl.syntax.value,
-  Enum          = core.lib.hl.syntax.enum,
-  Keyword       = core.lib.hl.syntax.keyword,
-  Snippet       = core.lib.hl.syntax.snippet,
-  Color         = core.lib.hl.syntax.color,
-  File          = core.lib.hl.syntax.file,
-  Reference     = core.lib.hl.syntax.reference,
-  Folder        = core.lib.hl.syntax.folder,
-  EnumMember    = core.lib.hl.syntax.enummember,
-  Constant      = core.lib.hl.syntax.constant,
-  Struct        = core.lib.hl.syntax.struct,
-  Event         = core.lib.hl.syntax.event,
-  Operator      = core.lib.hl.syntax.operator,
-  TypeParameter = core.lib.hl.syntax.typeparameter,
-  Namespace     = core.lib.hl.syntax.namespace,
-  Table         = core.lib.hl.syntax.table,
-  Object        = core.lib.hl.syntax.object,
-  Tag           = core.lib.hl.syntax.tag,
-  Array         = core.lib.hl.syntax.array,
-  Boolean       = core.lib.hl.syntax.boolean,
-  Number        = core.lib.hl.syntax.number,
-  Null          = core.lib.hl.syntax.null,
-  String        = core.lib.hl.syntax.string,
-  Package       = core.lib.hl.syntax.package,
+  Text          = core.lib.hl:get('syntax', 'text'),
+  Method        = core.lib.hl:get('syntax', 'method'),
+  Function      = core.lib.hl:get('syntax', 'fn'),
+  Constructor   = core.lib.hl:get('syntax', 'constructor'),
+  Field         = core.lib.hl:get('syntax', 'field'),
+  Variable      = core.lib.hl:get('syntax', 'variable'),
+  Class         = core.lib.hl:get('syntax', 'class'),
+  Interface     = core.lib.hl:get('syntax', 'interface'),
+  Module        = core.lib.hl:get('syntax', 'module'),
+  Property      = core.lib.hl:get('syntax', 'property'),
+  Unit          = core.lib.hl:get('syntax', 'unit'),
+  Value         = core.lib.hl:get('syntax', 'value'),
+  Enum          = core.lib.hl:get('syntax', 'enum'),
+  Keyword       = core.lib.hl:get('syntax', 'keyword'),
+  Snippet       = core.lib.hl:get('syntax', 'snippet'),
+  Color         = core.lib.hl:get('syntax', 'color'),
+  File          = core.lib.hl:get('syntax', 'file'),
+  Reference     = core.lib.hl:get('syntax', 'reference'),
+  Folder        = core.lib.hl:get('syntax', 'folder'),
+  EnumMember    = core.lib.hl:get('syntax', 'enummember'),
+  Constant      = core.lib.hl:get('syntax', 'constant'),
+  Struct        = core.lib.hl:get('syntax', 'struct'),
+  Event         = core.lib.hl:get('syntax', 'event'),
+  Operator      = core.lib.hl:get('syntax', 'operator'),
+  TypeParameter = core.lib.hl:get('syntax', 'typeparameter'),
+  Namespace     = core.lib.hl:get('syntax', 'namespace'),
+  Table         = core.lib.hl:get('syntax', 'table'),
+  Object        = core.lib.hl:get('syntax', 'object'),
+  Tag           = core.lib.hl:get('syntax', 'tag'),
+  Array         = core.lib.hl:get('syntax', 'array'),
+  Boolean       = core.lib.hl:get('syntax', 'boolean'),
+  Number        = core.lib.hl:get('syntax', 'number'),
+  Null          = core.lib.hl:get('syntax', 'null'),
+  String        = core.lib.hl:get('syntax', 'string'),
+  Package       = core.lib.hl:get('syntax', 'package'),
 }
 
 for kind, item in pairs(kind_hl) do
   local hi_group = string.format('CmpItemKind%s', kind)
-  core.lib.highlight.apply {
+  core.lib.hl.apply {
     [hi_group] = item,
   }
 end

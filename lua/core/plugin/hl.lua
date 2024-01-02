@@ -133,7 +133,8 @@ return {
     }
   end,
   load = function()
-    core.lib.hl = require 'core.plugin.hl'.create()
+    core.lib.hl = core.lib.hl or {}
+    core.lib.hl.__value = require 'core.plugin.hl'.create()
 
     -- [FIXME]
     ---@deprecated
