@@ -8,6 +8,7 @@
 ---@field ui CoreUIHighlights
 ---@field diagnostic CoreDiagnosticHighlights
 ---@field diff CoreDiffHighlights
+---@field syntax CoreSyntaxHighlights
 
 ---@alias CoreUIHighlights { [CoreUIHlName]: Highlight }
 ---@alias CoreUIHlName 'bg'|'bg_accent'|'accent'|'current'|'focus'|'match'|'border'
@@ -18,7 +19,10 @@
 ---@alias CoreDiffHighlights { [CoreDiffHlName]: Highlight }
 ---@alias CoreDiffHlName 'add'|'change'|'delete'
 
----@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName|CoreDiffHlName
+---@alias CoreSyntaxHighlights { [CoreSyntaxHlName]: Highlight }
+---@alias CoreSyntaxHlName 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
+
+---@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName|CoreDiffHlName|CoreSyntaxHlName
 
 ---@param props { [1]: CoreHlName, [2]: Color|nil, [3]: Color|nil , fg: Color|nil, bg: Color|nil, from: Color|nil, inverse: boolean|nil }[]
 ---@return { [string]: Highlight }
@@ -88,6 +92,43 @@ return {
         { 'add',    from = 'DiffAdd' },
         { 'change', from = 'DiffChange' },
         { 'delete', from = 'DiffAdd' },
+      },
+      syntax = create_hls {
+        { 'text', from = 'Comment' },
+        { 'method', from = 'Constant' },
+        { 'fn', from = 'Constant' },
+        { 'constructor', from = 'Structure' },
+        { 'field', from = 'Identifier' },
+        { 'variable', from = 'Identifier' },
+        { 'class', from = 'Structure' },
+        { 'interface', from = 'Structure' },
+        { 'module', from = 'Keyword' },
+        { 'property', from = 'Keyword' },
+        { 'unit', from = 'Constant' },
+        { 'value', from = 'Constant' },
+        { 'enum', from = 'Constant' },
+        { 'keyword', from = 'Keyword' },
+        { 'snippet', from = 'Comment' },
+        { 'color', from = 'Constant' },
+        { 'file', from = 'Title' },
+        { 'reference', from = 'Identifier' },
+        { 'folder', from = 'Type' },
+        { 'enummember', from = 'Constant' },
+        { 'constant', from = 'Constant' },
+        { 'struct', from = 'Structure' },
+        { 'event', from = 'Keyword' },
+        { 'operator', from = 'Operator' },
+        { 'typeparameter', from = 'Type' },
+        { 'namespace', from = 'Constant' },
+        { 'table', from = 'Structure' },
+        { 'object', from = 'Structure' },
+        { 'tag', from = 'Identifier' },
+        { 'array', from = 'Type' },
+        { 'boolean', from = 'Boolean' },
+        { 'number', from = 'Constant' },
+        { 'null', from = 'Comment' },
+        { 'string', from = 'Comment' },
+        { 'package', from = 'healthWarning' },
       },
     }
   end,
