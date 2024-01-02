@@ -50,7 +50,11 @@ local styles = {
   }
 }
 
+---@class CoreLualineOpts__options
+---@field separators? 'slant'|'round'|'block'|'arrow'
+
 ---@class CoreLualineOpts
+---@field options CoreLualineOpts__options
 ---@field config LualineConfig
 ---@field style? LualineStyle
 
@@ -66,6 +70,14 @@ return {
     end
 
     local config = opts.config
+
+    if opts.options.separators and core.lib.icons.separator[opts.options.separators] then
+      config = vim.tbl_deep_extend('force', config, styles.minimal)
+
+      local sep = core.lib.icons.separator[opts.options.separators]
+      config.options.section_separators = { left = sep.right, right = sep.left }
+    end
+
     if opts.style and styles[opts.style] then
       config = vim.tbl_deep_extend('force', config, styles[opts.style])
     end

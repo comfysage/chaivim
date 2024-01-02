@@ -1,6 +1,10 @@
 return {
   default = {
     opts = {
+      ---@type CoreLualineOpts__options
+      options = {
+        separators = 'arrow',
+      },
       ---@type LualineConfig
       config = {
         options = {
