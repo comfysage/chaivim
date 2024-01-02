@@ -73,7 +73,8 @@ return {
   setup = function()
     core.lib.icons = require 'core.plugin.icons'.create()
 
-    -- [FIXME] deprecate
+    -- [FIXME]
+    ---@deprecated
     core.icons = require 'core.plugin.icons'.create()
   end,
 }
