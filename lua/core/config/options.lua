@@ -8,6 +8,7 @@ local M = {}
 ---@field use_ripgrep boolean
 ---@field treesitter_folds boolean
 ---@field load_plugins table<string>
+---@field cmdheight boolean
 
 --- Setup options
 ---@param opts OptionsConfig
@@ -22,6 +23,7 @@ function M.setup(opts)
   vim.opt.cursorline = opts.cursorline
   vim.opt.showmode = false
   vim.opt.showcmd = false
+  vim.opt.cmdheight = opts.cmdheight
 
   vim.opt.number = true
   vim.opt.relativenumber = false

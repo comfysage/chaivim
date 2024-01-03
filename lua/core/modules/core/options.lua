@@ -9,6 +9,7 @@ return {
       scrolloff = 2,
       treesitter_folds = false,
       load_plugins = { },
+      cmdheight = 0,
     },
   },
 }
