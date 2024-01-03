@@ -10,7 +10,7 @@
 return {
   setup = function()
     ---@diagnostic disable-next-line: missing-fields
-    core.lib = {}
+    core.lib = core.lib or {}
     require 'core.lib.preload'
     require 'core.lib.autocmd'
     require 'core.lib.event'
