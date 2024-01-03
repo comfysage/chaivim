@@ -107,7 +107,6 @@ function parts.load(module, spec)
 end
 
 function parts.colorscheme(_)
-  vim.cmd.colorscheme(core.config.colorscheme)
   local ok, _ = pcall(vim.cmd.colorscheme, core.config.colorscheme)
   if not ok then
     Util.log("couldn't load colorscheme", 'error')
