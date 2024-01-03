@@ -31,6 +31,9 @@ end
 ---@class CoreLib__math
 ---@field hex_to_rgb fun(n: integer): core.types.lib.color.Color
 function core.lib.math.hex_to_rgb(n)
+  if n == 'none' then
+    n = 0
+  end
   local components = core.lib.math.hex_to_components(3, n)
   return { r = components[1], g = components[2], b = components[3] }
 end
