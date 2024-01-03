@@ -22,7 +22,7 @@ function core.lib.color.mix(ratio, props)
 
   local mix = { r = 0, g = 0, b = 0 }
   for slider, _ in pairs(mix) do
-    mix[slider] = math.floor((1-ratio) * color1[slider] + ratio * color2[slider])
+    mix[slider] = math.floor((1 - ratio) * color1[slider] + ratio * color2[slider])
   end
 
   return core.lib.color.rgb(mix)
