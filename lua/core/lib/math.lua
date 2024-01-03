@@ -31,24 +31,8 @@ end
 ---@class CoreLib__math
 ---@field hex_to_rgb fun(n: integer): core.types.lib.color.Color
 function core.lib.math.hex_to_rgb(n)
-  local color = { r = 0, g = 0, b = 0 }
-  local _n = n
-
-  local r_component = (256 ^ 2)
-  color.r = math.floor(_n / r_component)
-  color.r = color.r > 0 and color.r or 0
-  _n = _n - color.r * r_component
-
-  local g_component = (256 ^ 1)
-  color.g = math.floor(_n / g_component)
-  color.g = color.g > 0 and color.g or 0
-  _n = _n - color.g * g_component
-
-  local b_component = (256 ^ 0)
-  color.b = math.floor(_n / b_component)
-  color.b = color.b > 0 and color.b or 0
-
-  return color
+  local components = core.lib.math.hex_to_components(3, n)
+  return { r = components[1], g = components[2], b = components[3] }
 end
 
 ---@class CoreLib__math
