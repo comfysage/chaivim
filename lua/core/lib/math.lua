@@ -12,6 +12,23 @@ function core.lib.math.components_to_hex(props)
 end
 
 ---@class CoreLib__math
+---@field hex_to_components fun(n: integer, v: integer): Array<integer>
+function core.lib.math.hex_to_components(n, v)
+  local _components = {}
+  local components = {}
+  local _n = v
+
+  for i = 1, n, 1 do
+    _components[i] = (256 ^ (n - i))
+    components[i] = math.floor(_n / _components[i])
+    components[i] = components[i] > 0 and components[i] or 0
+    _n = _n - components[i] * _components[i]
+  end
+
+  return components
+end
+
+---@class CoreLib__math
 ---@field hex_to_rgb fun(n: integer): core.types.lib.color.Color
 function core.lib.math.hex_to_rgb(n)
   local color = { r = 0, g = 0, b = 0 }
