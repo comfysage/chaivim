@@ -53,7 +53,7 @@ require 'core.plugin.command'.create {
   name = 'ToggleStatusLine', fn = function(_)
   if vim.o.laststatus == 0 then
     vim.opt.laststatus = 3
-    vim.opt.cmdheight = 1
+    vim.opt.cmdheight = core.modules.core.options.opts.cmdheight
   else
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 0
