@@ -4,6 +4,8 @@
 ---@field event CoreLib__event
 ---@field keymaps CoreLib__keymaps
 ---@field hl CoreLib__highlight
+---@field color CoreLib__color
+---@field math CoreLib__math
 
 return {
   setup = function()
