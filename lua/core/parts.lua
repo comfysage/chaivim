@@ -122,6 +122,10 @@ function parts.colorscheme(_)
   })
 end
 
+function parts.load_transparency()
+  require 'core.plugin.transparency'.setup()
+end
+
 function parts.preload(_)
   require 'core.bootstrap'.boot 'keymaps'
   require 'core.bootstrap'.boot 'plenary'

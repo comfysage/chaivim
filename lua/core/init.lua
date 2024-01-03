@@ -21,7 +21,6 @@ local parts = require 'core.parts'
 ---@field log_level integer
 ---@field colorscheme string
 ---@field transparent_background boolean
----@field transparent_fn { [string]: fun(_: bool) }
 ---@field config_module string
 ---@field modules Modules
 
@@ -59,7 +58,6 @@ M.default_config = {
   log_level = vim.log.levels.INFO,
   colorscheme = 'evergarden', -- or 'habamax' or 'zaibatsu' or 'retrobox'
   transparent_background = false,
-  transparent_fn = {},
   modules = {},
 }
 
@@ -96,7 +94,6 @@ function M.setup(config)
   local _config = {
     colorscheme = config.colorscheme,
     transparent_background = config.transparent_background,
-    transparent_fn = config.transparent_fn,
     config_module = CONFIG_MODULE,
     modules = config.modules,
   }
@@ -125,9 +122,7 @@ function M.load()
 
   parts.colorscheme {}
 
-  _G.transparent_background_fn = core.config.transparent_fn
-
-  toggle_transparent_background(core.config.transparent_background)
+  parts.load_transparency {}
 
   parts.platform {}
 
@@ -147,9 +142,7 @@ function M.reload()
 
   parts.colorscheme {}
 
-  _G.transparent_background_fn = core.config.transparent_fn
-
-  toggle_transparent_background(core.config.transparent_background)
+  parts.load_transparency {}
 
   parts.platform {}
 
