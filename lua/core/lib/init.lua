@@ -1,3 +1,5 @@
+---@alias tuple<T> { [1]: T, [2]: T }
+
 -- statically allocated instead of dynamically by function wrapping
 ---@class CoreLib
 ---@field autocmd CoreLib__autocmd
