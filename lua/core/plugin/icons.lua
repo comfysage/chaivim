@@ -68,6 +68,10 @@ return {
         info = '󰋼',
         hint = '󰌵',
       },
+      ui = {
+        item_prefix = '',
+        dot = '·',
+      },
       separator = {
         slant = { left = "", right = "" },
         round = { left = "", right = "" },
