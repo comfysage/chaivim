@@ -4,6 +4,7 @@
 ---@field syntax Icons
 ---@field item Icons
 ---@field info Icons
+---@field diff Icons
 ---@field diagnostic Icons
 ---@field separator Icons
 
@@ -55,6 +56,11 @@ return {
       info = {
         loaded = "●",
         not_loaded = "○",
+      },
+      diff = {
+        added = '󰐖',
+        changed = '󰦓',
+        deleted = '󰍵',
       },
       diagnostic = {
         error = '󰅙',
