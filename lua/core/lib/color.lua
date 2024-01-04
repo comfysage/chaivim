@@ -1,5 +1,6 @@
 core.lib.color = {}
 
+---@alias core.types.lib.color.Color__internal integer|'none'
 ---@alias core.types.lib.color.Color__rgb { r: integer, g: integer, b: integer }
 ---@alias core.types.lib.color.Color core.types.lib.color.Color__rgb
 ---@alias core.types.lib.color.Color__hsl { hue: integer, sat: integer, lum: integer }
@@ -14,8 +15,9 @@ end
 ---@class CoreLib__color
 ---@field mix fun(ratio, props): integer
 ---@param ratio number Ratio of color2 mixed into color1; 1.0 means only color2
----@param props { [1]: integer, [2]: integer }
+---@param props tuple<core.types.lib.color.Color__internal>
 function core.lib.color.mix(ratio, props)
+  if not props or not props[1] or not props[2] then return 0 end
   local color1 = core.lib.math.hex_to_rgb(props[1])
   local color2 = core.lib.math.hex_to_rgb(props[2])
   if not props or not props[1] or not props[2] then return 0 end
@@ -31,7 +33,7 @@ end
 ---@class CoreLib__color
 ---@field hsl_mix fun(ratio, props): integer
 ---@param ratio { hue?: number, sat?: number, lum?: number } Ratio of color2 mixed into color1; 1.0 means only color2
----@param props { [1]: integer, [2]: integer }
+---@param props tuple<core.types.lib.color.Color__internal>
 function core.lib.color.hsl_mix(ratio, props)
   if not props or not props[1] or not props[2] then return 0 end
   local color1__rgb = core.lib.math.hex_to_rgb(props[1])
@@ -161,7 +163,7 @@ end
 ---@class CoreLib__color
 ---@field color_overlay fun(ratio, props): integer
 ---@param ratio number Ratio of color2 overlayed ontop of color1; 1.0 means only color2
----@param props { [1]: integer, [2]: integer }
+---@param props tuple<core.types.lib.color.Color__internal>
 function core.lib.color.color_overlay(ratio, props)
   if not props[1] or not props[2] then return 0 end
   local f = core.lib.math.hex_to_rgb(props[1])
