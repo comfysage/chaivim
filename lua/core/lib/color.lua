@@ -157,3 +157,26 @@ function core.lib.color.hue_to_rgb(p, q, t)
   end
   return p
 end
+
+---@class CoreLib__color
+---@field color_overlay fun(ratio, props): integer
+---@param ratio number Ratio of color2 overlayed ontop of color1; 1.0 means only color2
+---@param props { [1]: integer, [2]: integer }
+function core.lib.color.color_overlay(ratio, props)
+  if not props[1] or not props[2] then return 0 end
+  local f = core.lib.math.hex_to_rgb(props[1])
+  local t = core.lib.math.hex_to_rgb(props[2])
+
+  if (ratio < 0) then
+    ratio = ratio * -1
+  end
+  local p = 1 - ratio;
+
+  local r = math.ceil(((p * f.r ^ 2) + (ratio * t.r ^ 2)) ^ 0.5)
+  local g = math.ceil(((p * f.g ^ 2) + (ratio * t.g ^ 2)) ^ 0.5)
+  local b = math.ceil(((p * f.b ^ 2) + (ratio * t.b ^ 2)) ^ 0.5)
+
+  local color = core.lib.color.rgb { r = r, g = g, b = b }
+
+  return color
+end
