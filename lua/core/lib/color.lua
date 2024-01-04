@@ -29,6 +29,31 @@ function core.lib.color.mix(ratio, props)
 end
 
 ---@class CoreLib__color
+---@field hsl_mix fun(ratio, props): integer
+---@param ratio { hue?: number, sat?: number, lum?: number } Ratio of color2 mixed into color1; 1.0 means only color2
+---@param props { [1]: integer, [2]: integer }
+function core.lib.color.hsl_mix(ratio, props)
+  if not props or not props[1] or not props[2] then return 0 end
+  local color1__rgb = core.lib.math.hex_to_rgb(props[1])
+  local color2__rgb = core.lib.math.hex_to_rgb(props[2])
+  local color1 = core.lib.color.rgb_to_hsl(color1__rgb)
+  local color2 = core.lib.color.rgb_to_hsl(color2__rgb)
+
+  local mix = { hue = 0, lum = 0, sat = 0 }
+  for slider, _ in pairs(mix) do
+    local r = ratio[slider]
+    if ratio[slider] then
+      mix[slider] = (1 - r) * color1[slider] + r * color2[slider]
+    else
+      mix[slider] = color1[slider]
+    end
+  end
+
+  local mix__rgb = core.lib.color.hsl_to_rgb(mix)
+  return core.lib.color.rgb(mix__rgb)
+end
+
+---@class CoreLib__color
 ---@field rgb_to_hsl fun(props: core.types.lib.color.Color__rgb): core.types.lib.color.Color__hsl
 function core.lib.color.rgb_to_hsl(props)
   local hsl = { hue = 0, sat = 0, lum = 0 }
