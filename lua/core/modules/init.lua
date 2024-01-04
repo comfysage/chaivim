@@ -11,7 +11,6 @@ local default_modules = {
       'telescope', 'mini', 'gitsigns',
       'dash',
       'commands',
-      'cursor',
     },
   },
 }

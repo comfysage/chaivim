@@ -1,6 +1,6 @@
 return {
   setcursor = function(_, mode)
-    local hls = require 'core.config.cursor'.create()
+    local hls = require 'core.ui.cursor'.create()
     if not hls or not hls.hl or not hls.hl[mode] then return end
 
     core.lib.hl.apply({ CursorLine = hls.hl[mode] })
@@ -8,21 +8,21 @@ return {
   setup = function()
     vim.opt.cursorline = true
     vim.opt.guicursor = 'n-v-c-sm:block-NCursor,i-ci-ve:ver25-ICursor,r-cr-o:hor20-RCursor'
-    local hls = require 'core.config.cursor'.create()
+    local hls = require 'core.ui.cursor'.create()
     if not hls or not hls.cursor then return end
     core.lib.hl.apply(hls.cursor)
 
-    require 'core.config.cursor'.setcursor 'normal'
+    require 'core.ui.cursor'.setcursor 'normal'
     core.lib.autocmd.create {
       event = 'InsertEnter', priority = 2,
       fn = function(ev)
-        require 'core.config.cursor'.setcursor (ev.buf, 'insert')
+        require 'core.ui.cursor'.setcursor (ev.buf, 'insert')
       end
     }
     core.lib.autocmd.create {
       event = 'InsertLeave', priority = 2,
       fn = function(ev)
-        require 'core.config.cursor'.setcursor (ev.buf, 'normal')
+        require 'core.ui.cursor'.setcursor (ev.buf, 'normal')
       end
     }
   end,

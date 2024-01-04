@@ -9,5 +9,9 @@ return {
         require 'core.ui.input' (...)
       end
     end
+
+    if opts.cursor.enabled then
+      require 'core.ui.cursor'.setup()
+    end
   end,
 }

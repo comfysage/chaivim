@@ -1,6 +1,9 @@
 return {
   default = {
     opts = {
+      cursor = {
+        enabled = true,
+      },
       input = {
         -- Set to false to disable the vim.ui.input implementation
         enabled = true,
