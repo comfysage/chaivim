@@ -74,6 +74,7 @@ return {
     return {
       ui = create_hls {
         { 'bg',        from = 'Normal' },
+        { 'fg',        from = 'Normal', bg = 'none' },
         { 'bg_accent', from = 'SignColumn' },
         { 'accent',    from = 'TablineSel', inverse = true },
         { 'current',   from = 'CursorLine' },
