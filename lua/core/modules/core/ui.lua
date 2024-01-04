@@ -1,6 +1,7 @@
 return {
   default = {
     opts = {
+      general = {},
       cursor = {
         enabled = true,
       },
