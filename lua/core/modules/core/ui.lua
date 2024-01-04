@@ -1,7 +1,9 @@
 return {
   default = {
     opts = {
-      general = {},
+      general = {
+        separator_style = 'round',
+      },
       cursor = {
         enabled = true,
       },
