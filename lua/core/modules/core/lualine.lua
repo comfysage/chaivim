@@ -3,7 +3,7 @@ return {
     opts = {
       ---@type CoreLualineOpts__options
       options = {
-        separators = 'arrow',
+        separators = nil,
       },
       ---@type LualineConfig
       config = {
