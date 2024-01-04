@@ -6,6 +6,7 @@
 ---@field event CoreLib__event
 ---@field keymaps CoreLib__keymaps
 ---@field hl CoreLib__highlight
+---@field options CoreLib__options
 ---@field color CoreLib__color
 ---@field math CoreLib__math
 
@@ -18,6 +19,7 @@ return {
     require 'core.lib.event'
     require 'core.lib.keymaps'
     require 'core.lib.hl'
+    require 'core.lib.options'
 
     ---@class CoreLib
     ---@field get fun(field: string, ...: string): any

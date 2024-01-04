@@ -42,6 +42,9 @@ function parts.load_config(_)
     core.modules[main_mod] = vim.tbl_deep_extend("keep", core.modules[main_mod],
       require 'core.modules'.get_defaults(main_mod))
   end
+
+  -- update options table
+  core.lib.options.__value = core.modules.core
 end
 
 ---@param main string
