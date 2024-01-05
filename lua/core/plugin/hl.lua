@@ -81,6 +81,7 @@ return {
         { 'focus',     from = 'IncSearch' },
         { 'match',     from = 'Search' },
         { 'border',    from = 'WinSeparator' },
+        { 'comment',   from = 'Comment' },
       },
       diagnostic = create_hls {
         { 'ok',    from = 'DiagnosticOk' },
