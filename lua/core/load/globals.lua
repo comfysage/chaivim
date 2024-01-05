@@ -24,7 +24,7 @@ end
 
 --- Secure reload module
 ---@param module_name string
----@param starts_with_only boolean
+---@param starts_with_only? boolean
 ---@return boolean
 ---@return any|nil|string
 SR = function(module_name, starts_with_only)
