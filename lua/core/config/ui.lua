@@ -5,7 +5,7 @@ return {
     Util.log 'set up ui'
 
     if opts.input.enabled then
-    ---@diagnostic disable-next-line: duplicate-set-field
+      ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.input = function(...)
         require 'core.ui.input' (...)
       end
