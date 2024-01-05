@@ -5,6 +5,7 @@
 ---@field item Icons
 ---@field info Icons
 ---@field diff Icons
+---@field diff_status Icons
 ---@field diagnostic Icons
 ---@field separator Icons
 ---@field git Icons
@@ -62,6 +63,11 @@ return {
         added = '󰐖',
         changed = '󰦓',
         deleted = '󰍵',
+      },
+      diff_status = {
+        added = '',
+        changed = '',
+        deleted = '',
       },
       diagnostic = {
         error = '󰅙',

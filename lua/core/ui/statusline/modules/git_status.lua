@@ -11,13 +11,13 @@ return function()
   local git_status = vim.b[utils.stbufnr()].gitsigns_status_dict
 
   local added = (git_status.added and git_status.added ~= 0)
-      and (core.lib.fmt.space(core.lib.icons.diff.added) .. git_status.added)
+      and (core.lib.fmt.space(core.lib.icons.diff_status.added) .. git_status.added)
       or ''
   local changed = (git_status.changed and git_status.changed ~= 0)
-      and (core.lib.fmt.space(core.lib.icons.diff.changed) .. git_status.changed)
+      and (core.lib.fmt.space(core.lib.icons.diff_status.changed) .. git_status.changed)
       or ''
   local removed = (git_status.removed and git_status.removed ~= 0)
-      and (core.lib.fmt.space(core.lib.icons.diff.deleted) .. git_status.removed)
+      and (core.lib.fmt.space(core.lib.icons.diff_status.deleted) .. git_status.removed)
       or ''
 
   return added .. changed .. removed .. ' '
