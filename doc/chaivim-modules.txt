@@ -77,6 +77,12 @@ modules.commands                                 *chaivim-modules.commands*
     }
   }
 <
+modules.cursor                                     *chaivim-modules.cursor*
+>lua
+  { "cursor",
+    opts = {}
+  }
+<
 modules.dash                                         *chaivim-modules.dash*
 >lua
   {
@@ -140,7 +146,7 @@ modules.gitsigns                                 *chaivim-modules.gitsigns*
             text = "~"
           },
           delete = {
-            text = "_"
+            text = "│"
           },
           topdelete = {
             text = "‾"
@@ -263,7 +269,9 @@ modules.lsp                                           *chaivim-modules.lsp*
     opts = {
       config = {
         severity_sort = false,
-        signs = true,
+        signs = {
+          text = { "󰅙", "", "󰋼", "󰌵" }
+        },
         underline = true,
         update_in_insert = false,
         virtual_text = {
@@ -281,7 +289,7 @@ modules.lsp                                           *chaivim-modules.lsp*
         goto_prev = "<M-h>",
         goto_references = "gR",
         hover = "K",
-        open_float = "<space>l",
+        open_float = "L",
         peek_definition = "<space>gd",
         rename = "gr",
         set_qflist = "<space>q",
@@ -347,10 +355,10 @@ modules.lualine                                   *chaivim-modules.lualine*
             } },
           lualine_b = { "branch", <function 3>, "diff", { "diagnostics",
               symbols = {
-                error = "E",
-                hint = "H",
-                info = "I",
-                warn = "W"
+                error = "󰅙",
+                hint = "󰌵",
+                info = "󰋼",
+                warn = ""
               }
             } },
           lualine_c = { "filename" },
@@ -360,7 +368,8 @@ modules.lualine                                   *chaivim-modules.lualine*
         },
         tabline = {},
         winbar = {}
-      }
+      },
+      options = {}
     }
   }
 <
@@ -526,6 +535,12 @@ modules.ui                                             *chaivim-modules.ui*
 >lua
   { "ui",
     opts = {
+      cursor = {
+        enabled = true
+      },
+      general = {
+        separator_style = "round"
+      },
       input = {
         border = "rounded",
         buf_options = {},

@@ -74,6 +74,12 @@
   }
 }
 ```
+### `cursor` module
+```lua
+{ "cursor",
+  opts = {}
+}
+```
 ### `dash` module
 ```lua
 {
@@ -137,7 +143,7 @@
           text = "~"
         },
         delete = {
-          text = "_"
+          text = "│"
         },
         topdelete = {
           text = "‾"
@@ -260,7 +266,9 @@
   opts = {
     config = {
       severity_sort = false,
-      signs = true,
+      signs = {
+        text = { "󰅙", "", "󰋼", "󰌵" }
+      },
       underline = true,
       update_in_insert = false,
       virtual_text = {
@@ -278,7 +286,7 @@
       goto_prev = "<M-h>",
       goto_references = "gR",
       hover = "K",
-      open_float = "<space>l",
+      open_float = "L",
       peek_definition = "<space>gd",
       rename = "gr",
       set_qflist = "<space>q",
@@ -344,10 +352,10 @@
           } },
         lualine_b = { "branch", <function 3>, "diff", { "diagnostics",
             symbols = {
-              error = "E",
-              hint = "H",
-              info = "I",
-              warn = "W"
+              error = "󰅙",
+              hint = "󰌵",
+              info = "󰋼",
+              warn = ""
             }
           } },
         lualine_c = { "filename" },
@@ -357,7 +365,8 @@
       },
       tabline = {},
       winbar = {}
-    }
+    },
+    options = {}
   }
 }
 ```
@@ -523,6 +532,12 @@
 ```lua
 { "ui",
   opts = {
+    cursor = {
+      enabled = true
+    },
+    general = {
+      separator_style = "round"
+    },
     input = {
       border = "rounded",
       buf_options = {},
