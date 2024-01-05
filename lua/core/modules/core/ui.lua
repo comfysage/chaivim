@@ -7,6 +7,9 @@ return {
       cursor = {
         enabled = true,
       },
+      statusline = {
+        enabled = true,
+      },
       input = {
         -- Set to false to disable the vim.ui.input implementation
         enabled = true,
