@@ -7,6 +7,7 @@
 ---@field diff Icons
 ---@field diagnostic Icons
 ---@field separator Icons
+---@field git Icons
 
 return {
   ---@return CoreIcons
@@ -77,6 +78,9 @@ return {
         round = { left = "", right = "" },
         block = { left = "█", right = "█" },
         arrow = { left = "", right = "" },
+      },
+      git = {
+        branch = '',
       },
     }
   end,
