@@ -40,6 +40,7 @@ local parts = require 'core.parts'
 ---@class CorePath
 ---@field root string
 ---@field core string
+---@field log string
 ---@field plenary string
 ---@field keymaps string
 ---@field telescope string
@@ -67,6 +68,7 @@ _G.core.config = vim.tbl_deep_extend('force', M.default_config, _G.core.config o
 local root_path = vim.fn.stdpath("data") .. "/core"
 _G.core.path = {
   root = root_path,
+  log = ('%s/core_log.txt'):format(vim.fn.stdpath("data")),
 }
 _G.core.path.core = _G.core.path.root .. "/chai"
 
