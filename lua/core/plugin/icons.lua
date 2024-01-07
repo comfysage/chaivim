@@ -7,6 +7,7 @@
 ---@field diff Icons
 ---@field diff_status Icons
 ---@field diagnostic Icons
+---@field ui Icons
 ---@field separator Icons
 ---@field git Icons
 
