@@ -39,8 +39,8 @@ end
 ---@alias core.types.log.data.item { [1]: integer, [2]: string }
 
 ---@class core.types.log.data
----@field write fun(self: core.types.log.data, props: core.types.log.data.item)
-function Data:write(props)
+---@field write fun(self: core.types.log.data, source: string, props: core.types.log.data.item)
+function Data:write(source, props)
   if
       (not props[1] or not props[2])
       or (not type(props[1]) == 'integer' or not type(props[2]) == 'string')
@@ -68,9 +68,13 @@ function Data:write(props)
   -- save to json log
   local json_log_path = ('%s.json'):format(core.path.log)
   local r_fh_json = io.open(json_log_path, 'r')
-  local contents = '{"items":[]}'
+  local contents = '{"items":{}}'
   if r_fh_json then
-    contents = r_fh_json:read '*a'
+    local _contents = r_fh_json:read '*a'
+    if type(_contents) == 'string' and string.len(_contents) > 0 then
+      contents = _contents
+    end
+    r_fh_json:close()
   end
   local w_fh_json = io.open(json_log_path, 'w+')
   if not w_fh_json then
@@ -80,13 +84,18 @@ function Data:write(props)
     )
   else
     local data = vim.json.decode(contents)
-    if data ~= vim.NIL and data.items then
-      data.items[#data.items+1] = item
-    else
-      data.items = { item }
+    local split = vim.split(source, '%.')
+    if #split > 1 then
+      local module, task = unpack(split, 1, 2)
+      if data == vim.NIL or not data.items or data.items == vim.empty_dict() then
+        data.items = {}
+      end
+      data.items[module] = data.items[module] or {}
+      data.items[module][task] = data.items[module][task] or {}
+      data.items[module][task][#data.items[module][task]+1] = item
+      local log_content = vim.json.encode(data)
+      w_fh_json:write(log_content)
     end
-    local log_content = vim.json.encode(data)
-    w_fh_json:write(log_content)
     w_fh_json:close()
   end
 end
@@ -109,23 +118,23 @@ function Log:new()
   }, self)
 
   local time = get_time()
-  log:write(('initial: log start [%s]'):format(time))
+  log:write('log', ('initial: log start [%s]'):format(time))
 
   return log
 end
 
 ---@class core.types.log
----@field write fun(self: core.types.log, msg: string, level: 'debug'|'info'|'warn'|'error'|nil)
-function Log:write(msg, level)
+---@field write fun(self: core.types.log, source: string, msg: string, level: 'debug'|'info'|'warn'|'error'|nil)
+function Log:write(source, msg, level)
   level = level or 'debug'
   local log_level = self.log_levels[level] or self.log_levels['debug']
-  self.data:write { level, msg }
+  self.data:write(source, { level, msg })
 
   -- notify
   if log_level < core.config.log_level then
     return
   end
-  vim.notify(msg, log_level)
+  vim.notify(('[%s] %s')(source, msg), log_level)
 end
 
 ---@class Core

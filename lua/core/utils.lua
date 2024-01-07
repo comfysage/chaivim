@@ -4,7 +4,7 @@ local Util = {}
 ---@param msg string
 ---@param level 'debug'|'info'|'warn'|'error'|nil
 function Util.log(msg, level)
-  core.log:write(msg, level)
+  core.log:write('core.core', msg, level)
 end
 
 ---@param name string
