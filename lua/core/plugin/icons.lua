@@ -49,7 +49,7 @@ return {
         boolean       = '',
         number        = '',
         null          = '󰟢',
-        string        = '\'\'',
+        string        = '＂',
         package       = '',
       },
       item = {
