@@ -12,6 +12,7 @@ return {
     --- ```
     opts = {
       leader = 'SPC',
+      localleader = nil,
       -- default options used for keymaps
       defaults = {},
       special_keys = {

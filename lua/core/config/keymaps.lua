@@ -7,9 +7,15 @@ return {
       _leader = ' '
     end
 
+    local _localleader = opts.localleader
+    if not _localleader then
+      _localleader = _leader .. ','
+    end
+
     Util.log('keymaps.setup', string.format('set leader to "%s"', _leader))
+    Util.log('keymaps.setup', string.format('set localleader to "%s"', _localleader))
     vim.g.mapleader = _leader
-    vim.g.maplocalleader = _leader
+    vim.g.maplocalleader = _localleader
 
     require 'keymaps'.setup {
       default_opts = opts.defaults,
