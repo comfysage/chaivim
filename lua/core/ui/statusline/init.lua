@@ -64,7 +64,7 @@ M.parse = function()
   local m = utils.getmode()
 
   modules[#modules + 1] = '%#St_normal#'
-      .. m.hl
+      .. m.hl .. ' '
       .. table.concat(_modules.a)
       .. m.sep_hl
       .. sep_r
