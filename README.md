@@ -16,6 +16,12 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 - :telescope: [telescope](https://github.com/nvim-telescope/telescope.nvim)
 - :evergreen_tree: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- :computer: keymaps
+- :airplane: lualine
+- :pencil: cmp
+- :scissors: luasnip
+- :hammer: mini.nvim
+- :vertical_traffic_light: gitsigns
 
 ## :lock: requirements
 
