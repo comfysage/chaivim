@@ -24,7 +24,7 @@ return {
         variable      = '󰀫',
         class         = 'ﴯ',
         interface     = '',
-        module        = '',
+        module        = '',
         property      = 'ﰠ',
         unit          = '',
         value         = '',
