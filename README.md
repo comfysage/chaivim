@@ -1,6 +1,6 @@
 # chaivim
 
-🍵 easily configurable neovim system with solid defaults and a cozy editor experience.
+:tea: easily configurable neovim system with solid defaults and a cozy editor experience.
 
 ![dash](images/dash.png)
 
