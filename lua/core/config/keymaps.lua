@@ -2,13 +2,12 @@ local Util = require 'core.utils'
 
 return {
   setup = function(opts)
-    Util.log('keymaps.setup', string.format('setting leader to "%s"', vim.g.mapleader))
-
     local _leader = opts.leader
     if opts.leader == 'space' or opts.leader == 'SPC' then
       _leader = ' '
     end
 
+    Util.log('keymaps.setup', string.format('set leader to "%s"', _leader))
     vim.g.mapleader = _leader
     vim.g.maplocalleader = _leader
 
