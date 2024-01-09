@@ -10,6 +10,7 @@
 ---@field ui Icons
 ---@field separator Icons
 ---@field git Icons
+---@field debug Icons
 
 return {
   ---@return CoreIcons
@@ -88,6 +89,19 @@ return {
       },
       git = {
         branch = '',
+      },
+      debug = {
+        start = '',
+        pause = '',
+        continue = '',
+        restart = '',
+        step_into = '',
+        step_out = '',
+        step_over = '',
+        step_back = '',
+        stop = '',
+        data = '',
+        log = '',
       },
     }
   end,
