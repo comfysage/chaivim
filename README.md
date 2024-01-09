@@ -19,7 +19,7 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 - :computer: [keymaps](https://github.com/crispybaccoon/keymaps.nvim)
 - :airplane: [lualine](https://github.com/nvim-lualine/lualine.nvim)
 - :pencil: [cmp](https://github.com/hrsh7th/nvim-cmp)
-- :scissors: [luasnip](https://github.com/L3MON4D3/LuaSnip)
+- :scissors: [luasnip](https://github.com/L3MON4D3/LuaSnip) with [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - :hammer: [mini.nvim](https://github.com/echasnovski/mini.nvim)
 - :vertical_traffic_light: [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
