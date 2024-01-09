@@ -8,7 +8,7 @@ return {
         vim.notify('reloading module: ' .. CONFIG_MODULE .. '\t' .. props.file, vim.log.levels.INFO)
         local status, config = SR(CONFIG_MODULE)
         if not status then
-          Util.log('config module ' .. CONFIG_MODULE .. ' was not found', 'error')
+          Util.log('autocmds.config_reload', 'config module ' .. CONFIG_MODULE .. ' was not found', 'error')
           return
         end
         if type(config) == 'table' then

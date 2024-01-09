@@ -33,10 +33,10 @@ return {
     -- update global
     core.modules.core.lazy.opts = opts
 
-    Util.log 'loading lazy.'
+    Util.log('lazy.setup', 'loading lazy.')
     require 'core.bootstrap'.boot 'lazy'
 
-    Util.log 'loading plugins.'
+    Util.log('lazy.setup', 'loading plugins.')
     require 'lazy'.setup('core.lazy.plugins', opts.config)
   end
 }

@@ -4,7 +4,7 @@ _G.Keymap = _G.Keymap or {}
 
 _G.Keymap.group = _G.Keymap.group or function(props)
   if not props.group then
-    Util.log('`Keymap.group` requires `group` field', 'warn')
+    Util.log('globals.keymap', '`Keymap.group` requires `group` field', 'warn')
     return
   end
   local mappings = props[1] or {}
@@ -13,7 +13,7 @@ _G.Keymap.group = _G.Keymap.group or function(props)
   end
   for _, map in ipairs(mappings) do
     if #map < 4 then
-      Util.log('`Keymap.group` requires 4 paramaters per keymap', 'warn')
+      Util.log('globals.keymap', '`Keymap.group` requires 4 paramaters per keymap', 'warn')
       goto continue
     end
     local mode = map[1]

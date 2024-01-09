@@ -61,7 +61,7 @@ local styles = {
 return {
   ---@param opts CoreLualineOpts
   setup = function(opts)
-    Util.log 'loading lualine.'
+    Util.log('lualine.setup', 'loading lualine.')
     require 'core.bootstrap'.boot 'lualine'
 
     local ok, lualine = SR_L 'lualine'

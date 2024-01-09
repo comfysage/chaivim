@@ -36,11 +36,11 @@ function Data:new()
   return data
 end
 
----@alias core.types.log.data.item { [1]: integer, [2]: string }
+---@alias core.types.log.data.item { [1]: string, [2]: integer, [3]: string }
 
 ---@class core.types.log.data
----@field write fun(self: core.types.log.data, source: string, props: core.types.log.data.item)
-function Data:write(source, props)
+---@field write fun(self: core.types.log.data, props: core.types.log.data.item)
+function Data:write(props)
   if
       (not props[1] or not props[2])
       or (not type(props[1]) == 'integer' or not type(props[2]) == 'string')
@@ -48,8 +48,8 @@ function Data:write(source, props)
     return
   end
 
-  local level, msg = unpack(props, 1, 2)
-  local item = { [1] = level, [2] = msg }
+  local source, level, msg = unpack(props, 1, 3)
+  local item = { source, level, msg }
 
   -- save to log
   local log_path = core.path.log
@@ -84,18 +84,12 @@ function Data:write(source, props)
     )
   else
     local data = vim.json.decode(contents)
-    local split = vim.split(source, '%.')
-    if #split > 1 then
-      local module, task = unpack(split, 1, 2)
-      if data == vim.NIL or not data.items or data.items == vim.empty_dict() then
-        data.items = {}
-      end
-      data.items[module] = data.items[module] or {}
-      data.items[module][task] = data.items[module][task] or {}
-      data.items[module][task][#data.items[module][task]+1] = item
-      local log_content = vim.json.encode(data)
-      w_fh_json:write(log_content)
+    if data == vim.NIL or not data.items or data.items == vim.empty_dict() then
+      data.items = {}
     end
+    data.items[#data.items+1] = item
+    local log_content = vim.json.encode(data)
+    w_fh_json:write(log_content)
     w_fh_json:close()
   end
 end
@@ -128,13 +122,13 @@ end
 function Log:write(source, msg, level)
   level = level or 'debug'
   local log_level = self.log_levels[level] or self.log_levels['debug']
-  self.data:write(source, { level, msg })
+  self.data:write({ source, level, msg })
 
   -- notify
   if log_level < core.config.log_level then
     return
   end
-  vim.notify(('[%s] %s')(source, msg), log_level)
+  vim.notify(('[%s] %s'):format(source, msg), log_level)
 end
 
 ---@class Core

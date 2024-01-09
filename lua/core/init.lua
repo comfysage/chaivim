@@ -79,7 +79,7 @@ function M.setup(config)
   if type(config) == 'string' then
     local status, opts = SR(config)
     if not status then
-      Util.log('config module ' .. config .. ' was not found', 'error')
+      Util.log('core.setup', 'config module ' .. config .. ' was not found', 'error')
       return
     end
     if type(opts) == 'table' then
@@ -112,7 +112,7 @@ function M.load()
     return
   end
 
-  Util.log('loading config')
+  Util.log('core.startup', 'loading config')
 
   if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
   core.group_id = vim.api.nvim_create_augroup('core:' .. CONFIG_MODULE, {})
@@ -132,7 +132,7 @@ function M.load()
 end
 
 function M.reload()
-  Util.log('reloading config')
+  Util.log('core.reload', 'reloading config')
 
   vim.api.nvim_del_augroup_by_id(core.group_id)
   core.group_id = vim.api.nvim_create_augroup("config:" .. CONFIG_MODULE, {})

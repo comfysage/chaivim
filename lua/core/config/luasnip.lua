@@ -2,7 +2,7 @@ local Util = require 'core.utils'
 
 return {
   setup = function(opts)
-    Util.log 'loading luasnip.'
+    Util.log('luasnip.setup', 'loading luasnip.')
     require 'core.bootstrap'.boot 'luasnip'
 
     local ok, _ = SR_L 'luasnip'

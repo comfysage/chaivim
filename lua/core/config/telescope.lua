@@ -41,7 +41,7 @@ local function use_theme(theme_name)
 
   local theme = themes[theme_name]
   if not theme then
-    Util.log('theme with name `' .. theme_name .. '` not found', 'error')
+    Util.log('telescope.setup', 'theme with name `' .. theme_name .. '` not found', 'error')
     return
   end
 

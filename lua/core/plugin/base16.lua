@@ -2646,12 +2646,12 @@ end
 
 M.load = function(name)
   if not name then
-    Util.log('no theme specified', 'warn')
+    Util.log('base16.load', 'no theme specified', 'warn')
     return
   end
   local theme = M.themes[name]
   if not theme then
-    Util.log('theme not found: ' .. name, 'warn')
+    Util.log('base16.load', 'theme not found: ' .. name, 'warn')
     return
   end
 

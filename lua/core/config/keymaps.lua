@@ -2,7 +2,7 @@ local Util = require 'core.utils'
 
 return {
   setup = function(opts)
-    Util.log(string.format('setting leader to "%s"', vim.g.mapleader))
+    Util.log('keymaps.setup', string.format('setting leader to "%s"', vim.g.mapleader))
 
     local _leader = opts.leader
     if opts.leader == 'space' or opts.leader == 'SPC' then

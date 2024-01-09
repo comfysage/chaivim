@@ -21,12 +21,12 @@ end
 
 function parts.load_config(_)
   if not core.config.modules['core'] then
-    Util.log('core modules are not defined.', 'error')
+    Util.log('core.parts', 'core modules are not defined.', 'error')
     return
   end
 
   for main_mod, modules in pairs(core.config.modules) do
-    Util.log('loading ' .. main_mod .. ' modules.')
+    Util.log('core.parts', 'loading ' .. main_mod .. ' modules.')
     core.modules[main_mod] = core.modules[main_mod] or {}
 
     for _, spec in pairs(modules) do
@@ -70,11 +70,11 @@ end
 ---@param spec ModuleSpec
 function parts.load(module, spec)
   if spec.enabled == false then
-    Util.log('skipping loading module: ' .. module)
+    Util.log('core.parts', 'skipping loading module: ' .. module)
     return
   end
   if spec.loaded and spec.reload == false then
-    Util.log('skipping reloading module: ' .. module)
+    Util.log('core.parts', 'skipping reloading module: ' .. module)
     return
   end
 
@@ -83,7 +83,7 @@ function parts.load(module, spec)
   local callback = function(source, opts)
     local status, result = pcall(require, source)
     if not status then
-      Util.log("failed to load " .. source .. "\n\t" .. result, 'error')
+      Util.log('core.parts', "failed to load " .. source .. "\n\t" .. result, 'error')
       return
     end
     if type(result) == 'table' then
@@ -112,7 +112,7 @@ end
 function parts.colorscheme(_)
   local ok, _ = pcall(vim.cmd.colorscheme, core.config.colorscheme)
   if not ok then
-    Util.log("couldn't load colorscheme", 'error')
+    Util.log('core.parts', "couldn't load colorscheme", 'error')
   end
 
   vim.api.nvim_create_autocmd({ 'UIEnter' }, {
@@ -135,7 +135,7 @@ function parts.preload(_)
   require 'core.bootstrap'.boot 'evergarden'
 
   if not keymaps then
-    Util.log('global keymaps is not defined.', 'error')
+    Util.log('core.parts', 'global keymaps is not defined.', 'error')
     return
   end
 

@@ -92,7 +92,7 @@ local fn = {
 local function _get(name, props)
   local _fn = fn[name]
   if not _fn or not _fn[props] then
-    Util.log('bootstrap function ' .. props .. ' not found for: ' .. name, 'error')
+    Util.log('core.bootstrap', 'bootstrap function ' .. props .. ' not found for: ' .. name, 'error')
     return
   end
   return _fn[props]

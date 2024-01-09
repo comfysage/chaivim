@@ -4,7 +4,7 @@ local ensure = { 'markdown', 'markdown_inline', 'vimdoc' }
 
 return {
   setup = function(opts)
-    Util.log 'loading treesitter.'
+    Util.log('treesitter.setup', 'loading treesitter.')
     require 'core.bootstrap'.boot 'treesitter'
 
     local ok, treesitter = SR_L 'nvim-treesitter'

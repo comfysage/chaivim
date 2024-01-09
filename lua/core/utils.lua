@@ -3,8 +3,8 @@ local Util = {}
 --- vim.notify wrapper to avoid msg overload
 ---@param msg string
 ---@param level 'debug'|'info'|'warn'|'error'|nil
-function Util.log(msg, level)
-  core.log:write('core.core', msg, level)
+function Util.log(source, msg, level)
+  core.log:write(source, msg, level)
 end
 
 ---@param name string
@@ -31,7 +31,7 @@ end
 ---@param props { name: string|nil, path: string|nil }
 function Util.git_pull(props)
   if not props.path then
-    Util.log 'no path specified in `git_pull()`'
+    Util.log('core.utils', 'no path specified in `git_pull()`')
     return
   end
 
@@ -42,11 +42,11 @@ function Util.git_pull(props)
     "pull",
   }, { cwd = props.path }):wait()
   if obj.code > 0 then
-    Util.log('error while updating ' .. name .. ' at ' .. props.path ..
+    Util.log('core.utils', 'error while updating ' .. name .. ' at ' .. props.path ..
       '\n\t' .. obj.stdout .. '\n\t' .. obj.stderr, 'error')
     return
   end
-  Util.log('succesfully updated ' .. name, 'info')
+  Util.log('core.utils', 'succesfully updated ' .. name, 'info')
 end
 
 ---@param props { name: string, url: string }
@@ -61,11 +61,11 @@ function Util.git_clone(props)
     modulepath,
   }, { cwd = core.path.root }):wait()
   if obj.code > 0 then
-    Util.log('error while cloning ' .. props.name .. ' at ' .. modulepath ..
+    Util.log('core.utils', 'error while cloning ' .. props.name .. ' at ' .. modulepath ..
       '\n\t' .. obj.stdout .. '\n\t' .. obj.stderr, 'error')
     return
   end
-  Util.log('succesfully cloned ' .. props.name, 'info')
+  Util.log('core.utils', 'succesfully cloned ' .. props.name, 'info')
 end
 
 ---@param props { name: string, dir: string, mod: string, opts: table|nil|boolean }
@@ -74,7 +74,7 @@ function Util.boot(props)
   core.path[props.name] = dir
 
   if not vim.loop.fs_stat(dir) then
-    Util.log('module ' .. props.name .. ' not found. bootstrapping...', 'warn')
+    Util.log('core.utils', 'module ' .. props.name .. ' not found. bootstrapping...', 'warn')
     require 'core.bootstrap'.load(props.name)
   end
   Util.add_to_path(dir)
@@ -92,18 +92,18 @@ function Util.boot(props)
     return
   end
 
-  Util.log('error while bootstrapping ' .. props.name .. '\n\t' .. (result or ''), 'error')
+  Util.log('core.utils', 'error while bootstrapping ' .. props.name .. '\n\t' .. (result or ''), 'error')
 end
 
 ---@param props { name: string, dir: string, mod: string, url: string, opts: table|nil|boolean }
 ---@return { boot: function, load: function, update: function }|nil
 function Util.create_bootstrap(props)
   if not props.name then
-    Util.log('error while loading bootstrap spec\n\t`props.name` is empty', 'error')
+    Util.log('core.utils', 'error while loading bootstrap spec\n\t`props.name` is empty', 'error')
     return
   end
   if not props.url then
-    Util.log('error while loading bootstrap spec\n\t`props.url` is empty', 'error')
+    Util.log('core.utils', 'error while loading bootstrap spec\n\t`props.url` is empty', 'error')
     return
   end
   props.dir = props.dir or props.name

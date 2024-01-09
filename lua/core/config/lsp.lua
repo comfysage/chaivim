@@ -52,7 +52,7 @@ local function setup_servers(servers, capabilities)
     end
 
     opts.capabilities = capabilities
-    Util.log(string.format('setup_lsp:%s', name))
+    Util.log('lsp.setup', string.format('setup_lsp:%s', name))
     nvim_lsp[name].setup(opts)
   end
 end
@@ -79,7 +79,7 @@ return {
     Util.add_to_path(string.format('%s/%s', core.path.root, 'cmp-nvim-lua'))
     capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
 
-    Util.log 'set up lsp servers'
+    Util.log('lsp.setup', 'set up lsp servers')
     setup_servers(opts.servers, capabilities)
 
     -- Use LspAttach autocommand to only map the following keys
@@ -87,7 +87,7 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
-        Util.log('lsp server attached to current buffer', 'info')
+        Util.log('lsp.attach', 'lsp server attached to current buffer', 'info')
 
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'

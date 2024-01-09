@@ -27,7 +27,7 @@ return {
       ---@type AutoCmdCallback
       callback = function(opts)
         for i, fn_t in pairs(core.handle[ev]) do
-          Util.log(string.format('autocmds:%s:%d', ev, i))
+          Util.log('autocmds.callback', string.format('autocmds:%s:%d', ev, i))
           for _, fn in ipairs(fn_t) do
             fn(opts)
           end
@@ -73,7 +73,7 @@ return {
   end,
   --- trigger a custom event
   start = function(ev)
-    Util.log(string.format('start:custom:%s', ev))
+    Util.log('autocmds.setup', string.format('start:custom:%s', ev))
     vim.api.nvim_exec_autocmds('User', { pattern = ev })
   end,
 }
