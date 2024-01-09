@@ -14,14 +14,14 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 ### integrated plugins
 
-- :telescope: [telescope](https://github.com/nvim-telescope/telescope.nvim)
-- :evergreen_tree: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- :computer: [keymaps](https://github.com/crispybaccoon/keymaps.nvim)
-- :airplane: [lualine](https://github.com/nvim-lualine/lualine.nvim)
-- :pencil: [cmp](https://github.com/hrsh7th/nvim-cmp)
-- :scissors: [luasnip](https://github.com/L3MON4D3/LuaSnip) with [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-- :hammer: [mini.nvim](https://github.com/echasnovski/mini.nvim)
-- :vertical_traffic_light: [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
+- :telescope: [telescope](https://github.com/nvim-telescope/telescope.nvim) - a highly extendable fuzzy finder.
+- :evergreen_tree: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - treesitter configurations and abstraction layer for neovim.
+- :computer: [keymaps](https://github.com/crispybaccoon/keymaps.nvim) - a keymap manager for neovim.
+- :airplane: [lualine](https://github.com/nvim-lualine/lualine.nvim) - a blazing fast and easy to configure neovim statusline plugin.
+- :pencil: [cmp](https://github.com/hrsh7th/nvim-cmp) - a completion plugin for neovim.
+- :scissors: [luasnip](https://github.com/L3MON4D3/LuaSnip) with [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) - a snippet engine for Neovim.
+- :hammer: [mini.nvim](https://github.com/echasnovski/mini.nvim) - the "swiss army knife" among neovim plugins.
+- :vertical_traffic_light: [gitsigns](https://github.com/lewis6991/gitsigns.nvim) - git integration for neovim.
 
 ## :lock: requirements
 
