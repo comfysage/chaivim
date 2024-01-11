@@ -123,7 +123,7 @@ function Model:_init()
 end
 
 ---@class core.types.ui.model
----@field _view fun(self: core.types.ui.model): string
+---@field _view fun(self: core.types.ui.model)
 function Model:_view()
   self.internal.hls = {}
 
