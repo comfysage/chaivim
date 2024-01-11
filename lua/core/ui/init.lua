@@ -136,6 +136,13 @@ function Model:_view()
 end
 
 ---@class core.types.ui.model
+---@field add_hl fun(self: core.types.ui.model, name: string, ...)
+function Model:add_hl(name, ...)
+  self.internal.hls[name] = self.internal.hls[name] or {}
+  self.internal.hls[name][#self.internal.hls[name] + 1] = { ... }
+end
+
+---@class core.types.ui.model
 ---@field _update fun(self: core.types.ui.model, msg: string): any
 function Model:_update(msg)
   local _msg = self:update(msg)
