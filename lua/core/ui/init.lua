@@ -207,7 +207,6 @@ function Model:send(msg)
       self.internal.cursor = api.nvim_win_get_cursor(self.internal.win)
     end,
     hls = function()
-      P 'hls'
       for name, hl_items in pairs(self.internal.hls) do
         for _, v in ipairs(hl_items) do
           local y, x_start, x_end = unpack(v, 1, 3)
