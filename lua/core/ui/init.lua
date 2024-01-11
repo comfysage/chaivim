@@ -241,8 +241,8 @@ end
 ---@class core.types.ui.model
 ---@field open fun(self: core.types.ui.model)
 function Model:open()
-  self:init()
   self:_init()
+  self:init()
 
   self:send(nil)
 end
