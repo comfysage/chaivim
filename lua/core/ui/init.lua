@@ -128,7 +128,7 @@ function Model:_view()
 end
 
 ---@class core.types.ui.model
----@field _update fun(self: core.types.ui.model, msg): any
+---@field _update fun(self: core.types.ui.model, msg: string): any
 function Model:_update(msg)
   local _msg = self:update(msg)
   if type(msg) ~= 'table' then
@@ -151,11 +151,13 @@ function Model:view() end
 
 ---@class core.types.ui.model
 ---@field update fun(self: core.types.ui.model, msg)
+---@param _ string
 function Model:update(_) end
 
 --- used to respond to data changes
 ---@class core.types.ui.model
 ---@field send fun(self: core.types.ui.model, msg)
+---@param msg string
 function Model:send(msg)
   self.internal.cmd = self:_update(msg)
 
