@@ -20,6 +20,9 @@ Model.__index = Model
 ---@field window { config: table, width: integer, height: integer }
 ---@field cmd 'quit'|any
 ---@field cursor tuple<integer>
+---@field hls { [string]: table<core.types.ui.model.internal.hl_pos> }
+
+---@alias core.types.ui.model.internal.hl_pos { [1]: integer, [2]: integer, [3]: integer }
 
 ---@class core.types.ui.model
 ---@field new fun(self: core.types.ui.model, data: table, props?: core.types.ui.model.props): core.types.ui.model
@@ -36,6 +39,7 @@ function Model:new(data, props)
       window = { config = {}, width = 0, height = 0 },
       cmd = nil,
       cursor = { 0, 0 },
+      hls = {},
     },
   }, self)
 
@@ -121,10 +125,14 @@ end
 ---@class core.types.ui.model
 ---@field _view fun(self: core.types.ui.model): string
 function Model:_view()
+  self.internal.hls = {}
+
   local lines = self:view()
   api.nvim_set_option_value('modifiable', true, { buf = self.internal.buf })
   api.nvim_buf_set_lines(self.internal.buf, 0, -1, false, lines)
   api.nvim_set_option_value('modifiable', false, { buf = self.internal.buf })
+
+  self:send 'hls'
 end
 
 ---@class core.types.ui.model
@@ -190,6 +198,22 @@ function Model:send(msg)
     end,
     cursormove = function()
       self.internal.cursor = api.nvim_win_get_cursor(self.internal.win)
+    end,
+    hls = function()
+      P 'hls'
+      for name, hl_items in pairs(self.internal.hls) do
+        for _, v in ipairs(hl_items) do
+          local y, x_start, x_end = unpack(v, 1, 3)
+          api.nvim_buf_add_highlight(
+            self.internal.buf,
+            0,
+            'Core' .. name,
+            y - 1,
+            x_start,
+            x_end
+          )
+        end
+      end
     end,
   }
 
