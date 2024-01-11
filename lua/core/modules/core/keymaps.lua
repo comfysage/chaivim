@@ -53,7 +53,7 @@ return {
         show_ui = {
           { 'normal', '<leader>sc', function()
             require 'core.ui.cheatsheet'.open()
-          end, 'show cheatsheet' }
+          end, 'show cheatsheet' },
         },
         copy_paste = {
           -- copy/pasting from system clipboard
