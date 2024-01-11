@@ -54,6 +54,9 @@ return {
           { 'normal', '<leader>sc', function()
             require 'core.ui.cheatsheet'.open()
           end, 'show cheatsheet' },
+          { 'normal', '<leader>sh', function()
+            require 'core.ui.status':open()
+          end, 'show core status' },
         },
         copy_paste = {
           -- copy/pasting from system clipboard
