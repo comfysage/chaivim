@@ -130,10 +130,10 @@ function Model:add_mapping(mode, lhs, msg)
   vim.keymap.set(mode, lhs, function()
     self:send(msg)
   end, {
-      desc = ('coreui:%s'):format(msg),
-      buffer = self.internal.buf,
-      silent = true,
-    })
+    desc = ('coreui:%s'):format(msg),
+    buffer = self.internal.buf,
+    silent = true,
+  })
 end
 
 ---@class core.types.ui.model
