@@ -121,9 +121,15 @@ end
 ---@class core.types.ui.model
 ---@field _update fun(self: core.types.ui.model, msg): any
 function Model:_update(msg)
-  self:update(msg)
+  local _msg = self:update(msg)
+  if type(msg) ~= 'table' then
+    msg = {msg}
+  end
+  if type(_msg) ~= 'table' then
+    _msg = {_msg}
+  end
 
-  return msg
+  return { unpack(msg), unpack(_msg) }
 end
 
 ---@class core.types.ui.model
