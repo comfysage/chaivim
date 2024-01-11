@@ -27,13 +27,12 @@ Model.__index = Model
 ---@class core.types.ui.model
 ---@field new fun(self: core.types.ui.model, data: table, props?: core.types.ui.model.props): core.types.ui.model
 function Model:new(data, props)
-  local ns = api.nvim_create_namespace ''
   local model = setmetatable({
     data = data,
     props = props or {},
     internal = {
-      id = api.nvim_create_augroup(('core.ui[%d]'):format(ns), {}),
-      ns = ns, -- anonymous ns
+      id = '',
+      ns = 0,
       buf = 0,
       win = 0,
       window = { config = {}, width = 0, height = 0 },
@@ -256,6 +255,10 @@ end
 ---@class core.types.ui.model
 ---@field open fun(self: core.types.ui.model)
 function Model:open()
+  -- anonymous ns
+  local ns = api.nvim_create_namespace ''
+  self.internal.ns = ns
+  self.internal.id = api.nvim_create_augroup(('core.ui[%d]'):format(ns), {})
   self:_init()
   self:init()
 
