@@ -14,7 +14,7 @@ local log_levels = {
 vim.tbl_add_reverse_lookup(log_levels)
 
 --- Log Data type
----@class core.types.log.data table
+---@class core.types.log.data
 ---@field __index core.types.log.data
 ---@field items table<core.types.log.data.item>
 ---@field log_levels { [integer]: string }
