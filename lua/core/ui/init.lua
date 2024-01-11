@@ -19,6 +19,7 @@ Model.__index = Model
 ---@field win integer
 ---@field window { config: table, width: integer, height: integer }
 ---@field cmd 'quit'|any
+---@field cursor tuple<integer>
 
 ---@class core.types.ui.model
 ---@field new fun(self: core.types.ui.model, data: table, props?: core.types.ui.model.props): core.types.ui.model
@@ -34,6 +35,7 @@ function Model:new(data, props)
       win = 0,
       window = { config = {}, width = 0, height = 0 },
       cmd = nil,
+      cursor = { 0, 0 },
     },
   }, self)
 
@@ -107,6 +109,13 @@ function Model:_init()
       self:send 'winresize'
     end,
   })
+  api.nvim_create_autocmd('CursorMoved', {
+    group = self.internal.id,
+    buffer = self.internal.buf,
+    callback = function()
+      self:send 'cursormove'
+    end,
+  })
 end
 
 ---@class core.types.ui.model
@@ -176,6 +185,9 @@ function Model:send(msg)
       self.internal.window.config.height = _height
 
       api.nvim_win_set_config(self.internal.win, self.internal.window.config)
+    end,
+    cursormove = function()
+      self.internal.cursor = api.nvim_win_get_cursor(self.internal.win)
     end,
   }
 
