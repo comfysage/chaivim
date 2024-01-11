@@ -147,10 +147,10 @@ end
 function Model:_update(msg)
   local _msg = self:update(msg)
   if type(msg) ~= 'table' then
-    msg = {msg}
+    msg = { msg }
   end
   if type(_msg) ~= 'table' then
-    _msg = {_msg}
+    _msg = { _msg }
   end
 
   return { unpack(msg), unpack(_msg) }
