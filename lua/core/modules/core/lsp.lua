@@ -27,7 +27,7 @@ return {
         window = {
           height = 20,
           width = 64,
-          border = 'none'
+          border = 'none',
         },
       },
       config = {
@@ -36,7 +36,7 @@ return {
         severity_sort = false,
         -- use signs for diagnostics
         signs = {
-          text = require 'core.utils'.get_diagnostic_signs(),
+          text = require('core.utils').get_diagnostic_signs(),
           priority = GC.priority.signs.lsp,
         },
         -- Use underline for diagnostics
@@ -65,7 +65,7 @@ return {
           -- symbols or error codes.
           -- string|function
           prefix = function(props)
-            local icons = require 'core.utils'.get_diagnostic_signs()
+            local icons = require('core.utils').get_diagnostic_signs()
             return icons[props.severity]
           end,
           -- Append diagnostic message with suffix. If a function, it must have
