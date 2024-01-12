@@ -36,9 +36,9 @@ function model:init()
       end
       items[module] = items[module] or {}
       items[module][task] = items[module][task]
-          or { expand = false, items = {} }
+        or { expand = false, items = {} }
       items[module][task].items[#items[module][task].items + 1] =
-      { item[2], item[3] }
+        { item[2], item[3] }
     end
   end
 
@@ -150,7 +150,7 @@ function model:update(msg)
       end
       local module, task = unpack(item, 1, 2)
       self.data.items[module][task].expand =
-          not self.data.items[module][task].expand
+        not self.data.items[module][task].expand
     end,
   }
 
