@@ -24,9 +24,11 @@ return {
       mappings = {
         tabs = {
           -- tab switching
-          { 'normal', '<tab>',        vim.cmd.tabnext, 'next tab' },
-          { 'normal', '<S-TAB>',      vim.cmd.tabprev, 'prev tab' },
-          { 'normal', '<space><TAB>', ':$tabedit<CR>', 'open new tab' },
+          { 'normal', '<space><tab>]', vim.cmd.tabnext, 'next tab' },
+          { 'normal', '<space><tab>[', vim.cmd.tabprev, 'prev tab' },
+          { 'normal', '<space><tab>n', ':$tabedit<CR>', 'open new tab' },
+          { 'normal', '<space><tab>d', ':tabclose<CR>', 'close current tab' },
+          { 'normal', '<space><tab>x', ':tabclose<CR>', 'close current tab' },
         },
         windows = {
           { 'normal', '<C-\\>', ':vs<CR>:wincmd l<CR>', 'split file vertically' },
