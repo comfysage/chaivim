@@ -121,7 +121,7 @@ return {
         keymaps.normal[opts.mappings.goto_references] = { vim.lsp.buf.references,
           'goto references', group = 'LSP', map_opts }
         keymaps.normal[opts.mappings.format] = { function()
-          vim.lsp.buf.format { async = true }
+          vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= 'null-ls' end }
         end, 'format', group = 'LSP', map_opts }
 
         if opts.signature.enabled then
