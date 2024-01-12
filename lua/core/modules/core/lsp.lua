@@ -37,6 +37,7 @@ return {
         -- use signs for diagnostics
         signs = {
           text = require 'core.utils'.get_diagnostic_signs(),
+          priority = GC.priority.signs.lsp,
         },
         -- Use underline for diagnostics
         underline = true,
