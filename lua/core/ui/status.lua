@@ -4,6 +4,8 @@ local api = vim.api
 
 local model = require 'core.ui' {
   items = {},
+  module_order = {},
+  task_pos = {},
 }
 
 function model:init()
