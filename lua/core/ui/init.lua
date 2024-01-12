@@ -67,7 +67,7 @@ function Model:_init()
   }
 
   self.internal.win =
-      api.nvim_open_win(self.internal.buf, false, self.internal.window.config)
+    api.nvim_open_win(self.internal.buf, false, self.internal.window.config)
 
   api.nvim_win_set_buf(self.internal.win, self.internal.buf)
 
@@ -206,12 +206,12 @@ function Model:send(msg)
       local _width = 90
       _width = _width > self.internal.window.width
           and self.internal.window.width
-          or _width
+        or _width
 
       self.internal.window.config.row =
-          math.floor((self.internal.window.height - _height) / 2)
+        math.floor((self.internal.window.height - _height) / 2)
       self.internal.window.config.col =
-          math.floor((self.internal.window.width - _width) / 2)
+        math.floor((self.internal.window.width - _width) / 2)
       self.internal.window.config.width = _width
       self.internal.window.config.height = _height
 
