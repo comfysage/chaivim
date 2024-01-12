@@ -31,7 +31,12 @@ return {
           { 'normal', '<space><tab>x', ':tabclose<CR>', 'close current tab' },
         },
         windows = {
-          { 'normal', '<C-\\>', ':vs<CR>:wincmd l<CR>', 'split file vertically' },
+          {
+            'normal',
+            '<C-\\>',
+            ':vs<CR>:wincmd l<CR>',
+            'split file vertically',
+          },
         },
         buffers = {
           { 'normal', '<leader>x', ':Close<cr>', 'close buffer' },
@@ -47,18 +52,33 @@ return {
           { 'visual', '>', '>gv', 'increase indention' },
         },
         toggle_ui = {
-          { 'normal', ',tb', function()
-            ---@diagnostic disable
-            _G.toggle_transparent_background()
-          end, 'toggle transparent background' },
+          {
+            'normal',
+            ',tb',
+            function()
+              ---@diagnostic disable
+              _G.toggle_transparent_background()
+            end,
+            'toggle transparent background',
+          },
         },
         show_ui = {
-          { 'normal', '<leader>sc', function()
-            require 'core.ui.cheatsheet'.open()
-          end, 'show cheatsheet' },
-          { 'normal', '<leader>sh', function()
-            require 'core.ui.status':open()
-          end, 'show core status' },
+          {
+            'normal',
+            '<leader>sc',
+            function()
+              require('core.ui.cheatsheet').open()
+            end,
+            'show cheatsheet',
+          },
+          {
+            'normal',
+            '<leader>sh',
+            function()
+              require('core.ui.status'):open()
+            end,
+            'show core status',
+          },
         },
         copy_paste = {
           -- copy/pasting from system clipboard
