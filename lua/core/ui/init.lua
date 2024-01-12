@@ -146,7 +146,7 @@ function Model:_view()
   api.nvim_buf_set_lines(self.internal.buf, 0, -1, false, lines)
   api.nvim_set_option_value('modifiable', false, { buf = self.internal.buf })
 
-  self:send 'hls'
+  return 'hls'
 end
 
 ---@class core.types.ui.model
@@ -159,37 +159,6 @@ end
 ---@class core.types.ui.model
 ---@field _update fun(self: core.types.ui.model, msg: string): any
 function Model:_update(msg)
-  local _msg = self:update(msg)
-  if type(msg) ~= 'table' then
-    msg = { msg }
-  end
-  if type(_msg) ~= 'table' then
-    _msg = { _msg }
-  end
-
-  return { unpack(msg), unpack(_msg) }
-end
-
----@class core.types.ui.model
----@field init fun(self: core.types.ui.model)
-function Model:init() end
-
----@class core.types.ui.model
----@field view fun(self: core.types.ui.model)
-function Model:view() end
-
----@class core.types.ui.model
----@field update fun(self: core.types.ui.model, msg)
----@param _ string
-function Model:update(_) end
-
---- used to respond to data changes
----@class core.types.ui.model
----@field send fun(self: core.types.ui.model, msg)
----@param msg string
-function Model:send(msg)
-  self.internal.cmd = self:_update(msg)
-
   local fn = {
     quit = function()
       api.nvim_del_augroup_by_id(self.internal.id)
@@ -237,18 +206,40 @@ function Model:send(msg)
     end,
   }
 
-  if type(self.internal.cmd) ~= 'table' then
-    if self.internal.cmd == nil then
-      self.internal.cmd = 'view'
-    end
-    self.internal.cmd = { self.internal.cmd }
+  local _fn = fn[msg]
+  if not _fn then
+    _fn = fn.view
   end
+
+  local cmd = {}
+  cmd[#cmd+1] = _fn()
+  cmd[#cmd+1] = self:update(msg)
+
+  return cmd
+end
+
+---@class core.types.ui.model
+---@field init fun(self: core.types.ui.model)
+function Model:init() end
+
+---@class core.types.ui.model
+---@field view fun(self: core.types.ui.model)
+function Model:view() end
+
+---@class core.types.ui.model
+---@field update fun(self: core.types.ui.model, msg)
+---@param _ string
+function Model:update(_) end
+
+--- used to respond to data changes
+---@class core.types.ui.model
+---@field send fun(self: core.types.ui.model, msg)
+---@param msg string
+function Model:send(msg)
+  self.internal.cmd = self:_update(msg)
+
   for _, cmd in ipairs(self.internal.cmd) do
-    local _fn = fn[cmd]
-    if not _fn then
-      _fn = fn.view
-    end
-    _fn()
+    self:send(cmd)
   end
 end
 
