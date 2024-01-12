@@ -26,11 +26,11 @@ local function setup_servers(servers, capabilities)
       Lua = {
         diagnostics = {
           -- recognize 'vim' global
-          globals = { 'vim', 'table', 'package' }
+          globals = { 'vim', 'table', 'package' },
         },
         workspace = {
           -- Make server aware of nvim runtime files
-          library = vim.api.nvim_get_runtime_file("", true)
+          library = vim.api.nvim_get_runtime_file('', true),
         },
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT)
@@ -60,24 +60,31 @@ end
 return {
   ---@param opts LspConfigOpts
   setup = function(opts)
-    keymaps.normal[opts.mappings.show_lsp_info] = { function()
-      require 'lspconfig.ui.lspinfo' ()
-    end, 'Show Lsp Info' }
+    keymaps.normal[opts.mappings.show_lsp_info] = {
+      function()
+        require 'lspconfig.ui.lspinfo'()
+      end,
+      'Show Lsp Info',
+    }
 
     -- lsp diagnostics
     vim.diagnostic.config(opts.config)
 
     -- Global mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    keymaps.normal[opts.mappings.open_float] = { vim.diagnostic.open_float, 'show diagnostics', group = 'LSP' }
-    keymaps.normal[opts.mappings.goto_prev] = { vim.diagnostic.goto_prev, 'goto previous diagnostic', group = 'LSP' }
-    keymaps.normal[opts.mappings.goto_next] = { vim.diagnostic.goto_next, 'goto next diagnostic', group = 'LSP' }
-    keymaps.normal[opts.mappings.set_qflist] = { vim.diagnostic.setqflist, 'add diagnostics to qf list', group = 'LSP' }
+    keymaps.normal[opts.mappings.open_float] =
+      { vim.diagnostic.open_float, 'show diagnostics', group = 'LSP' }
+    keymaps.normal[opts.mappings.goto_prev] =
+      { vim.diagnostic.goto_prev, 'goto previous diagnostic', group = 'LSP' }
+    keymaps.normal[opts.mappings.goto_next] =
+      { vim.diagnostic.goto_next, 'goto next diagnostic', group = 'LSP' }
+    keymaps.normal[opts.mappings.set_qflist] =
+      { vim.diagnostic.setqflist, 'add diagnostics to qf list', group = 'LSP' }
 
     -- nvim-cmp supports additional completion capabilities
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     Util.add_to_path(string.format('%s/%s', core.path.root, 'cmp-nvim-lua'))
-    capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     Util.log('lsp.setup', 'set up lsp servers')
     setup_servers(opts.servers, capabilities)
@@ -95,48 +102,103 @@ return {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local map_opts = { buffer = ev.buf }
-        keymaps.normal[opts.mappings.goto_declaration] = { vim.lsp.buf.declaration,
-          'goto declaration', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.goto_definition] = { vim.lsp.buf.definition,
-          'goto definition', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.peek_definition] = { function ()
-          require 'core.plugin.lsp'.peek_definition()
-        end, 'peek definition', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.hover] = { vim.lsp.buf.hover,
-          'hover', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.goto_implementation] = { vim.lsp.buf.implementation,
-          'goto implementation', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.show_signature] = { vim.lsp.buf.signature_help,
-          'show signature', group = 'LSP', map_opts }
-        keymaps.insert[opts.mappings.show_signature] = { vim.lsp.buf.signature_help,
-          'show signature', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.show_type_definition] = { vim.lsp.buf.type_definition,
-          'show type definition', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.rename] = { vim.lsp.buf.rename,
-          'rename', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.show_code_action] = { vim.lsp.buf.code_action,
-          'show code action', group = 'LSP', map_opts }
-        keymaps.visual[opts.mappings.show_code_action] = { vim.lsp.buf.code_action,
-          'show code action', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.goto_references] = { vim.lsp.buf.references,
-          'goto references', group = 'LSP', map_opts }
-        keymaps.normal[opts.mappings.format] = { function()
-          vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= 'null-ls' end }
-        end, 'format', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.goto_declaration] = {
+          vim.lsp.buf.declaration,
+          'goto declaration',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.goto_definition] = {
+          vim.lsp.buf.definition,
+          'goto definition',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.peek_definition] = {
+          function()
+            require('core.plugin.lsp').peek_definition()
+          end,
+          'peek definition',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.hover] =
+          { vim.lsp.buf.hover, 'hover', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.goto_implementation] = {
+          vim.lsp.buf.implementation,
+          'goto implementation',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.show_signature] = {
+          vim.lsp.buf.signature_help,
+          'show signature',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.insert[opts.mappings.show_signature] = {
+          vim.lsp.buf.signature_help,
+          'show signature',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.show_type_definition] = {
+          vim.lsp.buf.type_definition,
+          'show type definition',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.rename] =
+          { vim.lsp.buf.rename, 'rename', group = 'LSP', map_opts }
+        keymaps.normal[opts.mappings.show_code_action] = {
+          vim.lsp.buf.code_action,
+          'show code action',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.visual[opts.mappings.show_code_action] = {
+          vim.lsp.buf.code_action,
+          'show code action',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.goto_references] = {
+          vim.lsp.buf.references,
+          'goto references',
+          group = 'LSP',
+          map_opts,
+        }
+        keymaps.normal[opts.mappings.format] = {
+          function()
+            vim.lsp.buf.format {
+              async = true,
+              filter = function(client)
+                return client.name ~= 'null-ls'
+              end,
+            }
+          end,
+          'format',
+          group = 'LSP',
+          map_opts,
+        }
 
         if opts.signature.enabled then
-          vim.api.nvim_set_hl(0, 'ActiveParameter', { link = 'LspSignatureActiveParameter' })
+          vim.api.nvim_set_hl(
+            0,
+            'ActiveParameter',
+            { link = 'LspSignatureActiveParameter' }
+          )
 
           vim.api.nvim_create_autocmd('InsertLeave', {
             group = core.group_id,
-            callback = require 'core.plugin.lsp'.close_signature,
+            callback = require('core.plugin.lsp').close_signature,
           })
           vim.api.nvim_create_autocmd({ 'InsertEnter', 'CursorMovedI' }, {
             group = core.group_id,
-            callback = require 'core.plugin.lsp'.auto_signature,
+            callback = require('core.plugin.lsp').auto_signature,
           })
         end
       end,
     })
-  end
+  end,
 }
