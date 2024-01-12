@@ -20,7 +20,7 @@ return {
         hover = 'K',
         show_code_action = 'gl',
         rename = 'gr',
-        format = ',f',
+        format = '.fl',
       },
       signature = {
         enabled = true,
