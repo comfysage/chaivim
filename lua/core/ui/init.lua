@@ -51,7 +51,7 @@ function Model:_init()
   self.internal.buf = api.nvim_create_buf(false, true)
 
   -- open window
-  self.internal.window.height = api.nvim_win_get_height(0)
+  self.internal.window.height = vim.o.lines
   self.internal.window.width = vim.o.columns
 
   self.internal.window.config = {
@@ -199,7 +199,7 @@ function Model:send(msg)
       return self:_view()
     end,
     winresize = function()
-      self.internal.window.height = api.nvim_win_get_height(1000)
+      self.internal.window.height = vim.o.lines
       self.internal.window.width = vim.o.columns
 
       local _height = math.floor(self.internal.window.height * 0.8)
