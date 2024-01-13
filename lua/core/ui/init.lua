@@ -5,6 +5,7 @@ local api = vim.api
 ---@field data table
 ---@field props core.types.ui.model.props
 ---@field internal core.types.ui.model.internal
+---@field _ { blacklist: table<string, boolean> }
 local Model = {}
 
 Model.__index = Model
@@ -39,6 +40,9 @@ function Model:new(data, props)
       cmd = nil,
       cursor = { 0, 0 },
       hls = {},
+    },
+    _ = {
+      blacklist = {},
     },
   }, self)
 
@@ -206,13 +210,15 @@ function Model:_update(msg)
     end,
   }
 
-  local _fn = fn[msg]
-  if not _fn then
-    _fn = fn.view
-  end
+  if not msg then return end
 
   local cmd = {}
-  cmd[#cmd+1] = _fn()
+
+  local _fn = fn[msg]
+  if _fn then
+    cmd[#cmd+1] = _fn()
+  end
+
   cmd[#cmd+1] = self:update(msg)
 
   return cmd
@@ -236,11 +242,22 @@ function Model:update(_) end
 ---@field send fun(self: core.types.ui.model, msg)
 ---@param msg string
 function Model:send(msg)
-  self.internal.cmd = self:_update(msg)
+  if not msg then return end
+  if type(msg) == 'boolean' and msg then
+    msg = 'view'
+  end
+  if self._.blacklist[msg] then
+    vim.notify(('stackoverflow on %s'):format(msg), vim.log.levels.WARN)
+    return
+  end
+  self._.blacklist[msg] = true
+  local cmds = self:_update(msg)
 
-  for _, cmd in ipairs(self.internal.cmd) do
+  for _, cmd in ipairs(cmds) do
     self:send(cmd)
   end
+
+  self._.blacklist[msg] = false
 end
 
 ---@class core.types.ui.model
@@ -253,7 +270,7 @@ function Model:open()
   self:_init()
   self:init()
 
-  self:send(nil)
+  self:send(true)
 end
 
 return function(...)

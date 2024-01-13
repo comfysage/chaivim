@@ -87,6 +87,7 @@ end
 
 function model:view()
   local lines = {}
+  self.data.task_pos = {}
 
   local module_order = self.data.module_order
   local items = self.data.items
@@ -143,7 +144,7 @@ end
 function model:update(msg)
   local fn = {
     cursormove = function()
-      return 'view'
+      return true
     end,
     open_section = function()
       local item = self.data.task_pos[self.internal.cursor[1]]
@@ -153,6 +154,7 @@ function model:update(msg)
       local module, task = unpack(item, 1, 2)
       self.data.items[module][task].expand =
         not self.data.items[module][task].expand
+      return true
     end,
   }
 
