@@ -2,6 +2,15 @@ local Util = require 'core.utils'
 
 local api = vim.api
 
+local default_props = {
+  title = nil,
+  persistent = false,
+  size = {
+    width = 90,
+    height = 0.8,
+  },
+}
+
 ---@class core.types.ui.model
 ---@field __index core.types.ui.model
 ---@field data table
@@ -15,6 +24,7 @@ Model.__index = Model
 ---@class core.types.ui.model.props
 ---@field title? string
 ---@field persistent? boolean
+---@field size? { width: integer|number, height: integer|number }
 
 ---@class core.types.ui.model.internal
 ---@field id integer
@@ -33,7 +43,7 @@ Model.__index = Model
 function Model:new(data, props)
   local model = setmetatable({
     data = data,
-    props = props or {},
+    props = vim.tbl_deep_extend('force', default_props, props or {}),
     internal = {
       id = '',
       ns = 0,
@@ -111,10 +121,8 @@ function Model:layout()
   self.internal.window.height = vim.o.lines
   self.internal.window.width = vim.o.columns
 
-  local _height = math.floor(self.internal.window.height * 0.8)
-  _height = size(self.internal.window.height, _height)
-  local _width = 90
-  _width = size(self.internal.window.width, _width)
+  local _height = size(self.internal.window.height, self.props.size.height)
+  local _width = size(self.internal.window.width, self.props.size.width)
 
   self.internal.window.config.row =
   math.floor((self.internal.window.height - _height) / 2)
