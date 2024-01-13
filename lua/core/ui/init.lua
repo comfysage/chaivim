@@ -246,15 +246,32 @@ function Model:toggle()
 end
 
 ---@class core.types.ui.model
----@field show fun(self: core.types.ui.model)
-function Model:show()
+---@field _show fun(self: core.types.ui.model)
+function Model:_show()
   if self:win_valid() then
     self:focus()
+    return true
   elseif self:buf_valid() then
     self:mount()
-  else
+    return true
+  end
+  return false
+end
+
+---@class core.types.ui.model
+---@field show fun(self: core.types.ui.model, props?: { noerror: boolean })
+function Model:show(props)
+  local ok = self:_show()
+  if ok then
+    self:send 'show'
+    return true
+  end
+
+  if not (props and props.noerror) then
     Util.log('core.ui.show', 'buffer closed', 'error')
   end
+
+  return false
 end
 
 ---@class core.types.ui.model
