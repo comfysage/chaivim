@@ -1,3 +1,5 @@
+local Util = require 'core.utils'
+
 local api = vim.api
 
 ---@class core.types.ui.model
@@ -12,6 +14,7 @@ Model.__index = Model
 
 ---@class core.types.ui.model.props
 ---@field title? string
+---@field persistent? boolean
 
 ---@class core.types.ui.model.internal
 ---@field id integer
@@ -34,8 +37,8 @@ function Model:new(data, props)
     internal = {
       id = '',
       ns = 0,
-      buf = 0,
-      win = 0,
+      buf = nil,
+      win = nil,
       window = { config = {}, width = 0, height = 0 },
       cmd = nil,
       cursor = { 0, 0 },
@@ -69,41 +72,104 @@ end
 ---@class core.types.ui.model
 ---@field _init fun(self: core.types.ui.model)
 function Model:_init()
-  self.internal.buf = api.nvim_create_buf(false, true)
+  -- anonymous ns
+  local ns = api.nvim_create_namespace ''
+  self.internal.ns = ns
+  self.internal.id = api.nvim_create_augroup(('core.ui[%d]'):format(ns), {})
 
-  -- open window
+  -- set initial window size
   self.internal.window.height = vim.o.lines
   self.internal.window.width = vim.o.columns
 
   self.internal.window.config = {
     relative = 'editor',
     title = self.props.title or '',
-    title_pos = 'center',
+    title_pos = self.props.title and 'center' or nil,
     border = 'rounded',
-    row = 1,
-    col = 1,
-    width = 1,
-    height = 1,
-    hide = true,
   }
 
-  self.internal.win =
-    api.nvim_open_win(self.internal.buf, false, self.internal.window.config)
-
-  api.nvim_win_set_buf(self.internal.win, self.internal.buf)
-
-  local name = self.props.title and 'core.' .. self.props.title or 'core'
-  vim.opt_local.filetype = name
-  vim.g[name .. '_displayed'] = true
+  self:mount()
 
   vim.keymap.set('n', 'q', function()
     self:send 'quit'
   end, { buffer = self.internal.buf })
 
+  self:on({ 'BufDelete', 'BufHidden' }, function()
+    self:close {}
+  end, {
+    once = true,
+  })
+  self:on('CursorMoved', 'cursormove', {})
+end
+
+---@class core.types.ui.model
+---@field layout fun(self: core.types.ui.model)
+function Model:layout()
+  local function size(max, value)
+    return value > 1 and math.min(value, max) or math.floor(max * value)
+  end
+  self.internal.window.height = vim.o.lines
+  self.internal.window.width = vim.o.columns
+
+  local _height = math.floor(self.internal.window.height * 0.8)
+  _height = size(self.internal.window.height, _height)
+  local _width = 90
+  _width = size(self.internal.window.width, _width)
+
+  self.internal.window.config.row =
+  math.floor((self.internal.window.height - _height) / 2)
+  self.internal.window.config.col =
+  math.floor((self.internal.window.width - _width) / 2)
+  self.internal.window.config.width = _width
+  self.internal.window.config.height = _height
+end
+
+---@class core.types.ui.model
+---@field mount fun(self: core.types.ui.model)
+function Model:mount()
+  if self:buf_valid() then
+    self.internal.buf = self.internal.buf
+  else
+    self.internal.buf = api.nvim_create_buf(false, true)
+  end
+
+  self:layout()
+  self.internal.win =
+      api.nvim_open_win(self.internal.buf, true, self.internal.window.config)
+
+  if vim.bo[self.internal.buf].buftype == "" then
+    vim.bo[self.internal.buf].buftype = "nofile"
+  end
+  local name = self.props.title and 'core.' .. self.props.title or 'core'
+  if vim.bo[self.internal.buf].filetype == "" then
+    vim.bo[self.internal.buf].filetype = name
+  end
+  vim.g[name .. '_displayed'] = true
+
+  self:opts()
+
+  api.nvim_create_autocmd('VimResized', {
+    group = self.internal.id,
+    callback = function()
+      self:send 'winresize'
+    end,
+  })
+end
+
+---@class core.types.ui.model
+---@field mount fun(self: core.types.ui.model)
+function Model:opts()
   -- buf only options
   api.nvim_set_option_value('modifiable', false, { buf = self.internal.buf })
   api.nvim_set_option_value('buflisted', false, { buf = self.internal.buf })
 
+  vim.bo[self.internal.buf].bufhidden = self.props.persistent and 'hide' or 'wipe'
+  api.nvim_set_option_value('conceallevel', 3, { win = self.internal.win })
+  api.nvim_set_option_value('foldenable', false, { win = self.internal.win })
+  api.nvim_set_option_value('spell', false, { win = self.internal.win })
+  api.nvim_set_option_value('wrap', true, { win = self.internal.win })
+  api.nvim_set_option_value('winhighlight', 'Normal:NormalFloat', { win = self.internal.win })
+  api.nvim_set_option_value('colorcolumn', '', { win = self.internal.win })
   api.nvim_set_option_value('number', false, { win = self.internal.win })
   api.nvim_set_option_value(
     'relativenumber',
@@ -112,26 +178,70 @@ function Model:_init()
   )
   api.nvim_set_option_value('signcolumn', 'no', { win = self.internal.win })
   api.nvim_set_option_value('list', false, { win = self.internal.win })
-  api.nvim_set_option_value('wrap', false, { win = self.internal.win })
   api.nvim_set_option_value('cul', false, { win = self.internal.win })
-  api.nvim_set_option_value('colorcolumn', '0', { win = self.internal.win })
+end
 
-  self.internal.window.config.hide = false
+---@class core.types.ui.model
+---@field focus fun(self: core.types.ui.model)
+function Model:focus()
   api.nvim_set_current_win(self.internal.win)
-  self:send 'winresize'
 
-  api.nvim_create_autocmd('WinResized', {
-    group = self.internal.id,
-    callback = function()
-      self:send 'winresize'
-    end,
-  })
-  self:on({ 'BufDelete', 'BufHidden' }, function()
-      api.nvim_del_augroup_by_id(self.internal.id)
-    end, {
-    once = true,
-  })
-  self:on('CursorMoved', 'cursormove', {})
+  if vim.v.vim_did_enter ~= 1 then
+    local win = self.internal.win
+    api.nvim_create_autocmd("VimEnter", {
+      once = true,
+      callback = function()
+        if win and api.nvim_win_is_valid(win) then
+          pcall(api.nvim_set_current_win, win)
+        end
+        return true
+      end,
+    })
+  end
+end
+
+---@class core.types.ui.model
+---@field win_valid fun(self: core.types.ui.model): boolean
+function Model:win_valid()
+  return self.internal.win and api.nvim_win_is_valid(self.internal.win)
+end
+
+---@class core.types.ui.model
+---@field buf_valid fun(self: core.types.ui.model): boolean
+function Model:buf_valid()
+  return self.internal.buf and api.nvim_buf_is_valid(self.internal.buf)
+end
+
+---@class core.types.ui.model
+---@field hide fun(self: core.types.ui.model)
+function Model:hide()
+  if self:win_valid() then
+    self:close({ wipe = false })
+  end
+end
+
+---@class core.types.ui.model
+---@field toggle fun(self: core.types.ui.model): boolean
+function Model:toggle()
+  if self:win_valid() then
+    self:hide()
+    return false
+  else
+    self:show()
+    return true
+  end
+end
+
+---@class core.types.ui.model
+---@field show fun(self: core.types.ui.model)
+function Model:show()
+  if self:win_valid() then
+    self:focus()
+  elseif self:buf_valid() then
+    self:mount()
+  else
+    Util.log('core.ui.show', 'buffer closed', 'error')
+  end
 end
 
 ---@class core.types.ui.model
@@ -173,30 +283,27 @@ end
 ---@field _update fun(self: core.types.ui.model, msg: string): any
 function Model:_update(msg)
   local fn = {
-    quit = function()
+    exit = function()
       self:close { wipe = true }
+    end,
+    quit = function()
+      self:close {}
     end,
     view = function()
       return self:_view()
     end,
     winresize = function()
-      self.internal.window.height = vim.o.lines
-      self.internal.window.width = vim.o.columns
-
-      local _height = math.floor(self.internal.window.height * 0.8)
-      local _width = 90
-      _width = _width > self.internal.window.width
-          and self.internal.window.width
-        or _width
-
-      self.internal.window.config.row =
-        math.floor((self.internal.window.height - _height) / 2)
-      self.internal.window.config.col =
-        math.floor((self.internal.window.width - _width) / 2)
-      self.internal.window.config.width = _width
-      self.internal.window.config.height = _height
-
-      api.nvim_win_set_config(self.internal.win, self.internal.window.config)
+      if not (self.internal.win and api.nvim_win_is_valid(self.internal.win)) then
+        return
+      end
+      self:layout()
+      local config = {}
+      for _, key in ipairs({ "relative", "width", "height", "col", "row" }) do
+        ---@diagnostic disable-next-line: no-unknown
+        config[key] = self.internal.window.config[key]
+      end
+      self:opts()
+      api.nvim_win_set_config(self.internal.win, config)
     end,
     cursormove = function()
       self.internal.cursor = api.nvim_win_get_cursor(self.internal.win)
@@ -224,10 +331,10 @@ function Model:_update(msg)
 
   local _fn = fn[msg]
   if _fn then
-    cmd[#cmd+1] = _fn()
+    cmd[#cmd + 1] = _fn()
   end
 
-  cmd[#cmd+1] = self:update(msg)
+  cmd[#cmd + 1] = self:update(msg)
 
   return cmd
 end
@@ -271,14 +378,15 @@ end
 ---@class core.types.ui.model
 ---@field open fun(self: core.types.ui.model)
 function Model:open()
-  -- anonymous ns
-  local ns = api.nvim_create_namespace ''
-  self.internal.ns = ns
-  self.internal.id = api.nvim_create_augroup(('core.ui[%d]'):format(ns), {})
-  self:_init()
-  self:init()
-
-  self:send(true)
+  if self:win_valid() then
+    self:focus()
+  elseif self:buf_valid() then
+    self:mount()
+  else
+    self:_init()
+    self:init()
+    self:send 'view'
+  end
 end
 
 ---@class core.types.ui.model
@@ -286,13 +394,23 @@ end
 function Model:close(opts)
   local win = self.internal.win
   local buf = self.internal.buf
-  local wipe = opts and opts.wipe
+  local wipe = nil
+  if opts and opts.wipe ~= nil then
+    wipe = opts.wipe
+  else
+    wipe = not self.props.persistent
+  end
+
+  self.win = nil
+  if wipe then
+    self.buf = nil
+  end
   vim.schedule(function()
-    if win and vim.api.nvim_win_is_valid(win) then
-      vim.api.nvim_win_close(win, true)
+    if win and api.nvim_win_is_valid(win) then
+      api.nvim_win_close(win, true)
     end
-    if wipe and buf and vim.api.nvim_buf_is_valid(buf) then
-      vim.api.nvim_buf_delete(buf, { force = true })
+    if wipe and buf and api.nvim_buf_is_valid(buf) then
+      api.nvim_buf_delete(buf, { force = true })
     end
   end)
 end
