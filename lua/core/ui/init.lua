@@ -125,9 +125,9 @@ function Model:layout()
   local _width = size(self.internal.window.width, self.props.size.width)
 
   self.internal.window.config.row =
-  math.floor((self.internal.window.height - _height) / 2)
+    math.floor((self.internal.window.height - _height) / 2)
   self.internal.window.config.col =
-  math.floor((self.internal.window.width - _width) / 2)
+    math.floor((self.internal.window.width - _width) / 2)
   self.internal.window.config.width = _width
   self.internal.window.config.height = _height
 end
@@ -143,13 +143,13 @@ function Model:mount()
 
   self:layout()
   self.internal.win =
-      api.nvim_open_win(self.internal.buf, true, self.internal.window.config)
+    api.nvim_open_win(self.internal.buf, true, self.internal.window.config)
 
-  if vim.bo[self.internal.buf].buftype == "" then
-    vim.bo[self.internal.buf].buftype = "nofile"
+  if vim.bo[self.internal.buf].buftype == '' then
+    vim.bo[self.internal.buf].buftype = 'nofile'
   end
   local name = self.props.title and 'core.' .. self.props.title or 'core'
-  if vim.bo[self.internal.buf].filetype == "" then
+  if vim.bo[self.internal.buf].filetype == '' then
     vim.bo[self.internal.buf].filetype = name
   end
   vim.g[name .. '_displayed'] = true
@@ -171,12 +171,17 @@ function Model:opts()
   api.nvim_set_option_value('modifiable', false, { buf = self.internal.buf })
   api.nvim_set_option_value('buflisted', false, { buf = self.internal.buf })
 
-  vim.bo[self.internal.buf].bufhidden = self.props.persistent and 'hide' or 'wipe'
+  vim.bo[self.internal.buf].bufhidden = self.props.persistent and 'hide'
+    or 'wipe'
   api.nvim_set_option_value('conceallevel', 3, { win = self.internal.win })
   api.nvim_set_option_value('foldenable', false, { win = self.internal.win })
   api.nvim_set_option_value('spell', false, { win = self.internal.win })
   api.nvim_set_option_value('wrap', true, { win = self.internal.win })
-  api.nvim_set_option_value('winhighlight', 'Normal:NormalFloat', { win = self.internal.win })
+  api.nvim_set_option_value(
+    'winhighlight',
+    'Normal:NormalFloat',
+    { win = self.internal.win }
+  )
   api.nvim_set_option_value('colorcolumn', '', { win = self.internal.win })
   api.nvim_set_option_value('number', false, { win = self.internal.win })
   api.nvim_set_option_value(
@@ -196,7 +201,7 @@ function Model:focus()
 
   if vim.v.vim_did_enter ~= 1 then
     local win = self.internal.win
-    api.nvim_create_autocmd("VimEnter", {
+    api.nvim_create_autocmd('VimEnter', {
       once = true,
       callback = function()
         if win and api.nvim_win_is_valid(win) then
@@ -224,7 +229,7 @@ end
 ---@field hide fun(self: core.types.ui.model)
 function Model:hide()
   if self:win_valid() then
-    self:close({ wipe = false })
+    self:close { wipe = false }
   end
 end
 
@@ -301,12 +306,14 @@ function Model:_update(msg)
       return self:_view()
     end,
     winresize = function()
-      if not (self.internal.win and api.nvim_win_is_valid(self.internal.win)) then
+      if
+        not (self.internal.win and api.nvim_win_is_valid(self.internal.win))
+      then
         return
       end
       self:layout()
       local config = {}
-      for _, key in ipairs({ "relative", "width", "height", "col", "row" }) do
+      for _, key in ipairs { 'relative', 'width', 'height', 'col', 'row' } do
         ---@diagnostic disable-next-line: no-unknown
         config[key] = self.internal.window.config[key]
       end
@@ -333,7 +340,9 @@ function Model:_update(msg)
     end,
   }
 
-  if not msg then return end
+  if not msg then
+    return
+  end
 
   local cmd = {}
 
@@ -365,7 +374,9 @@ function Model:update(_) end
 ---@field send fun(self: core.types.ui.model, msg)
 ---@param msg string
 function Model:send(msg)
-  if not msg then return end
+  if not msg then
+    return
+  end
   if type(msg) == 'boolean' and msg then
     msg = 'view'
   end
