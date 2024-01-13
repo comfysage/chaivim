@@ -414,11 +414,9 @@ end
 ---@class core.types.ui.model
 ---@field open fun(self: core.types.ui.model)
 function Model:open()
-  if self:win_valid() then
-    self:focus()
-  elseif self:buf_valid() then
-    self:mount()
-  else
+  local ok = self:show { noerror = true }
+
+  if not ok then
     self:_init()
     self:init()
     self:send 'view'
