@@ -50,6 +50,23 @@ function Model:new(data, props)
 end
 
 ---@class core.types.ui.model
+---@field on fun(self: core.types.ui.model, event: string|string[], fn: function|string, opts: vim.api.keyset.create_autocmd)
+function Model:on(event, fn, opts)
+  if type(fn) == 'string' then
+    local msg = fn
+    fn = function()
+      self:send(msg)
+    end
+  end
+  opts = vim.tbl_deep_extend('force', {
+    group = self.internal.id,
+    buffer = self.internal.buf,
+    callback = fn,
+  }, opts)
+  api.nvim_create_autocmd(event, opts)
+end
+
+---@class core.types.ui.model
 ---@field _init fun(self: core.types.ui.model)
 function Model:_init()
   self.internal.buf = api.nvim_create_buf(false, true)
@@ -103,26 +120,18 @@ function Model:_init()
   api.nvim_set_current_win(self.internal.win)
   self:send 'winresize'
 
-  api.nvim_create_autocmd({ 'QuitPre', 'BufDelete' }, {
-    buffer = self.internal.buf,
-    group = self.internal.id,
-    callback = function()
-      api.nvim_del_augroup_by_id(self.internal.id)
-    end,
-  })
   api.nvim_create_autocmd('WinResized', {
     group = self.internal.id,
     callback = function()
       self:send 'winresize'
     end,
   })
-  api.nvim_create_autocmd('CursorMoved', {
-    group = self.internal.id,
-    buffer = self.internal.buf,
-    callback = function()
-      self:send 'cursormove'
-    end,
+  self:on({ 'BufDelete', 'BufHidden' }, function()
+      api.nvim_del_augroup_by_id(self.internal.id)
+    end, {
+    once = true,
   })
+  self:on('CursorMoved', 'cursormove', {})
 end
 
 ---@class core.types.ui.model
