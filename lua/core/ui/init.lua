@@ -175,7 +175,17 @@ function Model:_update(msg)
   local fn = {
     quit = function()
       api.nvim_del_augroup_by_id(self.internal.id)
-      api.nvim_buf_delete(self.internal.buf, { force = true })
+      local win = self.internal.win
+      local buf = self.internal.buf
+      local wipe = true
+      vim.schedule(function()
+        if win and vim.api.nvim_win_is_valid(win) then
+          vim.api.nvim_win_close(win, true)
+        end
+        if wipe and buf and vim.api.nvim_buf_is_valid(buf) then
+          vim.api.nvim_buf_delete(buf, { force = true })
+        end
+      end)
     end,
     view = function()
       return self:_view()
