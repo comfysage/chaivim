@@ -174,18 +174,7 @@ end
 function Model:_update(msg)
   local fn = {
     quit = function()
-      api.nvim_del_augroup_by_id(self.internal.id)
-      local win = self.internal.win
-      local buf = self.internal.buf
-      local wipe = true
-      vim.schedule(function()
-        if win and vim.api.nvim_win_is_valid(win) then
-          vim.api.nvim_win_close(win, true)
-        end
-        if wipe and buf and vim.api.nvim_buf_is_valid(buf) then
-          vim.api.nvim_buf_delete(buf, { force = true })
-        end
-      end)
+      self:close { wipe = true }
     end,
     view = function()
       return self:_view()
@@ -290,6 +279,22 @@ function Model:open()
   self:init()
 
   self:send(true)
+end
+
+---@class core.types.ui.model
+---@field close fun(self: core.types.ui.model, opts: { wipe?: boolean })
+function Model:close(opts)
+  local win = self.internal.win
+  local buf = self.internal.buf
+  local wipe = opts and opts.wipe
+  vim.schedule(function()
+    if win and vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_win_close(win, true)
+    end
+    if wipe and buf and vim.api.nvim_buf_is_valid(buf) then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end)
 end
 
 return function(...)
