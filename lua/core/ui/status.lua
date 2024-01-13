@@ -2,11 +2,17 @@ local Util = require 'core.utils'
 
 local api = vim.api
 
-local model = require 'core.ui' {
+local model = require 'core.ui' ({
   items = {},
   module_order = {},
   task_pos = {},
-}
+}, {
+    title = 'status',
+    size = {
+      width = 80,
+      height = 0.6,
+    },
+  })
 
 function model:init()
   local json_log_path = ('%s.json'):format(core.path.log)
