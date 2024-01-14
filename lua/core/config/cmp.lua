@@ -74,6 +74,7 @@ return {
       keymaps.insert['<S-Tab>'] = { cmp.mapping.select_prev_item(), '', group = 'cmp' }
     end
 
+    require 'core.config.cmp'.add_sources()
     cmp.setup(opts.config)
 
     -- Set configuration for specific filetype.
