@@ -131,8 +131,7 @@ end
 function parts.preload(_)
   parts.load_lib {}
 
-  -- [FIXME]
-  core.path.lazy = core.path.root
+  core.path.lazy = ('%s/%s'):format(core.path.root, 'lazy')
   require 'core.bootstrap'.boot 'keymaps'
   require 'core.bootstrap'.boot 'plenary'
   require 'core.bootstrap'.boot 'telescope'
