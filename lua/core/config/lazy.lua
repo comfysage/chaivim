@@ -60,6 +60,7 @@ return {
     require 'core.bootstrap'.boot 'lazy'
 
     Util.log('lazy.setup', 'loading plugins.')
+    ---@diagnostic disable-next-line: redundant-parameter
     require 'lazy'.setup('core.lazy.plugins', opts.config)
   end
 }
