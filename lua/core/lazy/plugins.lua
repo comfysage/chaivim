@@ -1,5 +1,4 @@
 return {
-  { name = 'chai', 'crispybaccoon/chaivim' },
   { 'crispybaccoon/keymaps.nvim' },
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-telescope/telescope.nvim',
