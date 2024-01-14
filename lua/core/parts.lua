@@ -131,6 +131,8 @@ end
 function parts.preload(_)
   parts.load_lib {}
 
+  -- [FIXME]
+  core.path.lazy = core.path.root
   require 'core.bootstrap'.boot 'keymaps'
   require 'core.bootstrap'.boot 'plenary'
   require 'core.bootstrap'.boot 'telescope'
