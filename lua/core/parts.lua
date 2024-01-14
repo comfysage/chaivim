@@ -129,6 +129,8 @@ function parts.load_transparency()
 end
 
 function parts.preload(_)
+  parts.load_lib {}
+
   require 'core.bootstrap'.boot 'keymaps'
   require 'core.bootstrap'.boot 'plenary'
   require 'core.bootstrap'.boot 'telescope'
@@ -138,8 +140,6 @@ function parts.preload(_)
     Util.log('core.parts', 'global keymaps is not defined.', 'error')
     return
   end
-
-  parts.load_lib {}
 end
 
 function parts.load_lib(_)
