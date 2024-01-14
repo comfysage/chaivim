@@ -18,7 +18,8 @@ function Util.load_plugins(plugins)
   for _, url in ipairs(plugins) do
     local _url = vim.split(url, '/')
     if #_url > 1 then
-      Util.add_to_path(_url[#_url])
+      local name = _url[#_url]
+      Util.add_to_path(('%s/%s'):format(core.path.lazy, name))
     end
   end
 end
