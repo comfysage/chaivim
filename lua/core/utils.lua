@@ -73,14 +73,11 @@ end
 
 ---@param props { name: string, dir: string, mod: string, opts: table|nil|boolean }
 function Util.boot(props)
-  local dir = core.path.root .. '/' .. props.dir
-  core.path[props.name] = dir
-
-  if not vim.loop.fs_stat(dir) then
+  if not vim.loop.fs_stat(core.path[props.name]) then
     Util.log('core.utils', 'module ' .. props.name .. ' not found. bootstrapping...', 'warn')
     require 'core.bootstrap'.load(props.name)
   end
-  Util.add_to_path(dir)
+  Util.add_to_path(core.path[props.name])
 
   if props.opts == false then
     return
@@ -111,6 +108,9 @@ function Util.create_bootstrap(props)
   end
   props.dir = props.dir or props.name
   props.mod = props.mod or props.name
+
+  local dir = core.path.lazy .. '/' .. props.dir
+  core.path[props.name] = dir
 
   return {
     boot = function()
