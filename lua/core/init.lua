@@ -40,11 +40,8 @@ local parts = require 'core.parts'
 ---@class CorePath
 ---@field root string
 ---@field core string
----@field log string
----@field plenary string
----@field keymaps string
----@field telescope string
 ---@field lazy string
+---@field log string
 
 ---@alias InternalModules { [MainModule]: { [ModuleName]: ModuleSpec } }
 
