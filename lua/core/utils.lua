@@ -25,6 +25,8 @@ end
 
 ---@param path string
 function Util.add_to_path(path)
+  Util.log('core.utils', ('add "%s" to path'):format(path))
+  ---@diagnostic disable-next-line: undefined-field
   vim.opt.rtp:prepend(path)
 end
 
