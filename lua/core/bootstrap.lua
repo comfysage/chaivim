@@ -36,7 +36,7 @@ local fn = {
     url = 'crispybaccoon/evergarden',
   },
   lazy = Util.create_bootstrap {
-    name = 'lazy',
+    name = 'lazy.nvim',
     url = 'folke/lazy.nvim',
     dir = 'lazy.nvim',
     mod = 'lazy',
