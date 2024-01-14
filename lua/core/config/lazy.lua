@@ -51,7 +51,7 @@ return {
     opts.config = vim.tbl_deep_extend('force', opts.config, overwrite)
 
     -- set lazy path
-    opts.config.root = core.path.root
+    opts.config.root = core.path.lazy
 
     -- update global
     core.modules.core.lazy.opts = opts
