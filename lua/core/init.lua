@@ -30,9 +30,9 @@ local parts = require 'core.parts'
 ---@field path CorePath
 ---@field loaded boolean
 ---@field modules InternalModules parsed module configs
----@field lib CoreLib
+---@field lib core.types.lib
 
----@class CoreLib
+---@class core.types.lib
 ---@field icons CoreIcons
 ---@field hl CoreHighlights
 --- ... `core.lib`

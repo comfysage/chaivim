@@ -1,6 +1,6 @@
 core.lib.math = {}
 
----@class CoreLib__math
+---@class core.types.lib.math
 ---@field components_to_hex fun(props: Array<integer>): integer
 function core.lib.math.components_to_hex(props)
   local n = 0
@@ -11,7 +11,7 @@ function core.lib.math.components_to_hex(props)
   return n
 end
 
----@class CoreLib__math
+---@class core.types.lib.math
 ---@field hex_to_components fun(n: integer, v: integer): Array<integer>
 function core.lib.math.hex_to_components(n, v)
   local _components = {}
@@ -28,7 +28,7 @@ function core.lib.math.hex_to_components(n, v)
   return components
 end
 
----@class CoreLib__math
+---@class core.types.lib.math
 ---@field hex_to_rgb fun(n): core.types.lib.color.Color
 ---@param n core.types.lib.color.Color__internal
 function core.lib.math.hex_to_rgb(n)
@@ -40,7 +40,7 @@ function core.lib.math.hex_to_rgb(n)
   return { r = components[1], g = components[2], b = components[3] }
 end
 
----@class CoreLib__math
+---@class core.types.lib.math
 ---@field avg fun(props: table<integer>): integer
 function core.lib.math.avg(props)
   local sum = 0

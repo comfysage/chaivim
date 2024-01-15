@@ -5,14 +5,14 @@ core.lib.color = {}
 ---@alias core.types.lib.color.Color core.types.lib.color.Color__rgb
 ---@alias core.types.lib.color.Color__hsl { hue: integer, sat: integer, lum: integer }
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field rgb fun(props: core.types.lib.color.Color__rgb): integer
 function core.lib.color.rgb(props)
   if not props or not props.r or not props.g or not props.b then return 0 end
   return core.lib.math.components_to_hex { [1] = props.r, [2] = props.g, [3] = props.b }
 end
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field mix fun(ratio, props): integer
 ---@param ratio number Ratio of color2 mixed into color1; 1.0 means only color2
 ---@param props tuple<core.types.lib.color.Color__internal>
@@ -30,7 +30,7 @@ function core.lib.color.mix(ratio, props)
   return core.lib.color.rgb(mix)
 end
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field hsl_mix fun(ratio, props): integer
 ---@param ratio { hue?: number, sat?: number, lum?: number } Ratio of color2 mixed into color1; 1.0 means only color2
 ---@param props tuple<core.types.lib.color.Color__internal>
@@ -55,7 +55,7 @@ function core.lib.color.hsl_mix(ratio, props)
   return core.lib.color.rgb(mix__rgb)
 end
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field rgb_to_hsl fun(props: core.types.lib.color.Color__rgb): core.types.lib.color.Color__hsl
 function core.lib.color.rgb_to_hsl(props)
   local hsl = { hue = 0, sat = 0, lum = 0 }
@@ -109,7 +109,7 @@ function core.lib.color.rgb_to_hsl(props)
   return hsl
 end
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field hsl_to_rgb fun(props: core.types.lib.color.Color__hsl): core.types.lib.color.Color__rgb
 function core.lib.color.hsl_to_rgb(props)
   local color = { r = 0, g = 0, b = 0 }
@@ -143,7 +143,7 @@ function core.lib.color.hsl_to_rgb(props)
   return color
 end
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field hue_to_rgb fun(p, q, t): number
 function core.lib.color.hue_to_rgb(p, q, t)
   if t < 0 then t = t + 1 end
@@ -160,7 +160,7 @@ function core.lib.color.hue_to_rgb(p, q, t)
   return p
 end
 
----@class CoreLib__color
+---@class core.types.lib.color
 ---@field color_overlay fun(ratio, props): integer
 ---@param ratio number Ratio of color2 overlayed ontop of color1; 1.0 means only color2
 ---@param props tuple<core.types.lib.color.Color__internal>

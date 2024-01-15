@@ -1,8 +1,8 @@
----@class CoreLib__options
+---@class core.types.lib.options
 core.lib.options = core.lib.options or {}
 core.lib.options.__value = core.lib.options.__value or {}
 
----@class CoreLib__options
+---@class core.types.lib.options
 ---@field get fun(self, ...: string): any
 function core.lib.options:get(name, ...)
   if not name then return end

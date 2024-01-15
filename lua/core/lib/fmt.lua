@@ -1,7 +1,7 @@
----@class CoreLib__fmt
+---@class core.types.lib.fmt
 core.lib.fmt = core.lib.fmt or {}
 
----@class CoreLib__fmt
+---@class core.types.lib.fmt
 ---@field space fun(str, n, sep): string
 ---@param str string
 ---@param n? integer

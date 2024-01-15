@@ -1,15 +1,15 @@
 ---@alias tuple<T> { [1]: T, [2]: T }
 
 -- statically allocated instead of dynamically by function wrapping
----@class CoreLib
----@field autocmd CoreLib__autocmd
----@field event CoreLib__event
----@field keymaps CoreLib__keymaps
----@field hl CoreLib__highlight
----@field options CoreLib__options
----@field fmt CoreLib__fmt
----@field color CoreLib__color
----@field math CoreLib__math
+---@class core.types.lib
+---@field autocmd core.types.lib.autocmd
+---@field event core.types.lib.event
+---@field keymaps core.types.lib.keymaps
+---@field hl core.types.lib.highlight
+---@field options core.types.lib.options
+---@field fmt core.types.lib.fmt
+---@field color core.types.lib.color
+---@field math core.types.lib.math
 
 return {
   setup = function()
@@ -24,7 +24,7 @@ return {
     require 'core.lib.options'
     require 'core.lib.fmt'
 
-    ---@class CoreLib
+    ---@class core.types.lib
     ---@field get fun(field: string, ...: string): any
     function core.lib:get(field, ...)
       local query_fn = {
