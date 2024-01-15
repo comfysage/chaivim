@@ -34,7 +34,7 @@ Model.__index = Model
 ---@field window { config: table, width: integer, height: integer }
 ---@field cmd 'quit'|any
 ---@field cursor tuple<integer>
----@field hls { [string]: table<core.types.ui.model.internal.hl_pos> }
+---@field hls { [string]: core.types.ui.model.internal.hl_pos[] }
 
 ---@alias core.types.ui.model.internal.hl_pos { [1]: integer, [2]: integer, [3]: integer }
 

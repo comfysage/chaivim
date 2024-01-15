@@ -41,7 +41,7 @@ function core.lib.math.hex_to_rgb(n)
 end
 
 ---@class core.types.lib.math
----@field avg fun(props: table<integer>): integer
+---@field avg fun(props: integer[]): integer
 function core.lib.math.avg(props)
   local sum = 0
   for _, v in ipairs(props) do

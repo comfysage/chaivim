@@ -13,7 +13,7 @@ function Util.has(name)
   return value == 1
 end
 
----@param plugins table<string>
+---@param plugins string[]
 function Util.load_plugins(plugins)
   for _, url in ipairs(plugins) do
     local _url = vim.split(url, '/')

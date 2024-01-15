@@ -51,7 +51,7 @@ end
 M.parse = function()
   local modules = {}
 
-  ---@type { ['a'|'b'|'c'|'x'|'y'|'z']: table<string> }
+  ---@type { ['a'|'b'|'c'|'x'|'y'|'z']: string[] }
   local _modules = {
     a = parse_components(config_modules.a),
     b = parse_components(config_modules.b),

@@ -7,7 +7,7 @@ local M = {}
 ---@field scrolloff integer
 ---@field use_ripgrep boolean
 ---@field treesitter_folds boolean
----@field load_plugins table<string>
+---@field load_plugins string[]
 ---@field cmdheight boolean
 
 --- Setup options
