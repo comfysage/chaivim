@@ -93,7 +93,7 @@ function Model:_init()
 
   self.internal.window.config = {
     relative = 'editor',
-    title = self.props.title or '',
+    title = core.lib.fmt.space(self.props.title or ''),
     title_pos = self.props.title and 'center' or nil,
     border = 'rounded',
   }
