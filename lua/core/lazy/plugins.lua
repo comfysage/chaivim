@@ -1,5 +1,6 @@
 return {
   { 'crispybaccoon/keymaps.nvim' },
+  { 'crispybaccoon/base46' },
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-telescope/telescope.nvim',
     dependencies = {

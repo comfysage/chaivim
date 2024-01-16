@@ -2,6 +2,7 @@ return {
   default = {
     opts = {
       general = {
+        colorscheme = nil,
         separator_style = 'round',
       },
       cursor = {

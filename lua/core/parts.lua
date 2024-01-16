@@ -110,6 +110,9 @@ function parts.load(module, spec)
 end
 
 function parts.colorscheme(_)
+  if core.lib.options:get('ui', 'general', 'colorscheme') ~= nil and core.config.colorscheme == 'base46' then
+    require 'core.plugin.hl'.load()
+  end
   local ok, _ = pcall(vim.cmd.colorscheme, core.config.colorscheme)
   if not ok then
     Util.log('core.parts', "couldn't load colorscheme", 'error')

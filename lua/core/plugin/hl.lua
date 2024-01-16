@@ -11,13 +11,39 @@
 ---@field syntax table<core.types.lib.hl.table.syntax.enum, core.types.hl.highlight>
 
 ---@class core.types.lib.hl.table.ui
+---@field fg core.types.hl.highlight normal fg
 ---@field bg core.types.hl.highlight normal bg
+---@field bg_dark core.types.hl.highlight bg for items that require less visual priority
 ---@field bg_accent core.types.hl.highlight bg for items that require visual priority; signcolumn
+---@field bg1 core.types.hl.highlight extra bg color
+---@field bg2 core.types.hl.highlight extra bg color
+---@field bg3 core.types.hl.highlight extra bg color
+---@field grey1 core.types.hl.highlight extra fg color
+---@field grey2 core.types.hl.highlight extra fg color
+---@field grey3 core.types.hl.highlight extra fg color
 ---@field accent core.types.hl.highlight accent color for titles and tabs
 ---@field current core.types.hl.highlight bg color for current item
 ---@field focus core.types.hl.highlight focused item
 ---@field match core.types.hl.highlight color for matching text
 ---@field border core.types.hl.highlight fg color for borders and window separators
+---@field pmenu_bg core.types.hl.highlight bg color for pmenu
+---@field statusline_bg core.types.hl.highlight bg color for statusline
+---@field folder_bg core.types.hl.highlight bg color for folders
+---@field bg_alt core.types.hl.highlight alternate bg color
+---@field red core.types.hl.highlight red
+---@field rose core.types.hl.highlight dark pink
+---@field pink core.types.hl.highlight pink
+---@field green core.types.hl.highlight green
+---@field vibrant core.types.hl.highlight dark green
+---@field nord core.types.hl.highlight blue
+---@field blue core.types.hl.highlight dark blue
+---@field orange core.types.hl.highlight yellow
+---@field yellow core.types.hl.highlight yellow
+---@field peach core.types.hl.highlight dark yellow
+---@field purple core.types.hl.highlight purple
+---@field mauve core.types.hl.highlight dark_purple
+---@field cyan core.types.hl.highlight cyan
+---@field teal core.types.hl.highlight dark cyan
 ---@alias core.types.lib.hl.table.diagnostic.enum 'ok'|'warn'|'error'|'info'|'hint'
 ---@alias core.types.lib.hl.table.diff.enum 'add'|'change'|'delete'
 ---@alias core.types.lib.hl.table.syntax.enum 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'

@@ -16,6 +16,11 @@ local fn = {
     dir = 'keymaps.nvim',
     opts = {},
   },
+  base46 = Util.create_bootstrap {
+    name = 'base46',
+    url = 'crispybaccoon/base46',
+    opts = false,
+  },
   plenary = Util.create_bootstrap {
     name = 'plenary',
     url = 'nvim-lua/plenary.nvim',
