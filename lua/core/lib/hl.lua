@@ -10,7 +10,7 @@ core.lib.hl.get_hl = function(props)
 end
 
 ---@class core.types.lib.highlight
----@field get fun(self, ...: string): core.types.hl.highlight
+---@field get fun(self, ...: string): integer
 function core.lib.hl:get(...)
   return vim.tbl_get(self.__value, ...)
 end

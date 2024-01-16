@@ -1,85 +1,74 @@
 ---@diagnostic disable duplicate-doc-alias
 
----@alias core.types.hl.color string|integer|'none'
+---@alias core.types.hl.color integer|'none'
 
----@alias core.types.hl.highlight { name: string, fg: core.types.hl.color, bg: core.types.hl.color  }
+---@alias core.types.hl.highlight { fg: core.types.hl.color, bg: core.types.hl.color  }
 
 ---@class core.types.lib.hl.table
 ---@field ui core.types.hl.table.ui
----@field diagnostic table<core.types.lib.hl.table.diagnostic.enum, core.types.hl.highlight>
----@field diff table<core.types.lib.hl.table.diff.enum, core.types.hl.highlight>
----@field syntax table<core.types.lib.hl.table.syntax.enum, core.types.hl.highlight>
+---@field diagnostic table<core.types.lib.hl.table.diagnostic.enum, integer>
+---@field diff table<core.types.lib.hl.table.diff.enum, integer>
+---@field syntax table<core.types.lib.hl.table.syntax.enum, integer>
 
 ---@class core.types.lib.hl.table.ui
----@field fg core.types.hl.highlight normal fg
----@field bg core.types.hl.highlight normal bg
----@field bg_dark core.types.hl.highlight bg for items that require less visual priority
----@field bg_accent core.types.hl.highlight bg for items that require visual priority; signcolumn
----@field bg1 core.types.hl.highlight extra bg color
----@field bg2 core.types.hl.highlight extra bg color
----@field bg3 core.types.hl.highlight extra bg color
----@field grey1 core.types.hl.highlight extra fg color
----@field grey2 core.types.hl.highlight extra fg color
----@field grey3 core.types.hl.highlight extra fg color
----@field accent core.types.hl.highlight accent color for titles and tabs
----@field current core.types.hl.highlight bg color for current item
----@field focus core.types.hl.highlight focused item
----@field match core.types.hl.highlight color for matching text
----@field border core.types.hl.highlight fg color for borders and window separators
----@field pmenu_bg core.types.hl.highlight bg color for pmenu
----@field statusline_bg core.types.hl.highlight bg color for statusline
----@field folder_bg core.types.hl.highlight bg color for folders
----@field bg_alt core.types.hl.highlight alternate bg color
----@field red core.types.hl.highlight red
----@field rose core.types.hl.highlight dark pink
----@field pink core.types.hl.highlight pink
----@field green core.types.hl.highlight green
----@field vibrant core.types.hl.highlight dark green
----@field nord core.types.hl.highlight blue
----@field blue core.types.hl.highlight dark blue
----@field orange core.types.hl.highlight yellow
----@field yellow core.types.hl.highlight yellow
----@field peach core.types.hl.highlight dark yellow
----@field purple core.types.hl.highlight purple
----@field mauve core.types.hl.highlight dark_purple
----@field cyan core.types.hl.highlight cyan
----@field teal core.types.hl.highlight dark cyan
+---@field fg integer normal fg
+---@field bg integer normal bg
+---@field bg_dark integer bg for items that require less visual priority
+---@field bg_accent integer bg for items that require visual priority; signcolumn
+---@field bg1 integer extra bg color
+---@field bg2 integer extra bg color
+---@field bg3 integer extra bg color
+---@field grey1 integer extra fg color
+---@field grey2 integer extra fg color
+---@field grey3 integer extra fg color
+---@field accent integer accent color for titles and tabs
+---@field current integer bg color for current item
+---@field focus integer focused item
+---@field match integer color for matching text
+---@field border integer fg color for borders and window separators
+---@field pmenu_bg integer bg color for pmenu
+---@field statusline_bg integer bg color for statusline
+---@field folder_bg integer bg color for folders
+---@field bg_alt integer alternate bg color
+---@field red integer red
+---@field rose integer dark pink
+---@field pink integer pink
+---@field green integer green
+---@field vibrant integer dark green
+---@field nord integer blue
+---@field blue integer dark blue
+---@field orange integer yellow
+---@field yellow integer yellow
+---@field peach integer dark yellow
+---@field purple integer purple
+---@field mauve integer dark_purple
+---@field cyan integer cyan
+---@field teal integer dark cyan
 ---@alias core.types.lib.hl.table.diagnostic.enum 'ok'|'warn'|'error'|'info'|'hint'
 ---@alias core.types.lib.hl.table.diff.enum 'add'|'change'|'delete'
 ---@alias core.types.lib.hl.table.syntax.enum 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
 
 ---@alias CoreHlName core.types.lib.hl.table.ui.enum|core.types.lib.hl.table.diagnostic.enum|core.types.lib.hl.table.diff.enum|core.types.lib.hl.table.syntax.enum
 
----@param props { [1]: CoreHlName, [2]: core.types.hl.color|nil, [3]: core.types.hl.color|nil , fg: core.types.hl.color|nil, bg: core.types.hl.color|nil, from: core.types.hl.color|nil, inverse: boolean|nil }[]
+---@param props { [1]: CoreHlName, [2]: string, bg?: boolean }[]
 ---@return { [string]: core.types.hl.highlight }
 local function create_hls(props)
   local hls = {}
   for _, v in ipairs(props) do
     local name = v[1]
-    local fg = v.fg or v[2]
-    local bg = v.bg or v[3]
 
-    -- if from is defined, then empty fields will be filled in
-    if v.from then
-      local copy = vim.api.nvim_get_hl(0, { name = v.from })
-      fg = fg or copy.fg
-      bg = bg or copy.bg
-    end
-    hls[name] = { name = name, fg = fg or 'none', bg = bg or 'none' }
-
-    local fg = hls[name].fg
-    local bg = hls[name].bg
-    if type(fg) == 'number' and type(bg) == 'number' and bg > fg then
-      hls[name].fg = bg
-      hls[name].bg = fg
-      if v.inverse then
-        hls[name].fg = fg
-        hls[name].bg = bg
+    function get(name)
+      local copy = vim.api.nvim_get_hl(0, { name = name })
+      if copy.link then
+        return get(copy.link)
       end
-    elseif bg == 'none' and v.inverse then
-      hls[name].fg = 0
-      hls[name].bg = fg
+      if v.bg then
+        local bg = copy.bg ~= nil and copy.bg or copy.fg
+        return bg or 'none'
+      end
+      return copy.fg or 'none'
     end
+    hls[name] = get(v[2])
   end
   return hls
 end
@@ -99,64 +88,64 @@ return {
   create = function()
     return {
       ui = create_hls {
-        { 'bg',        from = 'Normal' },
-        { 'fg',        from = 'Normal', bg = 'none' },
-        { 'bg_accent', from = 'SignColumn' },
-        { 'accent',    from = 'TablineSel', inverse = true },
-        { 'current',   from = 'CursorLine' },
-        { 'focus',     from = 'IncSearch' },
-        { 'match',     from = 'Search' },
-        { 'border',    from = 'WinSeparator' },
-        { 'comment',   from = 'Comment' },
+        { 'fg',        'Normal' },
+        { 'bg',        'Normal', bg = true },
+        { 'bg_accent', 'SignColumn', bg = true },
+        { 'accent',    'TablineSel', bg = true },
+        { 'current',   'CursorLine', bg = true },
+        { 'focus',     'IncSearch', bg = true },
+        { 'match',     'Search' },
+        { 'border',    'WinSeparator' },
+        { 'comment',   'Comment' },
       },
       diagnostic = create_hls {
-        { 'ok',    from = 'DiagnosticOk' },
-        { 'warn',  from = 'DiagnosticWarn' },
-        { 'error', from = 'DiagnosticError' },
-        { 'info',  from = 'DiagnosticInfo' },
-        { 'hint',  from = 'DiagnosticHint' },
+        { 'ok',    'DiagnosticOk' },
+        { 'warn',  'DiagnosticWarn' },
+        { 'error', 'DiagnosticError' },
+        { 'info',  'DiagnosticInfo' },
+        { 'hint',  'DiagnosticHint' },
       },
       diff = create_hls {
-        { 'add',    from = 'DiffAdd' },
-        { 'change', from = 'DiffChange' },
-        { 'delete', from = 'DiffAdd' },
+        { 'add',    'DiffAdd' },
+        { 'change', 'DiffChange' },
+        { 'delete', 'DiffAdd' },
       },
       syntax = create_hls {
-        { 'text', from = 'Comment' },
-        { 'method', from = 'Constant' },
-        { 'fn', from = 'Constant' },
-        { 'constructor', from = 'Structure' },
-        { 'field', from = 'Identifier' },
-        { 'variable', from = 'Identifier' },
-        { 'class', from = 'Structure' },
-        { 'interface', from = 'Structure' },
-        { 'module', from = 'Keyword' },
-        { 'property', from = 'Keyword' },
-        { 'unit', from = 'Constant' },
-        { 'value', from = 'Constant' },
-        { 'enum', from = 'Constant' },
-        { 'keyword', from = 'Keyword' },
-        { 'snippet', from = 'Comment' },
-        { 'color', from = 'Constant' },
-        { 'file', from = 'Title' },
-        { 'reference', from = 'Identifier' },
-        { 'folder', from = 'Type' },
-        { 'enummember', from = 'Constant' },
-        { 'constant', from = 'Constant' },
-        { 'struct', from = 'Structure' },
-        { 'event', from = 'Keyword' },
-        { 'operator', from = 'Operator' },
-        { 'typeparameter', from = 'Type' },
-        { 'namespace', from = 'Constant' },
-        { 'table', from = 'Structure' },
-        { 'object', from = 'Structure' },
-        { 'tag', from = 'Identifier' },
-        { 'array', from = 'Type' },
-        { 'boolean', from = 'Boolean' },
-        { 'number', from = 'Constant' },
-        { 'null', from = 'Comment' },
-        { 'string', from = 'Comment' },
-        { 'package', from = 'healthWarning' },
+        { 'text', 'Comment' },
+        { 'method', 'Constant' },
+        { 'fn', 'Constant' },
+        { 'constructor', 'Structure' },
+        { 'field', 'Identifier' },
+        { 'variable', 'Identifier' },
+        { 'class', 'Structure' },
+        { 'interface', 'Structure' },
+        { 'module', 'Keyword' },
+        { 'property', 'Keyword' },
+        { 'unit', 'Constant' },
+        { 'value', 'Constant' },
+        { 'enum', 'Constant' },
+        { 'keyword', 'Keyword' },
+        { 'snippet', 'Comment' },
+        { 'color', 'Constant' },
+        { 'file', 'Title' },
+        { 'reference', 'Identifier' },
+        { 'folder', 'Type' },
+        { 'enummember', 'Constant' },
+        { 'constant', 'Constant' },
+        { 'struct', 'Structure' },
+        { 'event', 'Keyword' },
+        { 'operator', 'Operator' },
+        { 'typeparameter', 'Type' },
+        { 'namespace', 'Constant' },
+        { 'table', 'Structure' },
+        { 'object', 'Structure' },
+        { 'tag', 'Identifier' },
+        { 'array', 'Type' },
+        { 'boolean', 'Boolean' },
+        { 'number', 'Constant' },
+        { 'null', 'Comment' },
+        { 'string', 'Comment' },
+        { 'package', 'healthWarning' },
       },
     }
   end,

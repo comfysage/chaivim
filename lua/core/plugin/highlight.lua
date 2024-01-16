@@ -57,8 +57,8 @@ return {
   end,
   create = function()
     return {
-      FloatTitle  = core.hl.ui.accent,
-      FloatBorder = core.hl.ui.border,
+      FloatTitle  = { core.lib.hl:get('ui', 'bg'), core.lib.hl:get('ui', 'accent') },
+      FloatBorder = { core.lib.hl:get('ui', 'border')  },
     }
   end,
   apply = function(props)

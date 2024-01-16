@@ -10,19 +10,19 @@ M.setup_highlights = function()
 end
 
 M.apply_highlights = function()
-  local normal_bg = core.lib.hl:get('ui', 'bg').bg
-  local normal_fg = core.lib.hl:get('ui', 'fg').fg
+  local normal_bg = core.lib.hl:get('ui', 'bg')
+  local normal_fg = core.lib.hl:get('ui', 'fg')
 
-  local accent_bg = core.lib.hl:get('ui', 'border').fg
-  local comment_fg = core.lib.hl:get('ui', 'comment').fg
+  local accent_bg = core.lib.hl:get('ui', 'border')
+  local comment_fg = core.lib.hl:get('ui', 'comment')
 
   local hls = {
-    ['St_normal'] = { fg = normal_fg, bg = core.lib.hl:get('ui', 'bg_accent').bg },
+    ['St_normal'] = { fg = normal_fg, bg = core.lib.hl:get('ui', 'bg_accent') },
   }
   local modes = {
-    ['St_NormalMode'] = { fg = normal_bg, bg = core.lib.hl:get('ui', 'accent').bg },
-    ['St_VisualMode'] = { fg = normal_bg, bg = core.lib.hl:get('syntax', 'constant').fg },
-    ['St_InsertMode'] = { fg = normal_bg, bg = core.lib.hl:get('ui', 'focus').fg },
+    ['St_NormalMode'] = { fg = normal_bg, bg = core.lib.hl:get('ui', 'accent') },
+    ['St_VisualMode'] = { fg = normal_bg, bg = core.lib.hl:get('syntax', 'constant') },
+    ['St_InsertMode'] = { fg = normal_bg, bg = core.lib.hl:get('ui', 'focus') },
     ['St_ReplaceMode'] = { link = 'St_InsertMode' },
     ['St_SelectMode'] = { link = 'St_VisualMode' },
     ['St_CommandMode'] = { link = 'St_NormalMode' },

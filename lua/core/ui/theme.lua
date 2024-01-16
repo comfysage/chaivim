@@ -3,8 +3,8 @@ local Util = require 'core.utils'
 return {
   create = function(theme)
     return {
-      Normal = { theme.ui.fg.fg, theme.ui.bg.bg },
-      NormalFloat = { theme.ui.fg.fg, theme.ui.bg.bg },
+      Normal = { theme.ui.fg, theme.ui.bg },
+      NormalFloat = { theme.ui.fg, theme.ui.bg },
       TabLine  = theme.ui.accent,
       TabLineFill  = { link = "TabLine" },
       TabLineSel  = theme.ui.accent,

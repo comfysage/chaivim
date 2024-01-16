@@ -12,10 +12,10 @@ local function use_theme(theme_name)
         preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
       },
       highlights = {
-        TelescopeTitle = core.hl.ui.accent,
-        TelescopeNormal = core.hl.ui.bg,
-        TelescopePromptNormal = core.hl.ui.bg_accent,
-        TelescopeSelection = core.hl.ui.current,
+        TelescopeTitle = { core.lib.hl:get('ui', 'bg') , core.lib.hl:get('ui', 'accent') },
+        TelescopeNormal = { core.lib.hl:get('ui', 'fg'), core.lib.hl:get('ui', 'bg') },
+        TelescopePromptNormal = { 'none', core.lib.hl:get('ui', 'bg_accent') },
+        TelescopeSelection = { 'none', core.lib.hl:get('ui', 'current') },
       },
     },
     main = {
@@ -26,10 +26,10 @@ local function use_theme(theme_name)
         preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       },
       highlights = {
-        TelescopeTitle = core.hl.ui.accent,
-        TelescopeNormal = core.hl.ui.bg,
-        TelescopePromptNormal = core.hl.ui.bg_accent,
-        TelescopeSelection = core.hl.ui.current,
+        TelescopeTitle = { core.lib.hl:get('ui', 'bg') , core.lib.hl:get('ui', 'accent') },
+        TelescopeNormal = { core.lib.hl:get('ui', 'fg'), core.lib.hl:get('ui', 'bg') },
+        TelescopePromptNormal = { 'none', core.lib.hl:get('ui', 'bg_accent') },
+        TelescopeSelection = { 'none', core.lib.hl:get('ui', 'current') },
       },
     },
   }

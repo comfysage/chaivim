@@ -24,7 +24,7 @@ return {
   create = function()
     _G.saved_highlights = {
       transparent = {
-        Normal = { fg = core.lib.hl:get('ui', 'bg').fg, bg = 'none' },
+        Normal = { fg = core.lib.hl:get('ui', 'fg'), bg = 'none' },
         SignColumn = glassify 'SignColumn',
         LineNr = glassify 'LineNr',
         TabLine = glassify 'TabLine',

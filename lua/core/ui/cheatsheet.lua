@@ -135,7 +135,7 @@ return {
     require 'core.plugin.hl'.load()
     -- local cheatsheet_ns = api.nvim_create_namespace 'cheatsheet'
     api.nvim_set_hl(0, "CheatsheetTitle", { link = 'TelescopeTitle' })
-    api.nvim_set_hl(0, "CheatsheetLine", { fg = core.hl.ui.bg.fg, bg = core.hl.ui.current.bg })
+    api.nvim_set_hl(0, "CheatsheetLine", { fg = core.lib.hl:get('ui', 'fg'), bg = core.lib.hl:get('ui', 'current') })
 
     ---@type { ['title'|'lines']: { [1]: integer, [2]: { from: integer, to: integer } }[] }
     local hls = {

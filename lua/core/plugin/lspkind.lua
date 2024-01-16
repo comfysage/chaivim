@@ -1,11 +1,11 @@
 local M = {}
 
 local cmp_hi = {
-  CmpItemMenu           = { fg = core.lib.hl:get('syntax', 'constant').fg, bg = "NONE", italic = true },
+  CmpItemMenu           = { fg = core.lib.hl:get('syntax', 'constant'), bg = "none", italic = true },
 
-  CmpItemAbbrDeprecated = { fg = core.lib.hl:get('diagnostic', 'warn').fg },
+  CmpItemAbbrDeprecated = { fg = core.lib.hl:get('diagnostic', 'warn') },
 
-  CmpItemAbbrMatch      = { fg = core.lib.hl:get('ui', 'match').fg },
+  CmpItemAbbrMatch      = { fg = core.lib.hl:get('ui', 'match') },
   CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 }
 
@@ -94,7 +94,7 @@ local kind_hl = {
 for kind, item in pairs(kind_hl) do
   local hi_group = string.format('CmpItemKind%s', kind)
   core.lib.hl.apply {
-    [hi_group] = item,
+    [hi_group] = { fg = item },
   }
 end
 

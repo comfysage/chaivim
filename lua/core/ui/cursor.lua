@@ -32,20 +32,20 @@ return {
 
     local main = core.lib.hl:get('ui', 'current')
 
-    local accent = core.lib.hl:get('ui', 'accent').bg
-    local line = core.lib.hl:get('syntax', 'string').fg
+    local accent = core.lib.hl:get('ui', 'accent')
+    local line = core.lib.hl:get('syntax', 'string')
 
     -- overlay on bg
-    local vibrant = core.lib.color.color_overlay(0.07, { normal.bg, line })
+    local vibrant = core.lib.color.color_overlay(0.07, { normal, line })
     -- brighten
     vibrant = core.lib.color.hsl_mix({ lum = 0.07 }, { vibrant, core.lib.color.rgb{ r = 200, g = 200, b = 200 } })
     return {
       hl = {
-        normal = main,
+        normal = { bg = main },
         insert = { bg = vibrant },
       },
       cursor = {
-        NCursor = { bg = cursor.fg },
+        NCursor = { bg = cursor },
         ICursor = { bg = accent },
       },
     }

@@ -58,10 +58,10 @@ function model:init()
   api.nvim_set_hl(
     0,
     'CoreModule',
-    { fg = core.lib.hl:get('syntax', 'module').fg }
+    { fg = core.lib.hl:get('syntax', 'module') }
   )
-  api.nvim_set_hl(0, 'CoreTask', { fg = core.lib.hl:get('syntax', 'fn').fg })
-  api.nvim_set_hl(0, 'CoreItem', { fg = core.lib.hl:get('syntax', 'field').fg })
+  api.nvim_set_hl(0, 'CoreTask', { fg = core.lib.hl:get('syntax', 'fn') })
+  api.nvim_set_hl(0, 'CoreItem', { fg = core.lib.hl:get('syntax', 'field') })
 
   self:add_mapping('n', '<cr>', 'open_section')
 end
