@@ -46,7 +46,7 @@
 ---@field teal integer dark cyan
 ---@alias core.types.lib.hl.table.diagnostic.enum 'ok'|'warn'|'error'|'info'|'hint'
 ---@alias core.types.lib.hl.table.diff.enum 'add'|'change'|'delete'
----@alias core.types.lib.hl.table.syntax.enum 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
+---@alias core.types.lib.hl.table.syntax.enum 'title'|'identifier'|'type'|'structure'|'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
 
 ---@alias CoreHlName core.types.lib.hl.table.ui.enum|core.types.lib.hl.table.diagnostic.enum|core.types.lib.hl.table.diff.enum|core.types.lib.hl.table.syntax.enum
 
@@ -111,6 +111,10 @@ return {
         { 'delete', 'DiffAdd' },
       },
       syntax = create_hls {
+        { 'title', from = 'Title' },
+        { 'identifier', from = 'Identifier' },
+        { 'type', from = 'Type' },
+        { 'structure', from = 'Structure' },
         { 'text', 'Comment' },
         { 'method', 'Constant' },
         { 'fn', 'Constant' },

@@ -117,6 +117,10 @@ function core.lib.hl.parse_theme(theme)
       delete = { fg = theme.base_30.red },
     },
     syntax = {
+      title = { fg = theme.syntax.title },
+      identifier = { fg = theme.syntax.identifier },
+      type = { fg = theme.syntax.type },
+      structure = { fg = theme.syntax.structure },
       text = { fg = theme.syntax.comment },
       method = { fg = theme.syntax.constant },
       fn = { fg = theme.syntax.constant },
