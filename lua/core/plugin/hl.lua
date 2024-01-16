@@ -5,12 +5,19 @@
 ---@alias core.types.hl.highlight { name: string, fg: core.types.hl.color, bg: core.types.hl.color  }
 
 ---@class core.types.lib.hl.table
----@field ui table<core.types.lib.hl.table.ui.enum, core.types.hl.highlight>
+---@field ui core.types.hl.table.ui
 ---@field diagnostic table<core.types.lib.hl.table.diagnostic.enum, core.types.hl.highlight>
 ---@field diff table<core.types.lib.hl.table.diff.enum, core.types.hl.highlight>
 ---@field syntax table<core.types.lib.hl.table.syntax.enum, core.types.hl.highlight>
 
----@alias core.types.lib.hl.table.ui.enum 'bg'|'bg_accent'|'accent'|'current'|'focus'|'match'|'border'
+---@class core.types.lib.hl.table.ui
+---@field bg core.types.hl.highlight normal bg
+---@field bg_accent core.types.hl.highlight bg for items that require visual priority; signcolumn
+---@field accent core.types.hl.highlight accent color for titles and tabs
+---@field current core.types.hl.highlight bg color for current item
+---@field focus core.types.hl.highlight focused item
+---@field match core.types.hl.highlight color for matching text
+---@field border core.types.hl.highlight fg color for borders and window separators
 ---@alias core.types.lib.hl.table.diagnostic.enum 'ok'|'warn'|'error'|'info'|'hint'
 ---@alias core.types.lib.hl.table.diff.enum 'add'|'change'|'delete'
 ---@alias core.types.lib.hl.table.syntax.enum 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
