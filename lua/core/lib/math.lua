@@ -1,6 +1,14 @@
 core.lib.math = {}
 
 ---@class core.types.lib.math
+---@field parse_hex_str fun(props: string): integer
+function core.lib.math.parse_hex_str(props)
+  if not props or type(props) ~= 'string' then return end
+  local n = string.sub(props, 2)
+  return tonumber(n, 16)
+end
+
+---@class core.types.lib.math
 ---@field components_to_hex fun(props: Array<integer>): integer
 function core.lib.math.components_to_hex(props)
   local n = 0
