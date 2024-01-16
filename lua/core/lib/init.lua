@@ -15,13 +15,11 @@ return {
   setup = function()
     ---@diagnostic disable-next-line: missing-fields
     core.lib = core.lib or {}
-    require 'core.lib.log'
     require 'core.lib.preload'
     require 'core.lib.autocmd'
     require 'core.lib.event'
     require 'core.lib.keymaps'
     require 'core.lib.hl'
-    require 'core.lib.options'
     require 'core.lib.fmt'
 
     ---@class core.types.lib
