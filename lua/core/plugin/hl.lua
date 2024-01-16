@@ -1,31 +1,24 @@
 ---@diagnostic disable duplicate-doc-alias
 
----@alias Color string|'none'
+---@alias core.types.hl.color string|integer|'none'
 
----@alias Highlight { name: string, fg: Color, bg: Color  }
+---@alias core.types.hl.highlight { name: string, fg: core.types.hl.color, bg: core.types.hl.color  }
 
----@class CoreHighlights
----@field ui CoreUIHighlights
----@field diagnostic CoreDiagnosticHighlights
----@field diff CoreDiffHighlights
----@field syntax CoreSyntaxHighlights
+---@class core.types.lib.hl.table
+---@field ui table<core.types.lib.hl.table.ui.enum, core.types.hl.highlight>
+---@field diagnostic table<core.types.lib.hl.table.diagnostic.enum, core.types.hl.highlight>
+---@field diff table<core.types.lib.hl.table.diff.enum, core.types.hl.highlight>
+---@field syntax table<core.types.lib.hl.table.syntax.enum, core.types.hl.highlight>
 
----@alias CoreUIHighlights { [CoreUIHlName]: Highlight }
----@alias CoreUIHlName 'bg'|'bg_accent'|'accent'|'current'|'focus'|'match'|'border'
+---@alias core.types.lib.hl.table.ui.enum 'bg'|'bg_accent'|'accent'|'current'|'focus'|'match'|'border'
+---@alias core.types.lib.hl.table.diagnostic.enum 'ok'|'warn'|'error'|'info'|'hint'
+---@alias core.types.lib.hl.table.diff.enum 'add'|'change'|'delete'
+---@alias core.types.lib.hl.table.syntax.enum 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
 
----@alias CoreDiagnosticHighlights { [CoreDiagnosticHlName]: Highlight }
----@alias CoreDiagnosticHlName 'ok'|'warn'|'error'|'info'|'hint'
+---@alias CoreHlName core.types.lib.hl.table.ui.enum|core.types.lib.hl.table.diagnostic.enum|core.types.lib.hl.table.diff.enum|core.types.lib.hl.table.syntax.enum
 
----@alias CoreDiffHighlights { [CoreDiffHlName]: Highlight }
----@alias CoreDiffHlName 'add'|'change'|'delete'
-
----@alias CoreSyntaxHighlights { [CoreSyntaxHlName]: Highlight }
----@alias CoreSyntaxHlName 'text'|'method'|'fn'|'constructor'|'field'|'variable'|'class'|'interface'|'module'|'property'|'unit'|'value'|'enum'|'keyword'|'snippet'|'color'|'file'|'reference'|'folder'|'enummember'|'constant'|'struct'|'event'|'operator'|'typeparameter'|'namespace'|'table'|'object'|'tag'|'array'|'boolean'|'number'|'null'|'string'|'package'
-
----@alias CoreHlName CoreUIHlName|CoreDiagnosticHlName|CoreDiffHlName|CoreSyntaxHlName
-
----@param props { [1]: CoreHlName, [2]: Color|nil, [3]: Color|nil , fg: Color|nil, bg: Color|nil, from: Color|nil, inverse: boolean|nil }[]
----@return { [string]: Highlight }
+---@param props { [1]: CoreHlName, [2]: core.types.hl.color|nil, [3]: core.types.hl.color|nil , fg: core.types.hl.color|nil, bg: core.types.hl.color|nil, from: core.types.hl.color|nil, inverse: boolean|nil }[]
+---@return { [string]: core.types.hl.highlight }
 local function create_hls(props)
   local hls = {}
   for _, v in ipairs(props) do
@@ -69,7 +62,7 @@ return {
       end,
     }
   end,
-  ---@return CoreHighlights
+  ---@return core.types.lib.hl.table
   create = function()
     return {
       ui = create_hls {

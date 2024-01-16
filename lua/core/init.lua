@@ -34,7 +34,7 @@ local parts = require 'core.parts'
 
 ---@class core.types.lib
 ---@field icons CoreIcons
----@field hl CoreHighlights
+---@field hl core.types.lib.hl.table
 --- ... `core.lib`
 
 ---@class CorePath
