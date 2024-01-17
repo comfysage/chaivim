@@ -78,7 +78,7 @@ return {
     require 'core.plugin.hl'.load()
 
     require 'core.load.handle'.create {
-      event = 'ColorScheme', priority = 1,
+      event = 'ColorScheme', priority = GC.priority.handle.colorscheme.hl,
       fn = function(_)
         require 'core.plugin.hl'.load()
       end,

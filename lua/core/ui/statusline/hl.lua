@@ -2,7 +2,7 @@ local M = {}
 
 M.setup_highlights = function()
   core.lib.autocmd.create {
-    event = 'ColorScheme', priority = 20,
+    event = 'ColorScheme', priority = GC.priority.handle.colorscheme.plugin,
     fn = function(_)
       require 'core.ui.statusline.hl'.apply_highlights()
     end

@@ -20,7 +20,7 @@ return {
 
     if opts.fix then
       core.lib.autocmd.create {
-        event = 'ColorScheme', priority = 12,
+        event = 'ColorScheme', priority = GC.priority.handle.colorscheme.fix,
         fn = function(_)
           opts.fix()
         end
