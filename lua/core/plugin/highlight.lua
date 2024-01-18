@@ -41,27 +41,7 @@ local function set_highlights(hlgroups)
 end
 
 return {
-  setup = function(opts)
-    core.lib.autocmd.create {
-      event = 'ColorScheme', priority = GC.priority.handle.colorscheme.theme,
-      fn = function(_)
-        require 'core.plugin.highlight'.load()
-      end
-    }
-  end,
-  create = function()
-    return {
-      FloatTitle  = { core.lib.hl:get('ui', 'bg'), core.lib.hl:get('ui', 'accent') },
-      FloatBorder = { core.lib.hl:get('ui', 'border')  },
-    }
-  end,
   apply = function(props)
     set_highlights(props)
   end,
-  load = function()
-    local ok, module = SR_L 'core.plugin.highlight'
-    if not ok then return end
-    local hlgroups = module.create()
-    module.apply(hlgroups)
-  end
 }
