@@ -4,6 +4,13 @@ return {
       general = {
         colorscheme = nil,
         separator_style = 'round',
+        theme_config = {
+          keyword = { italic = false },
+          types = { italic = false },
+          comment = { italic = false },
+          search = { reverse = false },
+          inc_search = { reverse = true }
+        },
       },
       cursor = {
         enabled = true,
