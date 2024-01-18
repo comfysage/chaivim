@@ -6,18 +6,12 @@
 ---@param group string
 ---@param colors ColorSpec
 local function set_hi(group, colors)
-  if vim.tbl_isempty(colors) then
+  if type(colors) ~= 'table' or vim.tbl_isempty(colors) then
     return
   end
 
   colors.fg = colors.fg or colors[1] or 'none'
-  if type(colors.fg) ~= 'table' then
-    colors.fg = { colors.fg, 'none' }
-  end
   colors.bg = colors.bg or colors[2] or 'none'
-  if type(colors.bg) ~= 'table' then
-    colors.bg = { colors.bg, 'none' }
-  end
 
   ---@type vim.api.keyset.highlight
   local color = {}
@@ -26,10 +20,10 @@ local function set_hi(group, colors)
     color[k] = v
   end
 
-  color.fg = colors.fg[1]
-  color.bg = colors.bg[1]
-  color.ctermfg = colors.fg[2]
-  color.ctermbg = colors.bg[2]
+  color.fg = type(colors.fg) == 'table' and colors.fg[1] or colors.fg
+  color.bg = type(colors.bg) == 'table' and colors.bg[1] or colors.bg
+  color.ctermfg = type(colors.fg) == 'table' and colors.fg[2] or 'none'
+  color.ctermbg = type(colors.bg) == 'table' and colors.bg[2] or 'none'
   color[1] = nil
   color[2] = nil
   color.name = nil
