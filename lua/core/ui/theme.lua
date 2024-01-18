@@ -360,28 +360,4 @@ return {
       core.lib.hl.apply(hl_groups.syntax)
     end
   end,
-  load = function()
-    local colorscheme = core.lib.options:get('ui', 'general', 'colorscheme')
-    if colorscheme == nil then
-      return
-    end
-    local ok, theme = core.lib.hl.get_theme { name = colorscheme }
-    if not ok then
-      require('core.utils').log(
-        'core.hl',
-        ('could\'t load theme "%s"'):format(colorscheme),
-        'error'
-      )
-      return
-    end
-
-    core.lib.hl = core.lib.hl or {}
-    core.lib.hl.__value = theme
-
-    -- [FIXME]
-    ---@deprecated
-    core.hl = core.lib.hl.__value
-
-    require('core.ui.theme').apply { full = true }
-  end,
 }
