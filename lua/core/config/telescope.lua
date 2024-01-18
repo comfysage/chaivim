@@ -12,10 +12,12 @@ local function use_theme(theme_name)
         preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
       },
       highlights = {
-        TelescopeTitle = { core.lib.hl:get('ui', 'bg') , core.lib.hl:get('ui', 'accent') },
-        TelescopeNormal = { core.lib.hl:get('ui', 'fg'), core.lib.hl:get('ui', 'bg') },
+        TelescopeTitle = { link = 'FloatTitle' },
+        TelescopeNormal = { link = 'FloatNormal' },
         TelescopePromptNormal = { 'none', core.lib.hl:get('ui', 'bg_accent') },
         TelescopeSelection = { 'none', core.lib.hl:get('ui', 'current') },
+        TelescopeMatching = { link = 'Search' },
+        TelescopeBorder = { link = 'FloatBorder' },
       },
     },
     main = {
@@ -26,10 +28,12 @@ local function use_theme(theme_name)
         preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       },
       highlights = {
-        TelescopeTitle = { core.lib.hl:get('ui', 'bg') , core.lib.hl:get('ui', 'accent') },
-        TelescopeNormal = { core.lib.hl:get('ui', 'fg'), core.lib.hl:get('ui', 'bg') },
+        TelescopeTitle = { link = 'FloatTitle' },
+        TelescopeNormal = { link = 'FloatNormal' },
         TelescopePromptNormal = { 'none', core.lib.hl:get('ui', 'bg_accent') },
         TelescopeSelection = { 'none', core.lib.hl:get('ui', 'current') },
+        TelescopeMatching = { link = 'Search' },
+        TelescopeBorder = { link = 'FloatBorder' },
       },
     },
   }
