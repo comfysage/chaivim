@@ -37,7 +37,7 @@
 ---@field vibrant integer dark green
 ---@field nord integer blue
 ---@field blue integer dark blue
----@field orange integer yellow
+---@field orange integer orange
 ---@field yellow integer yellow
 ---@field peach integer dark yellow
 ---@field purple integer purple
