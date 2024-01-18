@@ -37,125 +37,128 @@ end
 ---@alias core.types.lib.hl.theme.base_16.enum 'base00'|'base01'|'base02'|'base03'|'base04'|'base05'|'base06'|'base07'|'base08'|'base09'|'base0A'|'base0B'|'base0C'|'base0D'|'base0E'|'base0F'
 
 ---@class core.types.lib.hl.theme.ui
----@field accent string
----@field focus string
----@field match string
+---@field accent integer
+---@field focus integer
+---@field match integer
 
 ---@class core.types.lib.hl.theme.syntax
----@field comment string
----@field title string
----@field string string
----@field identifier string
----@field field string
----@field keyword string
----@field type string
----@field constant string
----@field operator string
----@field structure string
----@field boolean string
----@field error string
----@field warning string
----@field info string
----@field hint string
+---@field comment integer
+---@field special integer
+---@field title integer
+---@field integer string
+---@field identifier integer
+---@field field integer
+---@field keyword integer
+---@field type integer
+---@field constant integer
+---@field operator integer
+---@field structure integer
+---@field boolean integer
+---@field error integer
+---@field warning integer
+---@field info integer
+---@field hint integer
 
 ---@class core.types.lib.highlight
 ---@field parse_theme fun(theme): core.types.lib.hl.table
 function core.lib.hl.parse_theme(theme)
+  ---@type table<string, table<string, integer>>
   theme = core.lib.hl.patch_theme(theme)
 
   ---@type core.types.lib.hl.table
   local _theme = {
     ui = {
-      fg = { fg = theme.base_30.white },
-      bg = { bg = theme.base_30.black },
-      bg_dark = { bg = theme.base_30.darker_black },
-      bg_accent = { bg = theme.base_30.black2 },
-      bg1 = { bg = theme.base_30.one_bg },
-      bg2 = { bg = theme.base_30.one_bg2 },
-      bg3 = { bg = theme.base_30.one_bg3 },
-      current = { bg = theme.base_30.grey },
-      grey1 = { fg = theme.base_30.grey_fg },
-      grey2 = { fg = theme.base_30.grey_fg2 },
-      grey3 = { fg = theme.base_30.light_grey },
-      accent = { fg = theme.base_30.black, bg = theme.ui.accent },
-      focus = { bg = theme.ui.focus },
-      match = { fg = theme.ui.match },
-      border = { fg = theme.base_30.line },
+      fg = theme.base_30.white,
+      bg = theme.base_30.black,
+      bg_dark = theme.base_30.darker_black,
+      bg_accent = theme.base_30.black2,
+      bg1 = theme.base_30.one_bg,
+      bg2 = theme.base_30.one_bg2,
+      bg3 = theme.base_30.one_bg3,
+      current = theme.base_30.grey,
+      grey1 = theme.base_30.grey_fg,
+      grey2 = theme.base_30.grey_fg2,
+      grey3 = theme.base_30.light_grey,
+      accent = theme.base_30.green,
+      focus = theme.ui.focus,
+      match = theme.ui.match,
+      border = theme.base_30.line,
 
-      comment = { fg = theme.syntax.comment },
+      comment = theme.syntax.comment,
 
-      pmenu_bg = { bg = theme.base_30.pmenu_bg },
-      statusline_bg = { bg = theme.base_30.statusline_bg },
-      folder_bg = { bg = theme.base_30.folder_bg },
-      bg_alt = { bg = theme.base_30.lightbg },
+      pmenu_bg = theme.base_30.pmenu_bg,
+      statusline_bg = theme.base_30.statusline_bg,
+      folder_bg = theme.base_30.folder_bg,
+      bg_alt = theme.base_30.lightbg,
 
-      red = { fg = theme.base_30.red },
-      rose = { fg = theme.base_30.baby_pink },
-      pink = { fg = theme.base_30.pink },
-      green = { fg = theme.base_30.green },
-      vibrant = { fg = theme.base_30.vibrant_green },
-      nord = { fg = theme.base_30.nord_blue },
-      blue = { fg = theme.base_30.blue },
-      orange = { fg = theme.base_30.orange },
-      yellow = { fg = theme.base_30.yellow },
-      peach = { fg = theme.base_30.sun },
-      purple = { fg = theme.base_30.purple },
-      mauve = { fg = theme.base_30.dark_purple },
-      cyan = { fg = theme.base_30.cyan },
-      teal = { fg = theme.base_30.teal },
+      red = theme.base_30.red,
+      rose = theme.base_30.baby_pink,
+      pink = theme.base_30.pink,
+      green = theme.base_30.green,
+      vibrant = theme.base_30.vibrant_green,
+      nord = theme.base_30.nord_blue,
+      blue = theme.base_30.blue,
+      orange = theme.base_30.orange,
+      yellow = theme.base_30.yellow,
+      peach = theme.base_30.sun,
+      purple = theme.base_30.purple,
+      mauve = theme.base_30.dark_purple,
+      cyan = theme.base_30.cyan,
+      teal = theme.base_30.teal,
     },
     diagnostic = {
-      ok = {},
-      warn = {},
-      error = {},
-      info = {},
-      hint = {},
+      ok = theme.base_30.green,
+      error = theme.syntax.error,
+      warn = theme.syntax.warning,
+      info = theme.syntax.info,
+      hint = theme.syntax.hint,
     },
     diff = {
-      add = { fg = theme.base_30.green },
-      change = { fg = theme.base_30.teal },
-      delete = { fg = theme.base_30.red },
+      add = theme.base_30.green,
+      change = theme.base_30.teal,
+      delete = theme.base_30.red,
     },
     syntax = {
-      title = { fg = theme.syntax.title },
-      identifier = { fg = theme.syntax.identifier },
-      type = { fg = theme.syntax.type },
-      structure = { fg = theme.syntax.structure },
-      text = { fg = theme.syntax.comment },
-      method = { fg = theme.syntax.constant },
-      fn = { fg = theme.syntax.constant },
-      constructor = { fg = theme.syntax.structure },
-      field = { fg = theme.syntax.field },
-      variable = { fg = theme.syntax.identifier },
-      class = { fg = theme.syntax.structure },
-      interface = { fg = theme.syntax.structure },
-      module = { fg = theme.syntax.keyword },
-      property = { fg = theme.syntax.keyword },
-      unit = { fg = theme.syntax.constant },
-      value = { fg = theme.syntax.constant },
-      enum = { fg = theme.syntax.constant },
-      keyword = { fg = theme.syntax.keyword },
-      snippet = { fg = theme.syntax.comment },
-      color = { fg = theme.syntax.constant },
-      file = { fg = theme.syntax.title },
-      reference = { fg = theme.syntax.identifier },
-      folder = { fg = theme.syntax.type },
-      enummember = { fg = theme.syntax.constant },
-      constant = { fg = theme.syntax.constant },
-      struct = { fg = theme.syntax.structure },
-      event = { fg = theme.syntax.keyword },
-      operator = { fg = theme.syntax.operator },
-      typeparameter = { fg = theme.syntax.type },
-      namespace = { fg = theme.syntax.constant },
-      table = { fg = theme.syntax.structure },
-      object = { fg = theme.syntax.structure },
-      tag = { fg = theme.syntax.identifier },
-      array = { fg = theme.syntax.type },
-      boolean = { fg = theme.syntax.boolean },
-      number = { fg = theme.syntax.constant },
-      null = { fg = theme.syntax.comment },
-      string = { fg = theme.syntax.string },
-      package = { fg = theme.syntax.warning },
+      special = theme.syntax.special,
+      title = theme.syntax.title,
+      identifier = theme.syntax.identifier,
+      type = theme.syntax.type,
+      structure = theme.syntax.structure,
+      text = theme.syntax.comment,
+      method = theme.syntax.constant,
+      fn = theme.syntax.constant,
+      constructor = theme.syntax.structure,
+      field = theme.syntax.field,
+      variable = theme.syntax.identifier,
+      class = theme.syntax.structure,
+      interface = theme.syntax.structure,
+      module = theme.syntax.keyword,
+      property = theme.syntax.keyword,
+      unit = theme.syntax.constant,
+      value = theme.syntax.constant,
+      enum = theme.syntax.constant,
+      keyword = theme.syntax.keyword,
+      snippet = theme.syntax.comment,
+      color = theme.syntax.constant,
+      file = theme.syntax.title,
+      reference = theme.syntax.identifier,
+      folder = theme.syntax.type,
+      enummember = theme.syntax.constant,
+      constant = theme.syntax.constant,
+      struct = theme.syntax.structure,
+      event = theme.syntax.keyword,
+      operator = theme.syntax.operator,
+      typeparameter = theme.syntax.type,
+      namespace = theme.syntax.constant,
+      table = theme.syntax.structure,
+      object = theme.syntax.structure,
+      tag = theme.syntax.identifier,
+      array = theme.syntax.type,
+      boolean = theme.syntax.boolean,
+      number = theme.syntax.constant,
+      null = theme.syntax.comment,
+      string = theme.syntax.string,
+      package = theme.syntax.warning,
     },
   }
 
@@ -167,11 +170,12 @@ end
 function core.lib.hl.patch_theme(theme)
 
   theme.syntax = vim.tbl_deep_extend('force', {
-    comment = theme.base_30.grey_fg,
+    comment = theme.base_30.grey_fg2,
+    special = theme.base_30.orange,
     title = theme.base_30.grey_fg2,
-    string = theme.base_30.vibrant_green,
+    string = theme.base_30.yellow,
     identifier = theme.base_30.white,
-    field = theme.base_30.blue,
+    field = theme.base_30.nord_blue,
     keyword = theme.base_30.red,
     type = theme.base_30.yellow,
     constant = theme.base_30.purple,
@@ -187,7 +191,7 @@ function core.lib.hl.patch_theme(theme)
   theme.ui = vim.tbl_deep_extend('force', {
     accent = theme.syntax.string,
     focus = theme.base_30.orange,
-    match = theme.base_30.yellow,
+    match = theme.base_30.orange,
   }, theme.ui or {})
 
   for _, t in ipairs({'base_30', 'base_16', 'syntax', 'ui'}) do
