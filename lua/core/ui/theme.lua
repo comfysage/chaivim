@@ -5,10 +5,50 @@ return {
   ---@param config table
   create = function(theme, config)
     local hl_groups = {}
-    hl_groups.main = {}
+    hl_groups.main = {
+      NormalFloat = { theme.ui.fg, theme.ui.bg },
+      FloatTitle = { theme.ui.bg, theme.ui.accent },
+      FloatBorder = { theme.ui.border },
+      StatusLine = { theme.ui.comment, theme.ui.bg_accent },
+      StatusLineNC = { theme.ui.comment, theme.ui.bg_accent },
+      FloatShadow = { 'none', 'none' },
+      FloatShadowThrough = { 'none', 'none' },
+
+      OkText = { theme.diagnostic.ok, 'none' },
+      ErrorText = { theme.diagnostic.error, 'none' },
+      WarningText = { theme.diagnostic.warn, 'none' },
+      InfoText = { theme.diagnostic.info, 'none' },
+      HintText = { theme.diagnostic.hint, 'none' },
+      OkFloat = { theme.diagnostic.ok, theme.ui.bg_accent },
+      ErrorFloat = { theme.diagnostic.error, theme.ui.bg_accent },
+      WarningFloat = { theme.diagnostic.warn, theme.ui.bg_accent },
+      InfoFloat = { theme.diagnostic.info, theme.ui.bg_accent },
+      HintFloat = { theme.diagnostic.hint, theme.ui.bg_accent },
+
+      Error = { theme.diagnostic.error },
+      ErrorMsg = { link = 'Error' },
+      WarningMsg = { theme.diagnostic.warn },
+      MoreMsg = { theme.ui.comment },
+      ModeMsg = { theme.ui.bg2, 'none' },
+
+      Search = { theme.ui.match, reverse = config.search.reverse },
+      IncSearch = { theme.ui.focus, reverse = config.inc_search.reverse },
+
+      Todo = { theme.ui.bg, theme.ui.purple },
+
+      -- Completion Menu
+      Pmenu = { theme.ui.grey1, theme.ui.bg2 },
+      PmenuSel = {
+        theme.ui.bg2,
+        theme.ui.pmenu_bg,
+        reverse = config.search.reverse,
+      },
+      PmenuSbar = { 'none', theme.ui.bg2 },
+      PmenuThumb = { 'none', theme.ui.grey1 },
+
+    }
     hl_groups.ui = {
       Normal = { theme.ui.fg, theme.ui.bg },
-      FloatTitle = { theme.ui.bg, theme.ui.accent },
 
       Cursor = { theme.ui.fg },
       Visual = { 'none', theme.ui.bg3 },
@@ -30,52 +70,13 @@ return {
       Folded = { theme.ui.comment },
       FoldColumn = { theme.ui.bg1 },
 
-      NormalFloat = { theme.ui.fg, theme.ui.bg },
-      FloatBorder = { theme.ui.border },
-      StatusLine = { theme.ui.comment, theme.ui.bg_accent },
-      StatusLineNC = { theme.ui.comment, theme.ui.bg_accent },
-      FloatShadow = { 'none', 'none' },
-      FloatShadowThrough = { 'none', 'none' },
-
-      OkText = { theme.diagnostic.ok, 'none' },
-      ErrorText = { theme.diagnostic.error, 'none' },
-      WarningText = { theme.diagnostic.warn, 'none' },
-      InfoText = { theme.diagnostic.info, 'none' },
-      HintText = { theme.diagnostic.hint, 'none' },
-      OkFloat = { theme.diagnostic.ok, theme.ui.bg_accent },
-      ErrorFloat = { theme.diagnostic.error, theme.ui.bg_accent },
-      WarningFloat = { theme.diagnostic.warn, theme.ui.bg_accent },
-      InfoFloat = { theme.diagnostic.info, theme.ui.bg_accent },
-      HintFloat = { theme.diagnostic.hint, theme.ui.bg_accent },
-
       Question = { theme.ui.comment },
 
-      Search = { theme.ui.match, reverse = config.search.reverse },
-      IncSearch = { theme.ui.focus, reverse = config.inc_search.reverse },
-
-      Error = { theme.diagnostic.error },
-      ErrorMsg = { link = 'Error' },
-      WarningMsg = { theme.diagnostic.warn },
-      MoreMsg = { theme.ui.comment },
-      ModeMsg = { theme.ui.bg2, 'none' },
-
       ColorColumn = { 'none', theme.ui.bg1 },
-
-      Todo = { theme.ui.bg, theme.ui.purple },
 
       Conceal = { theme.ui.bg3 },
 
       Directory = { theme.ui.folder_bg },
-
-      -- Completion Menu
-      Pmenu = { theme.ui.grey1, theme.ui.bg2 },
-      PmenuSel = {
-        theme.ui.bg2,
-        theme.ui.pmenu_bg,
-        reverse = config.search.reverse,
-      },
-      PmenuSbar = { 'none', theme.ui.bg2 },
-      PmenuThumb = { 'none', theme.ui.grey1 },
 
       -- Diagnostics
       DiagnosticFloatingError = { link = 'ErrorFloat' },
@@ -308,7 +309,7 @@ return {
     hl_groups.syntax['@variable.builtin'] = { link = 'TSVariableBuiltin' }
 
     -- lsp
-    hl_groups.ui['@none'] = { theme.ui.fg }
+    hl_groups.main['@none'] = { theme.ui.fg }
 
     hl_groups.syntax['@lsp.type.property'] = { link = 'TSField' }
 
@@ -326,7 +327,7 @@ return {
     hl_groups.syntax['@lsp.type.function'] = { 'none' }
 
     -- fix lsp hover doc
-    hl_groups.ui['@none.markdown'] = { 'none', 'none' }
+    hl_groups.main['@none.markdown'] = { 'none', 'none' }
     hl_groups.ui['@text.emphasis'] = { theme.orange, italic = true }
 
     hl_groups.syntax['markdownH1'] = { theme.ui.purple }
