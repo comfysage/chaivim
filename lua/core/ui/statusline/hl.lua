@@ -34,8 +34,8 @@ M.apply_highlights = function()
 
   local sections = {
     ['St_section_b'] = { bg = accent_bg },
-    ['St_section_c'] = { fg = comment_fg, bg = normal_bg },
-    ['St_section_x'] = { fg = comment_fg, bg = normal_bg },
+    ['St_section_c'] = { fg = comment_fg, bg = core.lib.hl:get('ui', 'bg_accent') },
+    ['St_section_x'] = { fg = comment_fg, bg = core.lib.hl:get('ui', 'bg_accent') },
     ['St_section_y'] = { bg = accent_bg },
   }
   hls = vim.tbl_deep_extend('force', hls, sections)
