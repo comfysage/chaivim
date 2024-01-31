@@ -13,7 +13,7 @@ local function use_theme(theme_name)
       },
       highlights = {
         TelescopeTitle = { link = 'FloatTitle' },
-        TelescopeNormal = { link = 'FloatNormal' },
+        TelescopeNormal = { link = 'NormalFloat' },
         TelescopePromptNormal = { 'none', core.lib.hl:get('ui', 'bg_accent') },
         TelescopeSelection = { 'none', core.lib.hl:get('ui', 'current') },
         TelescopeMatching = { link = 'Search' },
@@ -29,7 +29,7 @@ local function use_theme(theme_name)
       },
       highlights = {
         TelescopeTitle = { link = 'FloatTitle' },
-        TelescopeNormal = { link = 'FloatNormal' },
+        TelescopeNormal = { link = 'NormalFloat' },
         TelescopePromptNormal = { 'none', core.lib.hl:get('ui', 'bg_accent') },
         TelescopeSelection = { 'none', core.lib.hl:get('ui', 'current') },
         TelescopeMatching = { link = 'Search' },
