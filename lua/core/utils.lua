@@ -4,7 +4,16 @@ local Util = {}
 ---@param msg string
 ---@param level 'debug'|'info'|'warn'|'error'|nil
 function Util.log(source, msg, level)
-  core.log:write(source, msg, level)
+  if core and core.log then
+    core.log:write(source, msg, level)
+  else
+    vim.notify(('[%s] %s'):format(source, msg), ({
+      debug = vim.log.levels.DEBUG,
+      info = vim.log.levels.INFO,
+      warn = vim.log.levels.WARN,
+      error = vim.log.levels.ERROR,
+    })[level])
+  end
 end
 
 ---@param name string
