@@ -41,10 +41,11 @@ return {
     ---@diagnostic disable-next-line redefined-local
     local ok, lspkind = SR_L 'core.plugin.lspkind'
     if ok then
-      opts.config.formatting = {
-        fields = { 'abbr', 'kind', 'menu' },
-        format = lspkind.format,
-      }
+      opts.config.formatting = lspkind.create_formatter(opts.menu_style)
+    end
+    if opts.menu_style == 'nyoom' then
+      opts.config.window.completion.col_offset = -3
+      opts.config.window.completion.side_padding = 0
     end
 
     opts.config.sources = cmp.config.sources({

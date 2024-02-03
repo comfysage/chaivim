@@ -10,6 +10,8 @@ return {
       },
       -- 'tab' or 'enter'
       completion_style = 'tab',
+      -- 'evergreen' | 'nyoom'
+      menu_style = 'evergreen',
       config = {
         window = {
           completion = {

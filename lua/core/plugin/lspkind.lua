@@ -100,22 +100,59 @@ end
 
 local max_count = 26
 
-function M.format(entry, vim_item)
-  -- Kind icons
-  vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-  -- Source
-  local menu_item = ({
-    buffer = "Buffer",
-    nvim_lsp = "LSP",
-    luasnip = "LuaSnip",
-    nvim_lua = "Lua",
-    latex_symbols = "LaTeX",
-  })[entry.source.name]
-  vim_item.menu = menu_item and string.format('  (%s)', menu_item) or ''
+function M.create_formatter(mode)
+  local modes = {
+    evergreen = {
+      fields = { 'abbr', 'kind', 'menu' },
+      format = function(entry, vim_item)
+        -- Kind icons
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        -- Source
+        local menu_item = ({
+          buffer = "Buffer",
+          nvim_lsp = "LSP",
+          luasnip = "LuaSnip",
+          nvim_lua = "Lua",
+          latex_symbols = "LaTeX",
+        })[entry.source.name]
+        vim_item.menu = menu_item and string.format('  (%s)', menu_item) or ''
 
-  local word = vim_item.abbr
-  vim_item.abbr = #word < max_count and word or string.sub(word, 0, max_count - 5) .. '...'
-  return vim_item
+        local word = vim_item.abbr
+        local len = string.len(word)
+        if len < max_count then
+          vim_item.abbr = word .. string.rep(' ', max_count - len)
+        else
+          vim_item.abbr = string.sub(word, 0, max_count - 3) .. '...'
+        end
+        return vim_item
+      end,
+    },
+    nyoom = {
+      fields = { 'kind', 'abbr', 'menu' },
+      format = function(_, vim_item)
+        -- Kind icons
+        local kind = vim_item.kind
+        vim_item.menu = kind
+        vim_item.kind = core.lib.fmt.space(kind_icons[kind])
+        -- Source
+
+        local word = vim_item.abbr
+        local len = string.len(word)
+        if len < max_count then
+          vim_item.abbr = word .. string.rep(' ', max_count - len)
+        else
+          vim_item.abbr = string.sub(word, 0, max_count - 3) .. '...'
+        end
+        return vim_item
+    end,
+    },
+  }
+  local format = modes[mode]
+  if not format then
+    format = modes['evergreen']
+  end
+  return format
 end
+
 
 return M
