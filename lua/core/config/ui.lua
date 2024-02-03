@@ -27,5 +27,17 @@ return {
       end
       vim.opt.statusline = "%!v:lua.core.statusline()"
     end
+
+    if opts.bufferline.enabled then
+      require 'core.ui.bufferline.load'.setup()
+
+      ---@class Core
+      ---@field bufferline fun()
+      _G.core.bufferline = function()
+        vim.opt.showtabline = 2
+        return R 'core.ui.bufferline.modules'.run()
+      end
+      vim.opt.tabline = "%!v:lua.core.bufferline()"
+    end
   end,
 }

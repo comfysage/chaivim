@@ -18,6 +18,13 @@ return {
       statusline = {
         enabled = true,
       },
+      bufferline = {
+        enabled = true,
+        -- add numbers to each tab in bufferline
+        show_numbers = true,
+        -- callback fn to modify bufferline modules
+        overriden_modules = nil,
+      },
       input = {
         -- Set to false to disable the vim.ui.input implementation
         enabled = true,
