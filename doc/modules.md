@@ -49,7 +49,7 @@
         completion = {
           col_offset = 0,
           side_padding = 1,
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None"
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel"
         }
       }
     },
@@ -59,6 +59,7 @@
       docs_down = "<C-b>",
       docs_up = "<C-f>"
     },
+    menu_style = "evergreen",
     snippet_engine = "luasnip"
   }
 }
@@ -130,7 +131,7 @@
         row = 0,
         style = "minimal"
       },
-      sign_priority = 6,
+      sign_priority = 18,
       signcolumn = true,
       signs = {
         add = {
@@ -237,9 +238,9 @@
       copy_paste = { { "normal", "<c-v>", '"+p', "paste from system clipboard" }, { "visual", "<c-c>", '"+y', "copy to system clipboard" } },
       indent = { { "visual", "<", "<gv", "decrease indention" }, { "visual", ">", ">gv", "increase indention" } },
       qf_list = { { "normal", "<c-n>", ":cnext<cr>", "goto next item in qf list" }, { "normal", "<c-b>", ":cprev<cr>", "goto prev item in qf list" } },
-      show_ui = { { "normal", "<leader>sc", <function 1>, "show cheatsheet" } },
-      tabs = { { "normal", "<tab>", <function 2>, "next tab" }, { "normal", "<S-TAB>", <function 3>, "prev tab" }, { "normal", "<space><TAB>", ":$tabedit<CR>", "open new tab" } },
-      toggle_ui = { { "normal", ",tb", <function 4>, "toggle transparent background" } },
+      show_ui = { { "normal", "<leader>sc", <function 1>, "show cheatsheet" }, { "normal", "<leader>sh", <function 2>, "show core status" } },
+      tabs = { { "normal", "<space><tab>]", <function 3>, "next tab" }, { "normal", "<space><tab>[", <function 4>, "prev tab" }, { "normal", "<space><tab>n", ":$tabedit<CR>", "open new tab" }, { "normal", "<space><tab>d", ":tabclose<CR>", "close current tab" }, { "normal", "<space><tab>x", ":tabclose<CR>", "close current tab" } },
+      toggle_ui = { { "normal", ",tb", <function 5>, "toggle transparent background" } },
       windows = { { "normal", "<C-\\>", ":vs<CR>:wincmd l<CR>", "split file vertically" } }
     },
     special_keys = {
@@ -267,6 +268,7 @@
     config = {
       severity_sort = false,
       signs = {
+        priority = 16,
         text = { "󰅙", "", "󰋼", "󰌵" }
       },
       underline = true,
@@ -278,7 +280,7 @@
       }
     },
     mappings = {
-      format = ",f",
+      format = ".fl",
       goto_declaration = "gD",
       goto_definition = "gd",
       goto_implementation = "gi",
@@ -532,11 +534,32 @@
 ```lua
 { "ui",
   opts = {
+    bufferline = {
+      enabled = true,
+      show_numbers = true
+    },
     cursor = {
       enabled = true
     },
     general = {
-      separator_style = "round"
+      separator_style = "round",
+      theme_config = {
+        comment = {
+          italic = false
+        },
+        inc_search = {
+          reverse = true
+        },
+        keyword = {
+          italic = false
+        },
+        search = {
+          reverse = false
+        },
+        types = {
+          italic = false
+        }
+      }
     },
     input = {
       border = "rounded",
@@ -567,6 +590,9 @@
         sidescrolloff = 0,
         wrap = false
       }
+    },
+    statusline = {
+      enabled = true
     }
   }
 }
