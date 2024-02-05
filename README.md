@@ -25,8 +25,8 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 ## :lock: requirements
 
-- Neovim >= 0.8.0 (needs to be built with LuaJIT)
-- git >= 2.19.0 (for partial clones support)
+- Neovim `>= 0.9.0` (needs to be built with LuaJIT)
+- git `>= 2.19.0` (for partial clones support)
 - a Nerd Font (optional)
 
 ## :package: installation
