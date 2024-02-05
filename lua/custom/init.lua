@@ -12,6 +12,23 @@ return {
         },
       },
       {
+        'ui',
+        opts = {
+          general = {
+            separator_style = 'round',
+          },
+          cursor = {
+            enabled = false,
+          },
+          statusline = {
+            enabled = true,
+          },
+          bufferline = {
+            enabled = true,
+          },
+        }
+      },
+      {
         'dash',
         opts = {
           open_on_startup = true,
