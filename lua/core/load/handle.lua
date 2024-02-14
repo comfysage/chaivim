@@ -45,13 +45,15 @@ return {
   ---   fn = function() Util.log 'hi' end,
   --- }
   --- ```
-  ---@param props { event: string, fn: AutoCmdCallback, priority?: integer, type?: string }
+  ---@param props { event: string|'custom', fn: AutoCmdCallback, priority?: integer, type?: string }
   create = function(props)
     if not props.event or not props.fn then
       return
     end
 
+    -- event name
     local event = props.event
+    -- event id
     local ev = props.event
     if event == 'custom' then
       event = 'User'
