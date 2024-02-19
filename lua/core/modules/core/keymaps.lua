@@ -12,7 +12,14 @@ return {
     --- ```
     opts = {
       leader = 'SPC',
-      localleader = nil,
+      -- localleader is appended to leader
+      -- ```lua
+      -- {
+      --   leader = 'SPC', -> 'SPC'
+      --   localleader = 'm', -> 'SPC + m'
+      -- }
+      -- ```
+      localleader = 'm',
       -- default options used for keymaps
       defaults = {},
       -- special keys are imported from ui->general->key_labels

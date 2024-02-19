@@ -7,10 +7,7 @@ return {
       _leader = ' '
     end
 
-    local _localleader = opts.localleader
-    if not _localleader then
-      _localleader = _leader .. ','
-    end
+    local _localleader = _leader .. opts.localleader
 
     Util.log('keymaps.setup', string.format('set leader to "%s"', _leader))
     Util.log('keymaps.setup', string.format('set localleader to "%s"', _localleader))
@@ -38,6 +35,7 @@ return {
     }
     keymaps_config.repl_keys = repl_keys
     keymaps_config.repl_keys['<leader>'] = opts.leader
+    keymaps_config.repl_keys['<localleader>'] = opts.leader .. '+' .. opts.localleader
     keymaps_config.repl_keys['<[c]%-([%w])>'] = 'CTRL+%1'
     keymaps_config.repl_keys['<[m]%-([%w])>'] = 'META+%1'
     keymaps_config.repl_keys['<[a]%-([%w])>'] = 'ALT+%1'
