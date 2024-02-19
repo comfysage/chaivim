@@ -16,5 +16,15 @@ return {
         core.lib.options:get('ui', 'general', 'key_labels')
     end
     which.setup(opts.config)
+
+    which.register {
+      ['.'] = { name = 'toggle' },
+      [','] = { name = 'edit' },
+      ['<leader>'] = {
+        f = { name = 'find' },
+        s = { name = 'show' },
+        g = { name = 'go' },
+      },
+    }
   end,
 }
