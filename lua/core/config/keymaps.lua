@@ -17,14 +17,26 @@ return {
     vim.g.mapleader = _leader
     vim.g.maplocalleader = _localleader
 
+    -- key labels
+    local key_labels = core.lib.options:get('ui', 'general', 'key_labels')
+    local repl_keys = {}
+
+    if not opts.special_keys then
+      opts.special_keys = {}
+      for m, k in pairs(key_labels) do
+        opts.special_keys[k] = m
+        repl_keys[string.lower(m)] = k
+      end
+    else
+      for m, k in pairs(opts.special_keys) do
+        repl_keys[string.lower(k)] = m
+      end
+    end
     require 'keymaps'.setup {
       default_opts = opts.defaults,
       special_keys = opts.special_keys
     }
-    keymaps_config.repl_keys = {}
-    for m, k in pairs(keymaps_config.special_keys) do
-      keymaps_config.repl_keys[string.lower(k)] = m
-    end
+    keymaps_config.repl_keys = repl_keys
     keymaps_config.repl_keys['<leader>'] = opts.leader
     keymaps_config.repl_keys['<[c]%-([%w])>'] = 'CTRL+%1'
     keymaps_config.repl_keys['<[m]%-([%w])>'] = 'META+%1'

@@ -15,12 +15,8 @@ return {
       localleader = nil,
       -- default options used for keymaps
       defaults = {},
-      special_keys = {
-        ['SPC'] = '<space>',
-        ['TAB'] = '<tab>',
-        ['STAB'] = '<s-tab>',
-        ['BS'] = '<bs>',
-      },
+      -- special keys are imported from ui->general->key_labels
+      special_keys = nil,
       mappings = {
         tabs = {
           -- tab switching
