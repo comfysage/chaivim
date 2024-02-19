@@ -88,7 +88,13 @@ local fn = {
     url = 'nvim-telescope/telescope-ui-select.nvim',
     dir = 'telescope-ui-select.nvim',
     opts = false,
-  }
+  },
+  whichkey = Util.create_bootstrap {
+    name = 'whichkey',
+    url = 'folke/which-key.nvim',
+    dir = 'which-key.nvim',
+    opts = false,
+  },
 }
 
 ---@param name string

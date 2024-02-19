@@ -30,5 +30,6 @@ return {
   },
   { 'echasnovski/mini.nvim' },
   { 'lewis6991/gitsigns.nvim' },
+  { 'folke/which-key.nvim' },
   { import = core.modules.core.lazy.opts.module },
 }

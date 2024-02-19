@@ -8,7 +8,7 @@ local default_modules = {
     },
     buf = { 'luasnip', 'cmp', },
     ui = {
-      'telescope', 'mini', 'gitsigns',
+      'telescope', 'mini', 'gitsigns', 'whichkey',
       'dash',
       'commands',
     },
