@@ -11,6 +11,22 @@ return {
           search = { reverse = false },
           inc_search = { reverse = true }
         },
+        key_labels = {
+          -- text keys
+          ['<space>'] = 'SPC',
+          ['<CR>'] = 'RET',
+          ['<BS>'] = 'BS',
+          -- tab keys
+          ['<Tab>'] = 'TAB',
+          ['<S-TAB>'] = 'SHIFT TAB',
+          -- leader key
+          ['<leader>'] = 'LD',
+          -- directional keys
+          ['<Up>'] = '↑',
+          ['<Left>'] = '←',
+          ['<Down>'] = '↓',
+          ['<Right>'] = '→',
+        },
       },
       cursor = {
         enabled = true,
