@@ -29,6 +29,7 @@ return {
     keymaps_config.repl_keys['<[c]%-([%w])>'] = 'CTRL+%1'
     keymaps_config.repl_keys['<[m]%-([%w])>'] = 'META+%1'
     keymaps_config.repl_keys['<[a]%-([%w])>'] = 'ALT+%1'
+    keymaps_config.repl_keys['<[s]%-([%w])>'] = 'SHIFT+%1'
 
     -- load keymaps plugin
     for group, mappings in pairs(opts.mappings) do
