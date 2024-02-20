@@ -28,6 +28,15 @@ H.is_lsp_trigger = function(char, type)
   return false
 end
 
+---@return boolean
+H.is_ts_trigger = function()
+  local node = vim.treesitter.get_node()
+  if not node then
+    return false
+  end
+  return node:type() == 'arguments'
+end
+
 ---@param capability string
 ---@return boolean
 H.has_lsp_clients = function(capability)
@@ -50,7 +59,7 @@ function M.auto_signature()
   if not H.has_lsp_clients('signatureHelpProvider') then return end
 
   local left_char = H.get_left_char()
-  local char_is_trigger = left_char == '(' or H.is_lsp_trigger(left_char, 'signature') or vim.treesitter.get_node():type() == 'arguments'
+  local char_is_trigger = left_char == '(' or H.is_lsp_trigger(left_char, 'signature') or H.is_ts_trigger()
   if not char_is_trigger then
     M.close_signature()
     return
