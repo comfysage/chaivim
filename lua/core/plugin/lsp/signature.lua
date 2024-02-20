@@ -11,6 +11,9 @@ H.get_left_char = function()
   return string.sub(line, col, col)
 end
 
+---@param char string
+---@param type string
+---@return boolean
 H.is_lsp_trigger = function(char, type)
   local triggers
   local providers = {
@@ -25,6 +28,8 @@ H.is_lsp_trigger = function(char, type)
   return false
 end
 
+---@param capability string
+---@return boolean
 H.has_lsp_clients = function(capability)
   local clients = vim.lsp.buf_get_clients()
   if vim.tbl_isempty(clients) then return false end
@@ -54,7 +59,10 @@ function M.auto_signature()
   M.show_signature_window()
 end
 
--- Cache for signature help
+--- Cache for signature help
+---@alias signature_cache { bufnr?: integer, text?: string, win_id?: integer, lsp: signature_cache.lsp }
+---@alias signature_cache.lsp { id: integer, status?: string, result?: any, cancel_fun?: function }
+---@type signature_cache
 H.signature = {
   bufnr = nil,
   text = nil,
@@ -62,6 +70,8 @@ H.signature = {
   lsp = { id = 0, status = nil, result = nil, cancel_fun = nil },
 }
 
+---@param cache signature_cache
+---@param id integer
 H.is_lsp_current = function(cache, id) return cache.lsp.id == id and cache.lsp.status == 'sent' end
 
 H.signature_window_lines = function()
@@ -188,6 +198,9 @@ H.signature_window_opts = function()
 end
 
 -- Helpers for floating windows -----------------------------------------------
+
+---@param cache signature_cache
+---@param name string
 H.ensure_buffer = function(cache, name)
   if type(cache.bufnr) == 'number' and vim.api.nvim_buf_is_valid(cache.bufnr) then return end
 
@@ -198,6 +211,11 @@ H.ensure_buffer = function(cache, name)
 end
 
 -- Returns tuple of height and width
+---@param lines string[]
+---@param max_height integer
+---@param max_width integer
+---@return integer
+---@return integer
 H.floating_dimensions = function(lines, max_height, max_width)
   max_height, max_width = math.max(max_height, 1), math.max(max_width, 1)
 
@@ -227,6 +245,8 @@ H.floating_dimensions = function(lines, max_height, max_width)
   return height, width
 end
 
+---@param cache signature_cache
+---@param opts vim.api.keyset.win_config
 H.open_action_window = function(cache, opts)
   cache.win_id = vim.api.nvim_open_win(cache.bufnr, false, opts)
   vim.api.nvim_set_option_value('wrap', true, { win = cache.win_id })
@@ -234,6 +254,7 @@ H.open_action_window = function(cache, opts)
   vim.api.nvim_set_option_value('breakindent', false, { win = cache.win_id })
 end
 
+---@param cache signature_cache
 H.close_action_window = function(cache)
   if type(cache.win_id) == 'number' and vim.api.nvim_win_is_valid(cache.win_id) then
     vim.api.nvim_win_close(cache.win_id, true)
@@ -244,6 +265,7 @@ H.close_action_window = function(cache)
   if cache.bufnr then vim.fn.setbufvar(cache.bufnr, '&buftype', 'nofile') end
 end
 
+---@param s string|table
 H.is_whitespace = function(s)
   if type(s) == 'string' then return s:find('^%s*$') end
   if type(s) == 'table' then
@@ -257,6 +279,9 @@ end
 
 -- Simulate splitting single line `l` like how it would look inside window with
 -- `wrap` and `linebreak` set to `true`
+---@param l string
+---@param width integer
+---@return table
 H.wrap_line = function(l, width)
   local res = {}
 
