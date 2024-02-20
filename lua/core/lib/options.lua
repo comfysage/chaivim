@@ -3,7 +3,7 @@ core.lib.options = core.lib.options or {}
 core.lib.options.__value = core.lib.options.__value or {}
 
 ---@class core.types.lib.options
----@field get fun(self, ...: string): any
+---@field get fun(self, name: string, ...: string): any
 function core.lib.options:get(name, ...)
   if not name then return end
   local query = { ... }
