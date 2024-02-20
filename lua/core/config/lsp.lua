@@ -191,11 +191,11 @@ return {
 
           vim.api.nvim_create_autocmd('InsertLeave', {
             group = core.group_id,
-            callback = require('core.plugin.lsp').close_signature,
+            callback = require('core.plugin.lsp.signature').close_signature,
           })
           vim.api.nvim_create_autocmd({ 'InsertEnter', 'CursorMovedI' }, {
             group = core.group_id,
-            callback = require('core.plugin.lsp').auto_signature,
+            callback = require('core.plugin.lsp.signature').auto_signature,
           })
         end
       end,
