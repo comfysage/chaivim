@@ -310,11 +310,11 @@ function M.show(namespace, bufnr, diagnostics, opts)
           },
         }
 
-        -- TODO: We can draw on the left side if and only if:
-        -- a. Is the last one stacked this line.
-        -- b. Has enough space on the left.
-        -- c. Is just one line.
-        -- d. Is not an overlap.
+        -- > [!NOTE] We can draw on the left side if and only if:
+        -- > a. Is the last one stacked this line.
+        -- > b. Has enough space on the left.
+        -- > c. Is just one line.
+        -- > d. Is not an overlap.
 
         local msg
         if diagnostic.code then
