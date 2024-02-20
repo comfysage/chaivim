@@ -33,6 +33,10 @@ return {
       -- show diagnostics below lines
       diagnostic_lines = {
         enabled = false,
+        -- only render for current line
+        only_current_line = true,
+        -- boolean highlight empty space to the left of a diagnostic
+        highlight_whole_line = false,
       },
       config = {
         -- options passed to `vim.diagnostic.open_float()`

@@ -24,9 +24,8 @@ local STR_ENUM = {
   BLANK = 'blank',
 }
 
----@alias core.types.diagnostic_lines.opts { [core.types.diagnostic_lines.ns]: core.types.diagnostic_lines.opts.virtual_lines }
-
----@class core.types.diagnostic_lines.opts.virtual_lines
+---@class core.types.diagnostic_lines.opts
+---@field enabled boolean
 ---@field only_current_line boolean only render for current line
 ---@field highlight_whole_line boolean highlight empty space to the left of a diagnostic
 
@@ -34,15 +33,16 @@ M.virtual_line_handlers = {
   ---@param namespace number
   ---@param bufnr number
   ---@param diagnostics table
-  ---@param opts boolean|core.types.diagnostic_lines.opts
+  ---@param opts boolean|vim.diagnostic.Opts
   show = function(namespace, bufnr, diagnostics, opts)
     local ns = vim.diagnostic.get_namespace(namespace)
     if not ns.user_data.virt_lines_ns then
       ns.user_data.virt_lines_ns = vim.api.nvim_create_namespace ''
     end
+    local vopts = opts[M.namespace] or {}
 
     vim.api.nvim_clear_autocmds { group = 'LspLines' }
-    if opts[M.namespace].only_current_line then
+    if vopts.only_current_line then
       vim.api.nvim_create_autocmd('CursorMoved', {
         buffer = bufnr,
         callback = function()
@@ -78,19 +78,26 @@ M.virtual_line_handlers = {
 }
 
 -- Registers a wrapper-handler to render lsp lines.
-function M.setup()
+---@param opts core.types.diagnostic_lines.opts.virtual_lines
+function M.setup(opts)
   Util.log('lsp.diagnostic_lines', 'enabling diagnostic lines')
-  vim.api.nvim_create_augroup('LspLines', { clear = true })
   -- TODO: On LSP restart (e.g.: diagnostics cleared), errors don't go away.
   vim.diagnostic.config { virtual_text = false }
+  vim.api.nvim_create_augroup('LspLines', { clear = true })
+
+  vim.diagnostic.config {
+    [M.namespace] = opts or {},
+  }
   vim.diagnostic.handlers[M.namespace] = M.virtual_line_handlers
 end
 
 ---@return boolean
 M.toggle = function()
-  local new_value = not vim.diagnostic.config()[M.namespace]
-  vim.diagnostic.config { [M.namespace] = new_value }
-  return new_value
+  local opts = vim.diagnostic.config()[M.namespace]
+  opts = opts or { enabled = false }
+  opts.enabled = not opts.enabled
+  vim.diagnostic.config { [M.namespace] = opts }
+  return opts.enabled
 end
 
 ---@param diagnostics vim.Diagnostic[]
@@ -137,7 +144,7 @@ end
 ---@param namespace integer
 ---@param bufnr integer
 ---@param diagnostics vim.Diagnostic[]
----@param opts boolean|core.types.diagnostic_lines.opts
+---@param opts boolean|vim.diagnostic.Opts
 function M.show(namespace, bufnr, diagnostics, opts)
   if not vim.api.nvim_buf_is_loaded(bufnr) then
     return
@@ -152,6 +159,7 @@ function M.show(namespace, bufnr, diagnostics, opts)
     },
     opts = { opts, 't', true },
   }
+  local vopts = opts[M.namespace] or {}
 
   table.sort(diagnostics, function(a, b)
     if a.lnum ~= b.lnum then
@@ -228,9 +236,7 @@ function M.show(namespace, bufnr, diagnostics, opts)
       if lelements[i][1] == STR_ENUM.DIAGNOSTIC then
         local diagnostic = lelements[i][2]
         local empty_space_hi
-        if
-          opts[M.namespace]
-          and opts[M.namespace].highlight_whole_line == false
+        if vopts.highlight_whole_line == false
         then
           empty_space_hi = ''
         else
