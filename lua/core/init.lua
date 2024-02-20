@@ -75,14 +75,11 @@ _G.core.modules = _G.core.modules or {}
 function M.setup(config)
   if type(config) == 'string' then
     local status, opts = SR(config)
-    if not status then
+    if not status or type(opts) ~= 'table' then
       Util.log('core.setup', 'config module ' .. config .. ' was not found', 'error')
       return
     end
-    if type(opts) == 'table' then
-      M.setup(opts)
-    end
-    return
+    return M.setup(opts)
   end
   CONFIG_MODULE = config.config_module or 'custom'
 
