@@ -1,18 +1,8 @@
+local Util = require 'core.utils'
+
 local M = {}
 
 local H = {}
-
-H.table_get = function(t, id)
-  if type(id) ~= 'table' then return H.table_get(t, { id }) end
-  local success, res = true, t
-  for _, i in ipairs(id) do
-    --stylua: ignore start
-    success, res = pcall(function() return res[i] end)
-    if not success or res == nil then return end
-    --stylua: ignore end
-  end
-  return res
-end
 
 H.get_left_char = function()
   local line = vim.api.nvim_get_current_line()
@@ -29,7 +19,7 @@ H.is_lsp_trigger = function(char, type)
   }
 
   for _, client in pairs(vim.lsp.buf_get_clients()) do
-    triggers = H.table_get(client, { 'server_capabilities', providers[type], 'triggerCharacters' })
+    triggers = Util.table_get(client, { 'server_capabilities', providers[type], 'triggerCharacters' })
     if vim.tbl_contains(triggers or {}, char) then return true end
   end
   return false
@@ -41,7 +31,7 @@ H.has_lsp_clients = function(capability)
   if not capability then return true end
 
   for _, c in pairs(clients) do
-    local has_capability = H.table_get(c.server_capabilities, capability)
+    local has_capability = Util.table_get(c.server_capabilities, capability)
     if has_capability then return true end
   end
   return false
