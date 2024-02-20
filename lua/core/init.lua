@@ -5,29 +5,28 @@ local Util = require 'core.utils'
 local parts = require 'core.parts'
 
 ---@diagnostic disable duplicate-doc-alias
+---@alias core.types.module.main 'core'|'config'|'custom'|string
 
----@alias MainModule 'core'|'config'|string
-
----@class ModuleSpec
----@field name ModuleName
+---@class core.types.module.spec
+---@field name core.types.module.name
 ---@field event string
 ---@field opts table|string|nil
 ---@field reload boolean
 
----@alias ModuleName 'options'|'highlights'|'base'|'maps'|'plugins'|string
----@alias ModuleField { [MainModule]: ModuleSpec[] }
+---@alias core.types.module.name 'options'|'highlights'|'base'|'maps'|'plugins'|string
+---@alias core.types.module.table { [core.types.module.main]: core.types.module.spec[] }
 
----@class Config
+---@class core.config
 ---@field log_level integer
 ---@field colorscheme string
 ---@field transparent_background boolean
 ---@field config_module string
----@field modules Modules
+---@field modules core.types.module.table
 
----@class Core
----@field config Config
+---@class core.types.global
+---@field config core.config
 ---@field group_id integer
----@field path CorePath
+---@field path core.types.global.path
 ---@field loaded boolean
 ---@field modules InternalModules parsed module configs
 ---@field lib core.types.lib
@@ -37,21 +36,21 @@ local parts = require 'core.parts'
 ---@field hl core.types.lib.hl.table
 --- ... `core.lib`
 
----@class CorePath
+---@class core.types.global.path
 ---@field root string
 ---@field core string
 ---@field lazy string
 ---@field log string
 
----@alias InternalModules { [MainModule]: { [ModuleName]: ModuleSpec } }
+---@alias InternalModules { [core.types.module.main]: { [core.types.module.name]: core.types.module.spec } }
 
 local M = {}
 
----@type Core
+---@type core.types.global
 ---@diagnostic disable: missing-fields
 _G.core = _G.core or {}
 
----@type Config
+---@type core.config
 M.default_config = {
   log_level = vim.log.levels.INFO,
   colorscheme = 'evergarden', -- or 'habamax' or 'zaibatsu' or 'retrobox'
@@ -59,7 +58,7 @@ M.default_config = {
   modules = {},
 }
 
----@type Config
+---@type core.config
 _G.core.config = vim.tbl_deep_extend('force', M.default_config, _G.core.config or {})
 
 local root_path = vim.fn.stdpath("data") .. "/core"
@@ -102,7 +101,7 @@ function M.setup(...)
   -- preload keymaps module
   parts.preload {}
 
-  ---@class Config
+  ---@class core.config
   local _config = {
     colorscheme = config.colorscheme,
     transparent_background = config.transparent_background,

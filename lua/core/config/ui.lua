@@ -20,7 +20,7 @@ return {
       core.modules.core.lualine.enabled = false
 
       require 'core.ui.statusline.hl'.setup_highlights()
-      ---@class Core
+      ---@class core.types.global
       ---@field statusline fun()
       _G.core.statusline = function()
         return R 'core.ui.statusline'.run()
@@ -31,7 +31,7 @@ return {
     if opts.bufferline.enabled then
       require 'core.ui.bufferline.load'.setup()
 
-      ---@class Core
+      ---@class core.types.global
       ---@field bufferline fun()
       _G.core.bufferline = function()
         vim.opt.showtabline = 2

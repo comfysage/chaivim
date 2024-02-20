@@ -131,7 +131,7 @@ function Log:write(source, msg, level)
   vim.notify(('[%s] %s'):format(source, msg), log_level)
 end
 
----@class Core
+---@class core.types.global
 ---@field log core.types.log
 ---@type core.types.log
 _G.core.log = Log:new()

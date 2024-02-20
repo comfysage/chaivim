@@ -21,7 +21,7 @@ return {
       desc = 'config:reload:' .. CONFIG_MODULE,
     })
   end,
-  ---@param spec ModuleSpec
+  ---@param spec core.types.module.spec
   create_reload = function (module, spec)
     local file_name = string.gsub(module, '[.]', '/')
     vim.api.nvim_create_autocmd('BufWritePost', {

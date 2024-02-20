@@ -50,7 +50,7 @@ end
 ---@param main string
 ---@param name string
 function parts.lazy_load(main, name)
-  ---@type ModuleName
+  ---@type core.types.module.name
   local module = main .. '.' .. name
   if main == 'core' then
     module = main .. '.config.' .. name
@@ -67,7 +67,7 @@ function parts.lazy_load(main, name)
 end
 
 ---@param module string
----@param spec ModuleSpec
+---@param spec core.types.module.spec
 function parts.load(module, spec)
   if spec.enabled == false then
     Util.log('core.parts', 'skipping loading module: ' .. module)

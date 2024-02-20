@@ -52,7 +52,7 @@ return {
     end
     import = vim.tbl_deep_extend('force', default, import)
 
-    ---@type ModuleSpec
+    ---@type core.types.module.spec
     local _spec = {
       name = module,
       reload = nil,
