@@ -33,6 +33,8 @@ return {
       -- show diagnostics below lines
       diagnostic_lines = {
         enabled = false,
+        -- only show virtual lines for severity
+        severity = nil,
         -- only render for current line
         only_current_line = true,
         -- boolean highlight empty space to the left of a diagnostic

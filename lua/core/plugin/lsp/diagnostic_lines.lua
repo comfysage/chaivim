@@ -26,6 +26,7 @@ local STR_ENUM = {
 
 ---@class core.types.diagnostic_lines.opts
 ---@field enabled boolean
+---@field severity integer only show virtual lines for severity
 ---@field only_current_line boolean only render for current line
 ---@field highlight_whole_line boolean highlight empty space to the left of a diagnostic
 
@@ -82,11 +83,18 @@ M.virtual_line_handlers = {
 function M.setup(opts)
   Util.log('lsp.diagnostic_lines', 'enabling diagnostic lines')
   -- TODO: On LSP restart (e.g.: diagnostics cleared), errors don't go away.
-  vim.diagnostic.config { virtual_text = false }
   vim.api.nvim_create_augroup('LspLines', { clear = true })
 
   vim.diagnostic.config {
     [M.namespace] = opts or {},
+  }
+  if not (opts.severity and type(opts.severity) == 'number') then
+    opts.severity = 9
+  end
+  local virt_text_opts = vim.diagnostic.config().virtual_text
+  virt_text_opts.severity = { max = opts.severity + 1 }
+  vim.diagnostic.config {
+    virtual_text = virt_text_opts,
   }
   vim.diagnostic.handlers[M.namespace] = M.virtual_line_handlers
 end
@@ -168,6 +176,12 @@ function M.show(namespace, bufnr, diagnostics, opts)
       return a.col < b.col
     end
   end)
+
+  if vopts.severity and type(vopts.severity) == 'number' then
+    diagnostics = vim.tbl_filter(function(d)
+      return d.severity <= vopts.severity
+    end, diagnostics)
+  end
 
   vim.api.nvim_buf_clear_namespace(bufnr, namespace, 0, -1)
   if #diagnostics == 0 then
