@@ -30,6 +30,10 @@ return {
           border = 'none',
         },
       },
+      -- show diagnostics below lines
+      diagnostic_lines = {
+        enabled = false,
+      },
       config = {
         -- options passed to `vim.diagnostic.open_float()`
         -- float = {},

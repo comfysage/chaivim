@@ -7,9 +7,13 @@ local Util = require 'core.utils'
 ---@field enabled boolean
 ---@field window { height: integer, width: integer, border: 'single'|'double'|'rounded'|'none' }
 
+---@class LspConfig__diagnostic_lines
+---@field enabled boolean
+
 ---@class LspConfigOpts
 ---@field mappings { [LspConfig__mappings]: string }
 ---@field signature LspConfig__signature
+---@field diagnostic_lines LspConfig__diagnostic_lines
 ---@field config table
 ---@field servers LspConfig__servers
 
@@ -197,6 +201,10 @@ return {
             group = core.group_id,
             callback = require('core.plugin.lsp.signature').auto_signature,
           })
+        end
+
+        if opts.diagnostic_lines.enabled then
+          require 'core.plugin.lsp.diagnostic_lines'.setup()
         end
       end,
     })
