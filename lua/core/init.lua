@@ -71,15 +71,31 @@ _G.core.path.core = _G.core.path.root .. "/chai"
 
 _G.core.modules = _G.core.modules or {}
 
----@param config Config
-function M.setup(config)
+---@param ... any
+function M.setup(...)
+  local args = { ... }
+  if #args == 0 then
+    Util.log('core.setup', 'not enough arguments provided', 'error')
+    return
+  end
+  local config = args[1]
+  local modules = args[2] or false
   if type(config) == 'string' then
     local status, opts = SR(config)
     if not status or type(opts) ~= 'table' then
       Util.log('core.setup', 'config module ' .. config .. ' was not found', 'error')
       return
     end
-    return M.setup(opts)
+    return M.setup(opts, modules)
+  end
+  if modules and type(modules) == 'string' then
+    local import_mod = modules
+    local status, result = SR(import_mod)
+    if not status or type(result) ~= 'table' then
+      Util.log('core.setup', 'modules from module ' .. import_mod .. ' were not found', 'error')
+      return
+    end
+    modules = result
   end
   CONFIG_MODULE = config.config_module or 'custom'
 
@@ -91,7 +107,7 @@ function M.setup(config)
     colorscheme = config.colorscheme,
     transparent_background = config.transparent_background,
     config_module = CONFIG_MODULE,
-    modules = config.modules,
+    modules = modules or config.modules,
   }
 
   _G.core.config = vim.tbl_deep_extend('force', _G.core.config, _config)
