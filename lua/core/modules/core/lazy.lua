@@ -38,5 +38,17 @@ return {
   },
   overwrite = {
     reload = false,
+    opts = {
+      config = {
+        root = nil, -- directory where plugins will be installed
+        -- required for core bootstrap
+        performance = {
+          reset_packpath = false,
+          rtp = {
+            reset = false,
+          },
+        },
+      },
+    },
   },
 }
