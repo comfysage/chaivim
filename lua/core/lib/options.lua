@@ -14,3 +14,18 @@ function core.lib.options:get(name, ...)
     return vim.tbl_get(module.opts, ...)
   end
 end
+
+---@class core.types.lib.options
+---@field enabled fun(self, name: string): any
+function core.lib.options:enabled(name)
+  if not name then return end
+  local module = self.__value[name]
+  if module then
+    ---@diagnostic disable-next-line: undefined-field
+    if module.enabled == false then
+      return false
+    end
+    return true
+  end
+  return false
+end
