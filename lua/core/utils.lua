@@ -12,7 +12,10 @@ function Util.log(source, msg, level)
       info = vim.log.levels.INFO,
       warn = vim.log.levels.WARN,
       error = vim.log.levels.ERROR,
-    })[level])
+    })[level or 'debug'])
+    -- > [!NOTE] although debug and info logs are allowed using these before
+    -- > core.log (before initialization) could overload the user with
+    -- > information everytime they enter neovim
   end
 end
 
