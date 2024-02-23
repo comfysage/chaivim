@@ -233,6 +233,7 @@
   opts = {
     defaults = {},
     leader = "SPC",
+    localleader = "m",
     mappings = {
       buffers = { { "normal", "<leader>x", ":Close<cr>", "close buffer" } },
       copy_paste = { { "normal", "<c-v>", '"+p', "paste from system clipboard" }, { "visual", "<c-c>", '"+y', "copy to system clipboard" } },
@@ -242,12 +243,6 @@
       tabs = { { "normal", "<space><tab>]", <function 3>, "next tab" }, { "normal", "<space><tab>[", <function 4>, "prev tab" }, { "normal", "<space><tab>n", ":$tabedit<CR>", "open new tab" }, { "normal", "<space><tab>d", ":tabclose<CR>", "close current tab" }, { "normal", "<space><tab>x", ":tabclose<CR>", "close current tab" } },
       toggle_ui = { { "normal", ",tb", <function 5>, "toggle transparent background" } },
       windows = { { "normal", "<C-\\>", ":vs<CR>:wincmd l<CR>", "split file vertically" } }
-    },
-    special_keys = {
-      BS = "<bs>",
-      SPC = "<space>",
-      STAB = "<s-tab>",
-      TAB = "<tab>"
     }
   }
 }
@@ -256,7 +251,34 @@
 ```lua
 { "lazy",
   opts = {
-    config = {},
+    config = {
+      ui = {
+        border = "none",
+        icons = {
+          cmd = "! ",
+          config = "",
+          event = "",
+          ft = "",
+          import = "",
+          init = "",
+          keys = "",
+          lazy = "",
+          list = { "-", "*", "*", "-" },
+          loaded = "●",
+          not_loaded = "○",
+          plugin = "",
+          runtime = "󰟢",
+          source = "",
+          start = "",
+          task = ""
+        },
+        size = {
+          height = 0.8,
+          width = 90
+        },
+        wrap = true
+      }
+    },
     module = "plugins"
   }
 }
@@ -278,6 +300,11 @@
         source = false,
         spacing = 4
       }
+    },
+    diagnostic_lines = {
+      enabled = false,
+      highlight_whole_line = false,
+      only_current_line = true
     },
     mappings = {
       format = ".fl",
@@ -542,6 +569,18 @@
       enabled = true
     },
     general = {
+      key_labels = {
+        ["<BS>"] = "BS",
+        ["<CR>"] = "RET",
+        ["<Down>"] = "↓",
+        ["<Left>"] = "←",
+        ["<Right>"] = "→",
+        ["<S-TAB>"] = "SHIFT TAB",
+        ["<Tab>"] = "TAB",
+        ["<Up>"] = "↑",
+        ["<leader>"] = "LD",
+        ["<space>"] = "SPC"
+      },
       separator_style = "round",
       theme_config = {
         comment = {
@@ -594,6 +633,14 @@
     statusline = {
       enabled = true
     }
+  }
+}
+```
+### `whichkey` module
+```lua
+{ "whichkey",
+  opts = {
+    config = {}
   }
 }
 ```
