@@ -7,7 +7,7 @@ if not vim.loop.fs_stat(chaipath) then
     'git',
     'clone',
     '--filter=blob:none',
-    'https://github.com/crispybaccoon/chaivim.git',
+    'https://github.com/comfysage/chaivim.git',
     chaipath,
   }):wait()
 end
