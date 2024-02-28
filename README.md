@@ -16,7 +16,7 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 - :telescope: [telescope](https://github.com/nvim-telescope/telescope.nvim) - a highly extendable fuzzy finder.
 - :evergreen_tree: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - treesitter configurations and abstraction layer for neovim.
-- :computer: [keymaps](https://github.com/crispybaccoon/keymaps.nvim) - a keymap manager for neovim.
+- :computer: [keymaps](https://github.com/comfysage/keymaps.nvim) - a keymap manager for neovim.
 - :airplane: [lualine](https://github.com/nvim-lualine/lualine.nvim) - a blazing fast and easy to configure neovim statusline plugin.
 - :pencil: [cmp](https://github.com/hrsh7th/nvim-cmp) - a completion plugin for neovim.
 - :scissors: [luasnip](https://github.com/L3MON4D3/LuaSnip) with [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) - a snippet engine for Neovim.
@@ -33,7 +33,7 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 chaivim can be installed [manually](#manual-install) or through the installer:
 ```shell
-curl -fsSL https://github.com/CrispyBaccoon/chaivim/raw/mega/utils/installer/install.sh | sh
+curl -fsSL https://github.com/comfysage/chaivim/raw/mega/utils/installer/install.sh | sh
 ```
 
 ### manual install
@@ -48,7 +48,7 @@ if not vim.loop.fs_stat(chaipath) then
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/crispybaccoon/chaivim.git",
+    "https://github.com/comfysage/chaivim.git",
     chaipath,
   }):wait()
 end

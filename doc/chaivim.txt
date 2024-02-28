@@ -20,7 +20,7 @@ Table of Contents                                  *chaivim-table-of-contents*
         "git",
         "clone",
         "--filter=blob:none",
-        "https://github.com/crispybaccoon/chaivim.git",
+        "https://github.com/comfysage/chaivim.git",
         chaipath,
       }):wait()
     end

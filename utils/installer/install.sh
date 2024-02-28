@@ -11,7 +11,7 @@ declare -xr NVIM_APPNAME="${NVIM_APPNAME:-"cvim"}"
 declare -xr CONFIG_DIR="${CONFIG_DIR:-"$XDG_CONFIG_HOME/$NVIM_APPNAME"}"
 
 declare -x CV_BRANCH="start"
-declare -xr CV_REMOTE="${CV_REMOTE:-"crispybaccoon/chaivim"}"
+declare -xr CV_REMOTE="${CV_REMOTE:-"comfysage/chaivim"}"
 declare -xr INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
 declare -xr REPO_URL="https://github.com/${CV_REMOTE}"
