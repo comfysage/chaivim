@@ -12,13 +12,13 @@ local fn = {
   },
   keymaps = Util.create_bootstrap {
     name = 'keymaps',
-    url = 'crispybaccoon/keymaps.nvim',
+    url = 'comfysage/keymaps.nvim',
     dir = 'keymaps.nvim',
     opts = {},
   },
   base46 = Util.create_bootstrap {
     name = 'base46',
-    url = 'crispybaccoon/base46',
+    url = 'comfysage/base46',
     opts = false,
   },
   plenary = Util.create_bootstrap {
@@ -38,7 +38,7 @@ local fn = {
   },
   evergarden = Util.create_bootstrap {
     name = 'evergarden',
-    url = 'crispybaccoon/evergarden',
+    url = 'comfysage/evergarden',
   },
   lazyplug = Util.create_bootstrap {
     name = 'lazyplug',

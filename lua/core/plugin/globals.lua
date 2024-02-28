@@ -20,14 +20,14 @@ setmetatable(Spec, {
 --- example:
 --- ```lua
 --- return Spec.colorscheme {
----   'crispybaccoon/evergarden',
+---   'comfysage/evergarden',
 ---   opts = {},
 --- }
 --- ```
 --- is the same as:
 --- ```lua
 --- return {
----   'crispybaccoon/evergarden',
+---   'comfysage/evergarden',
 ---   priority = 1200,
 ---   lazy = true,
 ---   opts = {},

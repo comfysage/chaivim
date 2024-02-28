@@ -1,6 +1,6 @@
 return {
-  { 'crispybaccoon/keymaps.nvim' },
-  { 'crispybaccoon/base46',
+  { 'comfysage/keymaps.nvim' },
+  { 'comfysage/base46',
     cond = function() return core.lib.options:get('ui', 'general', 'colorscheme') ~= nil and core.config.colorscheme == 'base46' end },
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-telescope/telescope.nvim',
@@ -11,7 +11,7 @@ return {
   },
   { 'nvim-lualine/lualine.nvim',
     cond = function() return core.lib.options:enabled 'lualine' end },
-  { 'crispybaccoon/evergarden' },
+  { 'comfysage/evergarden' },
   { 'nvim-treesitter/nvim-treesitter',
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
