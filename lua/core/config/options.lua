@@ -61,7 +61,7 @@ function M.setup(opts)
   vim.opt.expandtab = true
 
   -- Lifecycle
-  vim.opt.shell = vim.fn.getenv('SHELL') or '/usr/bin/bash'
+  vim.opt.shell = vim.env['SHELL'] or '/usr/bin/bash'
   vim.opt.swapfile = false
   vim.opt.backup = false
   vim.cmd [[ set undodir=~/.undodir ]]
