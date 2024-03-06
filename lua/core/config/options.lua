@@ -17,6 +17,8 @@ function M.setup(opts)
   vim.opt.fileencoding = 'utf-8'
 
   -- basic UI
+  vim.opt.title = true
+  vim.o.titlestring = '%f · nvim'
   vim.opt.errorbells = false
   vim.opt.mouse = 'nv'
 
