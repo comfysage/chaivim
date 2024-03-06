@@ -77,6 +77,8 @@ function M.setup(opts)
   vim.opt.hlsearch = false
   vim.opt.ignorecase = true
   vim.opt.smartcase = true
+  -- substitution with preview window
+  vim.opt.inccommand = 'split'
 
   -- Scrolling
   vim.opt.scrolloff = opts.scrolloff
