@@ -18,10 +18,10 @@ M.apply_highlights = function()
   local title_fg = core.lib.hl:get('syntax', 'title')
 
   local hls = {
-    ['BfLineFill'] = { fg = title_fg, bg = normal_bg },
+    ['BfLineFill'] = { fg = title_fg },
     ['BfKillBuf'] = { fg = title_fg },
-    ['BfLineBufOn'] = { fg = normal_fg, bg = normal_bg },
-    ['BfLineBufOff'] = { fg = comment_fg, bg = normal_bg },
+    ['BfLineBufOn'] = { fg = normal_fg },
+    ['BfLineBufOff'] = { fg = comment_fg },
     ['BfLineBufOnModified'] = { fg = normal_fg },
     ['BfLineBufOffModified'] = { fg = comment_fg },
     ['BfLineBufOnClose'] = { fg = core.lib.hl:get('diagnostic', 'error') },
