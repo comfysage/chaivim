@@ -25,7 +25,7 @@ M.apply_highlights = function()
     ['BfLineBufOnModified'] = { fg = normal_fg },
     ['BfLineBufOffModified'] = { fg = comment_fg },
     ['BfLineBufOnClose'] = { fg = core.lib.hl:get('diagnostic', 'error') },
-    ['BfLineBufOffClose'] = { fg = title_fg },
+    ['BfLineBufOffClose'] = { link = 'BfLineBufOff' },
     ['BfLineTabOn'] = { fg = normal_bg, bg = core.lib.hl:get('ui', 'accent') },
     ['BfLineTabOff'] = { fg = title_fg },
     ['BfLineTabCloseBtn'] = { link = 'BfLineTabOn' },
