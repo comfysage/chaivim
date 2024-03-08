@@ -91,6 +91,7 @@ M.setup = function(opts)
 
   Keymap.group {
     group = 'telescope',
+    { 'normal', opts.mappings.resume,           builtins.resume,    'resume' },
     { 'normal', opts.mappings.find_files,       pickers.find_files, 'find files' },
     { 'normal', opts.mappings.live_grep,        pickers.grep,       'find string' },
     { 'normal', opts.mappings.simple_find_file, pickers.explorer,   'find file' },

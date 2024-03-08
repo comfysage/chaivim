@@ -3,6 +3,8 @@ return {
     opts = {
       theme = 'main',
       mappings = {
+        -- resume last telescope search
+        resume = '<leader>;',
         find_files = '<leader><leader>',
         live_grep = '<leader>fr',
         simple_find_file = '<leader>ff',
