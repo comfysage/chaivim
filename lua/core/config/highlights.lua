@@ -12,7 +12,7 @@ return {
     -- endofbuffer chars
     vim.opt.fillchars:append { eob = " " }
 
-    vim.opt.listchars:append { tab = "» ", trail = "·", space = "·" }
+    vim.opt.listchars:append { tab = "» ", trail = "·", lead = '·', leadmultispace = ' ·' }
 
     vim.opt.background = "dark"
 
