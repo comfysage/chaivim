@@ -124,6 +124,35 @@ return {
             silent = false,
           },
         },
+        hipatterns = {
+          opts = {
+            groups = {
+              fixme = { { "FIX", "FIXME" }, "@comment.fix" },
+              warn = { { "WARN", "WARNING" }, "@comment.warning" },
+              perf = { { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" }, "@comment.fix" },
+              todo = { { "TODO" }, "@comment.todo" },
+              note = { { "NOTE", "INFO" }, "@comment.note" },
+              test = { { "TEST", "TESTING" }, "@comment.todo" },
+            },
+          },
+          config = function(hipatterns, opts)
+            local highlighters = {
+              -- [!NOTE] highlight hex color strings (`#rrggbb`) using that color
+              hex_color = hipatterns.gen_highlighter.hex_color(),
+            }
+            for m, v in pairs(opts.groups) do
+              local higroup = v[2]
+              local matches = v[1]
+              for _, match in ipairs(matches) do
+                highlighters[m .. '_' .. match] = { pattern = "%f[%w]()" .. match .. "()%f[%W]", group = higroup }
+                highlighters['note_' .. m .. '_' .. match] = { pattern = "[[]!*" .. match .. "[]]", group = higroup .. ".emphasis" }
+              end
+            end
+            hipatterns.setup {
+              highlighters = highlighters,
+            }
+          end,
+        },
         trailspace = { opts = {} },
       }
     },
