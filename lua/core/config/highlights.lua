@@ -12,7 +12,9 @@ return {
     -- endofbuffer chars
     vim.opt.fillchars:append { eob = " " }
 
-    vim.opt.listchars:append { tab = "» ", trail = "·", lead = '·', leadmultispace = ' ·' }
+    vim.opt.listchars:append { tab = "» ", trail = "·" }
+    local tabwidth = core.lib.options:get('options', 'tab_width')
+    vim.opt.listchars:append { lead = '·', leadmultispace = ('·%s'):format((' '):rep(tabwidth-1)) }
 
     vim.opt.background = "dark"
 
