@@ -49,6 +49,9 @@ function M.setup(opts)
 
   vim.opt.shortmess = 'filnrxoOtTIF'
 
+  -- allow cursor to move paste the end of the line in visual block mode
+  vim.opt.virtualedit = 'block'
+
   vim.o.timeout = true
   vim.o.timeoutlen = 300
 
