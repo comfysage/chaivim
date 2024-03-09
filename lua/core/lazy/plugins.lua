@@ -38,6 +38,8 @@ return {
   { 'folke/todo-comments.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     cond = function() return core.lib.options:enabled 'todo_comments' end },
+  { 'folke/trouble.nvim',
+    cond = function() return core.lib.options:enabled 'trouble' end },
   { 'nvim-tree/nvim-web-devicons',
     cond = function() return core.lib.options:get('ui', 'general', 'devicons') end },
   { import = core.modules.core.lazy.opts.module },

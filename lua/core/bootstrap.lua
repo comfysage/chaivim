@@ -101,6 +101,12 @@ local fn = {
     dir = 'todo-comments.nvim',
     opts = false,
   },
+  trouble = Util.create_bootstrap {
+    name = 'trouble',
+    url = 'folke/trouble.nvim',
+    dir = 'trouble.nvim',
+    opts = false,
+  },
 }
 
 ---@param name string
