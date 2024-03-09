@@ -47,13 +47,13 @@ return {
     end
   end,
   fix = function()
-    if core.config.transparent_background ~= nil then
-      require 'core.plugin.transparency'.set(core.config.transparent_background)
+    if core.config.ui.transparent_background ~= nil then
+      require 'core.plugin.transparency'.set(core.config.ui.transparent_background)
     end
   end,
   toggle = function()
-    if core.config.transparent_background ~= nil then
-      core.config.transparent_background = not core.config.transparent_background
+    if core.config.ui.transparent_background ~= nil then
+      core.config.ui.transparent_background = not core.config.ui.transparent_background
       require 'core.plugin.transparency'.fix()
     end
   end,

@@ -17,10 +17,13 @@ local parts = require 'core.parts'
 
 ---@class core.config
 ---@field log_level integer
----@field colorscheme string
----@field transparent_background boolean
+---@field ui core.config.ui
 ---@field config_module string
 ---@field modules core.types.module.table
+
+---@class core.config.ui
+---@field colorscheme string
+---@field transparent_background boolean
 
 ---@class core.types.global
 ---@field config core.config
@@ -50,15 +53,7 @@ local M = {}
 _G.core = _G.core or {}
 
 ---@type core.config
-M.default_config = {
-  log_level = vim.log.levels.INFO,
-  colorscheme = 'evergarden', -- or 'habamax' or 'zaibatsu' or 'retrobox'
-  transparent_background = false,
-  modules = {},
-}
-
----@type core.config
-_G.core.config = vim.tbl_deep_extend('force', M.default_config, _G.core.config or {})
+_G.core.config = require 'core.config'.setup(_G.core.config or {})
 
 local root_path = vim.fn.stdpath("data") .. "/core"
 _G.core.path = {
@@ -100,15 +95,10 @@ function M.setup(...)
   -- preload keymaps module
   parts.preload {}
 
-  ---@type core.config
-  local _config = {
-    colorscheme = config.colorscheme,
-    transparent_background = config.transparent_background,
-    config_module = CONFIG_MODULE,
-    modules = modules or config.modules,
-  }
+  config.config_module = CONFIG_MODULE
+  config.modules = modules or config.modules
 
-  _G.core.config = vim.tbl_deep_extend('force', _G.core.config, _config)
+  require 'core.config'.setup(config)
 
   M.load()
 end

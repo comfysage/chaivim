@@ -105,7 +105,7 @@ return {
 
 all config fields can be overwritten after `setup()`:
 ```lua
-core.config.colorscheme = 'tokyonight'
+core.config.ui.colorscheme = 'tokyonight'
 ```
 
 ## :gear: config modules

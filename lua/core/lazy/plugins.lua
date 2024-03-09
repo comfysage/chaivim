@@ -1,7 +1,7 @@
 return {
   { 'comfysage/keymaps.nvim' },
   { 'comfysage/base46',
-    cond = function() return core.lib.options:get('ui', 'general', 'colorscheme') ~= nil and core.config.colorscheme == 'base46' end },
+    cond = function() return core.lib.options:get('ui', 'general', 'colorscheme') ~= nil and core.config.ui.colorscheme == 'base46' end },
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-telescope/telescope.nvim',
     dependencies = {
