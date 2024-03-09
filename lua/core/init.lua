@@ -24,6 +24,17 @@ local parts = require 'core.parts'
 ---@class core.config.ui
 ---@field colorscheme string
 ---@field transparent_background boolean
+---@field separator_style 'slant'|'round'|'block'|'arrow'
+---@field devicons boolean
+---@field theme_config core.config.ui.theme_config
+---@field key_labels table<string, string>
+
+---@class core.config.ui.theme_config
+---@field keyword table<'italic', boolean>
+---@field types table<'italic', boolean>
+---@field comment table<'italic', boolean>
+---@field search table<'reverse', boolean>
+---@field inc_search table<'reverse', boolean>
 
 ---@class core.types.global
 ---@field config core.config

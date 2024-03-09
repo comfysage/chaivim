@@ -6,6 +6,33 @@ M.default_config = {
   ui = {
     colorscheme = 'evergarden', -- or 'habamax' or 'zaibatsu' or 'retrobox'
     transparent_background = false,
+    -- separators: slant (, ) round (,) block (█,█) arrow (,)
+    separator_style = 'round',
+    -- use 'nvim-tree/nvim-web-devicons'
+    devicons = true,
+    theme_config = {
+      keyword = { italic = false },
+      types = { italic = false },
+      comment = { italic = false },
+      search = { reverse = false },
+      inc_search = { reverse = true }
+    },
+    key_labels = {
+      -- text keys
+      ['<space>'] = 'SPC',
+      ['<CR>'] = 'RET',
+      ['<BS>'] = 'BS',
+      -- tab keys
+      ['<Tab>'] = 'TAB',
+      ['<S-TAB>'] = 'SHIFT TAB',
+      -- leader key
+      ['<leader>'] = 'LD',
+      -- directional keys
+      ['<Up>'] = '↑',
+      ['<Left>'] = '←',
+      ['<Down>'] = '↓',
+      ['<Right>'] = '→',
+    },
   },
   modules = {},
 }

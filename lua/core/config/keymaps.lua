@@ -15,7 +15,7 @@ return {
     vim.g.maplocalleader = _localleader
 
     -- key labels
-    local key_labels = core.lib.options:get('ui', 'general', 'key_labels')
+    local key_labels = core.config.ui.key_labels
     local repl_keys = {}
 
     if not opts.special_keys then

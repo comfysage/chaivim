@@ -1,7 +1,7 @@
 return {
   { 'comfysage/keymaps.nvim' },
   { 'comfysage/base46',
-    cond = function() return core.lib.options:get('ui', 'general', 'colorscheme') ~= nil and core.config.ui.colorscheme == 'base46' end },
+    cond = function() return core.config.ui.base46 ~= nil and core.config.ui.colorscheme == 'base46' end },
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -43,6 +43,6 @@ return {
   { 'b0o/incline.nvim',
     cond = function() return core.lib.options:enabled 'incline' end },
   { 'nvim-tree/nvim-web-devicons',
-    cond = function() return core.lib.options:get('ui', 'general', 'devicons') end },
+    cond = function() return core.config.ui.devicons end },
   { import = core.modules.core.lazy.opts.module },
 }

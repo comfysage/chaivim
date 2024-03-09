@@ -110,7 +110,8 @@ function parts.load(module, spec)
 end
 
 function parts.colorscheme(_)
-  if core.lib.options:get('ui', 'general', 'colorscheme') ~= nil and core.config.ui.colorscheme == 'base46' then
+  ---@diagnostic disable-next-line: undefined-field
+  if core.config.ui.base46 ~= nil and core.config.ui.colorscheme == 'base46' then
     require('core.bootstrap').boot 'base46'
   end
   local ok, result = pcall(vim.cmd.colorscheme, core.config.ui.colorscheme)

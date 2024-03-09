@@ -7,7 +7,7 @@ local M = {}
 ---@type NvMode
 _G.nvmode = 'n'
 
-local separator_style = core.lib.options:get('ui', 'general', 'separator_style')
+local separator_style = core.config.ui.separator_style
 
 ---@type { left: string, right: string }
 ---@diagnostic disable-next-line: assign-type-mismatch

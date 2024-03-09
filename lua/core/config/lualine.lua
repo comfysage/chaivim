@@ -72,7 +72,7 @@ return {
     local config = opts.config
 
     if not opts.options.separators then
-      opts.options.separators = core.lib.options:get('ui', 'general', 'separator_style')
+      opts.options.separators = core.config.ui.separator_style
     end
 
     if opts.options.separators and core.lib.icons.separator[opts.options.separators] then

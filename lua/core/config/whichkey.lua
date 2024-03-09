@@ -12,7 +12,7 @@ return {
 
     if not opts.config.key_labels then
       opts.config.key_labels =
-        core.lib.options:get('ui', 'general', 'key_labels')
+        core.config.ui.key_labels
     end
     which.setup(opts.config)
 

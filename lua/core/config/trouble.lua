@@ -10,7 +10,7 @@ return {
       return
     end
 
-    opts.config.icons = core.lib.options:get('ui', 'general', 'devicons')
+    opts.config.icons = core.config.ui.devicons
     trouble.setup(opts.config)
 
     core.lib.hl.apply {

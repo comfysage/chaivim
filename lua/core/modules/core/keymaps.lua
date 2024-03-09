@@ -22,7 +22,7 @@ return {
       localleader = 'm',
       -- default options used for keymaps
       defaults = {},
-      -- special keys are imported from ui->general->key_labels
+      -- special keys are imported from ui->key_labels
       special_keys = nil,
       mappings = {
         tabs = {

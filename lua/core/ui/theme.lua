@@ -54,7 +54,7 @@ return {
   apply = function()
     Util.log('core.ui', 'applying theme')
     local theme = core.lib.hl.__value
-    local config = core.lib.options:get('ui', 'general', 'theme_config')
+    local config = core.config.ui.theme_config
     local hl_groups = require('core.ui.theme').create(theme, config)
     Util.log('core.ui', ('applying "%s" hl groups'):format 'main')
     core.lib.hl.apply(hl_groups)

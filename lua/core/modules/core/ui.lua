@@ -1,35 +1,6 @@
 return {
   default = {
     opts = {
-      general = {
-        colorscheme = nil,
-        separator_style = 'round',
-        -- use 'nvim-tree/nvim-web-devicons'
-        devicons = true,
-        theme_config = {
-          keyword = { italic = false },
-          types = { italic = false },
-          comment = { italic = false },
-          search = { reverse = false },
-          inc_search = { reverse = true }
-        },
-        key_labels = {
-          -- text keys
-          ['<space>'] = 'SPC',
-          ['<CR>'] = 'RET',
-          ['<BS>'] = 'BS',
-          -- tab keys
-          ['<Tab>'] = 'TAB',
-          ['<S-TAB>'] = 'SHIFT TAB',
-          -- leader key
-          ['<leader>'] = 'LD',
-          -- directional keys
-          ['<Up>'] = '↑',
-          ['<Left>'] = '←',
-          ['<Down>'] = '↓',
-          ['<Right>'] = '→',
-        },
-      },
       cursor = {
         enabled = true,
       },
