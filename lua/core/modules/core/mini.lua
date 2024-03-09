@@ -30,10 +30,6 @@ return {
               textobject = 'gc',
             },
           },
-          config = function(mod, opts)
-            mod.setup(opts)
-            keymaps.normal[{ 'SPC', '/' }] = { opts.mappings.comment_line, '' }
-          end,
         },
         files      = {
           opts = {
@@ -55,7 +51,6 @@ return {
           },
           config = function(mod, opts)
             mod.setup(opts)
-            local keymaps = require 'keymaps'.setup()
             keymaps.normal['<space>sp'] = { require 'mini.files'.open, 'Open Files', group = "UI" }
           end
         },
