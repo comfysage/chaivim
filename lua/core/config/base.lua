@@ -16,6 +16,15 @@ vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'remove line numbers',
 })
 
+require 'core.load.handle'.create {
+  event = 'TermOpen', priority = 5,
+  fn = function(ev)
+    vim.keymap.set({ 't' }, '<esc><esc>', function()
+      return [[<C-\><C-n>]]
+    end, { buffer = ev.buf, expr = true })
+  end,
+}
+
 -- highlight when yanking (copying) text
 -- > try it with `yap` in normal mode
 -- > see `:help vim.highlight.on_yank()`
