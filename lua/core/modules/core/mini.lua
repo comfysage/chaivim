@@ -2,6 +2,25 @@ return {
   default = {
     opts = {
       plugins = {
+        ai         = {
+          opts = {
+            mappings = {
+              -- Main textobject prefixes
+              around = 'a',
+              inside = 'i',
+
+              -- Next/last variants
+              around_next = 'an',
+              inside_next = 'in',
+              around_last = 'al',
+              inside_last = 'il',
+
+              -- Move cursor to corresponding edge of `a` textobject
+              goto_left = 'g[',
+              goto_right = 'g]',
+            },
+          }
+        },
         pairs      = { opts = {} },
         align      = { opts = {} },
         comment    = {
@@ -122,12 +141,12 @@ return {
         hipatterns = {
           opts = {
             groups = {
-              fixme = { { "FIX", "FIXME" }, "@comment.fix" },
-              warn = { { "WARN", "WARNING" }, "@comment.warning" },
-              perf = { { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" }, "@comment.fix" },
-              todo = { { "TODO" }, "@comment.todo" },
-              note = { { "NOTE", "INFO" }, "@comment.note" },
-              test = { { "TEST", "TESTING" }, "@comment.todo" },
+              -- fixme = { { "FIX", "FIXME" }, "@comment.fix" },
+              -- warn = { { "WARN", "WARNING" }, "@comment.warning" },
+              -- perf = { { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" }, "@comment.fix" },
+              -- todo = { { "TODO" }, "@comment.todo" },
+              -- note = { { "NOTE", "INFO" }, "@comment.note" },
+              -- test = { { "TEST", "TESTING" }, "@comment.todo" },
             },
           },
           config = function(hipatterns, opts)
@@ -140,8 +159,11 @@ return {
               local matches = v[1]
               for _, match in ipairs(matches) do
                 highlighters[m .. '_' .. match] = { pattern = "%f[%w]()" .. match .. "()%f[%W]", group = higroup }
-                highlighters['note_' .. m .. '_' .. match] = { pattern = "[[]!*" .. match .. "[]]", group = higroup ..
-                ".emphasis" }
+                highlighters['note_' .. m .. '_' .. match] = {
+                  pattern = "[[]!*" .. match .. "[]]",
+                  group = higroup ..
+                      ".emphasis"
+                }
               end
             end
             hipatterns.setup {
