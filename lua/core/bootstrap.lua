@@ -95,6 +95,12 @@ local fn = {
     dir = 'which-key.nvim',
     opts = false,
   },
+  todo_comments = Util.create_bootstrap {
+    name = 'todo_comments',
+    url = 'folke/todo-comments.nvim',
+    dir = 'todo-comments.nvim',
+    opts = false,
+  },
 }
 
 ---@param name string

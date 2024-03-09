@@ -35,5 +35,8 @@ return {
   { 'lewis6991/gitsigns.nvim' },
   { 'folke/which-key.nvim',
     cond = function() return core.lib.options:enabled 'whichkey' end },
+  { 'folke/todo-comments.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    cond = function() return core.lib.options:enabled 'todo_comments' end },
   { import = core.modules.core.lazy.opts.module },
 }

@@ -11,6 +11,7 @@ local default_modules = {
       'telescope', 'mini', 'gitsigns', 'whichkey',
       'dash',
       'commands',
+      'todo_comments',
     },
   },
 }
