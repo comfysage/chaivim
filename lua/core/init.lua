@@ -100,7 +100,7 @@ function M.setup(...)
   -- preload keymaps module
   parts.preload {}
 
-  ---@class core.config
+  ---@type core.config
   local _config = {
     colorscheme = config.colorscheme,
     transparent_background = config.transparent_background,
