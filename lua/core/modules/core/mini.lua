@@ -89,16 +89,16 @@ return {
 
             -- Module mappings. Use `''` (empty string) to disable one.
             mappings = {
-              add = 'S',    -- Add surrounding in Normal and Visual modes
-              delete = 'ds', -- Delete surrounding
-              find = 'sf',  -- Find surrounding (to the right)
-              find_left = 'sF', -- Find surrounding (to the left)
-              highlight = '', -- Highlight surrounding
-              replace = 'cs', -- Replace surrounding
+              add = 'S',           -- Add surrounding in Normal and Visual modes
+              delete = 'ds',       -- Delete surrounding
+              find = 'sf',         -- Find surrounding (to the right)
+              find_left = 'sF',    -- Find surrounding (to the left)
+              highlight = '',      -- Highlight surrounding
+              replace = 'cs',      -- Replace surrounding
               update_n_lines = '', -- Update `n_lines`
 
-              suffix_last = '', -- Suffix to search with "prev" method
-              suffix_next = '', -- Suffix to search with "next" method
+              suffix_last = '',    -- Suffix to search with "prev" method
+              suffix_next = '',    -- Suffix to search with "next" method
             },
 
             -- Number of lines within which surrounding is searched
@@ -140,7 +140,8 @@ return {
               local matches = v[1]
               for _, match in ipairs(matches) do
                 highlighters[m .. '_' .. match] = { pattern = "%f[%w]()" .. match .. "()%f[%W]", group = higroup }
-                highlighters['note_' .. m .. '_' .. match] = { pattern = "[[]!*" .. match .. "[]]", group = higroup .. ".emphasis" }
+                highlighters['note_' .. m .. '_' .. match] = { pattern = "[[]!*" .. match .. "[]]", group = higroup ..
+                ".emphasis" }
               end
             end
             hipatterns.setup {
