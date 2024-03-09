@@ -60,6 +60,8 @@ return {
       info = {
         loaded = "●",
         not_loaded = "○",
+        fold_open = '',
+        fold_closed = '',
       },
       diff = {
         added = '󰐖',
