@@ -39,18 +39,19 @@ M.style.main = {
 
 ---@param name TelescopeStyle
 ---@param opts table
+---@return table
 M.get_style = function(name, opts)
   opts = opts or {}
   local style = M.style[name]
-  return style and vim.tbl_deep_extend('force', style, opts)
+  return vim.tbl_deep_extend('force', style or {}, opts)
 end
 
 M.picker = {}
 
 function M.picker.find_files(props)
   props = props or {}
-  local opts = MT(M.style.main, {
-    prompt_prefix = core.icons.item.find .. ' ',
+  local opts = M.get_style('main', {
+    prompt_prefix = core.lib.icons.item.find .. ' ',
     shorten_path = true,
     hidden = true,
   })
@@ -60,7 +61,7 @@ end
 
 function M.picker.grep(props)
   props = props or {}
-  local opts = MT(M.style.main, {
+  local opts = M.get_style('main', {
     max_results = 20
   })
 
@@ -71,8 +72,7 @@ end
 
 function M.picker.explorer(props)
   props = props or {}
-  local opts = M.style.bottom
-  opts = MT(M.style.dropdown, {
+  local opts = M.get_style('dropdown', {
     preview = true,
     shorten_path = true,
     hidden = true,
@@ -85,9 +85,7 @@ end
 
 function M.picker.git_files(props)
   props = props or {}
-  local opts = M.style.bottom
-
-  builtin.git_files(MT(opts, props))
+  builtin.git_files(M.get_style('bottom', props))
 end
 
 function M.picker.config_files()
@@ -104,7 +102,7 @@ end
 
 function M.picker.symbols(props)
   props = props or {}
-  local opts = MT(M.style.main, {
+  local opts = M.get_style('main', {
     shorten_path = true,
     hidden = true,
   })
@@ -114,9 +112,7 @@ end
 
 function M.picker.grep_current_file(props)
   props = props or {}
-  local opts = MT(M.style.main, {})
-
-  R 'telescope.builtin'.current_buffer_fuzzy_find(MT(opts, props))
+  R 'telescope.builtin'.current_buffer_fuzzy_find(M.get_style('main', props))
 end
 
 return M
