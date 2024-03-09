@@ -4,6 +4,8 @@ return {
       general = {
         colorscheme = nil,
         separator_style = 'round',
+        -- use 'nvim-tree/nvim-web-devicons'
+        devicons = true,
         theme_config = {
           keyword = { italic = false },
           types = { italic = false },
