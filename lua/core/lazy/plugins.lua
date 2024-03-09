@@ -40,6 +40,8 @@ return {
     cond = function() return core.lib.options:enabled 'todo_comments' end },
   { 'folke/trouble.nvim',
     cond = function() return core.lib.options:enabled 'trouble' end },
+  { 'b0o/incline.nvim',
+    cond = function() return core.lib.options:enabled 'incline' end },
   { 'nvim-tree/nvim-web-devicons',
     cond = function() return core.lib.options:get('ui', 'general', 'devicons') end },
   { import = core.modules.core.lazy.opts.module },

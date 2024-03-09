@@ -107,6 +107,12 @@ local fn = {
     dir = 'trouble.nvim',
     opts = false,
   },
+  incline = Util.create_bootstrap {
+    name = 'incline',
+    url = 'b0o/incline.nvim',
+    dir = 'incline.nvim',
+    opts = false,
+  },
 }
 
 ---@param name string
