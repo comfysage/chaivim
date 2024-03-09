@@ -148,7 +148,23 @@ return {
             }
           end,
         },
-        trailspace = { opts = {} },
+        trailspace = {
+          opts = {
+            -- highlight only in normal buffers (ones with empty 'buftype'). this is
+            -- useful to not show trailing whitespace where it usually doesn't matter.
+            only_in_normal_buffers = true,
+          },
+          config = function(mod, opts)
+            mod.setup(opts)
+
+            core.lib.autocmd.create {
+              event = "WinEnter",
+              fn = function()
+                require 'mini.trailspace'.highlight()
+              end,
+            }
+          end,
+        },
       }
     },
   },
