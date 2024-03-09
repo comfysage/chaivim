@@ -16,6 +16,19 @@ vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'remove line numbers',
 })
 
+-- highlight when yanking (copying) text
+-- > try it with `yap` in normal mode
+-- > see `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank {
+      timeout = 200,
+    }
+  end,
+})
+
 -- mkdir path
 
 -- autocmd BufWritePre * call s:Mkdir()
