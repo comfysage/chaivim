@@ -74,7 +74,8 @@ function M.setup(opts)
   vim.opt.hidden = true
 
   -- Searching
-  vim.opt.grepprg = opts.use_ripgrep and 'rg --vimgrep' or 'grep -n $* /dev/null'
+  vim.opt.grepprg = opts.use_ripgrep and 'rg --vimgrep'
+    or 'grep -n $* /dev/null'
   vim.opt.grepformat = '%f:%l:%c:%m'
   vim.opt.incsearch = true
   vim.opt.hlsearch = false
@@ -102,7 +103,7 @@ function M.setup(opts)
   vim.opt.splitright = true
   vim.opt.splitbelow = true
 
-  for _, option in ipairs({ 'menu', 'menuone', 'noselect', 'preview' }) do
+  for _, option in ipairs { 'menu', 'menuone', 'noselect', 'preview' } do
     if not vim.tbl_contains(vim.opt.completeopt, option) then
       vim.opt.completeopt:append(option)
     end
