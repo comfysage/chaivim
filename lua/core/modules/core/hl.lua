@@ -1,7 +1,8 @@
 return {
   default = {
     opts = {
-      use_overrides = true,
+      -- use if your colorscheme lacks some solid defaults
+      use_overrides = false,
     },
   },
 }
