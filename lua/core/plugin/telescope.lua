@@ -10,7 +10,14 @@ M.style = {}
 
 M.style.dropdown = themes.get_dropdown {
   theme = 'dropdown',
-  width = 0.8,
+  layout_config = {
+    width = function(_, max_columns, _)
+      return math.min(max_columns, 80)
+    end,
+    height = function(_, _, max_lines)
+      return math.min(max_lines, 12)
+    end,
+  },
   previewer = false,
 }
 
@@ -30,7 +37,14 @@ M.style.bottom = themes.get_ivy {
 M.style.main = {
   theme = 'main',
   -- winblend = 20;
-  width = 0.8,
+  layout_config = {
+    width = function(_, max_columns, _)
+      return math.min(math.floor(max_columns * 0.8), 160)
+    end,
+    height = function(_, _, max_lines)
+      return math.floor(max_lines * 0.9)
+    end,
+  },
   show_line = false,
   results_title = '',
   prompt_prefix = '$ ',
