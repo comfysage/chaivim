@@ -12,7 +12,6 @@ return {
         symbols = '<leader>fs',
         git_files = '<leader>fg',
         buffers = "<leader>fb",
-        filetypes = "<leader>ft",
         keymaps = "<leader>fk",
         mappings = "<leader>fm",
         help_tags = "<leader>fh",

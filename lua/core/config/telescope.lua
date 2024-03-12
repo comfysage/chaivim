@@ -98,7 +98,6 @@ M.setup = function(opts)
     { 'normal', opts.mappings.symbols,          pickers.symbols,    'find symbols' },
     { 'normal', opts.mappings.git_files,        pickers.git_files,  'find git file' },
     { 'normal', opts.mappings.buffers,          builtins.buffers,   'find buffer' },
-    { 'normal', opts.mappings.filetypes,        builtins.filetypes, 'find filetype' },
     { 'normal', opts.mappings.keymaps,          builtins.keymaps,   'find keymap' },
     { 'normal', opts.mappings.help_tags,        builtins.help_tags, 'find help tag' },
     { 'normal', opts.mappings.quickfix,         builtins.quickfix,  'search in qf list' },
