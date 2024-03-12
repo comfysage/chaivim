@@ -13,4 +13,4 @@ if not vim.loop.fs_stat(chaipath) then
 end
 vim.opt.rtp:prepend(chaipath)
 
-require 'core'.setup('custom.chairc', 'custom')
+require 'core'.setup('custom.config', 'custom.modules')
