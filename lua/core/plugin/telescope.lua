@@ -9,11 +9,13 @@ local M = {}
 M.style = {}
 
 M.style.dropdown = themes.get_dropdown {
+  theme = 'dropdown',
   width = 0.8,
   previewer = false,
 }
 
 M.style.bottom = themes.get_ivy {
+  theme = 'bottom',
   -- border = true,
   preview = true,
   shorten_path = true,
@@ -26,6 +28,7 @@ M.style.bottom = themes.get_ivy {
 }
 
 M.style.main = {
+  theme = 'main',
   -- winblend = 20;
   width = 0.8,
   show_line = false,
