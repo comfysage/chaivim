@@ -69,7 +69,7 @@ function M.setup(opts)
   vim.opt.shell = vim.env['SHELL'] or '/usr/bin/bash'
   vim.opt.swapfile = false
   vim.opt.backup = false
-  vim.cmd [[ set undodir=~/.undodir ]]
+  vim.opt.undodir = vim.fn.stdpath 'state' .. '/undodir'
   vim.opt.undofile = true
   vim.opt.hidden = true
 
