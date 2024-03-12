@@ -5,7 +5,7 @@ return {
   ---@param config table
   create = function(theme, config)
     local hl_groups = {
-      NormalFloat = { theme.ui.fg, theme.ui.bg },
+      NormalFloat = { theme.ui.fg, theme.ui.bg_accent },
       FloatTitle = { theme.ui.bg, theme.ui.accent },
       FloatBorder = { theme.ui.border },
       StatusLine = { theme.ui.comment, theme.ui.bg_accent },
