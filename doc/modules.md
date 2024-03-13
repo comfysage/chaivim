@@ -39,7 +39,11 @@
   opts = {
     completion_style = "tab",
     config = {
-      experimental = {},
+      experimental = {
+        ghost_text = {
+          hl_group = "NonText"
+        }
+      },
       formatting = {},
       mapping = {},
       snippet = {
@@ -223,7 +227,75 @@
 ```lua
 { "hl",
   opts = {
-    use_overrides = true
+    use_overrides = false
+  }
+}
+```
+### `incline` module
+```lua
+{ "incline",
+  opts = {
+    config = {
+      debounce_threshold = {
+        falling = 50,
+        rising = 10
+      },
+      hide = {
+        cursorline = true,
+        focused_win = false,
+        only_win = false
+      },
+      highlight = {
+        groups = {
+          InclineNormal = {
+            default = true,
+            group = "NormalFloat"
+          },
+          InclineNormalNC = {
+            default = true,
+            group = "NormalFloat"
+          }
+        }
+      },
+      ignore = {
+        buftypes = "special",
+        filetypes = {},
+        floating_wins = true,
+        unlisted_buffers = true,
+        wintypes = "special"
+      },
+      render = "basic",
+      window = {
+        margin = {
+          horizontal = 1,
+          vertical = 1
+        },
+        options = {
+          signcolumn = "no",
+          wrap = false
+        },
+        padding = 1,
+        padding_char = " ",
+        placement = {
+          horizontal = "right",
+          vertical = "top"
+        },
+        width = "fit",
+        winhighlight = {
+          active = {
+            EndOfBuffer = "None",
+            Normal = "InclineNormal",
+            Search = "None"
+          },
+          inactive = {
+            EndOfBuffer = "None",
+            Normal = "InclineNormalNC",
+            Search = "None"
+          }
+        },
+        zindex = 50
+      }
+    }
   }
 }
 ```
@@ -239,9 +311,9 @@
       copy_paste = { { "normal", "<c-v>", '"+p', "paste from system clipboard" }, { "visual", "<c-c>", '"+y', "copy to system clipboard" } },
       indent = { { "visual", "<", "<gv", "decrease indention" }, { "visual", ">", ">gv", "increase indention" } },
       qf_list = { { "normal", "<c-n>", ":cnext<cr>", "goto next item in qf list" }, { "normal", "<c-b>", ":cprev<cr>", "goto prev item in qf list" } },
-      show_ui = { { "normal", "<leader>sc", <function 1>, "show cheatsheet" }, { "normal", "<leader>sh", <function 2>, "show core status" } },
-      tabs = { { "normal", "<space><tab>]", <function 3>, "next tab" }, { "normal", "<space><tab>[", <function 4>, "prev tab" }, { "normal", "<space><tab>n", ":$tabedit<CR>", "open new tab" }, { "normal", "<space><tab>d", ":tabclose<CR>", "close current tab" }, { "normal", "<space><tab>x", ":tabclose<CR>", "close current tab" } },
-      toggle_ui = { { "normal", ",tb", <function 5>, "toggle transparent background" } },
+      show_ui = { { "normal", "<leader>sc", <function 1>, "show cheatsheet" }, { "normal", "<leader>sh", <function 2>, "show core status" }, { "normal", "<leader>sll", <function 3>, "show lazy" } },
+      tabs = { { "normal", "<space><tab>]", <function 4>, "next tab" }, { "normal", "<space><tab>[", <function 5>, "prev tab" }, { "normal", "<space><tab>n", ":$tabedit<CR>", "open new tab" }, { "normal", "<space><tab>d", ":tabclose<CR>", "close current tab" }, { "normal", "<space><tab>x", ":tabclose<CR>", "close current tab" } },
+      toggle_ui = { { "normal", ",tb", <function 6>, "toggle transparent background" } },
       windows = { { "normal", "<C-\\>", ":vs<CR>:wincmd l<CR>", "split file vertically" } }
     }
   }
@@ -428,11 +500,24 @@
 { "mini",
   opts = {
     plugins = {
+      ai = {
+        opts = {
+          mappings = {
+            around = "a",
+            around_last = "al",
+            around_next = "an",
+            goto_left = "g[",
+            goto_right = "g]",
+            inside = "i",
+            inside_last = "il",
+            inside_next = "in"
+          }
+        }
+      },
       align = {
         opts = {}
       },
       comment = {
-        config = <function 1>,
         opts = {
           mappings = {
             comment = "gc",
@@ -448,7 +533,7 @@
         }
       },
       files = {
-        config = <function 2>,
+        config = <function 1>,
         opts = {
           options = {
             use_as_default_explorer = false
@@ -460,6 +545,12 @@
             width_nofocus = 15,
             width_preview = 25
           }
+        }
+      },
+      hipatterns = {
+        config = <function 2>,
+        opts = {
+          groups = {}
         }
       },
       move = {
@@ -503,7 +594,10 @@
         }
       },
       trailspace = {
-        opts = {}
+        config = <function 3>,
+        opts = {
+          only_in_normal_buffers = true
+        }
       }
     }
   }
@@ -557,6 +651,66 @@
   }
 }
 ```
+### `trouble` module
+```lua
+{ "trouble",
+  opts = {
+    config = {
+      action_keys = {
+        cancel = "<esc>",
+        close = "q",
+        close_folds = { "zM", "zm" },
+        help = "g?",
+        hover = "K",
+        jump = { "<cr>", "<tab>", "<2-leftmouse>" },
+        jump_close = { "o" },
+        next = "j",
+        open_code_href = "gd",
+        open_folds = { "zR", "zr" },
+        open_split = { "<c-x>" },
+        open_tab = { "<c-t>" },
+        open_vsplit = { "<c-v>" },
+        preview = "p",
+        previous = "k",
+        refresh = "r",
+        switch_severity = "s",
+        toggle_fold = { "zA", "za" },
+        toggle_mode = "m",
+        toggle_preview = "P"
+      },
+      auto_close = false,
+      auto_fold = false,
+      auto_jump = { "lsp_definitions" },
+      auto_open = false,
+      auto_preview = true,
+      cycle_results = true,
+      fold_closed = "",
+      fold_open = "",
+      group = true,
+      height = 10,
+      icons = false,
+      include_declaration = { "lsp_references", "lsp_implementations", "lsp_definitions" },
+      indent_lines = true,
+      mode = "workspace_diagnostics",
+      multiline = true,
+      padding = true,
+      position = "bottom",
+      signs = {
+        error = "󰅙",
+        hint = "󰌵",
+        information = "󰋼",
+        other = "󰋼",
+        warning = ""
+      },
+      use_diagnostic_signs = true,
+      width = 50,
+      win_config = {
+        border = "single"
+      }
+    }
+  }
+}
+```
 ### `ui` module
 ```lua
 { "ui",
@@ -567,38 +721,6 @@
     },
     cursor = {
       enabled = true
-    },
-    general = {
-      key_labels = {
-        ["<BS>"] = "BS",
-        ["<CR>"] = "RET",
-        ["<Down>"] = "↓",
-        ["<Left>"] = "←",
-        ["<Right>"] = "→",
-        ["<S-TAB>"] = "SHIFT TAB",
-        ["<Tab>"] = "TAB",
-        ["<Up>"] = "↑",
-        ["<leader>"] = "LD",
-        ["<space>"] = "SPC"
-      },
-      separator_style = "round",
-      theme_config = {
-        comment = {
-          italic = false
-        },
-        inc_search = {
-          reverse = true
-        },
-        keyword = {
-          italic = false
-        },
-        search = {
-          reverse = false
-        },
-        types = {
-          italic = false
-        }
-      }
     },
     input = {
       border = "rounded",
