@@ -82,6 +82,14 @@ return {
             end,
             'show core status',
           },
+          {
+            'normal',
+            '<leader>sll',
+            function()
+              require('lazy').home()
+            end,
+            'show lazy',
+          },
         },
         copy_paste = {
           -- copy/pasting from system clipboard
