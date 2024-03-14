@@ -3,6 +3,14 @@ local fn = vim.fn
 
 local bufferline_config = core.lib.options:get('ui', 'bufferline')
 
+local separator_style = core.config.ui.separator_style
+---@type table<'left'|'right',string>
+---@diagnostic disable-next-line: assign-type-mismatch
+local separators = core.lib.icons.separator[separator_style]
+if not separators then
+  separators = { left = '', right = '' }
+end
+
 local bufisvalid = function(bufnr)
   return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted
 end
@@ -136,11 +144,21 @@ M.tablist = function()
       result = (i == fn.tabpagenr() and result .. "%#BfLineTabCloseBtn#" .. "%@Bf_TabClose@󰅙 %X") or result
     end
 
-    local new_tabtn = "%#BfLineTabNewBtn#" .. "%@Bf_NewTab@  %X"
-    local tabstoggleBtn = "%@Bf_ToggleTabs@ %#BfTabTitle# TABS %X"
+    local is_open = vim.g.BfTabsToggled ~= 1
 
-    return vim.g.BfTabsToggled == 1 and tabstoggleBtn:gsub("()", { [36] = core.lib.fmt.space('') })
-        or new_tabtn .. tabstoggleBtn .. result
+    local new_tabtn = "%#BfTabTitleSep#" .. separators.left .. "%#BfLineTabNewBtn#" .. "%@Bf_NewTab@  %X"
+    local tabstoggleBtn = "%@Bf_ToggleTabs@%#BfTabTitleSep#" .. (is_open and '' or separators.left)
+        .. "%#BfTabTitle# TABS " .. (is_open and '' or core.lib.fmt.space('')) .. " %X"
+
+    local function tabs_closed()
+      return tabstoggleBtn
+    end
+    local function tabs_open()
+      return new_tabtn .. tabstoggleBtn .. result
+    end
+
+    return is_open and tabs_open()
+        or tabs_closed()
   end
 
   return ""

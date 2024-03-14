@@ -31,6 +31,7 @@ M.apply_highlights = function()
     ['BfLineTabCloseBtn'] = { link = 'BfLineTabOn' },
     ['BfLineTabNewBtn'] = { link = 'BfTabTitle' },
     ['BfTabTitle'] = { fg = normal_fg, bg = normal_bg },
+    ['BfTabTitleSep'] = { fg = normal_bg },
     ['BfLineCloseAllBufsBtn'] = { link = 'BfTabTitle' },
   }
   local modes = {
