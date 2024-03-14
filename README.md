@@ -22,6 +22,10 @@ chaivim uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 - :scissors: [luasnip](https://github.com/L3MON4D3/LuaSnip) with [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) - a snippet engine for neovim.
 - :hammer: [mini.nvim](https://github.com/echasnovski/mini.nvim) - the "swiss army knife" among neovim plugins.
 - :vertical_traffic_light: [gitsigns](https://github.com/lewis6991/gitsigns.nvim) - git integration for neovim.
+- :scroll: [which-key](https://github.com/folke/which-key.nvim) - a keymap ui for neovim.
+- :pushpin: [todo-comments](https://github.com/folke/todo-comments.nvim) - highlight, list and search todo comments in your projects.
+- :construction: [trouble](https://github.com/folke/trouble.nvim) - a diagnostics manager.
+- :balloon: [incline](https://github.com/b0o/incline.nvim) - floating statuslines for neovim.
 
 ## :lock: requirements
 
