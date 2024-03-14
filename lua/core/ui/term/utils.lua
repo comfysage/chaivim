@@ -7,12 +7,14 @@ local api = vim.api
 ---@param opts vim.api.keyset.win_config
 ---@return table
 util.calc_float_opts = function(opts)
+  local width = math.ceil(opts.width * vim.o.columns)
+  local height = math.ceil(opts.height * vim.o.lines)
   return {
     relative = 'editor',
-    width = math.ceil(opts.width * vim.o.columns),
-    height = math.ceil(opts.height * vim.o.lines),
-    row = math.floor(opts.row * vim.o.lines),
-    col = math.floor(opts.col * vim.o.columns),
+    width = width,
+    height = height,
+    row = opts.row and math.floor(opts.row * vim.o.lines) or (vim.o.lines - height) / 2,
+    col = opts.col and math.floor(opts.col * vim.o.columns) or (vim.o.columns - width) / 2,
     border = opts.border,
   }
 end
