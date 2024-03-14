@@ -54,6 +54,50 @@ return {
 core-config
 : core configuration
 
+core-config-ui
+: ui configuration
+
+```lua
+{
+    -- chaivim uses evergarden by default
+    -- some other cozy alternatives are
+    -- - [kanagawa](https://github.com/rebelot/kanagawa.nvim)
+    -- - [gruvboxed](https://github.com/comfysage/gruvboxed)
+    -- - [iceberg](https://github.com/cocopon/iceberg.vim)
+    colorscheme = 'evergarden',
+    transparent_background = false,
+    -- separators: slant (, ) round (,) block (█,█) arrow (,)
+    -- these are used for ui components like the statusline
+    separator_style = 'round',
+    -- (optionally) use 'nvim-tree/nvim-web-devicons'
+    devicons = true,
+    -- used by `comfysage/base46`
+    theme_config = {
+      keyword = { italic = false },
+      types = { italic = false },
+      comment = { italic = false },
+      search = { reverse = false },
+      inc_search = { reverse = true }
+    },
+    -- key labels used by `keymaps.nvim` and some ui components
+    key_labels = {
+      -- text keys
+      ['<space>'] = 'SPC',
+      ['<CR>'] = 'RET',
+      ['<BS>'] = 'BS',
+      -- tab keys
+      ['<Tab>'] = 'TAB',
+      ['<S-TAB>'] = 'SHIFT TAB',
+      -- leader key
+      ['<leader>'] = 'LD',
+      -- directional keys
+      ['<Up>'] = '↑',
+      ['<Left>'] = '←',
+      ['<Down>'] = '↓',
+      ['<Right>'] = '→',
+}
+```
+
 core-config-log_level
 : Minimum log level
 
