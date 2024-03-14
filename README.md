@@ -64,30 +64,37 @@ vim.opt.rtp:prepend(chaipath)
 
 ```lua
 -- init.lua
-require 'core'.setup {
-    colorscheme = 'evergarden',
-    transparent_background = false,
-    modules = {
-        core = {
-            {
-                'options',
-                opts = {
-                    cursorline = false,
-                    tab_width = 2,
-                    scrolloff = 5,
-                },
-            },
-            {
-                'dash',
-                opts = {
-                    open_on_startup = true,
-                },
+require 'core'.setup('custom.config', 'custom.modules')
+
+-- lua/custom/config.lua
+return {
+    ui = {
+        colorscheme = 'evergarden',
+        transparent_background = false,
+    },
+}
+
+-- lua/custom/modules.lua
+return {
+    core = {
+        {
+            'options',
+            opts = {
+                cursorline = false,
+                tab_width = 2,
+                scrolloff = 5,
             },
         },
-        custom = {
-            -- your custom modules (in `lua/custom/`)
+        {
+            'dash',
+            opts = {
+                open_on_startup = true,
+            },
         },
-    }
+    },
+    custom = {
+        -- your custom modules (in `lua/custom/`)
+    },
 }
 ```
 or call `require 'core'.setup 'custom'` to load a custom configuration from `lua/custom/init.lua`:
@@ -97,13 +104,15 @@ require 'core'.setup 'custom'
 
 -- lua/custom/init.lua
 return {
-    colorscheme = 'evergarden',
+    ui = {
+        colorscheme = 'evergarden',
+    },
     modules = {
         core = {
             { 'options' },
             { 'base' },
         },
-    }
+    },
 }
 ```
 
