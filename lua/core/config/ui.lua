@@ -39,5 +39,9 @@ return {
       end
       vim.opt.tabline = "%!v:lua.core.bufferline()"
     end
+
+    if opts.terminal.enabled then
+      require 'core.ui.term'.setup(opts.terminal)
+    end
   end,
 }
