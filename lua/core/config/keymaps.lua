@@ -45,6 +45,12 @@ return {
     for group, mappings in pairs(opts.mappings) do
       Keymap.group { group = group, mappings }
     end
+
+    if core.lib.options:get('ui', 'terminal', 'enabled') then
+      require('core.ui.term').setup_keymaps(
+        core.lib.options:get('ui', 'terminal')
+      )
+    end
   end,
   cheatsheet = function(props)
     require 'core.ui.cheatsheet'.open(props)

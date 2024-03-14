@@ -97,4 +97,43 @@ M.setup = function(opts)
   require('core.ui.term.terminal').init(opts.terminals)
 end
 
+M.setup_keymaps = function(opts)
+  Keymap.group {
+    group = 'terminal',
+    {
+      'normal',
+      opts.mappings.open_float,
+      function()
+        require('core.ui.term.terminal').toggle 'float'
+      end,
+      'toggle floating terminal',
+    },
+    {
+      'normal',
+      opts.mappings.open_vertical,
+      function()
+        require('core.ui.term.terminal').toggle 'vertical'
+      end,
+      'toggle vertical terminal',
+    },
+    {
+      'normal',
+      opts.mappings.open_horizontal,
+      function()
+        require('core.ui.term.terminal').toggle 'horizontal'
+      end,
+      'toggle horizontal terminal',
+    },
+  }
+  vim.keymap.set('t', opts.mappings.open_float, function()
+    require('core.ui.term.terminal').toggle 'float'
+  end, { desc = 'toggle floating terminal' })
+  vim.keymap.set('t', opts.mappings.open_vertical, function()
+    require('core.ui.term.terminal').toggle 'vertical'
+  end, { desc = 'toggle vertical terminal' })
+  vim.keymap.set('t', opts.mappings.open_horizontal, function()
+    require('core.ui.term.terminal').toggle 'horizontal'
+  end, { desc = 'toggle horizontal terminal' })
+end
+
 return M

@@ -17,8 +17,10 @@ return {
       ---@class core.types.ui.term.config
       terminal = {
         enabled = true,
-        terminals = {
-          list = {},
+        mappings = {
+          open_float = '<leader>tt',
+          open_vertical = '<leader>tv',
+          open_horizontal = '<leader>th',
         },
         ui = {
           float = {
@@ -39,6 +41,9 @@ return {
           },
           close_on_exit = true,
           auto_insert = true,
+        },
+        terminals = {
+          list = {},
         },
       },
       input = {
