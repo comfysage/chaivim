@@ -1,94 +1,50 @@
-# installation
+# getting started
 
-```lua
--- init.lua
-local rootpath = vim.fn.stdpath("data") .. "/core"
-local chaipath = rootpath .. "/chai"
+you can install chaivim using the installer:
+```bash
+curl -fsSL https://github.com/comfysage/chaivim/raw/mega/utils/installer/install.sh | sh
+cvim
 
-if not vim.loop.fs_stat(chaipath) then
-  vim.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/comfysage/chaivim.git",
-    chaipath,
-  }):wait()
-end
-
-vim.opt.rtp:prepend(chaipath)
 ```
-
-chai can be updated with:
-```lua
-require 'core'.update()
+or you can get started using chaivim with the [starter template](https://github.com/comfysage/chaivim/tree/start):
+```bash
+git clone --depth 1 -b start https://github.com/comfysage/chaivim.git ~/.config/nvim
+nvim
 ```
 
 # usage
 
+chaivim configuration is usually split into `custom.config` and `custom.modules`.
+
 ```lua
-require 'core'.setup {
-    colorscheme = 'aurora',
-    transparent_background = true,
-    transparent_fn = {
-        evergarden = function(t)
-            _G.evergarden_config.transparent_background = t
-        end,
-        aurora = function(t)
-            _G.aurora_config.transparent_background = t
-        end,
-        aki = function(t)
-            _G.aki_config.transparent_background = t
-        end,
-        adachi = function(t)
-            _G.adachi_config.transparent_background = t
-        end,
-        gruvboxed = function(t)
-            _G.gruvboxed_config.transparent_background = t
-        end,
+-- lua/custom/config.lua
+return {
+    ui = {
+        colorscheme = 'evergarden',
+        transparent_background = false,
     },
-    config_module = 'custom', -- defaults to 'custom'
-    modules = {
-        ['core'] = {
-            {
-                'options',
-                event = nil,
-                opts = {
-                    cursorline = false,
-                    tab_width = 2,
-                    scrolloff = 5,
-                    use_ripgrep = true,
-                    treesitter_folds = false,
-                }
-            },
-            {
-                'highlights',
-                event = 'UIEnter',
-                opts = {
-                    fix = function()
-                        local groups = {
-                            fixme   = { "Fixme", vim.api.nvim_get_hl(0, { name = "DiagnosticWarn" }) },
-                            todo    = { "Todo", vim.api.nvim_get_hl(0, { name = "DiagnosticInfo" }) },
-                            note    = { "Note", vim.api.nvim_get_hl(0, { name = "DiagnosticHint" }) },
-                            success = { "Success", vim.api.nvim_get_hl(0, { name = "DiagnosticOk" }) },
-                            failure = { "Failure", vim.api.nvim_get_hl(0, { name = "DiagnosticError" }) },
-                        }
-                        for _, v in pairs(groups) do
-                            vim.api.nvim_set_hl(0, v[1], { fg = v[2].fg })
-                            vim.api.nvim_set_hl(0, v[1] .. 'Note', { fg = v[2].fg, reverse = true })
-                        end
-                    end
-                },
-            },
-            {
-                'dash',
-                opts = {
-                    open_on_startup = true, -- defaults to `false`
-                },
+}
+
+-- lua/custom/modules.lua
+return {
+    core = {
+        {
+            'options',
+            opts = {
+                cursorline = false,
+                tab_width = 2,
+                scrolloff = 5,
             },
         },
-        ['custom'] = {
-            -- your custom modules (in `lua/custom/`)
+        {
+            'dash',
+            opts = {
+                open_on_startup = true,
+            },
         },
+    },
+    custom = {
+        -- your custom modules (in `lua/custom/`)
     },
 }
 ```
