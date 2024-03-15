@@ -4,6 +4,7 @@ local M = {}
 
 ---@type core.config
 M.default_config = {
+  config_module = CONFIG_MODULE,
   log_level = vim.log.levels.INFO,
   ui = {
     colorscheme = 'evergarden', -- or 'habamax' or 'zaibatsu' or 'retrobox'
