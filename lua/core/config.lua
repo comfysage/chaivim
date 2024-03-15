@@ -1,5 +1,7 @@
 local M = {}
 
+---@alias vim.api.keyset.win_config.border 'none'|'single'|'double'|'rounded'|'solid'|'shadow'|string[]
+
 ---@type core.config
 M.default_config = {
   log_level = vim.log.levels.INFO,
@@ -8,6 +10,7 @@ M.default_config = {
     transparent_background = false,
     -- separators: slant (, ) round (,) block (█,█) arrow (,)
     separator_style = 'round',
+    float_border = 'rounded',
     -- use 'nvim-tree/nvim-web-devicons'
     devicons = true,
     theme_config = {

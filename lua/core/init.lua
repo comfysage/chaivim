@@ -25,6 +25,7 @@ local parts = require 'core.parts'
 ---@field colorscheme string
 ---@field transparent_background boolean
 ---@field separator_style 'slant'|'round'|'block'|'arrow'
+---@field float_border vim.api.keyset.win_config.border
 ---@field devicons boolean
 ---@field theme_config core.config.ui.theme_config
 ---@field key_labels table<string, string>

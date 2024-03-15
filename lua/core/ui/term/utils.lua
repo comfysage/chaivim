@@ -15,7 +15,7 @@ util.calc_float_opts = function(opts)
     height = height,
     row = opts.row and math.floor(opts.row * vim.o.lines) or (vim.o.lines - height) / 2,
     col = opts.col and math.floor(opts.col * vim.o.columns) or (vim.o.columns - width) / 2,
-    border = opts.border,
+    border = opts.border or core.config.ui.float_border,
   }
 end
 
