@@ -58,6 +58,9 @@ return {
               end
             end)
           end, 'load qf list items' },
+          { 'normal', '<leader>sq', function()
+            core.lib.keymaps.open_qf_list()
+          end, 'open qf list'},
         },
         indent = {
           -- < and > indents
