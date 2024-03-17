@@ -48,6 +48,16 @@ return {
           -- quick fix list
           { 'normal', '<c-n>', ':cnext<cr>', 'goto next item in qf list' },
           { 'normal', '<c-b>', ':cprev<cr>', 'goto prev item in qf list' },
+          { 'normal', '<leader>q', function()
+            local items = core.lib.options:get('keymaps', 'qf_loaders')
+            vim.ui.select(vim.tbl_keys(items), {}, function(item)
+              if not item then return end
+              local fn = items[item]
+              if fn and type(fn) == 'function' then
+                fn()
+              end
+            end)
+          end, 'load qf list items' },
         },
         indent = {
           -- < and > indents
@@ -97,6 +107,7 @@ return {
           { 'visual', '<c-c>', '"+y', 'copy to system clipboard' },
         },
       },
+      qf_loaders = {},
     },
   },
 }

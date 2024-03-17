@@ -12,3 +12,19 @@ core.lib.keymaps.open_qf_list = function()
     vim.cmd.copen()
   end
 end
+
+---@class core.types.lib.keymaps
+---@field register_qf_loader fun(key: string, cb: function, opts: { handle_open?: boolean })
+--- *opts*
+--- - *handle_open*: if true cb is wrapped in a fn that opens the qf list
+core.lib.keymaps.register_qf_loader = function(key, cb, opts)
+  if core.modules.core.keymaps.opts.qf_loaders[key] then return end
+  if opts.handle_open then
+    local _cb = vim.schedule_wrap(cb)
+    cb = function()
+      _cb()
+      core.lib.keymaps.open_qf_list()
+    end
+  end
+  core.modules.core.keymaps.opts.qf_loaders[key] = cb
+end

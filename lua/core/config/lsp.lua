@@ -1,6 +1,6 @@
 local Util = require 'core.utils'
 
----@alias LspConfig__mappings 'show_lsp_info'|'open_float'|'goto_prev'|'goto_next'|'set_qflist'|'goto_declaration'|'goto_definition'|'peek_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
+---@alias LspConfig__mappings 'show_lsp_info'|'open_float'|'goto_prev'|'goto_next'|'goto_declaration'|'goto_definition'|'peek_definition'|'hover'|'goto_implementation'|'show_signature'|'show_type_definition'|'rename'|'show_code_action'|'goto_references'|'format'
 ---@alias LspConfig__servers { [string]: { settings: table, [string]: table } }
 
 ---@class LspConfig__signature
@@ -79,8 +79,10 @@ return {
       { vim.diagnostic.goto_prev, 'goto previous diagnostic', group = 'LSP' }
     keymaps.normal[opts.mappings.goto_next] =
       { vim.diagnostic.goto_next, 'goto next diagnostic', group = 'LSP' }
-    keymaps.normal[opts.mappings.set_qflist] =
-      { vim.diagnostic.setqflist, 'add diagnostics to qf list', group = 'LSP' }
+
+    core.lib.keymaps.register_qf_loader('lsp_diagnostics', function()
+      vim.diagnostic.setqflist { open = false }
+    end, { handle_open = true })
 
     -- nvim-cmp supports additional completion capabilities
     local capabilities = vim.lsp.protocol.make_client_capabilities()
