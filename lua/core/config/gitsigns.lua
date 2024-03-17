@@ -79,6 +79,10 @@ return {
       { 'normal', opts.mappings.show_diff, function() gs.diffthis('~') end, 'vimdiff on current file with base ~' },
     }
 
+    core.lib.keymaps.register_qf_loader('git_hunks', function()
+      gs.setqflist('all', { open = false })
+    end, { handle_open = true })
+
     -- Text object
     Keymap.group {
       group = 'git',
