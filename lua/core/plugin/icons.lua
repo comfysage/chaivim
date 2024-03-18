@@ -62,6 +62,8 @@ return {
         not_loaded = "○",
         fold_open = '',
         fold_closed = '',
+        locked = '',
+        non_empty = '⏺',
       },
       diff = {
         added = '󰐖',
