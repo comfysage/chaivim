@@ -208,6 +208,12 @@ end
 
 -- Helpers for floating windows -----------------------------------------------
 
+H.buffer_opts = function(cache)
+  if not cache.bufnr then return end
+  -- Make this buffer a scratch (can close without saving)
+  vim.api.nvim_set_option_value('buftype', 'nofile', { buf = cache.bufnr })
+end
+
 ---@param cache signature_cache
 ---@param name string
 H.ensure_buffer = function(cache, name)
@@ -215,8 +221,7 @@ H.ensure_buffer = function(cache, name)
 
   cache.bufnr = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_name(cache.bufnr, name)
-  -- Make this buffer a scratch (can close without saving)
-  vim.fn.setbufvar(cache.bufnr, '&buftype', 'nofile')
+  H.buffer_opts(cache)
 end
 
 -- Returns tuple of height and width
@@ -271,7 +276,7 @@ H.close_action_window = function(cache)
   cache.win_id = nil
 
   -- For some reason 'buftype' might be reset. Ensure that buffer is scratch.
-  if cache.bufnr then vim.fn.setbufvar(cache.bufnr, '&buftype', 'nofile') end
+  H.buffer_opts(cache)
 end
 
 ---@param s string|table
