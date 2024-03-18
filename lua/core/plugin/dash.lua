@@ -166,6 +166,7 @@ function M.open(config)
 
   -- buf only options
   vim.opt_local.buflisted = false
+  vim.opt_local.buftype = 'nofile'
   vim.opt_local.modifiable = false
   vim.opt_local.number = false
   vim.opt_local.list = false
