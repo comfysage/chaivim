@@ -32,6 +32,8 @@ return {
           { 'normal', '<space><tab>n', ':$tabedit<CR>', 'open new tab' },
           { 'normal', '<space><tab>d', ':tabclose<CR>', 'close current tab' },
           { 'normal', '<space><tab>x', ':tabclose<CR>', 'close current tab' },
+          { 'normal', '<space><tab><', function() vim.cmd [[ -tabmove ]] end, 'move tab to the left' },
+          { 'normal', '<space><tab>>', function() vim.cmd [[ +tabmove ]] end, 'move tab to the right' },
         },
         windows = {
           {
