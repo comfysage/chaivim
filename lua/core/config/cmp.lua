@@ -51,7 +51,7 @@ return {
     opts.config.sources = {
       { name = 'nvim_lua' },
       { name = 'nvim_lsp' },
-      { name = opts.snippet_engine, max_item_count = 4 },
+      { name = opts.snippet_engine, max_item_count = 5 },
       { name = 'path',    max_item_count = 5 },
       { name = 'cmdline', max_item_count = 5 },
       { name = 'buffer',  max_item_count = 5 },
@@ -88,7 +88,7 @@ return {
 
     cmp.setup.filetype('markdown', {
       sources = {
-        { name = 'luasnip', max_item_count = 4 },
+        { name = 'luasnip', max_item_count = 5 },
         -- { name = 'emoji' },
         { name = "dictionary", keyword_length = 2, },
         { name = 'path' },
