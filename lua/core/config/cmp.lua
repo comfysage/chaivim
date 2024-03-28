@@ -48,15 +48,14 @@ return {
       opts.config.window.completion.side_padding = 0
     end
 
-    opts.config.sources = cmp.config.sources({
+    opts.config.sources = {
       { name = 'nvim_lua' },
       { name = 'nvim_lsp' },
       { name = opts.snippet_engine, max_item_count = 4 },
-    }, {
       { name = 'path',    max_item_count = 5 },
       { name = 'cmdline', max_item_count = 5 },
       { name = 'buffer',  max_item_count = 5 },
-    })
+    }
 
     keymaps.insert[opts.mappings.docs_down] = { cmp.mapping.scroll_docs(-4), '', group = 'cmp' }
     keymaps.insert[opts.mappings.docs_up] = { cmp.mapping.scroll_docs(4), '', group = 'cmp' }
@@ -88,14 +87,13 @@ return {
     })
 
     cmp.setup.filetype('markdown', {
-      sources = cmp.config.sources({
+      sources = {
         { name = 'luasnip', max_item_count = 4 },
         -- { name = 'emoji' },
-      }, {
         { name = "dictionary", keyword_length = 2, },
         { name = 'path' },
         { name = 'buffer',     max_item_count = 5 },
-      })
+      }
     })
 
     -- Use buffer source for `/`
@@ -108,11 +106,10 @@ return {
 
     -- Use cmdline & path source for ':'
     cmp.setup.cmdline(':', {
-      sources = cmp.config.sources({
-        { name = 'path' }
-      }, {
+      sources = {
+        { name = 'path' },
         { name = 'cmdline' }
-      })
+      }
     })
   end
 }
