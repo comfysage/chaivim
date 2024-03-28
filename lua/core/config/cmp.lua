@@ -98,7 +98,6 @@ return {
 
     -- Use buffer source for `/`
     cmp.setup.cmdline('/', {
-      view = { entries = 'wildmenu' },
       sources = {
         { name = 'buffer' }
       }
