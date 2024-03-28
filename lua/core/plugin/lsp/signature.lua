@@ -396,6 +396,9 @@ function M.show_signature_window()
 
   -- Compute floating window options
   local opts = H.signature_window_opts()
+  if #hl_ranges > 0 then
+    opts.bufpos[2] = opts.bufpos[2] - hl_ranges[1].first - 1
+  end
 
   -- Ensure that window doesn't open when it shouldn't
   if vim.fn.mode() == 'i' then H.open_action_window(H.signature, opts) end
