@@ -89,7 +89,7 @@ return {
     cmp.setup.filetype('markdown', {
       sources = {
         { name = opts.snippet_engine, max_item_count = 5 },
-        -- { name = 'emoji' },
+        { name = 'emoji' },
         { name = "dictionary", keyword_length = 2, },
         { name = 'path' },
         { name = 'buffer',     max_item_count = 5 },
@@ -110,5 +110,9 @@ return {
         { name = 'cmdline' }
       }
     })
+
+    if opts.use_emoji_source then
+      require 'core.plugin.cmp-emoji'
+    end
   end
 }

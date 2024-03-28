@@ -12,6 +12,8 @@ return {
       completion_style = 'tab',
       -- 'evergreen' | 'nyoom'
       menu_style = 'evergreen',
+      -- register `core.plugin.cmp-emoji`
+      use_emoji_source = true,
       config = {
         window = {
           completion = {
