@@ -26,7 +26,6 @@ return {
         window = {
           height = 20,
           width = 64,
-          border = 'none',
         },
       },
       -- show diagnostics below lines

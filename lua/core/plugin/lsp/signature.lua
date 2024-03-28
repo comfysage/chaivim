@@ -166,7 +166,10 @@ H.process_lsp_response = function(request_result, processor)
 end
 
 H.signature_window_opts = function()
-  local win_config = core.modules.core.lsp.opts.signature.window
+  local win_config = core.lib.options:get('lsp', 'signature', 'window')
+
+  local border_type = win_config.border or core.config.ui.float_border
+
   local lines = vim.api.nvim_buf_get_lines(H.signature.bufnr, 0, -1, {})
   local height, width = H.floating_dimensions(lines, win_config.height, win_config.width)
 
@@ -202,7 +205,7 @@ H.signature_window_opts = function()
     height = height,
     focusable = false,
     style = 'minimal',
-    border = win_config.border,
+    border = border_type,
   }
 end
 
