@@ -60,6 +60,7 @@ local create_term_window = function(type)
   )
   vim.wo.relativenumber = false
   vim.wo.number = false
+  vim.wo.winhl = 'Normal:Normal'
   return api.nvim_get_current_win()
 end
 
