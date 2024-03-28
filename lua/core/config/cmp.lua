@@ -88,7 +88,7 @@ return {
 
     cmp.setup.filetype('markdown', {
       sources = {
-        { name = 'luasnip', max_item_count = 5 },
+        { name = opts.snippet_engine, max_item_count = 5 },
         -- { name = 'emoji' },
         { name = "dictionary", keyword_length = 2, },
         { name = 'path' },
